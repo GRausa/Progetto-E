@@ -11,7 +11,7 @@ import java.util.ArrayList;
  *
  * @author cl418377
  */
-public class City {
+public class City implements Comparable{
     private String name;
     private ArrayList<Airport> airports;
     
@@ -20,8 +20,13 @@ public class City {
         airports = new ArrayList<>();
     }
     
-    public String getNome(){
+    public String getName(){
         return name;
+    }
+    
+    public int compareTo(Object o){
+        City a = (City) o;
+        return(name.compareTo(a.getName()));
     }
     
     

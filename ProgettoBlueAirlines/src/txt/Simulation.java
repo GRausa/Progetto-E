@@ -5,10 +5,17 @@
  */
 package txt;
 
+import blueAirlines.Company;
+import java.io.IOException;
+
 /**
  *
  * @author cl418377
  */
 public class Simulation {
-    
+    public static void main(String args[]) throws IOException{
+        Company c = new Company("file/BlueAirlines");
+        c.downloadAirplanes("Airplanes.txt");
+        System.out.println(c.toStringAirplanes());
+    }
 }

@@ -9,7 +9,7 @@ package blueAirlines;
  *
  * @author cl418377
  */
-public class Airport {
+public class Airport implements Comparable{
     private String name;
     private City city;
     
@@ -18,11 +18,16 @@ public class Airport {
         this.city=city;
     }
     
-    public String getNome(){
+    public String getName(){
         return name;
     }
     
     public City getCity(){
         return city;
+    }
+    
+    public int compareTo(Object o){
+        Airport a = (Airport) o;
+        return(name.compareTo(a.getName()));
     }
 }
