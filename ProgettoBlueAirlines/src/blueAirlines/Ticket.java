@@ -12,25 +12,24 @@ package blueAirlines;
 public class Ticket {
     private String code;
     private float price;
-    private int num_pos;
+    private int nPosition;
     
     public Ticket(String code, float price, int num_pos){
         this.code=code;
         this.price=price;
-        this.num_pos= num_pos;
+        this.nPosition= num_pos;
     
     }
-        public String getCode(){
+    public String getCode(){
         return code;
-        }
+    }
         
-        public float getPrice(){
-           return price; 
-        }
+    public float getPrice(){
+        return price; 
+    }
         
-        public int getNum_pos(){
-            return num_pos;
-        }
+    public int getNum_pos(){
+        return nPosition;
+    }
     
-    //aggg
 }
