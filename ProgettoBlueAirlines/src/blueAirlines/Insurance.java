@@ -11,9 +11,9 @@ package blueAirlines;
  */
 public class Insurance { //ASSICURAZIONE
     private String name;
-    private Double price;
+    private double price;
     
-    public Insurance (String name, Double price){
+    public Insurance (String name, double price){
         this.name=name;
         this.price=price;
     }
@@ -22,7 +22,7 @@ public class Insurance { //ASSICURAZIONE
         return name;
     }
 
-    public Double getPrice() {
+    public double getPrice() {
         return price;
     }
     

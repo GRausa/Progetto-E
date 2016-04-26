@@ -14,15 +14,19 @@ import java.util.Date;
  */
 public class Flight {
     private String code;
+    private Airplane airplane;
     private Date data;
+    private Route route;
     private ArrayList<Boolean> seats;
-    private Double price; //prezzo dipene dal volo
+    private double price; //prezzo dipene dal volo
     
-    public Flight(String code, Date data, Double price){
+    public Flight(String code, Date data, double price, Airplane airplane, Route route){
         this.code=code;
         this.data=data;
         this.price=price;
         this.seats=new ArrayList<>();
+        this.airplane=airplane;
+        this.route=route;
     }
     
     public String getCode(){
@@ -37,7 +41,7 @@ public class Flight {
         return seats;
     }
     
-    public Double getPrice(){
+    public double getPrice(){
         return price;
     }
 }

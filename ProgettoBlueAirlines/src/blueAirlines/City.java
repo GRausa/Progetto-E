@@ -12,16 +12,16 @@ import java.util.ArrayList;
  * @author cl418377
  */
 public class City {
-    private String nome;
+    private String name;
     private ArrayList<Airport> airports;
     
     public City(String nome){
-        this.nome=nome;
+        this.name=nome;
         airports = new ArrayList<>();
     }
     
     public String getNome(){
-        return nome;
+        return name;
     }
     
     

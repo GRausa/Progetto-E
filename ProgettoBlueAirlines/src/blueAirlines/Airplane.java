@@ -12,11 +12,11 @@ import java.util.ArrayList;
  * @author cl418377
  */
 public class Airplane {
-    private String nome;
+    private String name;
     private ArrayList <Seat> seat;
     
     public Airplane(String nome){
-        this.nome=nome;
+        this.name=nome;
         this.seat = new ArrayList<>();
     }
     
@@ -25,6 +25,6 @@ public class Airplane {
     }
     
     public String getNome(){
-        return nome;
+        return name;
     }
 }

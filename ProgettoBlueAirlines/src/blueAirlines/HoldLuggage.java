@@ -10,5 +10,19 @@ package blueAirlines;
  * @author cl418377
  */
 public class HoldLuggage {
+    private Double price;
+    private Double kg;
     
+    public HoldLuggage (Double kg, Double price){
+        this.kg=kg;
+        this.price=price;
+    }
+
+    public Double getKg() {
+        return kg;
+    }
+
+    public Double getPrice() {
+        return price;
+    }
 }

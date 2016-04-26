@@ -11,7 +11,7 @@ package blueAirlines;
  */
 public class Ticket {
     private String code;
-    private float price;
+    private double price;
     private int nPosition;
     
     public Ticket(String code, float price, int num_pos){
@@ -24,7 +24,7 @@ public class Ticket {
         return code;
     }
         
-    public float getPrice(){
+    public double getPrice(){
         return price; 
     }
         

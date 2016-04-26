@@ -10,13 +10,19 @@ package blueAirlines;
  * @author cl418377
  */
 public class Airport {
-    private String nome;
+    private String name;
+    private City city;
     
-    public Airport(String nome){
-        this.nome=nome;
+    public Airport(String nome, City city){
+        this.name=nome;
+        this.city=city;
     }
     
     public String getNome(){
-        return nome;
+        return name;
+    }
+    
+    public City getCity(){
+        return city;
     }
 }
