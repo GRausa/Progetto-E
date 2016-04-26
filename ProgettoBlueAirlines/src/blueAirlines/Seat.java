@@ -10,5 +10,21 @@ package blueAirlines;
  * @author cl418377
  */
 public class Seat {
-    //ciao
+    private Integer number;
+    private Integer numberClass; //class 1-> prima classe , 2 -> Seconda Classe
+
+    public Seat(Integer number, Integer numberClass) {
+        this.number = number;
+        this.numberClass = numberClass;
+    }
+
+    public Integer getNumber() {
+        return number;
+    }
+
+    public Integer getNumberClass() {
+        return numberClass;
+    }
+    
+         
 }
