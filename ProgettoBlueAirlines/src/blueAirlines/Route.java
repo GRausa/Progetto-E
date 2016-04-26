@@ -10,6 +10,22 @@ package blueAirlines;
  * @author cl418377
  */
 public class Route {
+    private Airport departure;
+    private Airport destination;
+    
+    public Route(Airport departure, Airport destination){
+        this.departure=departure;
+        this.destination=destination;
+    }
+
+    public Airport getDeparture(){
+        return departure;
+    }
+
+    public Airport getDestination(){
+        return destination;
+    }
+    
     
     
 }
