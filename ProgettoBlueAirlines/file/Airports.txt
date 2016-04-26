@@ -1,8 +1,0 @@
-Milano	Malpensa
-Milano	Linate
-Roma 	Fiumicino
-Monaco	Monaco di Bavier
-Palermo	Falcone Borsellino
-Parigi	Roissy
-Londra	Heathrow
-Londra	Gatwick

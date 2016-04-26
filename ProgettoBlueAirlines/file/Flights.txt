@@ -1,2 +1,0 @@
-A1	Malpensa	Roissy	16/06/2016	15:30	17:00	70.25
-A5	Heathrow	Fiumicino	21/07/2016	19:00	23:00	60.90
