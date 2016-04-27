@@ -5,7 +5,7 @@
  */
 package txt;
 
-import blueAirlines.Company;
+import blueAirline.Company;
 import java.io.IOException;
 
 /**
@@ -14,8 +14,10 @@ import java.io.IOException;
  */
 public class Simulation {
     public static void main(String args[]) throws IOException{
-        Company c = new Company("file/BlueAirlines");
-        c.downloadAirplanes("Airplanes.txt");
+        Company c = new Company("BlueAirlines");
+        c.downloadAirplanes("file/Airplanes.txt");
         System.out.println(c.toStringAirplanes());
+        c.downloadCitys("file/Citys.txt");
+        System.out.println(c.toStringCitys());
     }
 }
