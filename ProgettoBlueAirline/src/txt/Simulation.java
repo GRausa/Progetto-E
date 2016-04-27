@@ -19,5 +19,7 @@ public class Simulation {
         System.out.println(c.toStringAirplanes());
         c.downloadCitys("file/Citys.txt");
         System.out.println(c.toStringCitys());
+        c.downloadAirports("file/Airports.txt");
+        System.out.println(c.toStringAirports());
     }
 }
