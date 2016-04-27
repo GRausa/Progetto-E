@@ -26,8 +26,16 @@ public class Airport implements Comparable{
         return city;
     }
     
+    public String toString(){
+        return name+" "+city.toString();
+    }
+    
     public int compareTo(Object o){
         Airport a = (Airport) o;
         return(name.compareTo(a.getName()));
+    }
+    
+    public boolean equals(Airport airport){
+        return this.name.equals(airport.getName());
     }
 }

@@ -15,13 +15,21 @@ public class City implements Comparable{
     private String name;
     private ArrayList<Airport> airports;
     
-    public City(String nome){
-        this.name=nome;
+    public City(String name){
+        this.name=name;
         airports = new ArrayList<>();
+    }
+    
+    public void insertAirport(Airport airport){
+        airports.add(airport);
     }
     
     public String getName(){
         return name;
+    }
+    
+    public String toString(){
+        return name+"\n";
     }
     
     public int compareTo(Object o){
@@ -29,5 +37,8 @@ public class City implements Comparable{
         return(name.compareTo(a.getName()));
     }
     
+    public boolean equals(City city){
+        return this.name.equals(city.getName());
+    }
     
 }
