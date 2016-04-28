@@ -18,7 +18,7 @@ import java.util.StringTokenizer;
  */
 public class Company {
     private ArrayList<Airplane> airplanes;
-    private ArrayList<City> citys;
+    private ArrayList<City> cities;
     private ArrayList<Airport> airports;
     private String nameCompany;
     
@@ -26,7 +26,7 @@ public class Company {
         this.nameCompany=nameCompany;
         this.airplanes=new ArrayList<>();
         this.airports=new ArrayList<>();
-        this.citys=new ArrayList<>();
+        this.cities=new ArrayList<>();
     }
     
     public void downloadAirplanes(String nameFile) throws FileNotFoundException, IOException{
@@ -56,14 +56,14 @@ public class Company {
         while((line=in.readLine())!=null){
             StringTokenizer st = new StringTokenizer(line);
             String name = st.nextToken();
-            citys.add(new City(name));
+            cities.add(new City(name));
         }
         in.close();
     }
     
     public String toStringCitys(){
         String s="";
-        for(City city : citys){
+        for(City city : cities){
             s+=city.toString();
         }
         return s;
@@ -77,7 +77,7 @@ public class Company {
             String city = st.nextToken();
             City city_app=new City(city);
             String nameAirport = st.nextToken();
-            for(City c : citys){
+            for(City c : cities){
                 if(c.equals(city_app)){
                     Airport a = new Airport(nameAirport,c);
                     airports.add(a);
