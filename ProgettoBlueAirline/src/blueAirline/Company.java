@@ -101,12 +101,10 @@ public class Company {
     public void downloadRoutes(String nameFile) throws FileNotFoundException, IOException{
         BufferedReader in = new BufferedReader(new FileReader(nameFile));
         String line;
-        //routes.add(new Route(new Airport(("Ciao"),new City("ma")),new Airport(("Hello"),new City("hdh"))));
         while((line=in.readLine())!=null){
             StringTokenizer st = new StringTokenizer(line,"\t");
             String a1 = st.nextToken();
             String a2 = st.nextToken();
-            //System.out.println("bbb"+a1.toString()+" "+a2.toString());
             Airport destination = null;
             Airport departure = null;
             for(Airport a : airports){
@@ -120,7 +118,6 @@ public class Company {
                 }
             }
             routes.add(new Route(departure,destination));
-            //System.out.println("aad"+departure.toString()+" "+destination.toString());
         }
         in.close();
     }

@@ -27,7 +27,7 @@ public class Route {
     }
     
     public String toString(){
-        return departure.toString()+" "+destination.toString();
+        return "Departure: "+departure.toString()+"Destination: "+destination.toString()+"\n";
     }
     
     
