@@ -20,6 +20,10 @@ public class City implements Comparable{
         airports = new ArrayList<>();
     }
     
+    public ArrayList<Airport> getArrayAirports(){
+        return airports;
+    }   
+    
     public void insertAirport(Airport airport){
         airports.add(airport);
     }

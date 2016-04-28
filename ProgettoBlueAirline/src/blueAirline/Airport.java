@@ -13,17 +13,17 @@ public class Airport implements Comparable{
     private String name;
     private City city;
     
-    public Airport(String nome, City city){
-        this.name=nome;
+    public Airport(String name, City city){
+        this.name=name;
         this.city=city;
-    }
-    
-    public String getName(){
-        return name;
     }
     
     public City getCity(){
         return city;
+    }
+    
+    public String getName(){
+        return name;
     }
     
     public String toString(){

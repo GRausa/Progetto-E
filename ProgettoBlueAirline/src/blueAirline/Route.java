@@ -26,6 +26,10 @@ public class Route {
         return destination;
     }
     
+    public String toString(){
+        return departure.toString()+" "+destination.toString();
+    }
+    
     
     
 }
