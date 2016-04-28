@@ -96,6 +96,9 @@ public class Company {
         return s;
     }
     
+    public String hello(){
+        return "hello";
+    }
     
    
 }
