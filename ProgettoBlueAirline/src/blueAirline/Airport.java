@@ -38,4 +38,8 @@ public class Airport implements Comparable{
     public boolean equals(Airport airport){
         return this.name.equals(airport.getName());
     }
+    
+    public boolean equalsName(String name){
+        return this.name.equals(name);
+    }
 }

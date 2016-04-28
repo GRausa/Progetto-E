@@ -9,7 +9,11 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.StringTokenizer;
 
 /**
@@ -21,6 +25,7 @@ public class Company {
     private ArrayList<City> cities;
     private ArrayList<Airport> airports;
     private ArrayList<Route> routes;
+    private ArrayList<Flight> flights;
     private String nameCompany;
     
     public Company(String nameCompany){
@@ -29,6 +34,7 @@ public class Company {
         this.airports=new ArrayList<>();
         this.cities=new ArrayList<>();
         this.routes=new ArrayList<>();
+        this.flights=new ArrayList<>();
     }
     
     public void downloadAirplanes(String nameFile) throws FileNotFoundException, IOException{
@@ -108,13 +114,11 @@ public class Company {
             Airport destination = null;
             Airport departure = null;
             for(Airport a : airports){
-                Airport air = new Airport(a1,a.getCity());
-                Airport air2 = new Airport(a2,a.getCity());
-                if(a.equals(air)){
-                    departure = air;
+                if(a.equalsName(a1)){
+                    departure = a;
                 }
-                if(a.equals(air2)){
-                    destination = air2;
+                if(a.equalsName(a2)){
+                    destination = a;
                 }
             }
             routes.add(new Route(departure,destination));
@@ -130,6 +134,57 @@ public class Company {
         return s;
     }
     
+    public void downloadFlight(String nameFile) throws FileNotFoundException, IOException, ParseException{
+        DateFormat df1 = new SimpleDateFormat("dd/MM/yy");
+        DateFormat df2 = new SimpleDateFormat("HH:mm");
+        BufferedReader in = new BufferedReader(new FileReader(nameFile));
+        String line;
+        while((line=in.readLine())!=null){
+            StringTokenizer st = new StringTokenizer(line,"\t");
+            String codeFlight = st.nextToken();  
+            String codeAirplane = st.nextToken();            
+            String depaAirport = st.nextToken();            
+            String destAirport = st.nextToken();
+            Date departureDate = df1.parse(st.nextToken()); //OK
+            Date departureTime = df2.parse(st.nextToken()); //OK
+            Date destinationTime = df2.parse(st.nextToken()); //OK
+            double price = Double.parseDouble(st.nextToken()); //OK            
+            Airplane airplane = null;
+            for(Airplane a : airplanes){
+                if(a.equalsCode(codeAirplane)){
+                    airplane = a;
+                }
+            }            
+            Airport departureAirport = null;
+            Airport destinationAirport = null;
+            for(Airport a : airports){
+                if(a.equalsName(depaAirport)){
+                    departureAirport = a;
+                }
+                if(a.equalsName(destAirport)){
+                    destinationAirport = a;
+                }
+            }
+            Route r = new Route(departureAirport, destinationAirport);
+            Route route = null;
+            for(Route rou : routes){
+                if(rou.equals(r)){
+                    route = r;
+                }
+            }      
+            flights.add(new Flight(codeFlight, airplane, route, departureDate, departureTime, destinationTime, price));
+        }
+        in.close();
+    }
+    
+    public String toStringFlights(){
+        String s="";
+        for(Flight f : flights){
+            s+=f.toString();
+        }
+        return s;
+    }
+    /*
     public String toStringCityAirports(String nameCity){
         String s="";
         for(City c:cities){
@@ -141,7 +196,7 @@ public class Company {
             }
         }
         return s;
-    }
+    }*/
     
    
 }

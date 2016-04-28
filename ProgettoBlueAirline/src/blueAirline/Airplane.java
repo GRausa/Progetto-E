@@ -30,6 +30,14 @@ public class Airplane implements Comparable{
         return name;
     }
     
+    public boolean equals(Airplane airplane){
+        return this.code.equals(airplane.getCode());
+    }
+    
+    public boolean equalsCode(String code){
+        return this.code.equals(code);
+    }
+    
     public String getCode(){
         return code;
     }

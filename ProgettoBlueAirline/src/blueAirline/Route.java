@@ -26,8 +26,12 @@ public class Route {
         return destination;
     }
     
+    public boolean equals(Route route){
+        return (this.departure.getName().equals(route.departure.getName()) & this.destination.getName().equals(route.destination.getName()));
+    }
+    
     public String toString(){
-        return "Departure: "+departure.toString()+"Destination: "+destination.toString()+"\n";
+        return "Departure: "+departure.toString()+"Destination: "+destination.toString();
     }
     
     

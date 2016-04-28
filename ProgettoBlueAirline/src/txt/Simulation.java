@@ -6,14 +6,17 @@
 package txt;
 
 import blueAirline.Company;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.text.ParseException;
 
 /**
  *
  * @author cl418377
  */
 public class Simulation {
-    public static void main(String args[]) throws IOException{
+    public static void main(String args[]) throws IOException, FileNotFoundException, ParseException{
+        //CARICAMENTO
         Company c = new Company("BlueAirlines");
         c.downloadAirplanes("file/Airplanes.txt");
         System.out.println(c.toStringAirplanes());
@@ -23,6 +26,9 @@ public class Simulation {
         System.out.println(c.toStringAirports());
         c.downloadRoutes("file/Routes.txt");
         System.out.println(c.toStringRoutes());
+        
+        c.downloadFlight("file/Flights.txt");
+        System.out.println(c.toStringFlights());
         //System.out.println(c.toStringCityAirports("Monaco"));
     }
 }
