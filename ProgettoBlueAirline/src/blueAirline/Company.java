@@ -135,8 +135,6 @@ public class Company {
     }
     
     public void downloadFlight(String nameFile) throws FileNotFoundException, IOException, ParseException{
-        DateFormat df1 = new SimpleDateFormat("dd/MM/yy");
-        DateFormat df2 = new SimpleDateFormat("HH:mm");
         BufferedReader in = new BufferedReader(new FileReader(nameFile));
         String line;
         while((line=in.readLine())!=null){
@@ -145,9 +143,17 @@ public class Company {
             String codeAirplane = st.nextToken();            
             String depaAirport = st.nextToken();            
             String destAirport = st.nextToken();
-            Date departureDate = df1.parse(st.nextToken()); //OK
-            Date departureTime = df2.parse(st.nextToken()); //OK
-            Date destinationTime = df2.parse(st.nextToken()); //OK
+            
+            String depDate = st.nextToken();
+            String depTime = st.nextToken();
+            Date departureDate = new Date (Integer.parseInt(depDate.substring(6, 10)),Integer.parseInt(depDate.substring(3, 5)),Integer.parseInt(depDate.substring(0, 2)), Integer.parseInt(depTime.substring(0, 2)), Integer.parseInt((depTime.substring(3,5)))); //OK
+            
+            String destDate = st.nextToken();
+            String destTime = st.nextToken();
+            Date destinationDate = new Date (Integer.parseInt(destDate.substring(6, 10)),Integer.parseInt(destDate.substring(3, 5)),Integer.parseInt(destDate.substring(0, 2)), Integer.parseInt(destTime.substring(0, 2)), Integer.parseInt((destTime.substring(3,5)))); //OK
+            
+            
+            
             double price = Double.parseDouble(st.nextToken()); //OK            
             Airplane airplane = null;
             for(Airplane a : airplanes){
@@ -172,7 +178,7 @@ public class Company {
                     route = r;
                 }
             }      
-            flights.add(new Flight(codeFlight, airplane, route, departureDate, departureTime, destinationTime, price));
+            flights.add(new Flight(codeFlight, airplane, route, departureDate, destinationDate, price));
         }
         in.close();
     }
