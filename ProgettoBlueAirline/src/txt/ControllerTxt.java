@@ -3,6 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
+
+//IMPORTANTE 
+/*
+DISCUTERE MEGLIO DI QUESTA CLASSE
+IDEA DI ZODRACCIR-> RENDERLA UN CONTROLLER VERO E PROPRIO, LA MODALITÀ TXT DOVRA' FUNZIONARE
+COME UNA SHELL,NEL SENSO CHE DA LINEA DI COMANDO DIAMO L'ISTRUZIONE DA FARE E LUI ESEGUE,
+NON VA MESSO NEL MAIN(COME ABBIAMO FATTO ADESSO) :  ControllerTxt.checkSeats(c);
+QUINDI DA RIVEDERE.
+
+*/
+
 package txt;
 
 import blueAirline.Company;
