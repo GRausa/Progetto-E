@@ -11,6 +11,7 @@ import java.util.ArrayList;
  *
  * @author cl418377
  */
+
 public class City implements Comparable{
     private String name;
     private ArrayList<Airport> airports;
