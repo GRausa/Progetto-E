@@ -16,8 +16,10 @@ public class Reservation {
     private String prenotationCode;
     private Customer customer;
     private Boolean checkIn;
+    private Flight flight;
 
-    public Reservation(ArrayList<Passenger> passengers, String prenotationCode, Customer customer) {
+    public Reservation(Flight flight,ArrayList<Passenger> passengers, String prenotationCode, Customer customer) {
+        this.flight=flight;
         this.passengers = passengers;
         this.prenotationCode = prenotationCode;
         this.customer=customer;

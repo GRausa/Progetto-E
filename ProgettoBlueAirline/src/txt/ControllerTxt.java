@@ -64,11 +64,11 @@ public final class ControllerTxt {
         if(app!=null){
             if(n>app.getSeatFree()){
                 System.out.println("Non ci sono Posti sufficienti per questo volo, n° posti disponibili = "+app.getSeatFree());
-                return 1;//1 STA PER ERRORE:POSTI INSUFFICIENTI
+                return 0;//0 STA PER ERRORE:POSTI INSUFFICIENTI
             }
             else{
                 System.out.println("ok! CI sono abbastanza posti per questo volo. numero posti disponibili per questo volo :"+app.getSeatFree());
-                return 0;//0 STA PER TUTTO OK!
+                return n;//n STA PER TUTTO OK!, così proseguiamo la prenotazione con questo numero
             }
         }
         else{
@@ -76,4 +76,17 @@ public final class ControllerTxt {
         }
         
     }
+    
+    /*public static int Order(Company c){
+        int k=checkSeats(c);
+        if(k>0){
+            c.makeReservation();         
+            
+            si deve cambiare anche per questo
+            
+            
+        }
+        
+        
+    }*/
 }
