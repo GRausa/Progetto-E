@@ -1,7 +1,0 @@
-Boeing 777	293
-Airbus B330	268
-Airbus B321	200
-Airbus B320	165
-Airbus B319	138
-Embraer 190	100
-Embraer 175	88
