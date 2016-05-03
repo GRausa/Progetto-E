@@ -3,7 +3,7 @@ Milano	Linate
 Roma	Fiumicino
 Roma	Ciampino
 Monaco	Monaco di Bavier
-Palermo Falcone Borsellino
+Palermo	Falcone Borsellino
 Parigi	Roissy
 Parigi	Charles de Gaulle
 Londra	Heathrow
@@ -17,10 +17,10 @@ Barcellona	Girona
 Cagliari	Cagliari-Elmas
 Bari	Karol Wojtyła
 Napoli	Capodichino
-Foggia  Gino Lisa
-Verona  Villafranca
-Torino  Caselle
-Madrid  Barajas
-Brasilia  Presidente Juscelino Kubitschek
-Stoccarda Echterdingen
-Praga Ruzyně
+Foggi	 Gino Lisa
+Verona	Villafranca
+Torino	Caselle
+Madrid	Barajas
+Brasilia	Presidente Juscelino Kubitschek
+Stoccarda	Echterdingen
+Praga	Ruzyně
