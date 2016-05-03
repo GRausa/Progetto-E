@@ -9,18 +9,3 @@ Parigi	Charles de Gaulle
 Londra	Heathrow
 Londra	Gatwick
 Londra	Stansted
-New York	JFK
-New York	La Guardia
-Amsterdam	Schiphol
-Barcellona	El Prat
-Barcellona	Girona
-Cagliari	Cagliari-Elmas
-Bari	Karol Wojtyła
-Napoli	Capodichino
-Foggi	 Gino Lisa
-Verona	Villafranca
-Torino	Caselle
-Madrid	Barajas
-Brasilia	Presidente Juscelino Kubitschek
-Stoccarda	Echterdingen
-Praga	Ruzyně

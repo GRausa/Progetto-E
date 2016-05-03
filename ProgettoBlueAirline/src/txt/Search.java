@@ -29,7 +29,7 @@ public final class Search {
             System.out.println("Route presente.");
             System.out.println("Inserisci Data (gg/mm/aaaa) : ");
             s1 = input.nextLine();
-            Date date = new Date (Integer.parseInt(s1.substring(0, 1)),Integer.parseInt(s1.substring(2, 3)),Integer.parseInt(s1.substring(5, 8))); 
+            Date date = new Date (Integer.parseInt(s1.substring(0, 1)),Integer.parseInt(s1.substring(3, 4)),Integer.parseInt(s1.substring(6, 9))); 
             ArrayList<Flight> arrayFlight = c.searchFlights(r,date);
             return null;
         }
