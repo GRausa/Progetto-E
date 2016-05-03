@@ -62,7 +62,7 @@ public class Company {
         BufferedReader in = new BufferedReader(new FileReader(nameFile));
         String line;
         while((line=in.readLine())!=null){
-            StringTokenizer st = new StringTokenizer(line);
+            StringTokenizer st = new StringTokenizer(line,"\t");
             String name = st.nextToken();
             cities.add(new City(name));
         }
@@ -129,7 +129,7 @@ public class Company {
     public String toStringRoutes(){
         String s="";
         for(Route r : routes){
-            s+=r.toString();
+            s+=r.toString() + "\n";
         }
         return s;
     }
@@ -186,11 +186,11 @@ public class Company {
     public String toStringFlights(){
         String s="";
         for(Flight f : flights){
-            s+=f.toString();
+            s+=f.toString() +"\n";
         }
         return s;
     }
-    /*
+    
     public String toStringCityAirports(String nameCity){
         String s="";
         for(City c:cities){
@@ -202,7 +202,7 @@ public class Company {
             }
         }
         return s;
-    }*/
+    }
     
    
 }

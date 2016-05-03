@@ -1,3 +1,7 @@
 Malpensa	Roissy
 Fiumicino	Heathrow
 Heathrow	Fiumicino
+Falcone Borsellino	Linate
+JFK	El Prat
+Charles de Gaulle	JFK
+JFK	Charles de Gaulle

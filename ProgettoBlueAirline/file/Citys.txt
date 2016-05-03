@@ -4,3 +4,6 @@ Monaco
 Palermo
 Parigi
 Londra
+New York
+Amsterdam
+Barcellona
