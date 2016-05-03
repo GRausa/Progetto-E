@@ -3,13 +3,13 @@ Milano	Linate
 Roma	Fiumicino
 Roma  Ciampino
 Monaco	Monaco di Bavier
-Palermo	Falcone Borsellino
+Palermo Falcone Borsellino
 Parigi	Roissy
 Parigi	Charles de Gaulle
 Londra	Heathrow
-Londra	Gatwick
+Londra  Gatwick
 Londra  Stansted
-New York	JFK
+New York  JFK
 New York	La Guardia
 Amsterdam	Schiphol
 Barcellona	El Prat
