@@ -18,7 +18,7 @@ public class Flight {
     private Date destinationDate;
     private Date departureDate;
     private Route route;
-    private ArrayList<Boolean> seats;
+    private Seat[] seats;
     private double price; //prezzo dipene dal volo
     
     public Flight(String code, Airplane airplane, Route route, Date departureDate,Date destinationDate, double price){
@@ -28,14 +28,14 @@ public class Flight {
         this.departureDate = departureDate;
         this.destinationDate = destinationDate;
         this.price=price;
-        this.seats=new ArrayList<>();
+        this.seats = new Seat[airplane.getNumSeat()];
     }
     
     public String getCode(){
         return code;
     }
     
-    public ArrayList<Boolean> getSeats(){
+    public Seat[] getSeats(){
         return seats;
     }
     
@@ -44,7 +44,7 @@ public class Flight {
     }
     
     public String toString(){
-        return code+"\n"+route.toString()+"Departure Date: "+departureDate.getDate()+"/"+departureDate.getMonth()+"/"+departureDate.getYear()+" "+departureDate.getHours()+":"+departureDate.getMinutes()+"\nDestination Date: "+destinationDate.getDate()+"/"+destinationDate.getMonth()+"/"+destinationDate.getYear()+" "+destinationDate.getHours()+":"+destinationDate.getMinutes()+"\nPrice: "+Double.toString(price)+" €\nSeats Occcupied:"+seats.size()+"/"+airplane.getNumSeat()+"\n\n";
+        return code+"\n"+route.toString()+"Departure Date: "+departureDate.getDate()+"/"+departureDate.getMonth()+"/"+departureDate.getYear()+" "+departureDate.getHours()+":"+departureDate.getMinutes()+"\nDestination Date: "+destinationDate.getDate()+"/"+destinationDate.getMonth()+"/"+destinationDate.getYear()+" "+destinationDate.getHours()+":"+destinationDate.getMinutes()+"\nPrice: "+Double.toString(price)+" €\nSeats Occcupied:"+seats.length+"/"+airplane.getNumSeat()+"\n\n";
         //return code+"\n"+route.toString()+"Data partenza: "+departur+"\nData arrivo: "+destinationDate.toLocaleString()+"\nPrice: "+Double.toString(price)+"\nSeats Occcupied:"+seats.size()+"/"+airplane.getNumSeat()+"\n\n";
     
     }

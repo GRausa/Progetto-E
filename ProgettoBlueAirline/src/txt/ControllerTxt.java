@@ -16,9 +16,9 @@ import java.util.Scanner;
  *
  * @author cl418377
  */
-public final class Search {
+public final class ControllerTxt {
     
-    public static void searchFlight(Company c){
+    public static void searchTxtFlight(Company c){
         Scanner input = new Scanner(System.in);
         System.out.println("Inserisci partenza: ");
         String s1 = input.nextLine();
@@ -34,12 +34,20 @@ public final class Search {
             Date date = new Date (Integer.parseInt(vet[2]),Integer.parseInt(vet[1]),Integer.parseInt(vet[0])); 
             ArrayList<Flight> arrayFlight = c.searchFlights(r,date);
             for(Flight f:arrayFlight){
-       
                 System.out.println(f);
             }
         }
         else{
             System.out.println("Route non presente.");
         }
+    }
+    
+    public static void checkSeats(Company c){
+        Scanner input = new Scanner(System.in);
+        System.out.println("Inserisci codice volo: ");
+        String s1 = input.nextLine();
+        System.out.println("Inserisci numero passeggeri: ");
+        int n = input.nextInt();
+        
     }
 }

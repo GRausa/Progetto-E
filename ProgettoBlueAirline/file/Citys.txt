@@ -4,3 +4,15 @@ Monaco
 Palermo
 Parigi
 Londra
+New York
+Amsterdam
+Barcellona
+Bari
+Cagliari
+Napoli
+Verona
+Torino
+Madrid
+Brasilia
+Stoccarda
+Praga
