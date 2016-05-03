@@ -45,7 +45,8 @@ public class Company {
             String code = st.nextToken();
             String name = st.nextToken();
             int nSeats = Integer.parseInt(st.nextToken());
-            airplanes.add(new Airplane(code,name,nSeats));
+            int nFirstClass = Integer.parseInt(st.nextToken());
+            airplanes.add(new Airplane(code,name,nSeats,nFirstClass));
         }
         in.close();
     }

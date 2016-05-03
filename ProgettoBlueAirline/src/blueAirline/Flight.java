@@ -18,7 +18,8 @@ public class Flight {
     private int flightTime;
     private Date departureDate;
     private Route route;
-    private Seat[] seats;
+    //private LinkedHashMap<>
+    //private Seat[] seats;//DA MODIFICARE
     private double price; //prezzo dipene dal volo
     
     public Flight(String code, Airplane airplane, Route route, Date departureDate,int flightTime, double price){
@@ -44,7 +45,7 @@ public class Flight {
     }
     
     public String toString(){
-        return code+"\n"+route.toString()+"Departure Date: "+departureDate.getDate()+"/"+departureDate.getMonth()+"/"+departureDate.getYear()+" "+departureDate.getHours()+":"+departureDate.getMinutes()+"\nTempo di volo in minuti: "+flightTime+"\nPrice: "+Double.toString(price)+" €\nSeats Occcupied:"+seats.length+"/"+airplane.getNumSeat()+"\n\n";
+        return code+"\n"+route.toString()+"Departure Date: "+departureDate.getDate()+"/"+departureDate.getMonth()+"/"+departureDate.getYear()+" "+departureDate.getHours()+":"+departureDate.getMinutes()+"\nTempo di volo in minuti: "+flightTime+"\nPrice: "+Double.toString(price)+" €\nSeats Occcupied:"+this.seatsOccupeted()+"/"+airplane.getNumSeat()+"\n\n";
         
     }
 
@@ -54,6 +55,16 @@ public class Flight {
 
     public Route getRoute() {
         return route;
+    }
+    
+    public int seatsOccupeted(){
+        int n = 0;
+        for(int i=0;i<seats.length;i++){
+            if(seats[i].isReserved()){
+                    n++;
+            }
+        }
+        return n;
     }
     
     

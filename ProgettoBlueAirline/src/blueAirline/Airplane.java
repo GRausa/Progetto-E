@@ -14,17 +14,34 @@ import java.util.ArrayList;
 public class Airplane implements Comparable{
     private String name;
     private String code;
-    private Seat [] seats;
+    private Seat[] seats;
+    private int numberFirstClass;
     
-    public Airplane(String code, String name, int nSeats){
+    public Airplane(String code, String name, int nSeats, int numberFirstClass){
         this.name=name;
         this.code=code;
-        this.seats=new Seat[nSeats];
+        this.numberFirstClass=numberFirstClass;
+        this.seats=new Seat[nSeats];       
+        for(int i=0; i< nSeats; i++){
+            if(i<numberFirstClass){
+                seats[i]=new Seat(i,1);
+            }
+            else{
+                seats[i]=new Seat(i,2);
+            }
+            
+        }
     }
     
     public int getNumSeat(){
         return seats.length;
     }
+
+    public Seat[] getSeats() {
+        return seats;
+    }
+    
+    
     
     public String getName(){
         return name;
