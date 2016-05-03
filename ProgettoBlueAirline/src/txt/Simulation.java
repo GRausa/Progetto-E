@@ -32,6 +32,6 @@ public class Simulation {
         System.out.println(c.toStringFlights());
         //System.out.println(c.toStringCityAirports("Monaco"));
         
-        Flight f = Search.searchFlight(c);
+        Search.searchFlight(c);
     }
 }

@@ -207,10 +207,11 @@ public class Company {
     public ArrayList<Flight> searchFlights(Route route,Date data){
         ArrayList<Flight> ritorno=new ArrayList<>(2);
         for(Flight ciclo:flights){
-            if((ciclo.getRoute().equals(route))&&(ciclo.getDepartureDate().getMonth()==data.getMonth())&&(ciclo.getDepartureDate().getDay()==data.getDay())&&(ciclo.getDepartureDate().getYear()==data.getYear()))
-                    ritorno.add(ciclo);
+            if((ciclo.getRoute().equals(route))&&(ciclo.getDepartureDate().getMonth()==data.getMonth())&&(ciclo.getDepartureDate().getDate()==data.getDate())&&(ciclo.getDepartureDate().getYear()==data.getYear()))
+            {
+                ritorno.add(ciclo);
+            }
         }
-        
         return ritorno;
     }
     

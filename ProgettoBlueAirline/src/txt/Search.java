@@ -18,7 +18,7 @@ import java.util.Scanner;
  */
 public final class Search {
     
-    public static Flight searchFlight(Company c){
+    public static void searchFlight(Company c){
         Scanner input = new Scanner(System.in);
         System.out.println("Inserisci partenza: ");
         String s1 = input.nextLine();
@@ -29,13 +29,17 @@ public final class Search {
             System.out.println("Route presente.");
             System.out.println("Inserisci Data (gg/mm/aaaa) : ");
             s1 = input.nextLine();
-            Date date = new Date (Integer.parseInt(s1.substring(0, 1)),Integer.parseInt(s1.substring(3, 4)),Integer.parseInt(s1.substring(6, 9))); 
+            String [] vet = new String[3];
+            vet=s1.split("/");
+            Date date = new Date (Integer.parseInt(vet[2]),Integer.parseInt(vet[1]),Integer.parseInt(vet[0])); 
             ArrayList<Flight> arrayFlight = c.searchFlights(r,date);
-            return null;
+            for(Flight f:arrayFlight){
+       
+                System.out.println(f);
+            }
         }
         else{
             System.out.println("Route non presente.");
-            return null;
         }
     }
 }
