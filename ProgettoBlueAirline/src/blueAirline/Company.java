@@ -204,5 +204,15 @@ public class Company {
         return s;
     }
     
+    public ArrayList<Flight> searchFlights(Route route,Date data){
+        ArrayList<Flight> ritorno=new ArrayList<Flight>(2);
+        for(Flight ciclo:flights){
+            if((ciclo.getRoute().equals(route))&&(ciclo.getDepartureDate().equals(data)))
+                    ritorno.add(ciclo);
+        }
+        
+        return ritorno;
+    }
+    
    
 }
