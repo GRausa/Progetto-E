@@ -21,7 +21,7 @@ public class Flight {
     private Date departureDate;
     private Route route;
     private HashMap<Seat,Boolean> seats; //SERVE A MAPPARE OGNI POSTO PER VEDERE SE È DISPONIBILE
-    private int SeatFree; //CONTATORE POSTI LIBERI(SI DECREMENTA AD OGNI PRENOTAZIONE
+    private int seatFree; //CONTATORE POSTI LIBERI(SI DECREMENTA AD OGNI PRENOTAZIONE
     private double price; //prezzo dipene dal volo
     
     public Flight(String code, Airplane airplane, Route route, Date departureDate,int flightTime, double price){
@@ -35,7 +35,7 @@ public class Flight {
         for(int i=0;i<airplane.getNumSeat();i++){
             seats.put(airplane.getSeats()[i], Boolean.FALSE);
         }
-        this.SeatFree=airplane.getNumSeat();
+        this.seatFree=airplane.getNumSeat();
     }
     
     public String getCode(){
@@ -48,7 +48,7 @@ public class Flight {
     }
     
     public String toString(){
-        return code+"\n"+route.toString()+"Departure Date: "+departureDate.getDate()+"/"+departureDate.getMonth()+"/"+departureDate.getYear()+" "+departureDate.getHours()+":"+departureDate.getMinutes()+"\nTempo di volo in minuti: "+flightTime+"\nPrice: "+Double.toString(price)+" €\nSeats Occcupied:"+"/"+airplane.getNumSeat()+"\n\n";
+        return code+"\n"+route.toString()+"Departure Date: "+departureDate.getDate()+"/"+departureDate.getMonth()+"/"+departureDate.getYear()+" "+departureDate.getHours()+":"+departureDate.getMinutes()+"\nTempo di volo in minuti: "+flightTime+"\nPrice: "+Double.toString(price)+" €\nSeats Occcupied:"+(airplane.getNumSeat()-seatFree)+"/"+airplane.getNumSeat()+"\n\n";
         
     }
 
@@ -61,7 +61,7 @@ public class Flight {
     }
 
     public int getSeatFree() {
-        return SeatFree;
+        return seatFree;
     }
     
     
