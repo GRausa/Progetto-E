@@ -48,4 +48,14 @@ public class Flight {
         //return code+"\n"+route.toString()+"Data partenza: "+departur+"\nData arrivo: "+destinationDate.toLocaleString()+"\nPrice: "+Double.toString(price)+"\nSeats Occcupied:"+seats.size()+"/"+airplane.getNumSeat()+"\n\n";
     
     }
+
+    public Date getDepartureDate() {
+        return departureDate;
+    }
+
+    public Route getRoute() {
+        return route;
+    }
+    
+    
 }
