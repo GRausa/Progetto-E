@@ -15,18 +15,18 @@ import java.util.Date;
 public class Flight {
     private String code;
     private Airplane airplane;
-    private Date destinationDate;
+    private int flightTime;
     private Date departureDate;
     private Route route;
     private Seat[] seats;
     private double price; //prezzo dipene dal volo
     
-    public Flight(String code, Airplane airplane, Route route, Date departureDate,Date destinationDate, double price){
+    public Flight(String code, Airplane airplane, Route route, Date departureDate,int flightTime, double price){
         this.code=code;
         this.airplane=airplane;
         this.route=route;
         this.departureDate = departureDate;
-        this.destinationDate = destinationDate;
+        this.flightTime= flightTime;
         this.price=price;
         this.seats = new Seat[airplane.getNumSeat()];
     }
@@ -44,9 +44,8 @@ public class Flight {
     }
     
     public String toString(){
-        return code+"\n"+route.toString()+"Departure Date: "+departureDate.getDate()+"/"+departureDate.getMonth()+"/"+departureDate.getYear()+" "+departureDate.getHours()+":"+departureDate.getMinutes()+"\nDestination Date: "+destinationDate.getDate()+"/"+destinationDate.getMonth()+"/"+destinationDate.getYear()+" "+destinationDate.getHours()+":"+destinationDate.getMinutes()+"\nPrice: "+Double.toString(price)+" €\nSeats Occcupied:"+seats.length+"/"+airplane.getNumSeat()+"\n\n";
-        //return code+"\n"+route.toString()+"Data partenza: "+departur+"\nData arrivo: "+destinationDate.toLocaleString()+"\nPrice: "+Double.toString(price)+"\nSeats Occcupied:"+seats.size()+"/"+airplane.getNumSeat()+"\n\n";
-    
+        return code+"\n"+route.toString()+"Departure Date: "+departureDate.getDate()+"/"+departureDate.getMonth()+"/"+departureDate.getYear()+" "+departureDate.getHours()+":"+departureDate.getMinutes()+"\nTempo di volo in minuti: "+flightTime+"\nPrice: "+Double.toString(price)+" €\nSeats Occcupied:"+seats.length+"/"+airplane.getNumSeat()+"\n\n";
+        
     }
 
     public Date getDepartureDate() {

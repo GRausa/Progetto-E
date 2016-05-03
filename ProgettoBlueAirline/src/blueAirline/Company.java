@@ -144,15 +144,16 @@ public class Company {
             String depaAirport = st.nextToken();            
             String destAirport = st.nextToken();
             
+            String [] data = new String[3];
+            String [] ora = new String[2];
+            
             String depDate = st.nextToken();
+            data = depDate.split("/");
             String depTime = st.nextToken();
-            Date departureDate = new Date (Integer.parseInt(depDate.substring(6, 10)),Integer.parseInt(depDate.substring(3, 5)),Integer.parseInt(depDate.substring(0, 2)), Integer.parseInt(depTime.substring(0, 2)), Integer.parseInt((depTime.substring(3,5)))); //OK
+            ora = depTime.split(":");
+            Date departureDate = new Date (Integer.parseInt(data[2]),Integer.parseInt(data[1]),Integer.parseInt(data[0]), Integer.parseInt(ora[0]), Integer.parseInt(ora[1])); //OK
             
-            String destDate = st.nextToken();
-            String destTime = st.nextToken();
-            Date destinationDate = new Date (Integer.parseInt(destDate.substring(6, 10)),Integer.parseInt(destDate.substring(3, 5)),Integer.parseInt(destDate.substring(0, 2)), Integer.parseInt(destTime.substring(0, 2)), Integer.parseInt((destTime.substring(3,5)))); //OK
-            
-            
+            String flightTime = st.nextToken();
             
             double price = Double.parseDouble(st.nextToken()); //OK            
             Airplane airplane = null;
@@ -178,7 +179,7 @@ public class Company {
                     route = r;
                 }
             }      
-            flights.add(new Flight(codeFlight, airplane, route, departureDate, destinationDate, price));
+            flights.add(new Flight(codeFlight, airplane, route, departureDate, Integer.parseInt(flightTime), price));
         }
         in.close();
     }
