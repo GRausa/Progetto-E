@@ -5,48 +5,48 @@ Falcone Borsellino	Linate
 JFK	El Prat
 Charles de Gaulle	JFK
 JFK	Charles de Gaulle
-Monaco di Bavier  Roissy
-Monaco di Bavier  Charles de Gaulle
-Monaco di Bavier  Heathrow
-Monaco di Bavier  Gatwick
-Heathrow  JFK
-Heathrow  Schiphol
-Heathrow  El Prat
-Heathrow  Girona
-Heathrow  Echterdingen
-Heathrow  Ruzyně
-Presidente Juscelino Kubitschek Heathrow
-Barajas Capodichino
-Barajas Villafranca
-Barajas Caselle
-Barajas Girona
-Capodichino Villafranca
-Villafranca Caselle
-Gino Lisa Ciampino
-Gino Lisa Villafranca
-Gino Lisa Capodichino
-Ciampino  Ruzyně
-Linate  Falcone Borsellino	
-El Prat JFK
-JFK Charles de Gaulle
-Roissy  Monaco di Bavier
-Charles de Gaulle Monaco di Bavier
-Heathrow  Monaco di Bavier
-Gatwick Monaco di Bavier
-JFK Heathrow
-Schiphol  Heathrow
-El Prat Heathrow
-Girona  Heathrow
-Echterdingen  Heathrow
-Ruzyně  Heathrow
-Heathrow  Presidente Juscelino Kubitschek
-Capodichino Barajas
-Villafranca Barajas
-Caselle Barajas
-Girona  Barajas
-Villafranca Capodichino
-CaselleV  illafranca
-Ciampino  Gino Lisa
-Villafranca Gino Lisa
-Capodichino Gino Lisa
-Ruzyně Ciampino
+Monaco di Bavier	Roissy
+Monaco di Bavier	Charles de Gaulle
+Monaco di Bavier	Heathrow
+Monaco di Bavier	Gatwick
+Heathrow	JFK
+Heathrow	Schiphol
+Heathrow	El Prat
+Heathrow	Girona
+Heathrow	Echterdingen
+Heathrow	Ruzyně
+Presidente Juscelino Kubitschek	Heathrow
+Barajas	Capodichino
+Barajas	Villafranca
+Barajas	Caselle
+Barajas	Girona
+Capodichino	Villafranca
+Villafranca	Caselle
+Gino Lisa	Ciampino
+Gino Lisa	Villafranca
+Gino Lisa	Capodichino
+Ciampino	Ruzyně
+Linate	Falcone Borsellino	
+El Pra	JFK
+JFK	Charles de Gaulle
+Roissy	Monaco di Bavier
+Charles de Gaulle	Monaco di Bavier
+Heathrow	Monaco di Bavier
+Gatwick	Monaco di Bavier
+JFK	Heathrow
+Schiphol	Heathrow
+El Prat	Heathrow
+Girona	Heathrow
+Echterdingen	Heathrow
+Ruzyně	Heathrow
+Heathrow	Presidente Juscelino Kubitschek
+Capodichino	Barajas
+Villafranca	Barajas
+Caselle	Barajas
+Girona	Barajas
+Villafranca	Capodichino
+Caselle	Villafranca
+Ciampino	Gino Lisa
+Villafranca	Gino Lisa
+Capodichino	Gino Lisa
+Ruzyně	Ciampino
