@@ -6,6 +6,7 @@
 package txt;
 
 import blueAirline.Company;
+import blueAirline.Flight;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.ParseException;
@@ -30,5 +31,7 @@ public class Simulation {
         c.downloadFlight("file/Flights.txt");
         System.out.println(c.toStringFlights());
         //System.out.println(c.toStringCityAirports("Monaco"));
+        
+        Flight f = Search.searchFlight(c);
     }
 }

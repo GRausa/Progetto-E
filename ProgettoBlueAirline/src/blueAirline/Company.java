@@ -214,5 +214,14 @@ public class Company {
         return ritorno;
     }
     
+    public Route searchRoute(String stringDeparture, String stringDestination){
+        for(Route rou : routes){
+            if(rou.getDeparture().getCity().getName().equals(stringDeparture) & rou.getDestination().getCity().getName().equals(stringDestination)){
+                return rou;
+            }
+        }
+        return null;
+    }
+    
    
 }
