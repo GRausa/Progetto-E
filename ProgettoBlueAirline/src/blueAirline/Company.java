@@ -10,7 +10,9 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.*;
 import java.util.Date;
 import java.util.StringTokenizer;
 
@@ -150,7 +152,8 @@ public class Company {
             data = depDate.split("/");
             String depTime = st.nextToken();
             ora = depTime.split(":");
-            Date departureDate = new Date (Integer.parseInt(data[2]),Integer.parseInt(data[1]),Integer.parseInt(data[0]), Integer.parseInt(ora[0]), Integer.parseInt(ora[1])); //OK
+            
+            GregorianCalendar departureDate = new GregorianCalendar (Integer.parseInt(data[2]),Integer.parseInt(data[1])-1,Integer.parseInt(data[0]), Integer.parseInt(ora[0]), Integer.parseInt(ora[1])); //i mesi vanno da 0 a 
             
             String flightTime = st.nextToken();
             
@@ -216,10 +219,10 @@ public class Company {
     }
     
     
-    public ArrayList<Flight> searchFlights(Route route,Date data){
+    public ArrayList<Flight> searchFlights(Route route,GregorianCalendar data){
         ArrayList<Flight> ritorno=new ArrayList<>(2);
         for(Flight ciclo:flights){
-            if((ciclo.getRoute().equals(route))&&(ciclo.getDepartureDate().getMonth()==data.getMonth())&&(ciclo.getDepartureDate().getDate()==data.getDate())&&(ciclo.getDepartureDate().getYear()==data.getYear()))
+            if((ciclo.getRoute().equals(route))&& ciclo.getDepartureDate().get(Calendar.YEAR)==data.get(Calendar.YEAR)&& ciclo.getDepartureDate().get(Calendar.MONTH)==data.get(Calendar.MONTH) && ciclo.getDepartureDate().get(Calendar.DATE)==data.get(Calendar.DATE))
             {
                 ritorno.add(ciclo);
             }

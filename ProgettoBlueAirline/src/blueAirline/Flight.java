@@ -5,8 +5,11 @@
  */
 package blueAirline;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 
@@ -18,13 +21,13 @@ public class Flight {
     private String code;
     private Airplane airplane;
     private int flightTime;
-    private Date departureDate;
+    private Calendar departureDate;
     private Route route;
     private HashMap<Seat,Boolean> seats; //SERVE A MAPPARE OGNI POSTO PER VEDERE SE È DISPONIBILE
     private int seatFree; //CONTATORE POSTI LIBERI(SI DECREMENTA AD OGNI PRENOTAZIONE
     private double price; //prezzo dipene dal volo
     
-    public Flight(String code, Airplane airplane, Route route, Date departureDate,int flightTime, double price){
+    public Flight(String code, Airplane airplane, Route route, GregorianCalendar departureDate,int flightTime, double price){
         this.code=code;
         this.airplane=airplane;
         this.route=route;
@@ -48,11 +51,12 @@ public class Flight {
     }
     
     public String toString(){
-        return code+"\n"+route.toString()+"Departure Date: "+departureDate.getDate()+"/"+departureDate.getMonth()+"/"+departureDate.getYear()+" "+departureDate.getHours()+":"+departureDate.getMinutes()+"\nTempo di volo in minuti: "+flightTime+"\nPrice: "+Double.toString(price)+" €\nSeats Occcupied:"+(airplane.getNumSeat()-seatFree)+"/"+airplane.getNumSeat()+"\n\n";
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MMM/yyyy HH:mm");
+        return code+"\n"+route.toString()+"Departure Date: "+ sdf.format(this.departureDate.getTime())+"\nTempo di volo in minuti: "+flightTime+"\nPrice: "+Double.toString(price)+" €\nSeats Occcupied:"+(airplane.getNumSeat()-seatFree)+"/"+airplane.getNumSeat()+"\n\n";
         
     }
 
-    public Date getDepartureDate() {
+    public Calendar getDepartureDate() {
         return departureDate;
     }
 
