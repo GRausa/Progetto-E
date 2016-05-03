@@ -32,6 +32,7 @@ public class Simulation {
         System.out.println(c.toStringFlights());
         //System.out.println(c.toStringCityAirports("Monaco"));
         
-        ControllerTxt.searchTxtFlight(c);
+        //ControllerTxt.searchTxtFlight(c);
+        ControllerTxt.checkSeats(c);
     }
 }

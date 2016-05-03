@@ -42,12 +42,26 @@ public final class ControllerTxt {
         }
     }
     
-    public static void checkSeats(Company c){
+    public static int checkSeats(Company c){
         Scanner input = new Scanner(System.in);
         System.out.println("Inserisci codice volo: ");
         String s1 = input.nextLine();
         System.out.println("Inserisci numero passeggeri: ");
         int n = input.nextInt();
+        Flight app=c.searchFlights(s1);
+        if(app!=null){
+            if(n>app.getSeatFree()){
+                System.out.println("Non ci sono Posti sufficienti per questo volo, n° posti disponibili = "+app.getSeatFree());
+                return 1;//1 STA PER ERRORE:POSTI INSUFFICIENTI
+            }
+            else{
+                System.out.println("ok! CI sono abbastanza posti per questo volo. numero posti disponibili per questo volo :"+app.getSeatFree());
+                return 0;//0 STA PER TUTTO OK!
+            }
+        }
+        else{
+            return -1;//ERRORE NON ESISTE UN VOLO CON QUESTO CODICE
+        }
         
     }
 }

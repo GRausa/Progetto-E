@@ -206,6 +206,18 @@ public class Company {
         return s;
     }
     
+    
+    public Flight searchFlights(String cod) {
+
+        for(Flight ciclo:flights){
+            if(ciclo.getCode().equals(cod)){
+                return ciclo;
+            }
+        }
+        return null;    
+    }
+    
+    
     public ArrayList<Flight> searchFlights(Route route,Date data){
         ArrayList<Flight> ritorno=new ArrayList<>(2);
         for(Flight ciclo:flights){
@@ -225,6 +237,8 @@ public class Company {
         }
         return null;
     }
+
+    
     
     
 
