@@ -26,3 +26,27 @@ Gino Lisa Ciampino
 Gino Lisa Villafranca
 Gino Lisa Capodichino
 Ciampino  Ruzyně
+Linate  Falcone Borsellino	
+El Prat JFK
+JFK Charles de Gaulle
+Roissy  Monaco di Bavier
+Charles de Gaulle Monaco di Bavier
+Heathrow  Monaco di Bavier
+Gatwick Monaco di Bavier
+JFK Heathrow
+Schiphol  Heathrow
+El Prat Heathrow
+Girona  Heathrow
+Echterdingen  Heathrow
+Ruzyně  Heathrow
+Heathrow  Presidente Juscelino Kubitschek
+Capodichino Barajas
+Villafranca Barajas
+Caselle Barajas
+Girona  Barajas
+Villafranca Capodichino
+CaselleV  illafranca
+Ciampino  Gino Lisa
+Villafranca Gino Lisa
+Capodichino Gino Lisa
+Ruzyně Ciampino
