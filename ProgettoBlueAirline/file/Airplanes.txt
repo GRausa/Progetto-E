@@ -1,7 +1,7 @@
-A1	Boeing 777	293
-A2	Airbus B330	268
-A3	Airbus B321	200
-A4	Airbus B320	165
-A5	Airbus B319	138
-A6	Embraer 190	100
-A7	Embraer 175	88
+A1	Boeing 777	293	20
+A2	Airbus B330	268	18
+A3	Airbus B321	200	27
+A4	Airbus B320	165	12
+A5	Airbus B319	138	10
+A6	Embraer 190	100	8
+A7	Embraer 175	88	2

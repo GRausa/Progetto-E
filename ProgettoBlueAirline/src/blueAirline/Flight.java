@@ -7,6 +7,8 @@ package blueAirline;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 /**
  *
@@ -18,7 +20,8 @@ public class Flight {
     private int flightTime;
     private Date departureDate;
     private Route route;
-    //private LinkedHashMap<>
+    private HashMap<Seat,Boolean> seats; //SERVE A MAPPARE OGNI POSTO PER VEDERE SE È DISPONIBILE
+    private int SeatFree; //CONTATORE POSTI LIBERI(SI DECREMENTA AD OGNI PRENOTAZIONE
     //private Seat[] seats;//DA MODIFICARE
     private double price; //prezzo dipene dal volo
     
@@ -29,23 +32,24 @@ public class Flight {
         this.departureDate = departureDate;
         this.flightTime= flightTime;
         this.price=price;
-        this.seats = new Seat[airplane.getNumSeat()];
+        this.seats = new HashMap<>();
+        for(int i=0;i<airplane.getNumSeat();i++){
+            seats.put(airplane.getSeats()[i], Boolean.FALSE);
+        }
+        this.SeatFree=airplane.getNumSeat();
     }
     
     public String getCode(){
         return code;
     }
     
-    public Seat[] getSeats(){
-        return seats;
-    }
     
     public double getPrice(){
         return price;
     }
     
     public String toString(){
-        return code+"\n"+route.toString()+"Departure Date: "+departureDate.getDate()+"/"+departureDate.getMonth()+"/"+departureDate.getYear()+" "+departureDate.getHours()+":"+departureDate.getMinutes()+"\nTempo di volo in minuti: "+flightTime+"\nPrice: "+Double.toString(price)+" €\nSeats Occcupied:"+this.seatsOccupeted()+"/"+airplane.getNumSeat()+"\n\n";
+        return code+"\n"+route.toString()+"Departure Date: "+departureDate.getDate()+"/"+departureDate.getMonth()+"/"+departureDate.getYear()+" "+departureDate.getHours()+":"+departureDate.getMinutes()+"\nTempo di volo in minuti: "+flightTime+"\nPrice: "+Double.toString(price)+" €\nSeats Occcupied:"+"/"+airplane.getNumSeat()+"\n\n";
         
     }
 
@@ -57,7 +61,7 @@ public class Flight {
         return route;
     }
     
-    public int seatsOccupeted(){
+    /*public int seatsOccupeted(){
         int n = 0;
         for(int i=0;i<seats.length;i++){
             if(seats[i].isReserved()){
@@ -66,6 +70,6 @@ public class Flight {
         }
         return n;
     }
-    
+    */
     
 }
