@@ -26,7 +26,9 @@ import blueAirline.Company;
 import blueAirline.Flight;
 import blueAirline.Route;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.Scanner;
 
 /**
@@ -48,7 +50,7 @@ public final class ControllerTxt {
             s1 = input.nextLine();
             String [] vet = new String[3];
             vet=s1.split("/");
-            Date date = new Date (Integer.parseInt(vet[2]),Integer.parseInt(vet[1]),Integer.parseInt(vet[0])); 
+            GregorianCalendar date = new GregorianCalendar(Integer.parseInt(vet[2]),Integer.parseInt(vet[1])-1,Integer.parseInt(vet[0])); 
             ArrayList<Flight> arrayFlight = c.searchFlights(r,date);
             for(Flight f:arrayFlight){
                 System.out.println(f);
