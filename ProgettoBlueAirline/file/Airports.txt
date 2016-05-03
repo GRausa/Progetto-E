@@ -1,22 +1,22 @@
 Milano	Malpensa
 Milano	Linate
 Roma	Fiumicino
-Roma  Ciampino
+Roma	Ciampino
 Monaco	Monaco di Bavier
 Palermo Falcone Borsellino
 Parigi	Roissy
 Parigi	Charles de Gaulle
 Londra	Heathrow
-Londra  Gatwick
-Londra  Stansted
-New York  JFK
+Londra	Gatwick
+Londra	Stansted
+New York	JFK
 New York	La Guardia
 Amsterdam	Schiphol
 Barcellona	El Prat
-Barcellona  Girona
-Cagliari  Cagliari-Elmas
-Bari  Karol Wojtyła
-Napoli  Capodichino
+Barcellona	Girona
+Cagliari	Cagliari-Elmas
+Bari	Karol Wojtyła
+Napoli	Capodichino
 Foggia  Gino Lisa
 Verona  Villafranca
 Torino  Caselle
