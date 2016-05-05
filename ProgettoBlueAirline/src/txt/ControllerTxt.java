@@ -38,6 +38,7 @@ public final class ControllerTxt {
             s += "1) Ricerca se è prensente un volo in una data\n";
             s += "2) Ricerca se sono presenti dei posti in un volo\n";
             s += "3) Effettua una prenotazione\n";
+            s += "0) Esci.\n";
             System.out.println(s + "\nScelta: ");
             i = input.nextInt();
             switch (i) {
