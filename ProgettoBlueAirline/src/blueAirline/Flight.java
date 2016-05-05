@@ -11,7 +11,9 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
+import java.util.Map;
 
 /**
  *
@@ -88,6 +90,15 @@ public class Flight {
         return this.progressiveTicket;
     }
     
-    
-    
+    public void insertSeat(int n){
+        for (HashMap.Entry<Seat, Boolean> val : seats.entrySet()) {
+            if(val.getKey().getNumber()==n){
+               val.setValue(Boolean.TRUE);
+            }
+        }
+    }
+        
+       
 }
+    
+    

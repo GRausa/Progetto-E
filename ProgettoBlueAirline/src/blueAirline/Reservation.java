@@ -18,14 +18,16 @@ public class Reservation {
     private Boolean checkIn;
     private Flight flight;
 
-    public Reservation(Flight flight,ArrayList<Passenger> passengers, String prenotationCode, Customer customer) {
+    public Reservation(Flight flight,ArrayList<Passenger> passengers, ArrayList<Integer> seatsPosition, String prenotationCode, Customer customer) {
         this.flight=flight;
         this.passengers = passengers;
         this.prenotationCode = "PR"+flight.getProgressiveReservation();
         flight.addProgressiveReservation();
         this.customer=customer;
-        for(Passenger p : passengers){
-            p.setTicket(new Ticket("COD"+flight.getProgressiveTicket(), flight.getPrice(),flight.getProgressiveTicket()));
+        for(int i=0;i<passengers.size();i++){
+            passengers.get(i).setTicket(new Ticket("COD"+flight.getProgressiveTicket(), flight.getPrice(), seatsPosition.get(i)));
+            flight.addProgressiveTicket();
+            flight.insertSeat(seatsPosition.get(i));
         }
         this.customer=customer;
         this.checkIn=false;

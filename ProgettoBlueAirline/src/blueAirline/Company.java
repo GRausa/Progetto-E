@@ -241,9 +241,9 @@ public class Company {
         return null;
     }
 
-    public Reservation makeReservation(Flight flight,ArrayList<Passenger> passeggeri,String mail,String numero) {
+    public Reservation makeReservation(Flight flight,ArrayList<Passenger> passeggeri, ArrayList<Integer> seatsPosition, String mail,String numero) {
         String cod=flight.getCode();
-        Reservation app=new Reservation(flight,passeggeri,cod,new Customer(mail,numero));
+        Reservation app=new Reservation(flight,passeggeri,seatsPosition, cod,new Customer(mail,numero));
         reservations.add(app);
         return app;
     }
