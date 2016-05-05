@@ -25,6 +25,10 @@ public class Passenger {
         this.surname = surname;
         this.name = name;
     }
+    
+    public String toString(){
+        return "Card Identity: "+CI+"Cognome: "+surname+"Nome: "+name;
+    }
 
     public String getCI() {
         return CI;

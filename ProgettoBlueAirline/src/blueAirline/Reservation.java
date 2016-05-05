@@ -33,5 +33,15 @@ public class Reservation {
         this.checkIn=false;
     }
     
+    public String toString(){
+        String s="";
+        s+="Codice prenotazione: "+prenotationCode+"\n"+"Volo:"+flight.toString()+"\n"+"Prenotato da:"+customer.getEmail()+" "+customer.getNumber()+"\n";
+        s+="Passeggeri: ";
+        for(Passenger p : passengers){
+            s+=p.toString();
+        }
+        return s+"\n";
+    }
+    
     
 }

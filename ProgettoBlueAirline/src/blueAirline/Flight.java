@@ -87,7 +87,9 @@ public class Flight {
     }
     
     public int getProgressiveTicket(){
+        seatFree--;
         return this.progressiveTicket;
+        
     }
     
     public void insertSeat(int n){

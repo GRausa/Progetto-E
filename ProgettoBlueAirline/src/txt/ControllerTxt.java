@@ -20,6 +20,7 @@ package txt;
 
 import blueAirline.Company;
 import blueAirline.Flight;
+import blueAirline.Passenger;
 import blueAirline.Route;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
@@ -67,11 +68,11 @@ public final class ControllerTxt {
         Flight app=c.searchFlights(s1);
         if(app!=null){
             if(n>app.getSeatFree()){
-                System.out.println("Non ci sono Posti sufficienti per questo volo, n° posti disponibili = "+app.getSeatFree());
+                System.out.println("Non ci sono Posti sufficienti per questo volo\nNumero posti disponibili: "+app.getSeatFree());
                 return 0;//0 STA PER ERRORE:POSTI INSUFFICIENTI
             }
             else{
-                System.out.println("ok! CI sono abbastanza posti per questo volo. numero posti disponibili per questo volo :"+app.getSeatFree());
+                System.out.println("Ci sono abbastanza posti per questo volo.\nNumero posti disponibili per questo volo: "+app.getSeatFree());
                 return n;//n STA PER TUTTO OK!, così proseguiamo la prenotazione con questo numero
             }
         }
@@ -81,16 +82,32 @@ public final class ControllerTxt {
         
     }
     
-    /*public static int Order(Company c){
-        int k=checkSeats(c);
-        if(k>0){
-            c.makeReservation();         
-            
-            si deve cambiare anche per questo
-            
-            
+    public static void Order(Company c){
+        Scanner input = new Scanner(System.in);
+        int nPassengers=checkSeats(c);
+        if(nPassengers>0){
+            System.out.println("Inserisci email Customer: ");
+            String emailCustomer = input.nextLine();
+            System.out.println("Inserisci numero di telefono Customer: ");
+            String numberCustomer = input.nextLine();
+            System.out.println("Inserisci codice volo: ");
+            String s1 = input.nextLine();
+            int seat;
+            Flight f = c.searchFlights(s1);
+            ArrayList<Passenger> listPassengers = new ArrayList<>();
+            ArrayList<Integer> listSeats = new ArrayList<>();
+            System.out.println("Inserisci passegeri (IDCard Cognome Nome)");
+            for(int i=0;i<nPassengers;i++){
+                System.out.println("Inserisci passegero n"+(i+1)+": ");
+                s1 = input.nextLine();
+                String [] vet = new String[3];
+                vet=s1.split(" ");
+                listPassengers.add(new Passenger(vet[0],vet[1],vet[2]));        
+                System.out.println("Inserisci scelta posto: ");
+                seat = input.nextInt();
+                listSeats.add(seat);
+            }
+            c.makeReservation(f, listPassengers, listSeats, emailCustomer, numberCustomer);
         }
-        
-        
-    }*/
+    }
 }
