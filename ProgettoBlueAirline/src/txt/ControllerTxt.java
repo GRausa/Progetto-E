@@ -80,7 +80,13 @@ public final class ControllerTxt {
                 System.out.println(f);
             }
             if (arrayFlight.size() == 0) {
-                System.out.println("Nessun volo per questa data, riprova con un'altra data.");
+                System.out.println("Nessun volo per questa data, riprova con un'altra data. Stampo calendario per la tratta, e ricomincia"
+                        + "");
+                
+                    ArrayList<Flight> calendar= c.calendarFlight(r);
+                    for(Flight a:calendar)
+                        System.out.println(a);
+                
             }
         } else {
             System.out.println("Route non presente.");

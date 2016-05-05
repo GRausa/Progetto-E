@@ -251,6 +251,17 @@ public class Company {
         return app;
     }
     
+    public ArrayList<Flight> calendarFlight(Route route){
+        ArrayList<Flight> ritorno=new ArrayList<>(2);
+        for(Flight ciclo:flights){
+            if((ciclo.getRoute().equals(route)))
+            {
+                ritorno.add(ciclo);
+            }
+        }
+        return ritorno;
+    }
+    
     public String toStringReservation(){
         String s="";
         for(Reservation r: reservations){
