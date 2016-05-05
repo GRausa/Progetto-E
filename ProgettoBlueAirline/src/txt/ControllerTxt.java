@@ -47,8 +47,11 @@ public final class ControllerTxt {
             GregorianCalendar date = new GregorianCalendar(Integer.parseInt(vet[2]),Integer.parseInt(vet[1])-1,Integer.parseInt(vet[0])); 
             ArrayList<Flight> arrayFlight = c.searchFlights(r,date);
             for(Flight f:arrayFlight){
+                System.out.println("TROVATO IL SEGUENTE VOLO");
                 System.out.println(f);
             }
+            if(arrayFlight!=null)
+                System.out.println("Nessun volo per questa data, riprova con un'altra data");
         }
         else{
             System.out.println("Route non presente.");
