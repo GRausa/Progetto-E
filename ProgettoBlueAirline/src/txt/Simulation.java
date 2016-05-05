@@ -30,11 +30,9 @@ public class Simulation {
         
         c.downloadFlight("file/Flights.txt");
         System.out.println(c.toStringFlights());
-        //System.out.println(c.toStringCityAirports("Monaco"));
+    
+        ControllerTxt.start(c);
         
-        //ControllerTxt.searchTxtFlight(c);
-        //ControllerTxt.checkSeats(c);
-        ControllerTxt.Order(c);
-        System.out.println(c.toStringReservation());
+    
     }
 }

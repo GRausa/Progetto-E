@@ -39,6 +39,10 @@ public class Company {
         this.reservations=new ArrayList<>();
     }
     
+    public String getName(){
+        return nameCompany;
+    }
+    
     public void downloadAirplanes(String nameFile) throws FileNotFoundException, IOException{
         BufferedReader in = new BufferedReader(new FileReader(nameFile));
         String line;
