@@ -26,6 +26,8 @@ public class Flight {
     private HashMap<Seat,Boolean> seats; //SERVE A MAPPARE OGNI POSTO PER VEDERE SE È DISPONIBILE
     private int seatFree; //CONTATORE POSTI LIBERI(SI DECREMENTA AD OGNI PRENOTAZIONE
     private double price; //prezzo dipene dal volo
+    private int progressiveReservation;
+    private int progressiveTicket;
     
     public Flight(String code, Airplane airplane, Route route, GregorianCalendar departureDate,int flightTime, double price){
         this.code=code;
@@ -39,6 +41,8 @@ public class Flight {
             seats.put(airplane.getSeats()[i], Boolean.FALSE);
         }
         this.seatFree=airplane.getNumSeat();
+        this.progressiveReservation=0;
+        this.progressiveTicket=0;
     }
     
     public String getCode(){
@@ -68,6 +72,21 @@ public class Flight {
         return seatFree;
     }
     
+    public void addProgressiveReservation(){
+        this.progressiveReservation++;
+    }
+    
+    public void addProgressiveTicket(){
+        this.progressiveTicket++;
+    }
+    
+    public int getProgressiveReservation(){
+        return this.progressiveReservation;
+    }
+    
+    public int getProgressiveTicket(){
+        return this.progressiveTicket;
+    }
     
     
     

@@ -13,6 +13,7 @@ COME UNA SHELL,NEL SENSO CHE DA LINEA DI COMANDO DIAMO L'ISTRUZIONE DA FARE E LU
 NON VA MESSO NEL MAIN(COME ABBIAMO FATTO ADESSO) :  ControllerTxt.checkSeats(c);
 QUINDI DA RIVEDERE.
 
+
 */
 
 package txt;
@@ -21,8 +22,6 @@ import blueAirline.Company;
 import blueAirline.Flight;
 import blueAirline.Route;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Scanner;
 

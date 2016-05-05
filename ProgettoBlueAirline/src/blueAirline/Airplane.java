@@ -5,8 +5,6 @@
  */
 package blueAirline;
 
-import java.util.ArrayList;
-
 /**
  *
  * @author cl418377

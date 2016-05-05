@@ -21,8 +21,14 @@ public class Reservation {
     public Reservation(Flight flight,ArrayList<Passenger> passengers, String prenotationCode, Customer customer) {
         this.flight=flight;
         this.passengers = passengers;
-        this.prenotationCode = prenotationCode;
+        this.prenotationCode = "PR"+flight.getProgressiveReservation();
+        flight.addProgressiveReservation();
         this.customer=customer;
+        for(Passenger p : passengers){
+            p.setTicket(new Ticket("COD"+flight.getProgressiveTicket(), flight.getPrice(),flight.getProgressiveTicket()));
+        }
+        this.customer=customer;
+        this.checkIn=false;
     }
     
     

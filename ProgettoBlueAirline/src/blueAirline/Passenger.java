@@ -13,18 +13,17 @@ public class Passenger {
     private String CI;
     private String surname;
     private String name;
-    private double totalPrice;
+    private double additionalPrice;
     
     private Ticket ticket;
     private Insurance insurance;
     private HoldLuggage holdLuggage;
     private Meal meal;
 
-    public Passenger(String CI, String surname, String name, double totalPrice) {
+    public Passenger(String CI, String surname, String name) {
         this.CI = CI;
         this.surname = surname;
         this.name = name;
-        this.totalPrice = totalPrice;
     }
 
     public String getCI() {
@@ -40,8 +39,18 @@ public class Passenger {
     }
 
     public double getTotalPrice() {
-        return totalPrice;
+        return additionalPrice;
     }
+    
+    public void addTotalPrice(double addPrice){
+        this.additionalPrice+=addPrice;
+    }
+    
+    public void setTicket(Ticket tiket){
+        this.ticket=ticket;
+    }
+
+  
     
     
     

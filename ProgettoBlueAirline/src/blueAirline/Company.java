@@ -28,7 +28,6 @@ public class Company {
     private ArrayList<Flight> flights;
     private String nameCompany;
     private ArrayList<Reservation> reservations;
-    private int progressivPrenotation; //da dare come codice univico di prenotazione
     
     public Company(String nameCompany){
         this.nameCompany=nameCompany;
@@ -38,7 +37,6 @@ public class Company {
         this.routes=new ArrayList<>();
         this.flights=new ArrayList<>();
         this.reservations=new ArrayList<>();
-        this.progressivPrenotation=0;
     }
     
     public void downloadAirplanes(String nameFile) throws FileNotFoundException, IOException{
@@ -244,10 +242,9 @@ public class Company {
     }
 
     public Reservation makeReservation(Flight flight,ArrayList<Passenger> passeggeri,String mail,String numero) {
-        String cod=flight.getCode()+progressivPrenotation;
+        String cod=flight.getCode();
         Reservation app=new Reservation(flight,passeggeri,cod,new Customer(mail,numero));
         reservations.add(app);
-        progressivPrenotation++;
         return app;
     }
 

@@ -14,7 +14,7 @@ public class Ticket {
     private double price;
     private int nPosition;
     
-    public Ticket(String code, float price, int num_pos){
+    public Ticket(String code, double price, int num_pos){
         this.code=code;
         this.price=price;
         this.nPosition= num_pos;

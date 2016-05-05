@@ -6,7 +6,6 @@
 package txt;
 
 import blueAirline.Company;
-import blueAirline.Flight;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.ParseException;
@@ -33,6 +32,6 @@ public class Simulation {
         //System.out.println(c.toStringCityAirports("Monaco"));
         
         ControllerTxt.searchTxtFlight(c);
-        //ControllerTxt.checkSeats(c);
+        ControllerTxt.checkSeats(c);
     }
 }
