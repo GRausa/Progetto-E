@@ -17,6 +17,7 @@ import java.text.ParseException;
 public class Simulation {
     public static void main(String args[]) throws IOException, FileNotFoundException, ParseException{
         //CARICAMENTO
+        
         Company c = new Company("BlueAirlines");
         c.downloadAirplanes("file/Airplanes.txt");
         System.out.println(c.toStringAirplanes());
@@ -31,7 +32,9 @@ public class Simulation {
         System.out.println(c.toStringFlights());
         //System.out.println(c.toStringCityAirports("Monaco"));
         
-        ControllerTxt.searchTxtFlight(c);
-        ControllerTxt.checkSeats(c);
+        //ControllerTxt.searchTxtFlight(c);
+        //ControllerTxt.checkSeats(c);
+        ControllerTxt.Order(c);
+        System.out.println(c.toStringReservation());
     }
 }
