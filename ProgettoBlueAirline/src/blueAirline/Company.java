@@ -195,7 +195,7 @@ public class Company {
     public String toStringFlights(){
         String s="";
         for(Flight f : flights){
-            s+=f.toString() +"\n";
+            s+=f.toString()+"\n";
         }
         return s;
     }
