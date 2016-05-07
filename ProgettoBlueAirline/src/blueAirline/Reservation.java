@@ -22,7 +22,6 @@ public class Reservation {
         this.flight=flight;
         this.passengers = passengers;
         this.prenotationCode = "PR"+flight.getProgressiveReservation();
-        flight.addProgressiveReservation();
         this.customer=customer;
         for(int i=0;i<passengers.size();i++){
             passengers.get(i).setTicket(new Ticket("COD"+flight.getProgressiveTicket(), flight.getPrice(), seatsPosition.get(i)));

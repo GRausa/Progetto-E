@@ -14,7 +14,6 @@ public class Passenger {
     private String surname;
     private String name;
     private double additionalPrice;
-    
     private Ticket ticket;
     private Insurance insurance;
     private HoldLuggage holdLuggage;
@@ -27,7 +26,7 @@ public class Passenger {
     }
     
     public String toString(){
-        return "Card Identity: "+CI+" Cognome: "+surname+" Nome: "+name;
+        return "Card Identity: "+CI+"\nCognome: "+surname+"\nNome: "+name; //errore se stampo ticket
     }
 
     public String getCI() {
@@ -52,6 +51,10 @@ public class Passenger {
     
     public void setTicket(Ticket tiket){
         this.ticket=ticket;
+    }
+    
+    public Ticket getTicket(){
+        return ticket;
     }
 
   

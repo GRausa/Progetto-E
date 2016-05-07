@@ -20,6 +20,10 @@ public class Ticket {
         this.nPosition= num_pos;
     
     }
+    
+    public String toString(){
+        return code+" "+price+" "+nPosition;
+    }
     public String getCode(){
         return code;
     }
@@ -28,7 +32,7 @@ public class Ticket {
         return price; 
     }
         
-    public int getNum_pos(){
+    public int getNumPosition(){
         return nPosition;
     }
     

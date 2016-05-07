@@ -255,11 +255,11 @@ public class Company {
         return ritorno;
     }
 
-    public Reservation makeReservation(Flight flight,ArrayList<Passenger> passeggeri, ArrayList<Integer> seatsPosition, String mail,String numero) {
-        Reservation app=new Reservation(flight,passeggeri,seatsPosition, flight.getCode(),new Customer(mail,numero));
-        
-        reservations.add(app);
-        return app;
+    public Reservation makeReservation(Flight flight,ArrayList<Passenger> passengers, ArrayList<Integer> seatsPosition, String mail,String numero) {
+        Reservation res=new Reservation(flight,passengers,seatsPosition, flight.getCode(),new Customer(mail,numero));
+        flight.addProgressiveReservation();
+        reservations.add(res);
+        return res;
     }
     
     public ArrayList<Flight> calendarFlight(Route route){
