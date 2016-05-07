@@ -27,7 +27,7 @@ public class Passenger {
     }
     
     public String toString(){
-        return "Card Identity: "+CI+"Cognome: "+surname+"Nome: "+name;
+        return "Card Identity: "+CI+" Cognome: "+surname+" Nome: "+name;
     }
 
     public String getCI() {

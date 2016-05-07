@@ -58,7 +58,7 @@ public class Flight {
     
     public String toString(){
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MMM/yyyy HH:mm");
-        return code+"\n"+route.toString()+"Departure Date: "+ sdf.format(this.departureDate.getTime())+"\nTempo di volo in minuti: "+flightTime+"\nPrice: "+Double.toString(price)+" €\nSeats Occcupied:"+(airplane.getNumSeat()-seatFree)+"/"+airplane.getNumSeat()+"\n";
+        return code+"\n"+route.toString()+"Departure Date: "+ sdf.format(this.departureDate.getTime())+"\nTempo di volo in minuti: "+flightTime+"\nPrice: "+Double.toString(price)+" €\nSeats Occcupied: "+(airplane.getNumSeat()-seatFree)+"/"+airplane.getNumSeat()+"\n";
         
     }
 

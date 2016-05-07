@@ -36,7 +36,7 @@ public class Reservation {
     public String toString(){
         String s="";
         s+="Codice prenotazione: "+prenotationCode+"\n"+"Volo:"+flight.toString()+"\n"+"Prenotato da:"+customer.getEmail()+" "+customer.getNumber()+"\n";
-        s+="Passeggeri: ";
+        s+="Passeggeri: \n";
         for(Passenger p : passengers){
             s+=p.toString();
         }

@@ -32,6 +32,7 @@ public class Simulation {
         System.out.println(c.toStringFlights());
     
         ControllerTxt.start(c);
+        System.out.println(c.toStringReservation());
         
     
     }

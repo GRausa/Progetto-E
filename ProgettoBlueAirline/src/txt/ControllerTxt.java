@@ -80,7 +80,7 @@ public final class ControllerTxt {
                 System.out.println(f);
             }
             if (arrayFlight.size() == 0) {
-                System.out.println("Nessun volo per questa data, riprova con un'altra data. Stampo calendario per la tratta, e ricomincia"
+                System.out.println("Nessun volo per questa data, sono state trovate le seguenti tratte: "
                         + "");
                 
                     ArrayList<Flight> calendar= c.calendarFlight(r);
