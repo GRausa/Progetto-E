@@ -243,6 +243,17 @@ public class Company {
         }
         return null;
     }
+    
+    public ArrayList<Airport> linkedAirport(Airport departure){
+        ArrayList<Airport> ritorno=new ArrayList<>(5);
+        for(Route rotta:routes){
+            if(rotta.getDeparture().equals(departure)){
+                ritorno.add(rotta.getDestination());
+            }
+        }
+        
+        return ritorno;
+    }
 
     public Reservation makeReservation(Flight flight,ArrayList<Passenger> passeggeri, ArrayList<Integer> seatsPosition, String mail,String numero) {
         Reservation app=new Reservation(flight,passeggeri,seatsPosition, flight.getCode(),new Customer(mail,numero));
