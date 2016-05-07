@@ -116,7 +116,7 @@ public final class ControllerTxt {
         input.nextLine();
     }
 
-    public static void Order(Company c) {
+   public static void Order(Company c) {
         System.out.println("AREA 3: PRENOTAZIONE VOLO. ");
         Scanner input = new Scanner(System.in);
         System.out.println("Inserisci codice volo: ");
@@ -134,11 +134,17 @@ public final class ControllerTxt {
                 System.out.println("Posti disponibili: " + flight.getSeatFree());
                 System.out.println("Inserisci email Customer: ");
                 String emailCustomer = input.nextLine();
+                if (emailCustomer.isEmpty())
+                    emailCustomer = input.nextLine();
                 System.out.println("Inserisci numero di telefono Customer: ");
                 String numberCustomer = input.nextLine();
                 for (int i = 0; i < n; i++) {
                     System.out.println("Inserisci passegero n" + (i + 1) + " (IDCard Cognome Nome): ");
                     s1 = input.nextLine();
+                    if (s1.isEmpty())
+                    {
+                        s1 = input.nextLine();
+                    }
                     String[] vet = new String[3];
                     vet = s1.split(" ");
                     listPassengers.add(new Passenger(vet[0], vet[1], vet[2]));
