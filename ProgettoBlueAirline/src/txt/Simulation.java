@@ -31,6 +31,8 @@ public class Simulation {
         System.out.println(c.toStringFlights());
         c.downloadMeals("file/Meals.txt");
         System.out.println(c.toStringMeals());
+        c.downloadHoldLuggages("file/HoldLuggages.txt");
+        System.out.println(c.toStringHoldLuggages());
         
     
         ControllerTxt.start(c);

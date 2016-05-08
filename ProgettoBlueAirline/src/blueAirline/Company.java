@@ -10,10 +10,8 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.*;
-import java.util.Date;
 import java.util.StringTokenizer;
 
 /**
@@ -27,6 +25,7 @@ public class Company {
     private ArrayList<Route> routes;
     private ArrayList<Flight> flights;
     private ArrayList<Meal> meals;
+    private ArrayList<HoldLuggage> holdLuggages;
     private String nameCompany;
     private ArrayList<Reservation> reservations;
     
@@ -39,6 +38,7 @@ public class Company {
         this.flights=new ArrayList<>();
         this.reservations=new ArrayList<>();
         this.meals=new ArrayList<>();
+        this.holdLuggages=new ArrayList<>();
     }
     
     public String getName(){
@@ -234,6 +234,33 @@ public class Company {
         return s;
     }
     
+    public void downloadHoldLuggages(String nameFile) throws FileNotFoundException, IOException{
+        BufferedReader in = new BufferedReader(new FileReader(nameFile));
+        String line;
+        while((line=in.readLine())!=null){
+            StringTokenizer st = new StringTokenizer(line,"\t");
+            HoldLuggage h = new HoldLuggage(st.nextToken(),Double.parseDouble(st.nextToken()),Double.parseDouble(st.nextToken()));
+            holdLuggages.add(h);
+            }
+        in.close();
+    }
+    
+    public String toStringHoldLuggages(){
+        String s="";
+        for(HoldLuggage h: holdLuggages){
+            s+=h.toString()+"\n";
+        }
+        return s;
+    }
+    
+    public Meal searchMeal(String codeMeal){
+        for(Meal m:meals){
+            if(m.getCode().equals(codeMeal)){
+                return m;
+            }
+        }
+        return null;
+    }    
     
     
     public Flight searchFlights(String cod) {
@@ -245,14 +272,6 @@ public class Company {
         return null;    
     }
     
-    public Meal searchMeal(String codeMeal){
-        for(Meal m:meals){
-            if(m.getCode().equals(codeMeal)){
-                return m;
-            }
-        }
-        return null;
-    }
     
     public ArrayList<Flight> searchFlights(Route route,GregorianCalendar data){
         ArrayList<Flight> ritorno=new ArrayList<>(2);

@@ -152,7 +152,9 @@ public final class ControllerTxt {
                     listPassengers.add(p);
                     System.out.println("Inserisci scelta posto: ");
                     listSeats.add(input.nextInt());           
-                    System.out.println("-> OPZIONI DI VIAGGIO AGGIUNTIVE <-");                        
+                    System.out.println("-> OPZIONI DI VIAGGIO AGGIUNTIVE <-");  
+                    
+                    //MEAL
                     while(true){    
                         System.out.println("Aggiungi un pasto! Inserisci il codice (0 per uscire): ");
                         String str = input.nextLine();
@@ -174,7 +176,32 @@ public final class ControllerTxt {
                         else{
                             System.out.println("Errore inserimento del codice pasto.");
                         }
-                    }                    
+                    }
+                    
+                    //HOLD LUGGAGE
+                    while(true){    
+                        System.out.println("Aggiungi un pasto! Inserisci il codice (0 per uscire): ");
+                        String str = input.nextLine();
+                        if (str.isEmpty())
+                            str = input.nextLine(); 
+                        if(str.equals("0")){
+                            break;
+                        }
+                        Meal m = c.searchMeal(str);
+                        if(m!=null){
+                            if(flight.getFlightTime()>=m.getTimeMeal()){
+                                p.addMeal(m);
+                                System.out.println("Hai scelto il pasto:\n"+m.toString());
+                            }
+                            else{
+                                System.out.println("Questo pasto è riservato a tempi di volo più lunghi, riprova.");
+                            }
+                        }
+                        else{
+                            System.out.println("Errore inserimento del codice pasto.");
+                        }
+                    }
+                    
                 }
                 c.makeReservation(flight, listPassengers, listSeats, customer);
                 System.out.println("Prenotazione effettuata.");
