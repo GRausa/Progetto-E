@@ -18,14 +18,15 @@ public class Passenger {
     private double additionalPrice;
     private Ticket ticket;
     private Insurance insurance;
-    private HoldLuggage holdLuggage;
     private ArrayList<Meal> arrayMeals;
+    private ArrayList<HoldLuggage> arrayHoldLuggages;
 
     public Passenger(String CI, String surname, String name) {
         this.CI = CI;
         this.surname = surname;
         this.name = name;
         this.arrayMeals=new ArrayList<>();
+        this.arrayHoldLuggages=new ArrayList<>();
         this.ticket=new Ticket(null,0,0);
     }
     
@@ -60,5 +61,10 @@ public class Passenger {
     public void addMeal(Meal meal){
         arrayMeals.add(meal);
         this.ticket.addPrice(meal.getPrice());
+    }
+
+    public void addHoldLuggage(HoldLuggage holdLuggage) {
+        arrayHoldLuggages.add(holdLuggage);
+        this.ticket.addPrice(holdLuggage.getPrice());
     }
 }

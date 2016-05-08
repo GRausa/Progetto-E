@@ -262,6 +262,15 @@ public class Company {
         return null;
     }    
     
+    public HoldLuggage searchHoldLuggage(String codeHoldLuggage){
+        for(HoldLuggage h:holdLuggages){
+            if(h.getCode().equals(codeHoldLuggage)){
+                return h;
+            }
+        }
+        return null;
+    } 
+    
     
     public Flight searchFlights(String cod) {
         for(Flight f:flights){

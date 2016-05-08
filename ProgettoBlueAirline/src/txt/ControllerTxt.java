@@ -18,6 +18,7 @@ package txt;
 import blueAirline.Company;
 import blueAirline.Customer;
 import blueAirline.Flight;
+import blueAirline.HoldLuggage;
 import blueAirline.Meal;
 import blueAirline.Passenger;
 import blueAirline.Route;
@@ -180,25 +181,20 @@ public final class ControllerTxt {
                     
                     //HOLD LUGGAGE
                     while(true){    
-                        System.out.println("Aggiungi un pasto! Inserisci il codice (0 per uscire): ");
+                        System.out.println("Aggiungi un bagaglio! Inserisci il codice (0 per uscire): ");
                         String str = input.nextLine();
                         if (str.isEmpty())
                             str = input.nextLine(); 
                         if(str.equals("0")){
                             break;
                         }
-                        Meal m = c.searchMeal(str);
-                        if(m!=null){
-                            if(flight.getFlightTime()>=m.getTimeMeal()){
-                                p.addMeal(m);
-                                System.out.println("Hai scelto il pasto:\n"+m.toString());
-                            }
-                            else{
-                                System.out.println("Questo pasto è riservato a tempi di volo più lunghi, riprova.");
-                            }
+                        HoldLuggage h = c.searchHoldLuggage(str);
+                        if(h!=null){
+                            p.addHoldLuggage(h);
+                            System.out.println("Hai scelto il bagaglio:\n"+h.toString());
                         }
                         else{
-                            System.out.println("Errore inserimento del codice pasto.");
+                            System.out.println("Errore inserimento del codice bagaglio.");
                         }
                     }
                     

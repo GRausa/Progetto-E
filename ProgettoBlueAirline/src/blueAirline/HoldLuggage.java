@@ -31,4 +31,10 @@ public class HoldLuggage {
     public String toString(){
         return code+" "+kg+"Kg "+price+"€";
     }
+
+    public String getCode() {
+        return code;
+    }
+    
+    
 }
