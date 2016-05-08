@@ -26,10 +26,12 @@ public class Simulation {
         c.downloadAirports("file/Airports.txt");
         System.out.println(c.toStringAirports());
         c.downloadRoutes("file/Routes.txt");
-        System.out.println(c.toStringRoutes());
-        
+        System.out.println(c.toStringRoutes());        
         c.downloadFlight("file/Flights.txt");
         System.out.println(c.toStringFlights());
+        c.downloadMeals("file/Meals.txt");
+        System.out.println(c.toStringMeals());
+        
     
         ControllerTxt.start(c);
         System.out.println(c.toStringReservation());

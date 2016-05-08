@@ -26,6 +26,7 @@ public class Company {
     private ArrayList<Airport> airports;
     private ArrayList<Route> routes;
     private ArrayList<Flight> flights;
+    private ArrayList<Meal> meals;
     private String nameCompany;
     private ArrayList<Reservation> reservations;
     
@@ -37,6 +38,7 @@ public class Company {
         this.routes=new ArrayList<>();
         this.flights=new ArrayList<>();
         this.reservations=new ArrayList<>();
+        this.meals=new ArrayList<>();
     }
     
     public String getName(){
@@ -213,6 +215,26 @@ public class Company {
         return s;
     }
     
+    public void downloadMeals(String nameFile) throws FileNotFoundException, IOException{
+        BufferedReader in = new BufferedReader(new FileReader(nameFile));
+        String line;
+        while((line=in.readLine())!=null){
+            StringTokenizer st = new StringTokenizer(line,"\t");
+            Meal m = new Meal(st.nextToken(),st.nextToken(),Double.parseDouble(st.nextToken()),Integer.parseInt(st.nextToken()));
+            meals.add(m);
+            }
+        in.close();
+    }
+    
+    public String toStringMeals(){
+        String s="";
+        for(Meal m: meals){
+            s+=m.toString()+"\n";
+        }
+        return s;
+    }
+    
+    
     
     public Flight searchFlights(String cod) {
         for(Flight f:flights){
@@ -250,8 +272,7 @@ public class Company {
             if(rotta.getDeparture().equals(departure)){
                 ritorno.add(rotta.getDestination());
             }
-        }
-        
+        }        
         return ritorno;
     }
 
