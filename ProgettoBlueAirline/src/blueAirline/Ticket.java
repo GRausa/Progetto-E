@@ -22,7 +22,7 @@ public class Ticket {
     }
     
     public String toString(){
-        return code+" "+price+" "+nPosition;
+        return code+" "+price+"€ Posto: "+nPosition;
     }
     public String getCode(){
         return code;

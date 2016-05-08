@@ -25,5 +25,9 @@ public class Customer {
     public String getNumber(){
         return number;
     }
+    
+    public String toString(){
+        return email+" "+number;
+    } 
 }   
 

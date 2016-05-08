@@ -26,7 +26,7 @@ public class Passenger {
     }
     
     public String toString(){
-        return "Card Identity: "+CI+"\nCognome: "+surname+"\nNome: "+name; //errore se stampo ticket
+        return "Card Identity: "+CI+"\nCognome: "+surname+"\nNome: "+name+"\nTicket: "+ticket.toString(); //errore se stampo ticket
     }
 
     public String getCI() {
@@ -49,7 +49,7 @@ public class Passenger {
         this.additionalPrice+=addPrice;
     }
     
-    public void setTicket(Ticket tiket){
+    public void setTicket(Ticket ticket){
         this.ticket=ticket;
     }
     

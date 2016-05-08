@@ -24,7 +24,7 @@ public class Reservation {
         this.prenotationCode = "PR"+flight.getProgressiveReservation();
         this.customer=customer;
         for(int i=0;i<passengers.size();i++){
-            passengers.get(i).setTicket(new Ticket("COD"+flight.getProgressiveTicket(), flight.getPrice(), seatsPosition.get(i)));
+            passengers.get(i).setTicket(new Ticket("COD"+flight.getProgressiveTicket(),flight.getPrice(),seatsPosition.get(i)));
             flight.addProgressiveTicket();
             flight.insertSeat(seatsPosition.get(i));
         }
@@ -34,7 +34,7 @@ public class Reservation {
     
     public String toString(){
         String s="";
-        s+="Codice prenotazione: "+prenotationCode+"\n"+"Volo:"+flight.toString()+"\n"+"Prenotato da:"+customer.getEmail()+" "+customer.getNumber()+"\n";
+        s+="Codice prenotazione: "+prenotationCode+"\n"+"Volo:"+flight.toString()+"\n"+"Prenotato da: "+customer.toString()+"\n";
         s+="Passeggeri: \n";
         for(Passenger p : passengers){
             s+=p.toString();
