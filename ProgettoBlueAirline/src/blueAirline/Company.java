@@ -305,7 +305,7 @@ public class Company {
     public String toStringReservation(){
         String s="";
         for(Reservation r: reservations){
-            s+=r.toString();
+            s+=r.toString()+"\n";
         }
         return s;
     }
