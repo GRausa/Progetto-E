@@ -24,6 +24,11 @@ public class Ticket {
     public String toString(){
         return code+" "+price+"€ Posto: "+nPosition;
     }
+    
+    public void setCode(String code){
+        this.code=code;
+    }
+    
     public String getCode(){
         return code;
     }
@@ -31,9 +36,17 @@ public class Ticket {
     public double getPrice(){
         return price; 
     }
-        
-    public int getNumPosition(){
+    
+    public void addPrice(double p){
+        this.price+=p;
+    }
+
+    public int getnPosition() {
         return nPosition;
+    }
+
+    public void setnPosition(int nPosition) {
+        this.nPosition = nPosition;
     }
     
 }

@@ -245,6 +245,14 @@ public class Company {
         return null;    
     }
     
+    public Meal searchMeal(String codeMeal){
+        for(Meal m:meals){
+            if(m.getCode().equals(codeMeal)){
+                return m;
+            }
+        }
+        return null;
+    }
     
     public ArrayList<Flight> searchFlights(Route route,GregorianCalendar data){
         ArrayList<Flight> ritorno=new ArrayList<>(2);
@@ -276,8 +284,8 @@ public class Company {
         return ritorno;
     }
 
-    public Reservation makeReservation(Flight flight,ArrayList<Passenger> passengers, ArrayList<Integer> seatsPosition, String mail,String numero) {
-        Reservation res=new Reservation(flight,passengers,seatsPosition, flight.getCode(),new Customer(mail,numero));
+    public Reservation makeReservation(Flight flight,ArrayList<Passenger> passengers, ArrayList<Integer> seatsPosition, Customer customer) {
+        Reservation res=new Reservation(flight,passengers,seatsPosition, flight.getCode(), customer);
         flight.addProgressiveReservation();
         reservations.add(res);
         return res;

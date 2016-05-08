@@ -5,6 +5,8 @@
  */
 package blueAirline;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author cl418377
@@ -17,12 +19,14 @@ public class Passenger {
     private Ticket ticket;
     private Insurance insurance;
     private HoldLuggage holdLuggage;
-    private Meal meal;
+    private ArrayList<Meal> arrayMeals;
 
     public Passenger(String CI, String surname, String name) {
         this.CI = CI;
         this.surname = surname;
         this.name = name;
+        this.arrayMeals=new ArrayList<>();
+        this.ticket=new Ticket(null,0,0);
     }
     
     public String toString(){
@@ -49,16 +53,12 @@ public class Passenger {
         this.additionalPrice+=addPrice;
     }
     
-    public void setTicket(Ticket ticket){
-        this.ticket=ticket;
-    }
-    
     public Ticket getTicket(){
         return ticket;
     }
-
-  
     
-    
-    
+    public void addMeal(Meal meal){
+        arrayMeals.add(meal);
+        this.ticket.addPrice(meal.getPrice());
+    }
 }

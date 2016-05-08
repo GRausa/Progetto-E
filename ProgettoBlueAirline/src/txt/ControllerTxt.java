@@ -16,7 +16,9 @@
 package txt;
 
 import blueAirline.Company;
+import blueAirline.Customer;
 import blueAirline.Flight;
+import blueAirline.Meal;
 import blueAirline.Passenger;
 import blueAirline.Route;
 import java.util.ArrayList;
@@ -138,20 +140,38 @@ public final class ControllerTxt {
                     emailCustomer = input.nextLine();
                 System.out.println("Inserisci numero di telefono Customer: ");
                 String numberCustomer = input.nextLine();
+                Customer customer = new Customer(emailCustomer,numberCustomer);
                 for (int i = 0; i < n; i++) {
-                    System.out.println("Inserisci passegero n" + (i + 1) + " (IDCard Cognome Nome): ");
+                    System.out.println("Inserisci passegero n" +(i+1)+" (IDCard Cognome Nome): ");
                     s1 = input.nextLine();
                     if (s1.isEmpty())
-                    {
-                        s1 = input.nextLine();
-                    }
+                        s1 = input.nextLine();                    
                     String[] vet = new String[3];
                     vet = s1.split(" ");
-                    listPassengers.add(new Passenger(vet[0], vet[1], vet[2]));
+                    Passenger p = new Passenger(vet[0], vet[1], vet[2]);
+                    listPassengers.add(p);
                     System.out.println("Inserisci scelta posto: ");
-                    listSeats.add(input.nextInt());                    
+                    listSeats.add(input.nextInt());           
+                    System.out.println("-> OPZIONI DI VIAGGIO AGGIUNTIVE <-");                        
+                    while(true){    
+                        System.out.println("Aggiungi un pasto! Inserisci il codice (0 per uscire): ");
+                        String str = input.nextLine();
+                        if (str.isEmpty())
+                            str = input.nextLine(); 
+                        if(str.equals("0")){
+                            break;
+                        }
+                        Meal m = c.searchMeal(str);
+                        if(m!=null){
+                            p.addMeal(m);
+                            System.out.println("Hai scelto il pasto:\n"+m.toString());
+                        }
+                        else{
+                            System.out.println("Errore inserimento del codice pasto.");
+                        }
+                    }                    
                 }
-                c.makeReservation(flight, listPassengers, listSeats, emailCustomer, numberCustomer);
+                c.makeReservation(flight, listPassengers, listSeats, customer);
                 System.out.println("Prenotazione effettuata.");
             }
         } else {
