@@ -92,6 +92,10 @@ public class Flight {
         
     }
     
+    public int getFlightTime(){
+        return flightTime;
+    }
+    
     public void insertSeat(int n){
         for (HashMap.Entry<Seat, Boolean> val : seats.entrySet()) {
             if(val.getKey().getNumber()==n){

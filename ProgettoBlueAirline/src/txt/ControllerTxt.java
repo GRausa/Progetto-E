@@ -163,8 +163,13 @@ public final class ControllerTxt {
                         }
                         Meal m = c.searchMeal(str);
                         if(m!=null){
-                            p.addMeal(m);
-                            System.out.println("Hai scelto il pasto:\n"+m.toString());
+                            if(flight.getFlightTime()>=m.getTimeMeal()){
+                                p.addMeal(m);
+                                System.out.println("Hai scelto il pasto:\n"+m.toString());
+                            }
+                            else{
+                                System.out.println("Questo pasto è riservato a tempi di volo più lunghi, riprova.");
+                            }
                         }
                         else{
                             System.out.println("Errore inserimento del codice pasto.");
