@@ -33,6 +33,8 @@ public class Simulation {
         System.out.println(c.toStringMeals());
         c.downloadHoldLuggages("file/HoldLuggages.txt");
         System.out.println(c.toStringHoldLuggages());
+        c.downloadInsurances("file/Insurances.txt");
+        System.out.println(c.toStringInsurances());
         
     
         ControllerTxt.start(c);

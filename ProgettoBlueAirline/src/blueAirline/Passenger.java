@@ -67,4 +67,9 @@ public class Passenger {
         arrayHoldLuggages.add(holdLuggage);
         this.ticket.addPrice(holdLuggage.getPrice());
     }
+
+    public void addInsurance(Insurance ins) {
+        this.insurance=insurance;
+        this.ticket.addPrice(ins.getPrice());
+    }
 }

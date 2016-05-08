@@ -39,6 +39,6 @@ public class Meal {
     }
     
     public String toString(){
-        return "Codice Meal: "+code+" ("+name+") "+price+" €";
+        return code+" "+name+" "+price+" €";
     }
 }

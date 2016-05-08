@@ -26,6 +26,7 @@ public class Company {
     private ArrayList<Flight> flights;
     private ArrayList<Meal> meals;
     private ArrayList<HoldLuggage> holdLuggages;
+    private ArrayList<Insurance> insurances;
     private String nameCompany;
     private ArrayList<Reservation> reservations;
     
@@ -39,6 +40,7 @@ public class Company {
         this.reservations=new ArrayList<>();
         this.meals=new ArrayList<>();
         this.holdLuggages=new ArrayList<>();
+        this.insurances=new ArrayList<>();
     }
     
     public String getName(){
@@ -253,6 +255,25 @@ public class Company {
         return s;
     }
     
+    public void downloadInsurances(String nameFile) throws FileNotFoundException, IOException{
+        BufferedReader in = new BufferedReader(new FileReader(nameFile));
+        String line;
+        while((line=in.readLine())!=null){
+            StringTokenizer st = new StringTokenizer(line,"\t");
+            Insurance ins = new Insurance(st.nextToken(),st.nextToken(),Double.parseDouble(st.nextToken()));
+            insurances.add(ins);
+            }
+        in.close();
+    }
+    
+    public String toStringInsurances(){
+        String s="";
+        for(Insurance ins: insurances){
+            s+=ins.toString()+"\n";
+        }
+        return s;
+    }
+    
     public Meal searchMeal(String codeMeal){
         for(Meal m:meals){
             if(m.getCode().equals(codeMeal)){
@@ -271,6 +292,14 @@ public class Company {
         return null;
     } 
     
+    public Insurance searchInsurance(String codeInsurance){
+        for(Insurance ins:insurances){
+            if(ins.getCode().equals(codeInsurance)){
+                return ins;
+            }
+        }
+        return null;
+    }    
     
     public Flight searchFlights(String cod) {
         for(Flight f:flights){

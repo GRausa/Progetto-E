@@ -19,6 +19,7 @@ import blueAirline.Company;
 import blueAirline.Customer;
 import blueAirline.Flight;
 import blueAirline.HoldLuggage;
+import blueAirline.Insurance;
 import blueAirline.Meal;
 import blueAirline.Passenger;
 import blueAirline.Route;
@@ -196,6 +197,23 @@ public final class ControllerTxt {
                         else{
                             System.out.println("Errore inserimento del codice bagaglio.");
                         }
+                    }
+                    
+                    //INSURANCE (solo una)
+                    System.out.println("Aggiungi un' assicurazione! Inserisci il codice (0 per uscire): ");
+                    String str = input.nextLine();
+                    if (str.isEmpty()) {
+                        str = input.nextLine();
+                    }
+                    if (str.equals("0")) {
+                        break;
+                    }
+                    Insurance ins = c.searchInsurance(str);
+                    if (ins != null) {
+                        p.addInsurance(ins);
+                        System.out.println("Hai scelto l'assicurazione:\n" + ins.toString());
+                    } else {
+                        System.out.println("Errore inserimento del codice assicurazione.");
                     }
                     
                 }
