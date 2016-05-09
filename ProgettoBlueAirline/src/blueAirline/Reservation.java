@@ -44,5 +44,9 @@ public class Reservation {
         return s+"\n";
     }
     
+    public String getPrenotationCode(){
+        return prenotationCode;
+    }
+    
     
 }

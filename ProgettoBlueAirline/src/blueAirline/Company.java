@@ -331,14 +331,23 @@ public class Company {
         return null;
     }
     
+    public Reservation searchReservation(String reservation){
+        for(Reservation r:reservations){
+            if(r.getPrenotationCode().equals(reservation)){
+                return r;
+            }
+        }
+        return null;
+    }
+    
     public ArrayList<Airport> linkedAirport(Airport departure){
-        ArrayList<Airport> ritorno=new ArrayList<>(5);
+        ArrayList<Airport> airports=new ArrayList<>(5);
         for(Route rotta:routes){
             if(rotta.getDeparture().equals(departure)){
-                ritorno.add(rotta.getDestination());
+                airports.add(rotta.getDestination());
             }
         }        
-        return ritorno;
+        return airports;
     }
 
     public Reservation makeReservation(Flight flight,ArrayList<Passenger> passengers, ArrayList<Integer> seatsPosition, Customer customer) {

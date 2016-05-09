@@ -244,8 +244,9 @@ public final class ControllerTxt {
                         }
                     }                    
                 }
-                c.makeReservation(flight, listPassengers, listSeats, customer);
+                String code=(c.makeReservation(flight, listPassengers, listSeats, customer)).getPrenotationCode();
                 System.out.println("Prenotazione effettuata.");
+                System.out.println(c.searchReservation(code).toString());
             }
         } else {
             System.out.println("Errore nell'inserimento, codice non trovato.");

@@ -34,12 +34,13 @@ public class Simulation {
         c.downloadHoldLuggages("file/HoldLuggages.txt");
         System.out.println(c.toStringHoldLuggages());
         c.downloadInsurances("file/Insurances.txt");
-        System.out.println(c.toStringInsurances());
+        System.out.println(c.toStringInsurances());        
         
-    
+        //INTERFACCIA TESTUALE
         ControllerTxt.start(c);
-        System.out.println(c.toStringReservation());
         
+        //INTERFACCIA GRAFICA
+        //da definire
     
     }
 }
