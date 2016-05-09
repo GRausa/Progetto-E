@@ -79,18 +79,22 @@ public final class ControllerTxt {
             vet = s1.split("/");
             GregorianCalendar date = new GregorianCalendar(Integer.parseInt(vet[2]), Integer.parseInt(vet[1]) - 1, Integer.parseInt(vet[0]));
             ArrayList<Flight> arrayFlight = c.searchFlights(r, date);
-            for (Flight f : arrayFlight) {
-                System.out.println("Trovato il seguente volo:");
-                System.out.println(f);
+            if (!arrayFlight.isEmpty()) {
+                for (Flight f : arrayFlight) {
+                    System.out.println("Trovato il seguente volo:");
+                    System.out.println(f);
+                }
             }
-            if (arrayFlight.size() == 0) {
-                System.out.println("Nessun volo per questa data, sono state trovate le seguenti tratte: "
-                        + "");
-                
-                    ArrayList<Flight> calendar= c.calendarFlight(r);
+            else{
+                ArrayList<Flight> calendar= c.calendarFlight(r);
+                if(calendar.isEmpty()){
+                    System.out.println("La compagnia gestisce la route ma non ci sono voli presenti.");
+                }
+                else{
+                    System.out.println("Nessun volo per questa data, suggerimenti: ");
                     for(Flight a:calendar)
-                        System.out.println(a);
-                
+                        System.out.println(a); 
+                }
             }
         } else {
             System.out.println("Route non presente.");

@@ -349,14 +349,14 @@ public class Company {
     }
     
     public ArrayList<Flight> calendarFlight(Route route){
-        ArrayList<Flight> ritorno=new ArrayList<>(2);
-        for(Flight ciclo:flights){
-            if((ciclo.getRoute().equals(route)))
+        ArrayList<Flight> flight=new ArrayList<>(2);
+        for(Flight f:flights){
+            if((f.getRoute().equals(route)))
             {
-                ritorno.add(ciclo);
+                flight.add(f);
             }
         }
-        return ritorno;
+        return flight;
     }
     
     public String toStringReservation(){
