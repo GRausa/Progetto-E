@@ -162,7 +162,7 @@ public final class ControllerTxt {
                             System.out.println("Posto inserito superiore alla capienza massima");
                             continue;
                         }
-                        if(!flight.seatIsOccuped(seat)){                            
+                        if(!flight.seatIsOccuped(seat) & !listSeats.contains(seat)){                            
                             listSeats.add(seat);  
                             j=0;
                         }
@@ -230,17 +230,15 @@ public final class ControllerTxt {
                     if (str.isEmpty()) {
                         str = input.nextLine();
                     }
-                    if (str.equals("0")) {
-                        break;
-                    }
-                    Insurance ins = c.searchInsurance(str);
-                    if (ins != null) {
-                        p.addInsurance(ins);
-                        System.out.println("Hai scelto l'assicurazione:\n" + ins.toString());
-                    } else {
-                        System.out.println("Errore inserimento del codice assicurazione.");
-                    }
-                    
+                    if (!str.equals("0")) {
+                        Insurance ins = c.searchInsurance(str);
+                        if (ins != null) {
+                            p.addInsurance(ins);
+                            System.out.println("Hai scelto l'assicurazione:\n" + ins.toString());
+                        } else {
+                            System.out.println("Errore inserimento del codice assicurazione.");
+                        }
+                    }                    
                 }
                 c.makeReservation(flight, listPassengers, listSeats, customer);
                 System.out.println("Prenotazione effettuata.");
