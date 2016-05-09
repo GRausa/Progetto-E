@@ -158,6 +158,10 @@ public final class ControllerTxt {
                     while(j!=0){
                         System.out.println("Inserisci scelta posto: ");
                         seat=input.nextInt();
+                        if(seat>flight.getAirplane().getNumSeat()){
+                            System.out.println("Posto inserito superiore alla capienza massima");
+                            continue;
+                        }
                         if(!flight.seatIsOccuped(seat)){                            
                             listSeats.add(seat);  
                             j=0;

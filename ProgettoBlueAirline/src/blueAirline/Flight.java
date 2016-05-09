@@ -117,6 +117,10 @@ public class Flight {
         }
         return 0;
     }
+    
+    public Airplane getAirplane(){
+        return airplane;
+    }
        
 }
     
