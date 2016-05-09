@@ -18,7 +18,7 @@ public class Simulation {
     public static void main(String args[]) throws IOException, FileNotFoundException, ParseException{
         //CARICAMENTO
         
-        Company c = new Company("BlueAirlines");
+        Company c = new Company("BlueAirline");
         c.downloadAirplanes("file/Airplanes.txt");
         System.out.println(c.toStringAirplanes());
         c.downloadCitys("file/Citys.txt");

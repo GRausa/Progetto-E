@@ -152,8 +152,29 @@ public final class ControllerTxt {
                     vet = s1.split(" ");
                     Passenger p = new Passenger(vet[0], vet[1], vet[2]);
                     listPassengers.add(p);
-                    System.out.println("Inserisci scelta posto: ");
-                    listSeats.add(input.nextInt());           
+                    
+                    //verifica posto
+                    int j=1,seat=0;
+                    while(j!=0){
+                        System.out.println("Inserisci scelta posto: ");
+                        seat=input.nextInt();
+                        if(!flight.seatIsOccuped(seat)){                            
+                            listSeats.add(seat);  
+                            j=0;
+                        }
+                        else{
+                            System.out.println("Il posto è occupato, digiti: \n1)Decidere nuovamente il posto\n2)Assegnazione automatica");
+                            j=input.nextInt();
+                            switch(j){
+                                case 1: continue;                                        
+                                case 2: seat=flight.automaticSeatOccuped();
+                                        listSeats.add(seat);
+                                        j=0;
+                                        break;                                
+                            }
+                        }
+                    }
+                    System.out.println("Posto "+seat+"assegnato.");   
                     System.out.println("-> OPZIONI DI VIAGGIO AGGIUNTIVE <-");  
                     
                     //MEAL
