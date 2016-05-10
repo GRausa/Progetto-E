@@ -10,7 +10,7 @@ package blueAirline;
  *
  * @author cl418377
  */
-public class Airplane implements Comparable{
+public class Airplane{
     private String name;
     private String code;
     private Seat[] seats;
@@ -103,12 +103,5 @@ public class Airplane implements Comparable{
     public String toString(){
         return code+" "+name+" "+seats.length+"\n";
     }
-     
-    public int compareTo(Object o){
-        Airplane a = (Airplane) o;
-        return(name.compareTo(a.getCode()));
-    }
-
     
-            
 }

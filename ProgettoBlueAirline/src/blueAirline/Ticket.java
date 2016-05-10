@@ -18,7 +18,7 @@ public class Ticket {
      * Crea un nuovo biglietto.
      * @param code codice identificativo del biglietto
      * @param price prezzo del biglietto
-     * @param num_pos 
+     * @param num_pos posizione del posto a sedere
      */
     public Ticket(String code, double price, int num_pos){
         this.code=code;

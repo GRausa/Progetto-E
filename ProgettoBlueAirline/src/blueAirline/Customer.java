@@ -38,7 +38,10 @@ public class Customer {
     public String getNumber(){
         return number;
     }
-    
+    /**
+     * 
+     * @return rappresentazione scritta dell'oggetto
+     */
     public String toString(){
         return email+" "+number;
     } 
