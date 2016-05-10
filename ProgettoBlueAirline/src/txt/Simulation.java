@@ -39,6 +39,8 @@ public class Simulation {
         //INTERFACCIA TESTUALE
         ControllerTxt.start(c);
         
+        c.printFile();
+        
         //INTERFACCIA GRAFICA
         //da definire
     

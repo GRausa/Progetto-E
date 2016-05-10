@@ -56,6 +56,5 @@ public class Ticket {
 
     public void setnPosition(int nPosition) {
         this.nPosition = nPosition;
-    }
-    
+    }    
 }

@@ -61,5 +61,16 @@ public class Reservation {
         return prenotationCode;
     }
     
+    public Flight getFlight(){
+        return flight;
+    }
+    
+    public ArrayList<Passenger> getPassenger(){
+        return passengers;
+    }
+    
+    public Customer getCustomer(){
+        return customer;
+    }   
     
 }

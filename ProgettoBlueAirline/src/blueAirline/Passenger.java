@@ -19,7 +19,6 @@ public class Passenger {
     private double additionalPrice;
     private Ticket ticket;
     private Insurance insurance;
-    private HoldLuggage holdLuggage;
     private Meal meal;
     private ArrayList<Meal> arrayMeals;
     private ArrayList<HoldLuggage> arrayHoldLuggages;
@@ -76,5 +75,29 @@ public class Passenger {
     public void addInsurance(Insurance ins) {
         this.insurance=insurance;
         this.ticket.addPrice(ins.getPrice());
+    }
+    
+    public String toStringPrintFile(){
+        String s="";
+        s+=CI+" "+surname+" "+name+" "+this.nAllAditionalElement()+"\n";
+        for(Meal m : arrayMeals){
+            s+=m.getCode()+" ";
+        }
+        for(HoldLuggage hd: arrayHoldLuggages){
+            s+=hd.getCode()+" ";
+        }
+        if(insurance!=null)
+            s+=insurance.getCode();
+        s+="\n"+ticket.getnPosition();
+        return s;
+    }
+    
+    public int nAllAditionalElement(){
+        int n=0;
+        n+=arrayMeals.size()+this.arrayHoldLuggages.size();
+        if(insurance!=null){
+            n++;
+        }
+        return n;
     }
 }

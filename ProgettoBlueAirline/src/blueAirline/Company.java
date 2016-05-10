@@ -6,8 +6,10 @@
 package blueAirline;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -357,6 +359,21 @@ public class Company {
         flight.addProgressiveReservation();
         reservations.add(res);
         return res;
+    }
+    
+    public void printFile() throws IOException{
+        FileWriter w = new FileWriter("file/Reservations.txt");
+        BufferedWriter f = new BufferedWriter(w);
+        for(Reservation r : reservations){
+            f.write(r.getFlight().getCode()+"\n");
+            ArrayList<Passenger> ar = r.getPassenger();
+            for(Passenger p:ar){
+                f.write(p.toStringPrintFile());
+            }
+            f.write("\n");
+            f.write(r.getCustomer().toString()+"\n");
+        }       
+        f.close();
     }
     
     public ArrayList<Flight> calendarFlight(Route route){
