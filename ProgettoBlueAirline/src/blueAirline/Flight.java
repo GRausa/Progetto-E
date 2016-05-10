@@ -9,6 +9,9 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Set;
 
 /**
  *
@@ -92,7 +95,7 @@ public class Flight {
     }
     
     public void insertSeat(int n){
-        for (HashMap.Entry<Seat, Boolean> val : seats.entrySet()) {
+        for (Map.Entry<Seat, Boolean> val : seats.entrySet()) {
             if(val.getKey().getNumber()==n){
                val.setValue(Boolean.TRUE);
             }
@@ -100,7 +103,7 @@ public class Flight {
     }
     
     public boolean seatIsOccuped(int n){
-        for (HashMap.Entry<Seat, Boolean> val : seats.entrySet()) {
+        for (Map.Entry<Seat, Boolean> val : seats.entrySet()) {
             if(val.getKey().getNumber()==n & val.getValue()==true){
                return true;
             } 
@@ -110,7 +113,7 @@ public class Flight {
     
     public int automaticSeatOccuped(){
         int i=0;
-        for (HashMap.Entry<Seat, Boolean> val : seats.entrySet()) {
+        for (Map.Entry<Seat, Boolean> val : seats.entrySet()) {
             if(val.getValue()==false)
                 return i;
             i++;            
