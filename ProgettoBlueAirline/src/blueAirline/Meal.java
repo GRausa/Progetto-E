@@ -6,11 +6,18 @@
 package blueAirline;
 
 /**
+ * La classe Meal indica la presenza del pasto. Non in tutti i voli si ha la possibilità di scegliere il pasto.
  *
  * @author cl418377
  */
 public class Meal {
+    /**
+     * Tipo di pasto
+     */
     private String name;
+    /**
+     * Prezzo del pasto
+     */
     private double price;
     
     public Meal (String name, double price){

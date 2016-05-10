@@ -17,7 +17,9 @@ import java.util.Date;
 import java.util.StringTokenizer;
 
 /**
- *
+ * La classe Company è il Controller di tutta l'applicazione. Offre quindi metodi per la gestione 
+ * dell'intero sistema.
+ * 
  * @author cl418377
  */
 public class Company {

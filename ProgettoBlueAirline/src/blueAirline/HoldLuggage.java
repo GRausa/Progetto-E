@@ -6,10 +6,15 @@
 package blueAirline;
 
 /**
- *
+ *La classe HoldLuggage indica la presenza del bagaglio da stiva. A differenza del bagaglio a mano richiede
+ * un supplemento. Non è obbligatorio.
+ * 
  * @author cl418377
  */
 public class HoldLuggage {
+    /**
+     * 
+     */
     private Double price;
     private Double kg;
     

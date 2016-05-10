@@ -16,21 +16,65 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
- *
+ * La classe Flight permette la gestione dei voli, il prezzo e i posti dell'aereo su cui viene effettuato il volo.
+ * 
  * @author cl418377
  */
 public class Flight {
+    /**
+     * Codice identificativo dell'aereo.
+     */
     private String code;
+    /**
+     * Aereo sul quale viene effettuato il volo.
+     */
     private Airplane airplane;
+    /**
+     * Tempo di volo in minuti.
+     */
     private int flightTime;
+    /**
+     * Data di partenza del volo.
+     * @see java.util.Calendar
+     * 
+     */
     private Calendar departureDate;
+    /**
+     * Rotta del volo.
+     */
     private Route route;
-    private HashMap<Seat,Boolean> seats; //SERVE A MAPPARE OGNI POSTO PER VEDERE SE È DISPONIBILE
-    private int seatFree; //CONTATORE POSTI LIBERI(SI DECREMENTA AD OGNI PRENOTAZIONE
-    private double price; //prezzo dipene dal volo
+    /**
+     * Mappa i posti a sedere dell'aereo in modo da vedere se sono disponbili.
+     */
+    private HashMap<Seat,Boolean> seats; 
+    /**
+     * Contatore dei posti liberi. Si decrementa ad ogni prenotazione.
+     */
+    private int seatFree;
+    /**
+     * Prezzo del volo. Il prezzo è fissato e non varia nel tempo.
+     */
+    private double price;
+    /**
+     * Numero progressivo per la prenotazione. Serve a rendere identificabili (e uniche) le prenotazioni.
+     */
     private int progressiveReservation;
+    /**
+     * Numero progressivo per i biglietti. Serve a rendere identificabili (e unici) i biglietti.
+     */
     private int progressiveTicket;
     
+    /**
+     * Inizializza un nuovo volo.
+     * 
+     * @param code codice del volo
+     * @param airplane Aereo su cui viene effettuato il volo
+     * @param route Rotta che percorre l'aereo
+     * @param departureDate Data di partenza
+     * @param flightTime Tempo di volo in minuti
+     * @param price Prezzo di un posto a sedere sul volo
+     * 
+     */
     public Flight(String code, Airplane airplane, Route route, GregorianCalendar departureDate,int flightTime, double price){
         this.code=code;
         this.airplane=airplane;
@@ -46,38 +90,59 @@ public class Flight {
         this.progressiveReservation=0;
         this.progressiveTicket=0;
     }
-    
+    /**
+     * 
+     * @return codice identificativo del volo 
+     */
     public String getCode(){
         return code;
     }
     
-    
+    /**
+     * 
+     * @return prezzo a persona del volo 
+     */
     public double getPrice(){
         return price;
     }
-    
+    /**
+     * 
+     * @return rappresentazione descrittiva del volo
+     */
     public String toString(){
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MMM/yyyy HH:mm");
         return code+"\n"+route.toString()+"Departure Date: "+ sdf.format(this.departureDate.getTime())+"\nTempo di volo in minuti: "+flightTime+"\nPrice: "+Double.toString(price)+" €\nSeats Occcupied:"+(airplane.getNumSeat()-seatFree)+"/"+airplane.getNumSeat()+"\n";
         
     }
-
+    /**  
+    * @return data di partenza
+    */
     public Calendar getDepartureDate() {
         return departureDate;
     }
-
+    /**
+     * 
+     * @return rotta dell'aereo 
+     */
     public Route getRoute() {
         return route;
     }
-
+    /**
+     * 
+     * @return numero di posti a sedere liberi di un determinato volo
+     */
     public int getSeatFree() {
         return seatFree;
     }
-    
+    /**
+     * Incrementa la variabile progressiveReservation in modo da avere prenotazioni uniche
+     */
     public void addProgressiveReservation(){
         this.progressiveReservation++;
     }
-    
+    /**
+     * Incrementa la variabile progressiveTicket in modo da avere biglietti unici
+     */
     public void addProgressiveTicket(){
         this.progressiveTicket++;
     }

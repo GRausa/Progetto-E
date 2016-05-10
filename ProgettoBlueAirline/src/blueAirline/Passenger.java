@@ -6,20 +6,49 @@
 package blueAirline;
 
 /**
- *
+ * La classe Passenger rappresenta un passeggero e offre metodi per la gestione dei biglietti.
+ * 
  * @author cl418377
  */
 public class Passenger {
+    /**
+     * Codice identificativo presente sulla Carta d'Identità.
+     */
     private String CI;
+    /**
+     * Cognome del passeggero.
+     */
     private String surname;
+    /**
+     * Nome del passeggero.
+     */
     private String name;
+    /**
+     * Prezzo degli extra che ogni passeggero ha richiesto (Pasto, Bagaglio da Stiva, Assicurazione).
+     */
     private double additionalPrice;
-    
+    /**
+     * Biglietto.
+     * @see blueAirline.Ticket
+     */
     private Ticket ticket;
+    /**
+     * Assicurazione.
+     * @see blueAirline.Insurance
+     */
     private Insurance insurance;
+    /**
+     * Bagaglio da stiva.
+     * @see blueAirline.HoldLuggage
+     */
     private HoldLuggage holdLuggage;
+    /**
+     * Pasto.
+     * @see blueAirline.Meal
+     */
     private Meal meal;
 
+    
     public Passenger(String CI, String surname, String name) {
         this.CI = CI;
         this.surname = surname;

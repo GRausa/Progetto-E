@@ -6,7 +6,9 @@
 package blueAirline;
 
 /**
- *
+ *La classe Insurance indica la presenza dell'assicurazione. Questa può essere di vario tipo 
+ * e non è obbligatoria ai fini dell'acquisto del biglietto.
+ * 
  * @author cl418377
  */
 public class Insurance { //ASSICURAZIONE

@@ -6,22 +6,40 @@
 package blueAirline;
 
 /**
- *
+ * La classe Seat gestisce i singoli posti a sedere sull'aereo.
+ * 
  * @author cl418377
  */
 public class Seat {
+    /**
+     * Numero identificativo del posto a sedere.
+     */
     private Integer number;
-    private Integer numberClass; //class 1-> prima classe , 2 -> Seconda Classe
-
+    /**
+     * Variabile intera che indica se il posto a sedere è di prima o di seconda classe.
+     * Può assumerere, quindi, il valore 1 o il valore 2.
+     */
+    private Integer numberClass; 
+    /**
+     * Alloca un nuovo posto a sedere.
+     * @param number numero del posto
+     * @param numberClass classe del posto
+     */
     public Seat(Integer number, Integer numberClass) {
         this.number = number;
         this.numberClass = numberClass;
     }
-
+    /**
+     * 
+     * @return numero del posto a sedere 
+     */
     public Integer getNumber() {
         return number;
     }
-
+    /**
+     * 
+     * @return classe del posto a sedere 
+     */
     public Integer getNumberClass() {
         return numberClass;
     }
