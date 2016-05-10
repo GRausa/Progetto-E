@@ -3,21 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/riccardo/Documenti/ProgettiUni/ProgettoE/Progetto-E/ProgettoBlueAirline/src/txt/Simulation.java</file>
-            <file>file:/home/riccardo/Documenti/ProgettiUni/ProgettoE/Progetto-E/ProgettoBlueAirline/src/java/JFrame.java</file>
-            <file>file:/home/riccardo/Documenti/ProgettiUni/ProgettoE/Progetto-E/ProgettoBlueAirline/src/blueAirline/Insurance.java</file>
-            <file>file:/home/riccardo/Documenti/ProgettiUni/ProgettoE/Progetto-E/ProgettoBlueAirline/src/blueAirline/Reservation.java</file>
-            <file>file:/home/riccardo/Documenti/ProgettiUni/ProgettoE/Progetto-E/ProgettoBlueAirline/src/txt/ControllerTxt.java</file>
-            <file>file:/home/riccardo/Documenti/ProgettiUni/ProgettoE/Progetto-E/ProgettoBlueAirline/src/blueAirline/Customer.java</file>
-            <file>file:/home/riccardo/Documenti/ProgettiUni/ProgettoE/Progetto-E/ProgettoBlueAirline/src/blueAirline/Seat.java</file>
-            <file>file:/home/riccardo/Documenti/ProgettiUni/ProgettoE/Progetto-E/ProgettoBlueAirline/src/blueAirline/Meal.java</file>
-            <file>file:/home/riccardo/Documenti/ProgettiUni/ProgettoE/Progetto-E/ProgettoBlueAirline/src/blueAirline/HoldLuggage.java</file>
-            <file>file:/home/riccardo/Documenti/ProgettiUni/ProgettoE/Progetto-E/ProgettoBlueAirline/src/blueAirline/Ticket.java</file>
-            <file>file:/home/riccardo/Documenti/ProgettiUni/ProgettoE/Progetto-E/ProgettoBlueAirline/src/blueAirline/Airplane.java</file>
-            <file>file:/home/riccardo/Documenti/ProgettiUni/ProgettoE/Progetto-E/ProgettoBlueAirline/src/blueAirline/Route.java</file>
-            <file>file:/home/riccardo/Documenti/ProgettiUni/ProgettoE/Progetto-E/ProgettoBlueAirline/src/blueAirline/City.java</file>
-            <file>file:/home/riccardo/Documenti/ProgettiUni/ProgettoE/Progetto-E/ProgettoBlueAirline/src/blueAirline/Company.java</file>
-            <file>file:/home/riccardo/Documenti/ProgettiUni/ProgettoE/Progetto-E/ProgettoBlueAirline/src/blueAirline/Airport.java</file>
+            <file>file:/home/inf/cl418377/NetBeansProjects/Progetto-E/ProgettoBlueAirline/src/blueAirline/Flight.java</file>
+            <file>file:/home/inf/cl418377/NetBeansProjects/Progetto-E/ProgettoBlueAirline/src/blueAirline/Seat.java</file>
+            <file>file:/home/inf/cl418377/NetBeansProjects/Progetto-E/ProgettoBlueAirline/src/ui/SimulationWindow.java</file>
         </group>
     </open-files>
 </project-private>
