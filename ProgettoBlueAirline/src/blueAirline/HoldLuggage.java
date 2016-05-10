@@ -12,13 +12,15 @@ package blueAirline;
  * @author cl418377
  */
 public class HoldLuggage {
-    /**
-     * 
-     */
+
+   
+
+    private String code;
     private Double price;
     private Double kg;
     
-    public HoldLuggage (Double kg, Double price){
+    public HoldLuggage (String code,Double kg, Double price){
+        this.code=code;
         this.kg=kg;
         this.price=price;
     }
@@ -30,4 +32,14 @@ public class HoldLuggage {
     public Double getPrice() {
         return price;
     }
+    
+    public String toString(){
+        return code+" "+kg+"Kg "+price+"€";
+    }
+
+    public String getCode() {
+        return code;
+    }
+    
+    
 }

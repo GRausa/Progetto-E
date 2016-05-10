@@ -11,25 +11,44 @@ package blueAirline;
  * @author cl418377
  */
 public class Meal {
+
     /**
      * Tipo di pasto
      */
+
+    private String code;
+
     private String name;
     /**
      * Prezzo del pasto
      */
     private double price;
+    private int timeMeal; //pasto che vale per tempo (timeMeal) maggiore di volo
     
-    public Meal (String name, double price){
+    public Meal (String code, String name, double price, int timeMeal){
+        this.code=code;
         this.name=name;
         this.price=price;
+        this.timeMeal=timeMeal;
     }
 
     public String getName() {
         return name;
     }
 
+    public int getTimeMeal() {
+        return timeMeal;
+    }
+
     public double getPrice() {
         return price;
+    }
+    
+    public String getCode() {
+        return code;
+    }
+    
+    public String toString(){
+        return code+" "+name+" "+price+" €";
     }
 }

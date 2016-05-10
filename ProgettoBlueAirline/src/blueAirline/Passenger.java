@@ -5,6 +5,8 @@
  */
 package blueAirline;
 
+import java.util.ArrayList;
+
 /**
  * La classe Passenger rappresenta un passeggero e offre metodi per la gestione dei biglietti.
  * 
@@ -27,16 +29,19 @@ public class Passenger {
      * Prezzo degli extra che ogni passeggero ha richiesto (Pasto, Bagaglio da Stiva, Assicurazione).
      */
     private double additionalPrice;
+
     /**
      * Biglietto.
      * @see blueAirline.Ticket
      */
+
     private Ticket ticket;
     /**
      * Assicurazione.
      * @see blueAirline.Insurance
      */
     private Insurance insurance;
+
     /**
      * Bagaglio da stiva.
      * @see blueAirline.HoldLuggage
@@ -48,15 +53,22 @@ public class Passenger {
      */
     private Meal meal;
 
+    private ArrayList<Meal> arrayMeals;
+    private ArrayList<HoldLuggage> arrayHoldLuggages;
+
+
     
     public Passenger(String CI, String surname, String name) {
         this.CI = CI;
         this.surname = surname;
         this.name = name;
+        this.arrayMeals=new ArrayList<>();
+        this.arrayHoldLuggages=new ArrayList<>();
+        this.ticket=new Ticket(null,0,0);
     }
     
     public String toString(){
-        return "Card Identity: "+CI+"Cognome: "+surname+"Nome: "+name;
+        return "Card Identity: "+CI+"\nCognome: "+surname+"\nNome: "+name+"\nTicket: "+ticket.toString(); //errore se stampo ticket
     }
 
     public String getCI() {
@@ -79,12 +91,22 @@ public class Passenger {
         this.additionalPrice+=addPrice;
     }
     
-    public void setTicket(Ticket tiket){
-        this.ticket=ticket;
+    public Ticket getTicket(){
+        return ticket;
+    }
+    
+    public void addMeal(Meal meal){
+        arrayMeals.add(meal);
+        this.ticket.addPrice(meal.getPrice());
     }
 
-  
-    
-    
-    
+    public void addHoldLuggage(HoldLuggage holdLuggage) {
+        arrayHoldLuggages.add(holdLuggage);
+        this.ticket.addPrice(holdLuggage.getPrice());
+    }
+
+    public void addInsurance(Insurance ins) {
+        this.insurance=insurance;
+        this.ticket.addPrice(ins.getPrice());
+    }
 }

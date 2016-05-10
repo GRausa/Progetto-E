@@ -6,14 +6,9 @@
 package blueAirline;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.Map;
 
 /**
  * La classe Flight permette la gestione dei voli, il prezzo e i posti dell'aereo su cui viene effettuato il volo.
@@ -111,7 +106,7 @@ public class Flight {
      */
     public String toString(){
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MMM/yyyy HH:mm");
-        return code+"\n"+route.toString()+"Departure Date: "+ sdf.format(this.departureDate.getTime())+"\nTempo di volo in minuti: "+flightTime+"\nPrice: "+Double.toString(price)+" €\nSeats Occcupied:"+(airplane.getNumSeat()-seatFree)+"/"+airplane.getNumSeat()+"\n";
+        return code+"\n"+route.toString()+"Departure Date: "+ sdf.format(this.departureDate.getTime())+"\nTempo di volo in minuti: "+flightTime+"\nPrice: "+Double.toString(price)+" €\nSeats Occcupied: "+(airplane.getNumSeat()-seatFree)+"/"+airplane.getNumSeat()+"\n";
         
     }
     /**  
@@ -157,6 +152,10 @@ public class Flight {
         
     }
     
+    public int getFlightTime(){
+        return flightTime;
+    }
+    
     public void insertSeat(int n){
         for (HashMap.Entry<Seat, Boolean> val : seats.entrySet()) {
             if(val.getKey().getNumber()==n){
@@ -164,7 +163,29 @@ public class Flight {
             }
         }
     }
-        
+    
+    public boolean seatIsOccuped(int n){
+        for (HashMap.Entry<Seat, Boolean> val : seats.entrySet()) {
+            if(val.getKey().getNumber()==n & val.getValue()==true){
+               return true;
+            } 
+        }
+        return false;
+    }  
+    
+    public int automaticSeatOccuped(){
+        int i=0;
+        for (HashMap.Entry<Seat, Boolean> val : seats.entrySet()) {
+            if(val.getValue()==false)
+                return i;
+            i++;            
+        }
+        return 0;
+    }
+    
+    public Airplane getAirplane(){
+        return airplane;
+    }
        
 }
     

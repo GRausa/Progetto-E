@@ -32,10 +32,15 @@ public class Ticket {
         this.nPosition= num_pos;
     
     }
-    /**
-     * 
-     * @return codice identificativo del biglietto
-     */
+    
+    public String toString(){
+        return code+" "+price+"€ Posto: "+nPosition;
+    }
+    
+    public void setCode(String code){
+        this.code=code;
+    }
+    
     public String getCode(){
         return code;
     }
@@ -46,12 +51,17 @@ public class Ticket {
     public double getPrice(){
         return price; 
     }
-    /**
-     * 
-     * @return 
-     */
-    public int getNum_pos(){
+    
+    public void addPrice(double p){
+        this.price+=p;
+    }
+
+    public int getnPosition() {
         return nPosition;
+    }
+
+    public void setnPosition(int nPosition) {
+        this.nPosition = nPosition;
     }
     
 }

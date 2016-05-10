@@ -18,7 +18,7 @@ public class Simulation {
     public static void main(String args[]) throws IOException, FileNotFoundException, ParseException{
         //CARICAMENTO
         
-        Company c = new Company("BlueAirlines");
+        Company c = new Company("BlueAirline");
         c.downloadAirplanes("file/Airplanes.txt");
         System.out.println(c.toStringAirplanes());
         c.downloadCitys("file/Citys.txt");
@@ -26,13 +26,21 @@ public class Simulation {
         c.downloadAirports("file/Airports.txt");
         System.out.println(c.toStringAirports());
         c.downloadRoutes("file/Routes.txt");
-        System.out.println(c.toStringRoutes());
-        
+        System.out.println(c.toStringRoutes());        
         c.downloadFlight("file/Flights.txt");
         System.out.println(c.toStringFlights());
-    
+        c.downloadMeals("file/Meals.txt");
+        System.out.println(c.toStringMeals());
+        c.downloadHoldLuggages("file/HoldLuggages.txt");
+        System.out.println(c.toStringHoldLuggages());
+        c.downloadInsurances("file/Insurances.txt");
+        System.out.println(c.toStringInsurances());        
+        
+        //INTERFACCIA TESTUALE
         ControllerTxt.start(c);
         
+        //INTERFACCIA GRAFICA
+        //da definire
     
     }
 }

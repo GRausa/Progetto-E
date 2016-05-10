@@ -10,10 +10,8 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.*;
-import java.util.Date;
 import java.util.StringTokenizer;
 
 /**
@@ -28,6 +26,9 @@ public class Company {
     private ArrayList<Airport> airports;
     private ArrayList<Route> routes;
     private ArrayList<Flight> flights;
+    private ArrayList<Meal> meals;
+    private ArrayList<HoldLuggage> holdLuggages;
+    private ArrayList<Insurance> insurances;
     private String nameCompany;
     private ArrayList<Reservation> reservations;
     
@@ -39,6 +40,9 @@ public class Company {
         this.routes=new ArrayList<>();
         this.flights=new ArrayList<>();
         this.reservations=new ArrayList<>();
+        this.meals=new ArrayList<>();
+        this.holdLuggages=new ArrayList<>();
+        this.insurances=new ArrayList<>();
     }
     
     public String getName(){
@@ -197,7 +201,7 @@ public class Company {
     public String toStringFlights(){
         String s="";
         for(Flight f : flights){
-            s+=f.toString() +"\n";
+            s+=f.toString()+"\n";
         }
         return s;
     }
@@ -215,6 +219,89 @@ public class Company {
         return s;
     }
     
+    public void downloadMeals(String nameFile) throws FileNotFoundException, IOException{
+        BufferedReader in = new BufferedReader(new FileReader(nameFile));
+        String line;
+        while((line=in.readLine())!=null){
+            StringTokenizer st = new StringTokenizer(line,"\t");
+            Meal m = new Meal(st.nextToken(),st.nextToken(),Double.parseDouble(st.nextToken()),Integer.parseInt(st.nextToken()));
+            meals.add(m);
+            }
+        in.close();
+    }
+    
+    public String toStringMeals(){
+        String s="";
+        for(Meal m: meals){
+            s+=m.toString()+"\n";
+        }
+        return s;
+    }
+    
+    public void downloadHoldLuggages(String nameFile) throws FileNotFoundException, IOException{
+        BufferedReader in = new BufferedReader(new FileReader(nameFile));
+        String line;
+        while((line=in.readLine())!=null){
+            StringTokenizer st = new StringTokenizer(line,"\t");
+            HoldLuggage h = new HoldLuggage(st.nextToken(),Double.parseDouble(st.nextToken()),Double.parseDouble(st.nextToken()));
+            holdLuggages.add(h);
+            }
+        in.close();
+    }
+    
+    public String toStringHoldLuggages(){
+        String s="";
+        for(HoldLuggage h: holdLuggages){
+            s+=h.toString()+"\n";
+        }
+        return s;
+    }
+    
+    public void downloadInsurances(String nameFile) throws FileNotFoundException, IOException{
+        BufferedReader in = new BufferedReader(new FileReader(nameFile));
+        String line;
+        while((line=in.readLine())!=null){
+            StringTokenizer st = new StringTokenizer(line,"\t");
+            Insurance ins = new Insurance(st.nextToken(),st.nextToken(),Double.parseDouble(st.nextToken()));
+            insurances.add(ins);
+            }
+        in.close();
+    }
+    
+    public String toStringInsurances(){
+        String s="";
+        for(Insurance ins: insurances){
+            s+=ins.toString()+"\n";
+        }
+        return s;
+    }
+    
+    public Meal searchMeal(String codeMeal){
+        for(Meal m:meals){
+            if(m.getCode().equals(codeMeal)){
+                return m;
+            }
+        }
+        return null;
+    }    
+    
+    public HoldLuggage searchHoldLuggage(String codeHoldLuggage){
+        for(HoldLuggage h:holdLuggages){
+            if(h.getCode().equals(codeHoldLuggage)){
+                return h;
+            }
+        }
+        return null;
+    } 
+    
+    public Insurance searchInsurance(String codeInsurance){
+        for(Insurance ins:insurances){
+            if(ins.getCode().equals(codeInsurance)){
+                return ins;
+            }
+        }
+        return null;
+    }    
     
     public Flight searchFlights(String cod) {
         for(Flight f:flights){
@@ -245,29 +332,48 @@ public class Company {
         }
         return null;
     }
+    
+    public Reservation searchReservation(String reservation){
+        for(Reservation r:reservations){
+            if(r.getPrenotationCode().equals(reservation)){
+                return r;
+            }
+        }
+        return null;
+    }
+    
+    public ArrayList<Airport> linkedAirport(Airport departure){
+        ArrayList<Airport> airports=new ArrayList<>(5);
+        for(Route rotta:routes){
+            if(rotta.getDeparture().equals(departure)){
+                airports.add(rotta.getDestination());
+            }
+        }        
+        return airports;
+    }
 
-    public Reservation makeReservation(Flight flight,ArrayList<Passenger> passeggeri, ArrayList<Integer> seatsPosition, String mail,String numero) {
-        Reservation app=new Reservation(flight,passeggeri,seatsPosition, flight.getCode(),new Customer(mail,numero));
-        
-        reservations.add(app);
-        return app;
+    public Reservation makeReservation(Flight flight,ArrayList<Passenger> passengers, ArrayList<Integer> seatsPosition, Customer customer) {
+        Reservation res=new Reservation(flight,passengers,seatsPosition, flight.getCode(), customer);
+        flight.addProgressiveReservation();
+        reservations.add(res);
+        return res;
     }
     
     public ArrayList<Flight> calendarFlight(Route route){
-        ArrayList<Flight> ritorno=new ArrayList<>(2);
-        for(Flight ciclo:flights){
-            if((ciclo.getRoute().equals(route)))
+        ArrayList<Flight> flight=new ArrayList<>(2);
+        for(Flight f:flights){
+            if((f.getRoute().equals(route)))
             {
-                ritorno.add(ciclo);
+                flight.add(f);
             }
         }
-        return ritorno;
+        return flight;
     }
     
     public String toStringReservation(){
         String s="";
         for(Reservation r: reservations){
-            s+=r.toString();
+            s+=r.toString()+"\n";
         }
         return s;
     }

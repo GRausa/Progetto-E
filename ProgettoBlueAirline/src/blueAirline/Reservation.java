@@ -49,11 +49,12 @@ public class Reservation {
     public Reservation(Flight flight,ArrayList<Passenger> passengers, ArrayList<Integer> seatsPosition, String prenotationCode, Customer customer) {
         this.flight=flight;
         this.passengers = passengers;
-        this.prenotationCode = "PR"+flight.getProgressiveReservation();
-        flight.addProgressiveReservation();
+        this.prenotationCode = flight.getCode()+"PR"+flight.getProgressiveReservation();
         this.customer=customer;
         for(int i=0;i<passengers.size();i++){
-            passengers.get(i).setTicket(new Ticket("COD"+flight.getProgressiveTicket(), flight.getPrice(), seatsPosition.get(i)));
+            passengers.get(i).getTicket().setCode(flight.getCode()+"COD"+flight.getProgressiveTicket());
+            passengers.get(i).getTicket().setnPosition(seatsPosition.get(i));
+            passengers.get(i).getTicket().addPrice(flight.getPrice());
             flight.addProgressiveTicket();
             flight.insertSeat(seatsPosition.get(i));
         }
@@ -66,12 +67,16 @@ public class Reservation {
      */
     public String toString(){
         String s="";
-        s+="Codice prenotazione: "+prenotationCode+"\n"+"Volo:"+flight.toString()+"\n"+"Prenotato da:"+customer.getEmail()+" "+customer.getNumber()+"\n";
-        s+="Passeggeri: ";
+        s+="Codice prenotazione: "+prenotationCode+"\n"+"Volo:"+flight.toString()+"\n"+"Prenotato da: "+customer.toString()+"\n";
+        s+="Passeggeri: \n";
         for(Passenger p : passengers){
             s+=p.toString();
         }
         return s+"\n";
+    }
+    
+    public String getPrenotationCode(){
+        return prenotationCode;
     }
     
     
