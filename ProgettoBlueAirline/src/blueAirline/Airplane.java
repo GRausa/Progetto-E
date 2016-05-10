@@ -11,22 +11,9 @@ package blueAirline;
  * @author cl418377
  */
 public class Airplane implements Comparable{
-    /**
-     * Nome dell'aereo
-     */
     private String name;
-    /**
-     * Codice identificativo 
-     */
     private String code;
-    /**
-     * Array dei posti a sedere
-     * @see Seat
-     */
     private Seat[] seats;
-    /**
-     * Numero dei posti in prima classe
-     */
     private int numberFirstClass;
     
     /**

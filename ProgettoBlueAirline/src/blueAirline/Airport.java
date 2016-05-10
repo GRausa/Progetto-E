@@ -11,13 +11,7 @@ package blueAirline;
  * @author cl418377
  */
 public class Airport implements Comparable{
-    /**
-     * Nome dell'aeroporto.
-     */
     private String name;
-    /**
-     * Città in cui è presente l'aeroporto.
-     */
     private City city;
     
     /**

@@ -12,15 +12,8 @@ package blueAirline;
  * @author cl418377
  */
 public class Customer {
-    /**
-     * L'email dell'acquirente, al quale verranno inviate le informazioni sulla prenotazione.
-     */
     private String email;
-    /**
-    * Numero di biglietti che intende acquistare.
-    */
-    private String number;
-    
+    private String number;    
     /**
      * Istanzia un nuovo Customer.
      * 

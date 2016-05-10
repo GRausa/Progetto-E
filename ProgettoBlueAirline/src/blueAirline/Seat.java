@@ -11,14 +11,7 @@ package blueAirline;
  * @author cl418377
  */
 public class Seat {
-    /**
-     * Numero identificativo del posto a sedere.
-     */
     private Integer number;
-    /**
-     * Variabile intera che indica se il posto a sedere è di prima o di seconda classe.
-     * Può assumerere, quindi, il valore 1 o il valore 2.
-     */
     private Integer numberClass; 
     /**
      * Alloca un nuovo posto a sedere.

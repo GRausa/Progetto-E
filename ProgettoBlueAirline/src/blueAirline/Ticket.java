@@ -10,15 +10,9 @@ package blueAirline;
  * @author cl418377
  */
 public class Ticket {
-    /**
-     * Codice identificativo del biglietto
-     */
-    private String code;
-    /**
-     * Prezzo del biglietto. Non segue nessun algoritmo ma è fisso per ogni volo.
-     */
-    private double price;
 
+    private String code;
+    private double price;
     private int nPosition;
     /**
      * Crea un nuovo biglietto.

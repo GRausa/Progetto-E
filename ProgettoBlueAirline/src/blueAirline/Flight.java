@@ -16,47 +16,16 @@ import java.util.HashMap;
  * @author cl418377
  */
 public class Flight {
-    /**
-     * Codice identificativo dell'aereo.
-     */
+    
     private String code;
-    /**
-     * Aereo sul quale viene effettuato il volo.
-     */
     private Airplane airplane;
-    /**
-     * Tempo di volo in minuti.
-     */
     private int flightTime;
-    /**
-     * Data di partenza del volo.
-     * @see java.util.Calendar
-     * 
-     */
     private Calendar departureDate;
-    /**
-     * Rotta del volo.
-     */
     private Route route;
-    /**
-     * Mappa i posti a sedere dell'aereo in modo da vedere se sono disponbili.
-     */
     private HashMap<Seat,Boolean> seats; 
-    /**
-     * Contatore dei posti liberi. Si decrementa ad ogni prenotazione.
-     */
     private int seatFree;
-    /**
-     * Prezzo del volo. Il prezzo è fissato e non varia nel tempo.
-     */
     private double price;
-    /**
-     * Numero progressivo per la prenotazione. Serve a rendere identificabili (e uniche) le prenotazioni.
-     */
     private int progressiveReservation;
-    /**
-     * Numero progressivo per i biglietti. Serve a rendere identificabili (e unici) i biglietti.
-     */
     private int progressiveTicket;
     
     /**

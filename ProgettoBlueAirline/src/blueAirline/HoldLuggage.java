@@ -12,9 +12,6 @@ package blueAirline;
  * @author cl418377
  */
 public class HoldLuggage {
-
-   
-
     private String code;
     private Double price;
     private Double kg;

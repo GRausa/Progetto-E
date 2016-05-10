@@ -11,17 +11,8 @@ package blueAirline;
  * @author cl418377
  */
 public class Meal {
-
-    /**
-     * Tipo di pasto
-     */
-
     private String code;
-
     private String name;
-    /**
-     * Prezzo del pasto
-     */
     private double price;
     private int timeMeal; //pasto che vale per tempo (timeMeal) maggiore di volo
     

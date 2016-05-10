@@ -10,13 +10,7 @@ package blueAirline;
  * @author cl418377
  */
 public class Route {
-    /**
-     * Aeroporto di partenza
-     */
     private Airport departure;
-    /**
-     * Aeroporto di arrivo
-     */
     private Airport destination;
     /**
      * Crea una nuova rotta.

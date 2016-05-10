@@ -14,28 +14,10 @@ import java.util.ArrayList;
  * @author cl418377
  */
 public class Reservation {
-    /**
-     * Lista di passeggeri che vogliono fare una prenotazione. I passeggeri sono coloro che riservano un posto sull'aereo, il 
-     * customer è colui che fa la prenotazione. Il customer può anche essere una persona esterna e quindi non essere fra i 
-     * passeggeri.
-     */
     private ArrayList<Passenger> passengers;
-    /**
-     * Codice identificativo della prenotazione
-     */
     private String prenotationCode;
-    /**
-     * Colui che effettua la prenotazione
-     * @see blueAirline.Customer
-     */
     private Customer customer;
-    /**
-     * Carattere booleano che ci dice se è già stato effettuato il check-in
-     */
     private Boolean checkIn;
-    /**
-     * Volo di cui vogliamo effettuare una prenotazione
-     */
     private Flight flight;
     /**
      * Costruttore della classe Reservation. Ci istanzia una nuova prenotazione con tutte le informazioni di 
