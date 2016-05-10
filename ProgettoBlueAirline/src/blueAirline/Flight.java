@@ -120,11 +120,17 @@ public class Flight {
         return this.progressiveTicket;
         
     }
-    
+    /**
+     * 
+     * @return tempo di volo
+     */
     public int getFlightTime(){
         return flightTime;
     }
-    
+    /**
+     * 
+     * @param n 
+     */
     public void insertSeat(int n){
         for (HashMap.Entry<Seat, Boolean> val : seats.entrySet()) {
             if(val.getKey().getNumber()==n){
