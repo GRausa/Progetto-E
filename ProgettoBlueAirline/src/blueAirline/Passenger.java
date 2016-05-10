@@ -79,25 +79,16 @@ public class Passenger {
     
     public String toStringPrintFile(){
         String s="";
-        s+=CI+" "+surname+" "+name+" "+this.nAllAditionalElement()+"\n";
+        s+=CI+"\t"+surname+"\t"+name+"\n";
         for(Meal m : arrayMeals){
-            s+=m.getCode()+" ";
+            s+=m.getCode()+"\t";
         }
         for(HoldLuggage hd: arrayHoldLuggages){
-            s+=hd.getCode()+" ";
+            s+=hd.getCode()+"\t";
         }
         if(insurance!=null)
             s+=insurance.getCode();
         s+="\n"+ticket.getnPosition();
         return s;
-    }
-    
-    public int nAllAditionalElement(){
-        int n=0;
-        n+=arrayMeals.size()+this.arrayHoldLuggages.size();
-        if(insurance!=null){
-            n++;
-        }
-        return n;
     }
 }

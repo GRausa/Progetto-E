@@ -37,9 +37,10 @@ public class Simulation {
         System.out.println(c.toStringInsurances());        
         
         //INTERFACCIA TESTUALE
-        ControllerTxt.start(c);
-        
-        c.printFile();
+        c.importFileReservation("file/Reservations.txt");
+        ControllerTxt.start(c);        
+        c.printFileReservation();
+        System.out.println(c.toStringReservation());
         
         //INTERFACCIA GRAFICA
         //da definire

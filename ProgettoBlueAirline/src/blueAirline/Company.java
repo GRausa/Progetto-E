@@ -11,6 +11,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.*;
@@ -361,19 +362,62 @@ public class Company {
         return res;
     }
     
-    public void printFile() throws IOException{
-        FileWriter w = new FileWriter("file/Reservations.txt");
-        BufferedWriter f = new BufferedWriter(w);
+    public void printFileReservation() throws IOException{
+        String s="";
+        PrintWriter f = new PrintWriter(new FileWriter("file/ReservationS.txt"));
         for(Reservation r : reservations){
-            f.write(r.getFlight().getCode()+"\n");
-            ArrayList<Passenger> ar = r.getPassenger();
+            s+=r.getFlight().getCode()+"\t"+r.getCustomer().getEmail()+"\t"+r.getCustomer().getNumber()+"\n";
+            ArrayList<Passenger> ar = r.getPassenger();  
+            s+=ar.size()+"\n";
             for(Passenger p:ar){
-                f.write(p.toStringPrintFile());
-            }
-            f.write("\n");
-            f.write(r.getCustomer().toString()+"\n");
+                s+=p.toStringPrintFile()+"\n";
+            }            
+            f.print(s);
         }       
         f.close();
+    }
+    
+    public void importFileReservation(String nameFile) throws FileNotFoundException, IOException{
+        BufferedReader in = new BufferedReader(new FileReader(nameFile));
+        String line;
+        while((line=in.readLine())!=null){
+            //1 RIGA
+            StringTokenizer st = new StringTokenizer(line,"\t");
+            Flight f = this.searchFlights(st.nextToken());
+            Customer c = new Customer(st.nextToken(),st.nextToken());
+            //2 RIGA
+            int k=Integer.parseInt(line=in.readLine());
+            //3 E + RIGHE PASSEGGERI                      
+            ArrayList<Passenger> passengers = new ArrayList<>();
+            ArrayList<Integer> seats = new ArrayList<>();
+            for(int i=0;i<k;i++){
+                line=in.readLine();  
+                StringTokenizer st2 = new StringTokenizer(line,"\t");
+                Passenger p=new Passenger(st2.nextToken(),st2.nextToken(),st2.nextToken());
+                passengers.add(p);
+                //riga supplementi
+                line=in.readLine();
+                StringTokenizer st3 = new StringTokenizer(line,"\t");                
+                while(st3.hasMoreTokens()){
+                    String element = st3.nextToken();
+                    switch(element.charAt(0)){
+                        case 'M':
+                            p.addMeal(this.searchMeal(element));
+                            break;
+                        case 'H':
+                            p.addHoldLuggage(this.searchHoldLuggage(element));
+                            break;
+                        case 'I':
+                            p.addInsurance(this.searchInsurance(element));
+                            break;
+                    }
+                }
+                //4 RIGA POSTO
+                seats.add(Integer.parseInt(in.readLine()));                
+            }
+            this.makeReservation(f, passengers, seats, c);
+        }
+        in.close();
     }
     
     public ArrayList<Flight> calendarFlight(Route route){
