@@ -113,11 +113,17 @@ public class Flight {
     public void addProgressiveTicket(){
         this.progressiveTicket++;
     }
-    
+    /**
+     * 
+     * @return numero prenotazione
+     */
     public int getProgressiveReservation(){
         return this.progressiveReservation;
     }
-    
+    /**
+     * 
+     * @return numero biglietto 
+     */
     public int getProgressiveTicket(){
         seatFree--;
         return this.progressiveTicket;

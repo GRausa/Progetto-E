@@ -22,6 +22,7 @@ public class Reservation {
     /**
      * Costruttore della classe Reservation. Ci istanzia una nuova prenotazione con tutte le informazioni di 
      * cui abbiamo bisogno, come la lista dei passeggeri e i relativi posti occupati sull'aereo.
+     * 
      * @param flight volo di cui si vuole effettuare una prenotazione
      * @param passengers lista di passeggeri
      * @param seatsPosition posizione dei nostri posti
@@ -45,7 +46,7 @@ public class Reservation {
     }
     /**
      * 
-     * @return rappresentazione scritta della nostra prenotazione.
+     * @return rappresentazione scritta della prenotazione.
      */
     public String toString(){
         String s="";
@@ -56,19 +57,31 @@ public class Reservation {
         }
         return s+"\n";
     }
-    
+    /**
+     * 
+     * @return codice di prenotazione
+     */
     public String getPrenotationCode(){
         return prenotationCode;
     }
-    
+    /**
+     * 
+     * @return volo della prenotazione
+     */
     public Flight getFlight(){
         return flight;
     }
-    
+    /**
+     * 
+     * @return lista di passeggeri della prenotazione
+     */
     public ArrayList<Passenger> getPassenger(){
         return passengers;
     }
-    
+    /**
+     * 
+     * @return colui che acquista i biglietti
+     */
     public Customer getCustomer(){
         return customer;
     }   

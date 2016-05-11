@@ -14,31 +14,53 @@ public class Meal {
     private String code;
     private String name;
     private double price;
-    private int timeMeal; //pasto che vale per tempo (timeMeal) maggiore di volo
-    
+    private int timeMeal; // Il pasto è disponibile solo su voli che hanno una certa durata
+    /**
+     * Istanzia un nuovo pasto.
+     * 
+     * @param code codice del pasto
+     * @param name nome del pasto
+     * @param price prezzo del pasto in euro
+     * @param timeMeal tempo di volo dal quale è disponibile il pasto
+     */
     public Meal (String code, String name, double price, int timeMeal){
         this.code=code;
         this.name=name;
         this.price=price;
         this.timeMeal=timeMeal;
     }
-
+    /**
+     * 
+     * @return nome del pasto 
+     */
     public String getName() {
         return name;
     }
-
+    /**
+     * 
+     * @return tempo di volo dal quale è disponibile il pasto
+     */
     public int getTimeMeal() {
         return timeMeal;
     }
-
+    /**
+     * 
+     * @return prezzo del pasto
+     */
     public double getPrice() {
         return price;
     }
-    
+    /**
+     * 
+     * @return codice del pasto 
+     */
     public String getCode() {
         return code;
     }
-    
+    /**
+     * 
+     * @return rappresentazione scritta del pasto
+     */
     public String toString(){
         return code+" "+name+" "+price+" €";
     }

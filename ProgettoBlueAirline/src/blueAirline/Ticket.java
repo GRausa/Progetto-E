@@ -14,6 +14,7 @@ public class Ticket {
     private String code;
     private double price;
     private int nPosition;
+    
     /**
      * Crea un nuovo biglietto.
      * @param code codice identificativo del biglietto
@@ -26,15 +27,25 @@ public class Ticket {
         this.nPosition= num_pos;
     
     }
-    
+    /**
+     * 
+     * @return rappresentazione scritta del biglietto
+     */
     public String toString(){
         return code+" "+price+"€ Posto: "+nPosition;
     }
-    
+    /**
+     * Imposta un nuovo codice al biglietto.
+     * 
+     * @param code nuovo codice
+     */
     public void setCode(String code){
         this.code=code;
     }
-    
+    /**
+     * 
+     * @return codice del biglietto
+     */
     public String getCode(){
         return code;
     }
@@ -45,7 +56,11 @@ public class Ticket {
     public double getPrice(){
         return price; 
     }
-    
+    /**
+     * Modifica il prezzo del biglietto.
+     * 
+     * @param p differenza di prezzo rispetto a quello precedente
+     */
     public void addPrice(double p){
         this.price+=p;
     }
