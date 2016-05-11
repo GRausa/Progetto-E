@@ -147,7 +147,12 @@ public class Flight {
             }
         }
     }
-    
+    /**
+     * 
+     * @param n numero del posto a sedere del quale vogliamo sapere se è occupato
+     * @return <code>true</code> se il numero del posto a sedere è occupato nel volo su cui è richiamato il metodo,
+     *         altrimenti ritorna <code>false</code>
+     */
     public boolean seatIsOccuped(int n){
         for (Map.Entry<Seat, Boolean> val : seats.entrySet()) {
             if(val.getKey().getNumber()==n & val.getValue()==true){
@@ -166,7 +171,10 @@ public class Flight {
         }
         return 0;
     }
-    
+    /**
+     * 
+     * @return aereo sul quale viene effettuato il volo
+     */
     public Airplane getAirplane(){
         return airplane;
     }
