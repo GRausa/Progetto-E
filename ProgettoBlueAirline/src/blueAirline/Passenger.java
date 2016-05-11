@@ -44,7 +44,7 @@ public class Passenger {
      * @return rappresentazione scritta del passeggero 
      */
     public String toString(){
-        return "Card Identity: "+CI+"\nCognome: "+surname+"\nNome: "+name+"\nTicket: "+ticket.toString(); //errore se stampo ticket
+        return "Card Identity: "+CI+"\nCognome: "+surname+"\nNome: "+name+"\nTicket: "+ticket.toString()+"\n"; //errore se stampo ticket
     }
     /**
      * 

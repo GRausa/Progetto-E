@@ -364,7 +364,7 @@ public class Company {
     
     public void printFileReservation() throws IOException{
         String s="";
-        PrintWriter f = new PrintWriter(new FileWriter("file/ReservationS.txt"));
+        PrintWriter f = new PrintWriter(new FileWriter("file/Reservations.txt"));
         for(Reservation r : reservations){
             s+=r.getFlight().getCode()+"\t"+r.getCustomer().getEmail()+"\t"+r.getCustomer().getNumber()+"\n";
             ArrayList<Passenger> ar = r.getPassenger();  
