@@ -160,7 +160,9 @@ public final class ControllerTxt {
                     
                     //verifica posto
                     int j=1,seat=0;
-                    while(j!=0){
+                    while(j!=0){                        
+                        System.out.println("Da 0 a "+flight.getAirplane().getNumberFirstClass()+": posti in prima classe (costo supplementare "+Flight.pricePrimeClass+" euro)");
+                        System.out.println("Da "+(flight.getAirplane().getNumberFirstClass()+1)+" a "+flight.getAirplane().getNumSeat()+": posti seconda classe.");
                         System.out.println("Inserisci scelta posto: ");
                         seat=input.nextInt();
                         if(seat>flight.getAirplane().getNumSeat()){
@@ -183,7 +185,7 @@ public final class ControllerTxt {
                             }
                         }
                     }
-                    System.out.println("Posto "+seat+"assegnato.");   
+                    System.out.println("Posto "+seat+" assegnato.");   
                     System.out.println("-> OPZIONI DI VIAGGIO AGGIUNTIVE <-");  
                     
                     //MEAL
