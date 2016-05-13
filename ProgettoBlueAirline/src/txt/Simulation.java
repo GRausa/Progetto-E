@@ -34,7 +34,9 @@ public class Simulation {
         c.downloadHoldLuggages("file/HoldLuggages.txt");
         System.out.println(c.toStringHoldLuggages());
         c.downloadInsurances("file/Insurances.txt");
-        System.out.println(c.toStringInsurances());        
+        System.out.println(c.toStringInsurances());     
+        c.downloadAdministrators("file/Administrators.txt");
+        System.out.println(c.toStringAdministrator());
         
         //INTERFACCIA TESTUALE
         c.importFileReservation("file/Reservations.txt");

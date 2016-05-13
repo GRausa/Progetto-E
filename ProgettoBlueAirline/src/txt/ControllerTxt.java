@@ -40,10 +40,11 @@ public final class ControllerTxt {
         while (i != 0) {
             String s = "";
             s += "\nBENVENUTO IN: " + c.getName() + "\n";
-            s += "1) Ricerca se è prensente un volo in una data\n";
-            s += "2) Ricerca se sono presenti dei posti in un volo\n";
+            s += "1) Ricerca un volo in una data\n";
+            s += "2) Ricerca dei posti in un volo\n";
             s += "3) Effettua una prenotazione\n";
             s += "4) Ricerca una prenotazione\n";
+            s += "5) Login Administrator\n";
             s += "0) Esci\n";
             System.out.println(s + "\nScelta: ");
             i = input.nextInt();
@@ -61,6 +62,9 @@ public final class ControllerTxt {
                     break;
                 case 4:
                     ControllerTxt.searchTxtReservation(c);
+                    break;
+                case 5:
+                    ControllerTxt.loginAdministrator(c);
                     break;
                 default: 
                     System.out.println("Errore scelta.");
@@ -269,7 +273,7 @@ public final class ControllerTxt {
     }
    
    
-   public static void searchTxtReservation(Company c) {
+    public static void searchTxtReservation(Company c) {
         System.out.println("AREA 4: RICERCA DI UNA PRENOTAZIONE. ");
         Scanner input = new Scanner(System.in);
         System.out.println("Inserisci codice volo: ");
@@ -283,5 +287,22 @@ public final class ControllerTxt {
         }
         System.out.println("Clicca per continuare.");
         input.nextLine();
-   }   
+    }
+    
+    public static void loginAdministrator(Company c) {
+        System.out.println("AREA 5: LOGIN AMMINISTRATORE. ");
+        Scanner input = new Scanner(System.in);
+        System.out.println("Inserisci username: ");
+        String s1 = input.nextLine();
+        System.out.println("Inserisci password: ");
+        String s2 = input.nextLine();
+        if(c.searchAdministrator(s1, s2)!=null){
+            System.out.println("Loggato");
+        }
+        else{
+            System.out.println("Errore nell'inserimento, credenziali non trovate.");
+        }
+        System.out.println("Clicca per continuare.");
+        input.nextLine();
+    }
 }

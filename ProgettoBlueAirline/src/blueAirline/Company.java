@@ -6,7 +6,6 @@
 package blueAirline;
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -34,6 +33,7 @@ public class Company {
     private ArrayList<Insurance> insurances;
     private String nameCompany;
     private ArrayList<Reservation> reservations;
+    private ArrayList<Administrator> administrators;
     
     public Company(String nameCompany){
         this.nameCompany=nameCompany;
@@ -46,6 +46,7 @@ public class Company {
         this.meals=new ArrayList<>();
         this.holdLuggages=new ArrayList<>();
         this.insurances=new ArrayList<>();
+        this.administrators=new ArrayList<>();
     }
     
     public String getName(){
@@ -278,6 +279,25 @@ public class Company {
         }
         return s;
     }
+
+    
+    public void downloadAdministrators(String nameFile) throws FileNotFoundException, IOException{
+        BufferedReader in = new BufferedReader(new FileReader(nameFile));
+        String line;
+        while((line=in.readLine())!=null){
+            StringTokenizer st = new StringTokenizer(line,"\t");
+            administrators.add(new Administrator(st.nextToken(),st.nextToken()));
+        }
+        in.close();
+    }
+    
+    public String toStringAdministrator(){
+        String s="";
+        for(Administrator a : administrators){
+            s+=a.toString()+"\n";
+        }
+        return s;
+    }
     
     public Meal searchMeal(String codeMeal){
         for(Meal m:meals){
@@ -452,11 +472,14 @@ public class Company {
         }
         return s;
     }
-
     
-    
-    
-
-    
-   
+    public Administrator searchAdministrator(String username, String password){
+        for(Administrator a:administrators){
+            if(a.getUser().equals(username)&a.getPassword().equals(password)){
+                return a;
+            }
+        }
+        return null;
+    }
+     
 }
