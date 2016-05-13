@@ -40,6 +40,9 @@ public class Reservation {
             passengers.get(i).getTicket().addPrice(flight.getPrice());
             flight.addProgressiveTicket();
             flight.insertSeat(seatsPosition.get(i));
+            if(flight.getAirplane().getNumberFirstClass()>=seatsPosition.get(i)){ //incremento il prezzo se è in prima classe
+                passengers.get(i).getTicket().addPrice(Flight.pricePrimeClass);
+            }
         }
         this.customer=customer;
         this.checkIn=false;

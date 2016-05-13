@@ -20,6 +20,7 @@ import java.util.Set;
  */
 public class Flight {
     
+    public static final int pricePrimeClass = 10;
     private String code;
     private Airplane airplane;
     private int flightTime;

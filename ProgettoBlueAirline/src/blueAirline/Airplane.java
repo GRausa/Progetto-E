@@ -103,5 +103,12 @@ public class Airplane{
     public String toString(){
         return code+" "+name+" "+seats.length+"\n";
     }
+    /**
+     * 
+     * @return numero dei posti in prima classe
+     */
+    public int getNumberFirstClass() {
+        return numberFirstClass;
+    }
     
 }
