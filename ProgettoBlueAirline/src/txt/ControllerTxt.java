@@ -43,6 +43,7 @@ public final class ControllerTxt {
             s += "1) Ricerca se è prensente un volo in una data\n";
             s += "2) Ricerca se sono presenti dei posti in un volo\n";
             s += "3) Effettua una prenotazione\n";
+            s += "4) Ricerca una prenotazione\n";
             s += "0) Esci\n";
             System.out.println(s + "\nScelta: ");
             i = input.nextInt();
@@ -57,6 +58,9 @@ public final class ControllerTxt {
                     break;
                 case 3:
                     ControllerTxt.Order(c);
+                    break;
+                case 4:
+                    ControllerTxt.searchTxtReservation(c);
                     break;
                 default: 
                     System.out.println("Errore scelta.");
@@ -258,9 +262,26 @@ public final class ControllerTxt {
             }
         } 
         else{
-            System.out.println("Errore nell'inserimento, codice non trovato.");
+            System.out.println("Errore nell'inserimento, codice volo non trovato.");
         }
         System.out.println("Clicca per continuare.");
         input.nextLine();
     }
+   
+   
+   public static void searchTxtReservation(Company c) {
+        System.out.println("AREA 4: RICERCA DI UNA PRENOTAZIONE. ");
+        Scanner input = new Scanner(System.in);
+        System.out.println("Inserisci codice volo: ");
+        String s1 = input.nextLine();
+        Reservation r = c.searchReservation(s1);
+        if(r!=null){
+            System.out.println(r);
+        }
+        else{
+            System.out.println("Errore nell'inserimento, codice prenotazione non trovato.");
+        }
+        System.out.println("Clicca per continuare.");
+        input.nextLine();
+   }   
 }

@@ -40,7 +40,6 @@ public class Simulation {
         c.importFileReservation("file/Reservations.txt");
         ControllerTxt.start(c);        
         c.printFileReservation();
-        System.out.println(c.toStringReservation());
         
         //INTERFACCIA GRAFICA
         //da definire
