@@ -356,10 +356,24 @@ public class Company {
     }
 
     public Reservation makeReservation(Flight flight,ArrayList<Passenger> passengers, ArrayList<Integer> seatsPosition, Customer customer) {
-        Reservation res=new Reservation(flight,passengers,seatsPosition, flight.getCode(), customer);
-        flight.addProgressiveReservation();
-        reservations.add(res);
-        return res;
+        Flight f = flight;
+        boolean k=false;
+        //VERIFICA PRENOTAZIONI IN CONTEMPORANEA
+        for(Integer i : seatsPosition){
+            if(flight.seatIsOccuped(i)){
+                k=true;
+                break;
+            }                
+        }
+        if(!k){
+            Reservation res=new Reservation(flight,passengers,seatsPosition, flight.getCode(), customer);
+            flight.addProgressiveReservation();
+            reservations.add(res);
+            return res;
+        }
+        else{
+           return null; 
+        }        
     }
     
     public void printFileReservation() throws IOException{

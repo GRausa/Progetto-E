@@ -22,6 +22,7 @@ import blueAirline.HoldLuggage;
 import blueAirline.Insurance;
 import blueAirline.Meal;
 import blueAirline.Passenger;
+import blueAirline.Reservation;
 import blueAirline.Route;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
@@ -244,11 +245,17 @@ public final class ControllerTxt {
                         }
                     }                    
                 }
-                String code=(c.makeReservation(flight, listPassengers, listSeats, customer)).getPrenotationCode();
-                System.out.println("Prenotazione effettuata.");
-                System.out.println(c.searchReservation(code).toString());
+                Reservation r = c.makeReservation(flight, listPassengers, listSeats, customer);
+                if(r!=null){
+                    System.out.println("Prenotazione effettuata. Codice prenotazione: "+r.getPrenotationCode());
+                    System.out.println(r);
+                }
+                else{
+                    System.out.println("Errore nella prenotazione, i posti sono stati assegnati a qualcun'altro."); 
+                }
             }
-        } else {
+        } 
+        else{
             System.out.println("Errore nell'inserimento, codice non trovato.");
         }
         System.out.println("Clicca per continuare.");
