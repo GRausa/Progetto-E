@@ -34,7 +34,10 @@ public class Company {
     private String nameCompany;
     private ArrayList<Reservation> reservations;
     private ArrayList<Administrator> administrators;
-    
+    /**
+     * Istanzia un nuova compagnia aerea, creando tutte le liste che verranno poi riempite di tutte le informazioni necessarie.
+     * @param nameCompany 
+     */
     public Company(String nameCompany){
         this.nameCompany=nameCompany;
         this.airplanes=new ArrayList<>();
@@ -48,11 +51,20 @@ public class Company {
         this.insurances=new ArrayList<>();
         this.administrators=new ArrayList<>();
     }
-    
+    /**
+     * 
+     * @return nome della compagnia
+     */
     public String getName(){
         return nameCompany;
     }
-    
+    /**
+     * Scarica le informazioni da file sugli aerei e le inserisce in una lista.
+     * 
+     * @param nameFile nome del file contentente le informazioni sugli aerei
+     * @throws FileNotFoundException
+     * @throws IOException 
+     */
     public void downloadAirplanes(String nameFile) throws FileNotFoundException, IOException{
         BufferedReader in = new BufferedReader(new FileReader(nameFile));
         String line;
@@ -66,7 +78,10 @@ public class Company {
         }
         in.close();
     }
-    
+    /**
+     * 
+     * @return rappresentazione scritta degli aerei presenti nel database 
+     */
     public String toStringAirplanes(){
         String s="";
         for(Airplane airplane : airplanes){
@@ -74,7 +89,13 @@ public class Company {
         }
         return s;
     }
-    
+    /**
+     * Scarica le informazioni da file sulle città e le inserisce in una lista.
+     * 
+     * @param nameFile nome del file contentente le informazioni sulle città
+     * @throws FileNotFoundException
+     * @throws IOException 
+     */
     public void downloadCitys(String nameFile) throws FileNotFoundException, IOException{
         BufferedReader in = new BufferedReader(new FileReader(nameFile));
         String line;
@@ -85,7 +106,10 @@ public class Company {
         }
         in.close();
     }
-    
+    /**
+     * 
+     * @return rappresentazione scritta delle città presenti nel database
+     */
     public String toStringCitys(){
         String s="";
         for(City city : cities){
@@ -93,7 +117,13 @@ public class Company {
         }
         return s;
     }
-    
+    /**
+     * Scarica le informazioni da file sugli aeoporti e le inserisce in una lista.
+     * 
+     * @param nameFile nome del file contentente le informazioni sulle città
+     * @throws FileNotFoundException
+     * @throws IOException 
+     */
     public void downloadAirports(String nameFile) throws FileNotFoundException, IOException{
         BufferedReader in = new BufferedReader(new FileReader(nameFile));
         String line;
@@ -112,7 +142,10 @@ public class Company {
         }
         in.close();
     }
-    
+    /**
+     * 
+     * @return rappresentazione scritta degli aeroporti
+     */
     public String toStringAirports(){
         String s="";
         for(Airport airport : airports){
@@ -120,7 +153,13 @@ public class Company {
         }
         return s;
     }
-    
+    /**
+     * Scarica le informazioni da file e le inserisce in una lista.
+     * 
+     * @param nameFile nome del file contenente le informazioni sulle rotte
+     * @throws FileNotFoundException
+     * @throws IOException 
+     */
     public void downloadRoutes(String nameFile) throws FileNotFoundException, IOException{
         BufferedReader in = new BufferedReader(new FileReader(nameFile));
         String line;
@@ -142,7 +181,10 @@ public class Company {
         }
         in.close();
     }
-    
+    /**
+     * 
+     * @return rappresentazione scritta delle rotte
+     */
     public String toStringRoutes(){
         String s="";
         for(Route r : routes){
@@ -150,7 +192,15 @@ public class Company {
         }
         return s;
     }
-    
+    /**
+     * 
+     * Scarica le informazioni da file sui voli e le inserisce in una lista.
+     * 
+     * @param nameFile nome del file contentente le informazioni sui voli
+     * @throws FileNotFoundException
+     * @throws IOException
+     * @throws ParseException 
+     */
     public void downloadFlight(String nameFile) throws FileNotFoundException, IOException, ParseException{
         BufferedReader in = new BufferedReader(new FileReader(nameFile));
         String line;
@@ -201,7 +251,10 @@ public class Company {
         }
         in.close();
     }
-    
+    /**
+     * 
+     * @return rappresentazione scritta dei voli 
+     */
     public String toStringFlights(){
         String s="";
         for(Flight f : flights){
@@ -209,7 +262,11 @@ public class Company {
         }
         return s;
     }
-    
+    /**
+     * 
+     * @param nameCity nome della città di cui vogliamo la descrizione
+     * @return rappresentazione scritta degli aeroporti presenti in una determinata città
+     */
     public String toStringCityAirports(String nameCity){
         String s="";
         for(City c:cities){
@@ -222,7 +279,13 @@ public class Company {
         }
         return s;
     }
-    
+    /**
+     * Scarica le informazioni da file sui pasti e le inserisce in una lista.
+     * 
+     * @param nameFile nome del file contentente le informazioni sui pasti
+     * @throws FileNotFoundException
+     * @throws IOException 
+     */
     public void downloadMeals(String nameFile) throws FileNotFoundException, IOException{
         BufferedReader in = new BufferedReader(new FileReader(nameFile));
         String line;
@@ -233,7 +296,10 @@ public class Company {
             }
         in.close();
     }
-    
+    /**
+     * 
+     * @return rappresentazione scritta dei pasti
+     */
     public String toStringMeals(){
         String s="";
         for(Meal m: meals){
@@ -241,7 +307,13 @@ public class Company {
         }
         return s;
     }
-    
+    /**
+     * Scarica le informazioni da file sui bagagli da stiva e le inserisce in una lista.
+     * 
+     * @param nameFile nome del file contentente le informazioni sui bagagli da stiva
+     * @throws FileNotFoundException
+     * @throws IOException 
+     */
     public void downloadHoldLuggages(String nameFile) throws FileNotFoundException, IOException{
         BufferedReader in = new BufferedReader(new FileReader(nameFile));
         String line;
@@ -252,7 +324,10 @@ public class Company {
             }
         in.close();
     }
-    
+    /**
+     * 
+     * @return rappresentazione scritta dei possibili "slot" per i bagagli a stiva che il passeggero può acquistare
+     */
     public String toStringHoldLuggages(){
         String s="";
         for(HoldLuggage h: holdLuggages){
@@ -260,7 +335,13 @@ public class Company {
         }
         return s;
     }
-    
+    /**
+     * Scarica le informazioni da file sulle possibili assicurazioni che il passeggero può acquistare.
+     * 
+     * @param nameFile nome del file contenente le informazioni sulle assicurazioni
+     * @throws FileNotFoundException
+     * @throws IOException 
+     */
     public void downloadInsurances(String nameFile) throws FileNotFoundException, IOException{
         BufferedReader in = new BufferedReader(new FileReader(nameFile));
         String line;
@@ -271,7 +352,10 @@ public class Company {
             }
         in.close();
     }
-    
+    /**
+     * 
+     * @return rapprensentazione scritta delle assicurazioni che il passeggero può acquistare
+     */
     public String toStringInsurances(){
         String s="";
         for(Insurance ins: insurances){
@@ -280,7 +364,13 @@ public class Company {
         return s;
     }
 
-    
+    /**
+     * Scarica le informazioni da file sugli amministratori dell'applicazione della compagnia.
+     * 
+     * @param nameFile nome del file contenente le informazioni sugli amministratori
+     * @throws FileNotFoundException
+     * @throws IOException 
+     */
     public void downloadAdministrators(String nameFile) throws FileNotFoundException, IOException{
         BufferedReader in = new BufferedReader(new FileReader(nameFile));
         String line;
@@ -290,7 +380,10 @@ public class Company {
         }
         in.close();
     }
-    
+    /**
+     * 
+     * @return rappresentazione scritta degli amministratori presenti nel database
+     */
     public String toStringAdministrator(){
         String s="";
         for(Administrator a : administrators){
@@ -298,7 +391,12 @@ public class Company {
         }
         return s;
     }
-    
+    /**
+     * Ricerca di un pasto a partire dal suo codice.
+     * 
+     * @param codeMeal codice del pasto
+     * @return pasto se presente nel databse o <code>null</code> se non è presente
+     */
     public Meal searchMeal(String codeMeal){
         for(Meal m:meals){
             if(m.getCode().equals(codeMeal)){
@@ -307,7 +405,12 @@ public class Company {
         }
         return null;
     }    
-    
+    /**
+     * Ricerca di uno "slot" per il bagaglio da stiva a partire dal suo codice.
+     * 
+     * @param codeHoldLuggage codice dello "slot" del bagaglio da stiva
+     * @return tipo di bagaglio se presente nel database o <code>null<code> se non è presente
+     */
     public HoldLuggage searchHoldLuggage(String codeHoldLuggage){
         for(HoldLuggage h:holdLuggages){
             if(h.getCode().equals(codeHoldLuggage)){
@@ -316,7 +419,12 @@ public class Company {
         }
         return null;
     } 
-    
+    /**
+     * Ricerca di un'assicurazione a partire dal suo codice.
+     * 
+     * @param codeInsurance codice dell'assicurazione
+     * @return assicurazione se presente nel database o <code>null</code> se non è presente
+     */
     public Insurance searchInsurance(String codeInsurance){
         for(Insurance ins:insurances){
             if(ins.getCode().equals(codeInsurance)){
@@ -325,7 +433,12 @@ public class Company {
         }
         return null;
     }    
-    
+    /**
+     * Ricerca di un volo a partire dal suo codice.
+     * 
+     * @param cod codice del volo
+     * @return volo se presente nel database o <code>null</code> se non è presente
+     */
     public Flight searchFlights(String cod) {
         for(Flight f:flights){
             if(f.getCode().equals(cod)){
@@ -335,7 +448,13 @@ public class Company {
         return null;    
     }
     
-    
+    /**
+     * Ricerca di un volo presente in una determinata data e con una determinata.
+     * 
+     * @param route rotta del volo
+     * @param data data del volo
+     * @return lista dei voli compatibili con le scelte effettuate.
+     */
     public ArrayList<Flight> searchFlights(Route route,GregorianCalendar data){
         ArrayList<Flight> ritorno=new ArrayList<>(2);
         for(Flight ciclo:flights){
@@ -346,7 +465,12 @@ public class Company {
         }
         return ritorno;
     }
-    
+    /**
+     * Ricerca di una rotta.
+     * @param stringDeparture luogo di partenza
+     * @param stringDestination luogo di arrivo
+     * @return rotta se presente nel database o <code>null</code> se non è presente
+     */
     public Route searchRoute(String stringDeparture, String stringDestination){
         for(Route rou : routes){
             if(rou.getDeparture().getCity().getName().equals(stringDeparture) & rou.getDestination().getCity().getName().equals(stringDestination)){
@@ -355,7 +479,12 @@ public class Company {
         }
         return null;
     }
-    
+    /**
+     * Ricerca di una prenotazione a partire dal suo codice identificativo.
+     * 
+     * @param reservation codice della prenotazione
+     * @return prenotazione se presente nel database o <code>null</code> se non è presente
+     */
     public Reservation searchReservation(String reservation){
         for(Reservation r:reservations){
             if(r.getPrenotationCode().equals(reservation)){
@@ -364,7 +493,11 @@ public class Company {
         }
         return null;
     }
-    
+    /**
+     * Ricerca delle coppie di aeroporti che hanno un collegamente (rotta) a partire da un aeroporto di partenza.
+     * @param departure aeroporto di partenza della rotta
+     * @return list di aeroporti che hanno un collegamento con l'aeroporto di partenza
+     */
     public ArrayList<Airport> linkedAirport(Airport departure){
         ArrayList<Airport> airports=new ArrayList<>(5);
         for(Route rotta:routes){
@@ -374,7 +507,16 @@ public class Company {
         }        
         return airports;
     }
-
+    /**
+     * Crea una nuova prenotazione e la aggiunge nel database.
+     * 
+     * @param flight volo su cui effettuare la prenotazione
+     * @param passengers passeggeri presenti nella prenotazione
+     * @param seatsPosition posizione dei posti a sedere da prenotare
+     * @param customer cliente che effettua la prenotazione
+     * @return prenotazione del volo se andata a buon fine, altrimenti <code>null</code>
+     * 
+     */
     public Reservation makeReservation(Flight flight,ArrayList<Passenger> passengers, ArrayList<Integer> seatsPosition, Customer customer) {
         Flight f = flight;
         boolean k=false;
@@ -395,7 +537,11 @@ public class Company {
            return null; 
         }        
     }
-    
+    /**
+     * Stampa le prenotazioni presenti nel database nel file "Reservations.txt".
+     * 
+     * @throws IOException 
+     */
     public void printFileReservation() throws IOException{
         String s="";
         PrintWriter f = new PrintWriter(new FileWriter("file/Reservations.txt"));
@@ -410,7 +556,13 @@ public class Company {
         }       
         f.close();
     }
-    
+    /**
+     * Importa le prenotazioni da un file.
+     * 
+     * @param nameFile nome del file con le varie prenotazioni
+     * @throws FileNotFoundException
+     * @throws IOException 
+     */
     public void importFileReservation(String nameFile) throws FileNotFoundException, IOException{
         BufferedReader in = new BufferedReader(new FileReader(nameFile));
         String line;
@@ -453,7 +605,12 @@ public class Company {
         }
         in.close();
     }
-    
+    /**
+     * Calendario di volo di una determinata rotta.
+     * 
+     * @param route rotta di cui vogliamo sapere i voli
+     * @return lista di voli che hanno una determinata rotta
+     */
     public ArrayList<Flight> calendarFlight(Route route){
         ArrayList<Flight> flight=new ArrayList<>(2);
         for(Flight f:flights){
@@ -464,7 +621,10 @@ public class Company {
         }
         return flight;
     }
-    
+    /**
+     * 
+     * @return rappresentazione scritta delle prenotazioni presenti nel database
+     */
     public String toStringReservation(){
         String s="";
         for(Reservation r: reservations){
@@ -472,7 +632,13 @@ public class Company {
         }
         return s;
     }
-    
+    /**
+     * Ricerca di un amministratore.
+     * 
+     * @param username username dell'amministratore
+     * @param password password dell'amministratore
+     * @return amministratore richiesto se presente nel database o <code>null</code> se non è presente
+     */
     public Administrator searchAdministrator(String username, String password){
         for(Administrator a:administrators){
             if(a.getUser().equals(username)&a.getPassword().equals(password)){
