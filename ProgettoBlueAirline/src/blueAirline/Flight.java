@@ -138,8 +138,9 @@ public class Flight {
         return flightTime;
     }
     /**
+     * Riserva un posto a sedere.
      * 
-     * @param n 
+     * @param n numero del posto a sedere da prenotare
      */
     public void insertSeat(int n){
         for (Map.Entry<Seat, Boolean> val : seats.entrySet()) {

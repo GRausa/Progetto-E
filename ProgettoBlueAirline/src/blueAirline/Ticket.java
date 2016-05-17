@@ -64,11 +64,18 @@ public class Ticket {
     public void addPrice(double p){
         this.price+=p;
     }
-
+    /**
+     * 
+     * @return posizione del posto a sedere relativo al biglietto
+     */
     public int getnPosition() {
         return nPosition;
     }
-
+    /**
+     * Cambia la posizione del posto a sedere.
+     * 
+     * @param nPosition posizione del nuovo posto
+     */
     public void setnPosition(int nPosition) {
         this.nPosition = nPosition;
     }    
