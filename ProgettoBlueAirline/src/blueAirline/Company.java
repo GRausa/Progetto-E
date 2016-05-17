@@ -471,13 +471,31 @@ public class Company {
      * @param stringDestination luogo di arrivo
      * @return rotta se presente nel database o <code>null</code> se non è presente
      */
-    public Route searchRoute(String stringDeparture, String stringDestination){
+    public ArrayList<Route> searchRouteForCity(String stringDeparture, String stringDestination){
+        ArrayList<Route> arrayRoutes = new ArrayList<>();
         for(Route rou : routes){
-            if(rou.getDeparture().getCity().getName().equals(stringDeparture) & rou.getDestination().getCity().getName().equals(stringDestination)){
-                return rou;
+            if(rou.getDeparture().getCity().getName().equalsIgnoreCase(stringDeparture) & rou.getDestination().getCity().getName().equalsIgnoreCase(stringDestination)){
+                arrayRoutes.add(rou);
             }
-        }
-        return null;
+        }        
+        return arrayRoutes;
+    }
+    
+    public ArrayList<Route> searchRouteForAirport(String stringDeparture, String stringDestination){
+        ArrayList<Route> arrayRoutes = new ArrayList<>();
+        for(Route rou : routes){
+            if(rou.getDeparture().getName().equalsIgnoreCase(stringDeparture) && rou.getDestination().getName().equalsIgnoreCase(stringDestination)){
+                arrayRoutes.add(rou);
+            }
+        }        
+        return arrayRoutes;
+    }
+    
+    public ArrayList<Route> searchRouteForCityAndAirport(String stringDeparture, String stringDestination){
+        ArrayList<Route> arrayRoutes = new ArrayList<>();
+        arrayRoutes.addAll(this.searchRouteForCity(stringDeparture, stringDestination));
+        arrayRoutes.addAll(this.searchRouteForAirport(stringDeparture, stringDestination));
+        return arrayRoutes;
     }
     /**
      * Ricerca di una prenotazione a partire dal suo codice identificativo.
