@@ -5,13 +5,8 @@
  */
 package play;
 
-import administrators.ControllerAdministrator;
-import clients.ControllerClient;
 import controllertxt.ControllerTxt;
-import objects.City;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import objects.Airplane;
 
 /**
  *
@@ -22,5 +17,7 @@ public class Start {
         
         ControllerTxt C = new ControllerTxt();
         C.searchRoutes();
+        System.out.println();
+        C.searchFlights(); //test con: Roma	New York	2016-05-24
     }    
 }

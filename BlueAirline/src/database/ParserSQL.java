@@ -5,11 +5,12 @@
  */
 package database;
 
-import objects.City;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import objects.Airplane;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import objects.Flight;
 import objects.Route;
 
 /**
@@ -18,39 +19,51 @@ import objects.Route;
  */
 public class ParserSQL {
 
-    public ArrayList<City> parseCitys(ResultSet resultQuery) throws SQLException {
-        ArrayList<City> citys = new ArrayList<>();
-        while (resultQuery.next()) {
-            String nome = resultQuery.getString("NOME");
-            String stato = resultQuery.getString("STATO");
-            citys.add(new City(nome,stato));
-        }
-        return citys;
-    }
-    
-    public ArrayList<Airplane> parseAirplanes(ResultSet resultQuery) throws SQLException {
-        ArrayList<Airplane> airplanes = new ArrayList<>();
-        while (resultQuery.next()) {
-            String codAirplane = resultQuery.getString("COD_AEREO");
-            String name = resultQuery.getString("NOME");
-            int seats = resultQuery.getInt("POSTI");
-            int seatsFirstClass = resultQuery.getInt("POSTI1CLASSE");
-            airplanes.add(new Airplane(codAirplane,name,seats,seatsFirstClass));
-        }
-        return airplanes;
-    }
-    
     public ArrayList<Route> parseRoutes(ResultSet resultQuery) throws SQLException{
         ArrayList<Route> routes = new ArrayList<>();
         while (resultQuery.next()) {
-            String deparutreAirport = resultQuery.getString("AEROPORTOPARTENZA");
+            String departureAirport = resultQuery.getString("AEROPORTOPARTENZA");
             String destinationAirport = resultQuery.getString("AEROPORTOARRIVO");
             String departureCity = resultQuery.getString("CITTAPARTENZA");
             String destinationCity = resultQuery.getString("CITTAARRIVO");
-            routes.add(new Route(deparutreAirport, destinationAirport, departureCity, destinationCity));
+            routes.add(new Route(departureAirport, destinationAirport, departureCity, destinationCity));
         }
-        return routes;
-        
+        return routes;        
     }
-
+    
+    public ArrayList<Flight> parseFlights(ResultSet resultQuery) throws SQLException{
+        ArrayList<Flight> flights = new ArrayList<>();
+        while (resultQuery.next()) {
+            String departureCity = resultQuery.getString("CITTAPARTENZA");
+            String departureAirport = resultQuery.getString("AEROPORTOPARTENZA");
+            String destinationCity = resultQuery.getString("CITTAARRIVO");
+            String destinationAirport = resultQuery.getString("AEROPORTOARRIVO");
+            String departureDate  = resultQuery.getString("DATAPARTENZA"); 
+            String departureTime = resultQuery.getString("ORAPARTENZA");
+            String destinationDate  = resultQuery.getString("DATAARRIVO"); 
+            String destinationTime = resultQuery.getString("ORAARRIVO");
+            double price = resultQuery.getDouble("PREZZO");
+            
+            Route r = new Route(departureAirport, destinationAirport, departureCity, destinationCity);
+            Calendar departureCalendar = ParserSQL.returnCalendar(departureDate, departureTime);
+            Calendar destinationCalendar = ParserSQL.returnCalendar(destinationDate, destinationTime);
+            
+            flights.add(new Flight(r,departureCalendar,destinationCalendar,price));
+        }
+        return flights;        
+    }
+    
+    //METODI GENERICI
+    
+    public static Calendar returnCalendar(String stringDate, String stringTime){
+        String[] vetDate = stringDate.split("-");
+        int year = Integer.parseInt(vetDate[0]);
+        int month = Integer.parseInt(vetDate[1]);
+        int day = Integer.parseInt(vetDate[2]);
+        String[] vetTime = stringTime.split(":");
+        int hour = Integer.parseInt(vetTime[0]);
+        int minute = Integer.parseInt(vetTime[1]);
+        GregorianCalendar date = new GregorianCalendar(year,month,day,hour,minute);
+        return date;
+    }
 }

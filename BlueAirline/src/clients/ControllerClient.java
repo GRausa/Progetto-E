@@ -5,10 +5,10 @@
  */
 package clients;
 
-import objects.City;
 import database.AdapterSQL;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import objects.Flight;
 import objects.Route;
 
 /**
@@ -16,19 +16,19 @@ import objects.Route;
  * @author Giovanni
  */
 public class ControllerClient {
-    
+
     private AdapterSQL adapter;
 
     public ControllerClient() {
         adapter = new AdapterSQL();
     }
-    
-    public ArrayList<City> searchCitys() throws SQLException {
-        return adapter.searchCitys();       
-    }
-    
-    public ArrayList<Route> searchRoutes() throws SQLException{
+
+    public ArrayList<Route> searchRoutes() throws SQLException {
         return adapter.searchRoutes();
     }
-    
+
+    public ArrayList<Flight> searchFlights(String departure, String destination, String date) throws SQLException {
+        return adapter.searchFlights(departure, destination, date);
+    }
+
 }

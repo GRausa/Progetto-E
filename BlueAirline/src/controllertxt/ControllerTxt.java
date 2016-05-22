@@ -9,6 +9,8 @@ import administrators.ControllerAdministrator;
 import clients.ControllerClient;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Scanner;
+import objects.Flight;
 import objects.Route;
 
 /**
@@ -28,6 +30,17 @@ public class ControllerTxt {
         ArrayList<Route> routes = CC.searchRoutes();
         for(Route r:routes){
             System.out.println(r);
+        }
+    }
+    
+    public void searchFlights() throws SQLException{
+        Scanner input = new Scanner(System.in);
+        System.out.println("Ricerca volo per citta': (Partenza /tab/ Arrivo /tab/ Data(AAAA-MM-GG))");
+        String s = input.nextLine();
+        String[] vet = s.split("\t");     
+        ArrayList<Flight> flights = CC.searchFlights(vet[0],vet[1],vet[2]);    
+        for(Flight f:flights){
+            System.out.println(f);
         }
     }
     

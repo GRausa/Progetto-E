@@ -5,11 +5,10 @@
  */
 package database;
 
-import objects.City;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import objects.Airplane;
+import objects.Flight;
 import objects.Route;
 
 /**
@@ -25,25 +24,7 @@ public class AdapterSQL {
         SQL = new ConnectionSQL();
         SQL.startConnection();
         parser = new ParserSQL();
-    }
-    
-    public ArrayList<City> searchCitys() throws SQLException {
-        ArrayList<City> citys;
-        String query = "SELECT NOME, STATO FROM Citta";
-        ResultSet resultQuery = SQL.queryRead(query);
-        citys = parser.parseCitys(resultQuery);
-        resultQuery.close();
-        return citys;
-    }   
-    
-    public ArrayList<Airplane> searchAirplanes() throws SQLException {
-        ArrayList<Airplane> airplanes;
-        String query = "SELECT COD_AEREO,POSTI,POSTI1CLASSE,NOME FROM Aereo";
-        ResultSet resultQuery = SQL.queryRead(query);
-        airplanes = parser.parseAirplanes(resultQuery);
-        resultQuery.close();
-        return airplanes;
-    }   
+    } 
     
     public ArrayList<Route> searchRoutes() throws SQLException{
         ArrayList<Route> routes;
@@ -57,5 +38,16 @@ public class AdapterSQL {
         return routes;        
     }
     
+    public ArrayList<Flight> searchFlights(String departure, String destination, String date) throws SQLException{
+        ArrayList<Flight> flights;
+        String query=
+        "SELECT A1.CITTA \"CITTAPARTENZA\", A1.NOME \"AEROPORTOPARTENZA\", A2.CITTA \"CITTAARRIVO\", A2.NOME \"AEROPORTOARRIVO\", V.DATAPARTENZA, V.ORAPARTENZA, V.DATAARRIVO, V.ORAARRIVO, V.PREZZO "+
+        "FROM Rotta R, Aeroporto A1, Aeroporto A2, Volo V "+
+        "WHERE R.AEROPORTOPARTENZA = A1.COD_AEROPORTO AND R.AEROPORTOARRIVO=A2.COD_AEROPORTO AND R.COD_ROTTA=V.ROTTA AND A1.CITTA='"+departure+"' AND A2.CITTA ='"+destination+"' AND V.DATAPARTENZA = '"+date+"'";
+        ResultSet resultQuery = SQL.queryRead(query);
+        flights = parser.parseFlights(resultQuery);
+        resultQuery.close();
+        return flights;  
+    }    
 }
 

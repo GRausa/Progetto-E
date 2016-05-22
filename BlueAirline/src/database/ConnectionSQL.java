@@ -28,7 +28,7 @@ public class ConnectionSQL {
         this.db = "sql7.freemysqlhosting.net";
         this.nameDb = "sql7120060";
         this.username = "sql7120060"; 
-        this.password = "";
+        this.password = "kb4Ua4Jkhk";
     }
 
     public ResultSet queryRead(String query) throws SQLException {
@@ -57,7 +57,7 @@ public class ConnectionSQL {
         }
     }
 
-    public boolean chiudiConnessione() {
+    public boolean closeConnection() {
         try {
             statement.close();
             connection.close();

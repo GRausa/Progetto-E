@@ -8,7 +8,6 @@ package administrators;
 import database.AdapterSQL;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import objects.Airplane;
 
 /**
  *
@@ -21,11 +20,5 @@ public class ControllerAdministrator {
     public ControllerAdministrator() {
         adapter = new AdapterSQL();
     }
-    
-    public ArrayList<Airplane> searchAirplanes() throws SQLException{
-        return adapter.searchAirplanes();
-    }
-    
-   
-    
+
 }

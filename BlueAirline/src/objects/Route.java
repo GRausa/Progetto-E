@@ -11,7 +11,7 @@ package objects;
  */
 public class Route {
 
-    String deparutreAirport, destinationAirport, departureCity, destinationCity;
+    private String deparutreAirport, destinationAirport, departureCity, destinationCity;
 
     public Route(String deparutreAirport, String destinationAirport, String departureCity, String destinationCity) {
         this.deparutreAirport = deparutreAirport;
