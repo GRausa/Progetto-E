@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Scanner;
 import objects.Flight;
+import objects.Reservation;
 import objects.Route;
 
 /**
@@ -42,6 +43,15 @@ public class ControllerTxt {
         for(Flight f:flights){
             System.out.println(f);
         }
+    }
+    
+    
+    public void makeReservation() throws SQLException{
+        Scanner input = new Scanner(System.in);
+        System.out.println("Effettua prenotazione (CodiceVolo /tab/ email /tab/ numero)");
+        String s = input.nextLine();
+        String[] vet = s.split("\t");
+        System.out.println(CC.makeReservation(vet[0],vet[1],vet[2]));
     }
     
 }

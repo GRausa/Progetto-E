@@ -9,6 +9,7 @@ import database.AdapterSQL;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import objects.Flight;
+import objects.Reservation;
 import objects.Route;
 
 /**
@@ -30,5 +31,14 @@ public class ControllerClient {
     public ArrayList<Flight> searchFlights(String departure, String destination, String date) throws SQLException {
         return adapter.searchFlights(departure, destination, date);
     }
+    
+    public Reservation searchReservation(int code) throws SQLException{
+        return adapter.searchReservation(code);
+    }
+    
+    public boolean makeReservation(String codeFlight, String email, String number) throws SQLException{
+        return adapter.makeReservation(codeFlight, email, number);
+    }
+    
 
 }

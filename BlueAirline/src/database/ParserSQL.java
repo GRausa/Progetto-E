@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import objects.Flight;
+import objects.Reservation;
 import objects.Route;
 
 /**
@@ -34,6 +35,7 @@ public class ParserSQL {
     public ArrayList<Flight> parseFlights(ResultSet resultQuery) throws SQLException{
         ArrayList<Flight> flights = new ArrayList<>();
         while (resultQuery.next()) {
+            String code = resultQuery.getString("COD_VOLO");
             String departureCity = resultQuery.getString("CITTAPARTENZA");
             String departureAirport = resultQuery.getString("AEROPORTOPARTENZA");
             String destinationCity = resultQuery.getString("CITTAARRIVO");
@@ -48,9 +50,18 @@ public class ParserSQL {
             Calendar departureCalendar = ParserSQL.returnCalendar(departureDate, departureTime);
             Calendar destinationCalendar = ParserSQL.returnCalendar(destinationDate, destinationTime);
             
-            flights.add(new Flight(r,departureCalendar,destinationCalendar,price));
+            flights.add(new Flight(code,r,departureCalendar,destinationCalendar,price));
         }
         return flights;        
+    }
+    
+    public Reservation parseReservation(ResultSet resultQuery) throws SQLException{        
+        int code = resultQuery.getInt("COD_PRENOTAZIONE");
+        String codeFlight = resultQuery.getString("VOLO");
+        String email = resultQuery.getString("EMAIL");
+        String number = resultQuery.getString("NUMERO");
+        Reservation reservation = new Reservation(code,codeFlight,email,number);
+        return reservation;
     }
     
     //METODI GENERICI

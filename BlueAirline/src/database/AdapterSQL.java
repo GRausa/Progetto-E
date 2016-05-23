@@ -9,6 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import objects.Flight;
+import objects.Reservation;
 import objects.Route;
 
 /**
@@ -41,13 +42,33 @@ public class AdapterSQL {
     public ArrayList<Flight> searchFlights(String departure, String destination, String date) throws SQLException{
         ArrayList<Flight> flights;
         String query=
-        "SELECT A1.CITTA \"CITTAPARTENZA\", A1.NOME \"AEROPORTOPARTENZA\", A2.CITTA \"CITTAARRIVO\", A2.NOME \"AEROPORTOARRIVO\", V.DATAPARTENZA, V.ORAPARTENZA, V.DATAARRIVO, V.ORAARRIVO, V.PREZZO "+
+        "SELECT V.COD_VOLO, A1.CITTA \"CITTAPARTENZA\", A1.NOME \"AEROPORTOPARTENZA\", A2.CITTA \"CITTAARRIVO\", A2.NOME \"AEROPORTOARRIVO\", V.DATAPARTENZA, V.ORAPARTENZA, V.DATAARRIVO, V.ORAARRIVO, V.PREZZO "+
         "FROM Rotta R, Aeroporto A1, Aeroporto A2, Volo V "+
         "WHERE R.AEROPORTOPARTENZA = A1.COD_AEROPORTO AND R.AEROPORTOARRIVO=A2.COD_AEROPORTO AND R.COD_ROTTA=V.ROTTA AND A1.CITTA='"+departure+"' AND A2.CITTA ='"+destination+"' AND V.DATAPARTENZA = '"+date+"'";
         ResultSet resultQuery = SQL.queryRead(query);
         flights = parser.parseFlights(resultQuery);
         resultQuery.close();
         return flights;  
-    }    
+    }  
+    
+    public Reservation searchReservation(int code) throws SQLException{
+        Reservation reservation;
+        String query=
+        "SELECT COD_PRENOTAZIONE, VOLO, EMAIL, NUMERO\n" +
+        "FROM Prenotazione\n" +
+        "WHERE COD_PRENOTAZIONE = "+code;
+        ResultSet resultQuery = SQL.queryRead(query);
+        reservation = parser.parseReservation(resultQuery);
+        resultQuery.close();
+        return reservation;
+    }
+    
+    public boolean makeReservation(String codeFlight, String email, String number) throws SQLException{
+        Reservation reservation;
+        String query =
+        "INSERT INTO Prenotazione VALUES (NULL, '"+codeFlight+"', '"+email+"', '"+number+"')";
+        SQL.queryWrite(query);
+        return true;
+    }
 }
 

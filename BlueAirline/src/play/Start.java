@@ -18,6 +18,7 @@ public class Start {
         ControllerTxt C = new ControllerTxt();
         C.searchRoutes();
         System.out.println();
-        C.searchFlights(); //test con: Roma	New York	2016-05-24
+        //C.searchFlights(); //test con: Roma	New York	2016-05-24
+        C.makeReservation();//test con:  HDT254
     }    
 }
