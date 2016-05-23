@@ -19,7 +19,7 @@ import objects.Route;
  */
 public class ParserSQL {
 
-    public ArrayList<Route> parseRoutes(ResultSet resultQuery) throws SQLException{
+    public static ArrayList<Route> parseRoutes(ResultSet resultQuery) throws SQLException{
         ArrayList<Route> routes = new ArrayList<>();
         while (resultQuery.next()) {
             String departureAirport = resultQuery.getString("AEROPORTOPARTENZA");
@@ -31,7 +31,7 @@ public class ParserSQL {
         return routes;        
     }
     
-    public ArrayList<Flight> parseFlights(ResultSet resultQuery) throws SQLException{
+    public static ArrayList<Flight> parseFlights(ResultSet resultQuery) throws SQLException{
         ArrayList<Flight> flights = new ArrayList<>();
         while (resultQuery.next()) {
             String departureCity = resultQuery.getString("CITTAPARTENZA");
