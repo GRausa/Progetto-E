@@ -6,7 +6,6 @@
 package administrators;
 
 import database.AdapterSQL;
-import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**

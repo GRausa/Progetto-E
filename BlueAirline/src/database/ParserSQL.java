@@ -20,7 +20,7 @@ import objects.Route;
  */
 public class ParserSQL {
 
-    public ArrayList<Route> parseRoutes(ResultSet resultQuery) throws SQLException{
+    public static ArrayList<Route> parseRoutes(ResultSet resultQuery) throws SQLException{
         ArrayList<Route> routes = new ArrayList<>();
         while (resultQuery.next()) {
             String departureAirport = resultQuery.getString("AEROPORTOPARTENZA");
@@ -32,7 +32,7 @@ public class ParserSQL {
         return routes;        
     }
     
-    public ArrayList<Flight> parseFlights(ResultSet resultQuery) throws SQLException{
+    public static ArrayList<Flight> parseFlights(ResultSet resultQuery) throws SQLException{
         ArrayList<Flight> flights = new ArrayList<>();
         while (resultQuery.next()) {
             String code = resultQuery.getString("COD_VOLO");
@@ -55,7 +55,7 @@ public class ParserSQL {
         return flights;        
     }
     
-    public Reservation parseReservation(ResultSet resultQuery) throws SQLException{        
+    public static Reservation parseReservation(ResultSet resultQuery) throws SQLException{        
         int code = resultQuery.getInt("COD_PRENOTAZIONE");
         String codeFlight = resultQuery.getString("VOLO");
         String email = resultQuery.getString("EMAIL");
@@ -64,7 +64,7 @@ public class ParserSQL {
         return reservation;
     }
     
-    public int parseFunctionSQL(ResultSet resultQuery, String value) throws SQLException{ //SINGOLI MAX,MIN,COUNT...
+    public static int parseFunctionSQL(ResultSet resultQuery, String value) throws SQLException{ //SINGOLI MAX,MIN,COUNT...
         resultQuery.next();
         return resultQuery.getInt(value);
     }

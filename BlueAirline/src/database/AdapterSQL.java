@@ -19,12 +19,12 @@ import objects.Route;
 public class AdapterSQL {
     
     ConnectionSQL SQL;
-    ParserSQL parser;
+    
 
     public AdapterSQL() {
         SQL = new ConnectionSQL();
         SQL.startConnection();
-        parser = new ParserSQL();
+        
     } 
     
     public ArrayList<Route> searchRoutes() throws SQLException{
@@ -34,7 +34,7 @@ public class AdapterSQL {
         "FROM Rotta R, Aeroporto A1, Aeroporto A2\n" +
         "WHERE R.AEROPORTOPARTENZA = A1.COD_AEROPORTO AND R.AEROPORTOARRIVO=A2.COD_AEROPORTO";
         ResultSet resultQuery = SQL.queryRead(query);
-        routes = parser.parseRoutes(resultQuery);
+        routes = ParserSQL.parseRoutes(resultQuery);
         resultQuery.close();
         return routes;        
     }
@@ -46,7 +46,7 @@ public class AdapterSQL {
         "FROM Rotta R, Aeroporto A1, Aeroporto A2, Volo V "+
         "WHERE R.AEROPORTOPARTENZA = A1.COD_AEROPORTO AND R.AEROPORTOARRIVO=A2.COD_AEROPORTO AND R.COD_ROTTA=V.ROTTA AND A1.CITTA='"+departure+"' AND A2.CITTA ='"+destination+"' AND V.DATAPARTENZA = '"+date+"'";
         ResultSet resultQuery = SQL.queryRead(query);
-        flights = parser.parseFlights(resultQuery);
+        flights = ParserSQL.parseFlights(resultQuery);
         resultQuery.close();
         return flights;  
     }  
@@ -58,7 +58,7 @@ public class AdapterSQL {
         "FROM Prenotazione\n" +
         "WHERE COD_PRENOTAZIONE = "+code;
         ResultSet resultQuery = SQL.queryRead(query);
-        reservation = parser.parseReservation(resultQuery);
+        reservation = ParserSQL.parseReservation(resultQuery);
         resultQuery.close();
         return reservation;
     }
@@ -69,7 +69,7 @@ public class AdapterSQL {
         "SELECT MAX(COD_PRENOTAZIONE) AS MAXCOD\n" +
         "FROM Prenotazione";        
         ResultSet resultQuery = SQL.queryRead(query);
-        int code = parser.parseFunctionSQL(resultQuery, "MAXCOD");
+        int code = ParserSQL.parseFunctionSQL(resultQuery, "MAXCOD");
         code++;
         query="INSERT INTO Prenotazione VALUES ('"+code+"', '"+codeFlight+"', '"+email+"', '"+number+"')";
         SQL.queryWrite(query);
