@@ -51,7 +51,7 @@ public class ControllerTxt {
         System.out.println("Effettua prenotazione (CodiceVolo /tab/ email /tab/ numero)");
         String s = input.nextLine();
         String[] vet = s.split("\t");
-        System.out.println(CC.makeReservation(vet[0],vet[1],vet[2]));
+        System.out.println("Prenotazione effettuata, codice prenotazione: "+(CC.makeReservation(vet[0],vet[1],vet[2])).getCode());
     }
     
 }

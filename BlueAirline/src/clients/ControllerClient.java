@@ -36,7 +36,7 @@ public class ControllerClient {
         return adapter.searchReservation(code);
     }
     
-    public boolean makeReservation(String codeFlight, String email, String number) throws SQLException{
+    public Reservation makeReservation(String codeFlight, String email, String number) throws SQLException{
         return adapter.makeReservation(codeFlight, email, number);
     }
     

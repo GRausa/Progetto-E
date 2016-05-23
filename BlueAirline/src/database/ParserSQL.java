@@ -64,6 +64,11 @@ public class ParserSQL {
         return reservation;
     }
     
+    public int parseFunctionSQL(ResultSet resultQuery, String value) throws SQLException{ //SINGOLI MAX,MIN,COUNT...
+        resultQuery.next();
+        return resultQuery.getInt(value);
+    }
+    
     //METODI GENERICI
     
     public static Calendar returnCalendar(String stringDate, String stringTime){

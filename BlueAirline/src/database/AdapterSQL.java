@@ -63,12 +63,18 @@ public class AdapterSQL {
         return reservation;
     }
     
-    public boolean makeReservation(String codeFlight, String email, String number) throws SQLException{
+    public Reservation makeReservation(String codeFlight, String email, String number) throws SQLException{
         Reservation reservation;
         String query =
-        "INSERT INTO Prenotazione VALUES (NULL, '"+codeFlight+"', '"+email+"', '"+number+"')";
+        "SELECT MAX(COD_PRENOTAZIONE) AS MAXCOD\n" +
+        "FROM Prenotazione";        
+        ResultSet resultQuery = SQL.queryRead(query);
+        int code = parser.parseFunctionSQL(resultQuery, "MAXCOD");
+        code++;
+        query="INSERT INTO Prenotazione VALUES ('"+code+"', '"+codeFlight+"', '"+email+"', '"+number+"')";
         SQL.queryWrite(query);
-        return true;
+        reservation = new Reservation(code,codeFlight,email,number);
+        return reservation;
     }
 }
 
