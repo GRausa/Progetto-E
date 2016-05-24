@@ -71,23 +71,20 @@ public class AdapterSQL {
         "SELECT MAX(COD_PRENOTAZIONE) AS MAXCOD\n" +
         "FROM Prenotazione";        
         ResultSet resultQuery = SQL.queryRead(query);
-        int codeReservation = ParserSQL.parseFunctionSQL(resultQuery, "MAXCOD");
+        int codeReservation = (int)ParserSQL.parseFunctionSQL(resultQuery, "MAXCOD");
         codeReservation++;
         query="INSERT INTO Prenotazione VALUES ('"+codeReservation+"', '"+reservation.getCodeFlight()+"', '"+reservation.getEmail()+"', '"+reservation.getNumber()+"')";
         SQL.queryWrite(query);
         reservation.setCode(codeReservation);
-        
-        
         //aggiunta passeggeri
         int i=0;
         //flight
         for(TicketPassenger tp : passengers){
             i++;
             String codeTicket = reservation.getCodeFlight()+""+reservation.getCode()+""+i;
-            query = "INSERT INTO TicketPasseggero "+
-                    "VALUES ('"+codeTicket+"', '"+tp.getID()+"', '"+tp.getName()+"', '"+tp.getSurname()+"', '"+reservation.getCode()+"', '"+reservation.getCodeFlight()+"', '"+tp.getNseat()+"', '"+tp.getSeatClass()+"', '120'";
-        }
-        
+            query = "INSERT INTO TicketPasseggero\n"+
+                    "VALUES ('"+codeTicket+"', '"+tp.getID()+"', '"+tp.getName()+"', '"+tp.getSurname()+"', '"+reservation.getCode()+"', '"+reservation.getCodeFlight()+"', '"+tp.getNseat()+"', '"+tp.getSeatClass()+"', '"+this.returnPriceFlight(reservation.getCodeFlight())+"')";
+        }        
         return reservation;  
        
     }
