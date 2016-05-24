@@ -7,6 +7,7 @@
 *.jar
 *.war
 *.ear
+built-jar.properties
 
 # OS generated files #
 
