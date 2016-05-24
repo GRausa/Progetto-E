@@ -13,7 +13,7 @@ public class Reservation {
     private int code;
     private String email, number, codeFlight;
 
-    public Reservation(String email, String number, String codeFlight) {
+    public Reservation(String codeFlight, String email, String number) {
         this.email = email;
         this.number = number;
         this.codeFlight = codeFlight;

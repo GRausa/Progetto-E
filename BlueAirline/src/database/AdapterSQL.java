@@ -86,12 +86,12 @@ public class AdapterSQL {
         reservation.setCode(codeReservation);
         //aggiunta passeggeri
         int i = 0;
-        //flight
         for (TicketPassenger tp : passengers) {
             i++;
             String codeTicket = reservation.getCodeFlight() + "" + reservation.getCode() + "" + i;
             query = "INSERT INTO TicketPasseggero\n"
-                    + "VALUES ('" + codeTicket + "', '" + tp.getID() + "', '" + tp.getName() + "', '" + tp.getSurname() + "', '" + reservation.getCode() + "', '" + reservation.getCodeFlight() + "', '" + tp.getNseat() + "', '" + tp.getSeatClass() + "', '" + this.returnPriceFlight(reservation.getCodeFlight()) + "')";
+                    +"VALUES ('" + codeTicket + "', '" + tp.getID() + "', '" + tp.getName() + "', '" + tp.getSurname() + "', '" + reservation.getCode() + "', '" + reservation.getCodeFlight() + "', '" + tp.getNseat() + "', '" + tp.getSeatClass() + "', '" + this.returnPriceFlight(reservation.getCodeFlight()) + "')";
+            SQL.queryWrite(query);
         }
         return reservation;
 

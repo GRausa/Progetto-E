@@ -66,7 +66,7 @@ public class ParserSQL {
     
     public static double parseFunctionSQL(ResultSet resultQuery, String value) throws SQLException{ //SINGOLI MAX,MIN,COUNT...
         resultQuery.next();
-        return resultQuery.getInt(value);
+        return resultQuery.getDouble(value);
     }
     
     //METODI GENERICI
