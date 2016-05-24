@@ -31,9 +31,9 @@ public class ControllerTxt {
 
     public void riempi() throws SQLException {
         ArrayList<Flight> flights = CC.riempi();
-        
+
     }
-    
+
     public void searchRoutes() throws SQLException {
         ArrayList<Route> routes = CC.searchRoutes();
         for (Route r : routes) {
@@ -67,19 +67,34 @@ public class ControllerTxt {
             System.out.println("Inserisci passeggero (ID - Nome - Cognome - NPosto - Classe - Aggiunte");
             s = input2.nextLine();
             String[] vet1 = s.split("\t");
-            //aggiunte
-            ArrayList
-            for(int j=5;j<vet1.length;j++){
-                
-            }
             
+            //aggiunte
+            ArrayList<String> meals = new ArrayList<>();
+            ArrayList<String> holdLuggages = new ArrayList<>();
+            ArrayList<String> insurances = new ArrayList<>();
+            for (int j = 5; j < vet1.length; j++) {
+                String v = vet1[j];
+                switch (vet1[j].charAt(0)) {
+                    case 'M':
+                        meals.add(v);
+                        break;
+                    case 'H':
+                        holdLuggages.add(v);
+                        break;
+                    case 'I':
+                        insurances.add(v);
+                        break;
+                    default:
+                        break;
+                }
+            }
             TicketPassenger p = new TicketPassenger(vet1[0], vet1[1], vet1[2], Integer.parseInt(vet1[3]), Integer.parseInt(vet1[4]));
+            p.setMeals(meals);
+            p.setHoldLuggages(holdLuggages);
+            p.setInsurances(insurances);
             passengers.add(p);
             i++;
         }
-        
-        CC.makeReservation(reservation,passengers);
-        
+        CC.makeReservation(reservation, passengers);
     }
-
 }

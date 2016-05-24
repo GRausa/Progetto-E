@@ -5,6 +5,8 @@
  */
 package objects;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author cl418377
@@ -14,6 +16,7 @@ public class TicketPassenger {
     private String code, ID, name, surname, codeFlight;
     private int nseat, seatClass, codeReservation;
     private double totalPrice;
+    private ArrayList<String> meals, holdLuggages, insurances;
 
     public TicketPassenger(String ID, String name, String surname, int nseat, int seatClass) {
         this.ID = ID;
@@ -21,6 +24,9 @@ public class TicketPassenger {
         this.surname = surname;
         this.nseat = nseat;
         this.seatClass = seatClass;
+        this.meals = new ArrayList<>();
+        this.holdLuggages = new ArrayList<>();
+        this.insurances = new ArrayList<>();
     }
 
     public String getCode() {
@@ -58,7 +64,30 @@ public class TicketPassenger {
     public double getTotalPrice() {
         return totalPrice;
     }
-    
-    
 
+    public void setMeals(ArrayList<String> meals) {
+        this.meals = meals;
+    }
+
+    public void setHoldLuggages(ArrayList<String> holdLuggages) {
+        this.holdLuggages = holdLuggages;
+    }
+
+    public void setInsurances(ArrayList<String> insurances) {
+        this.insurances = insurances;
+    }
+
+    public ArrayList<String> getMeals() {
+        return meals;
+    }
+
+    public ArrayList<String> getHoldLuggages() {
+        return holdLuggages;
+    }
+
+    public ArrayList<String> getInsurances() {
+        return insurances;
+    }
+    
+    
 }
