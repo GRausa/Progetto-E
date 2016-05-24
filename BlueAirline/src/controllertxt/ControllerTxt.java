@@ -38,7 +38,7 @@ public class ControllerTxt {
 
     public void searchFlights() throws SQLException {
         Scanner input = new Scanner(System.in);
-        System.out.println("Ricerca volo per citta': (Partenza /tab/ Arrivo /tab/ Data(AAAA-MM-GG))");
+        System.out.println("Ricerca volo per citta': (Partenza - Arrivo - Data(AAAA-MM-GG))");
         String s = input.nextLine();
         String[] vet = s.split("\t");
         ArrayList<Flight> flights = CC.searchFlights(vet[0], vet[1], vet[2]);
@@ -49,19 +49,25 @@ public class ControllerTxt {
 
     public void makeReservation() throws SQLException {
         Scanner input = new Scanner(System.in);
-        System.out.println("Effettua prenotazione (CodiceVolo /tab/ Email /tab/ Numero)");
+        System.out.println("Effettua prenotazione (CodiceVolo - Email - Numero)");
         String s = input.nextLine();
         String[] vet = s.split("\t");
         Reservation reservation = new Reservation(vet[0], vet[1], vet[2]);
-        System.out.println("Inserisci numpero passeggeri: ");
+        System.out.println("Inserisci numero passeggeri: ");
         int n = input.nextInt();
         int i = 0;
         ArrayList<TicketPassenger> passengers = new ArrayList<>();
         while (i < n) {
             Scanner input2 = new Scanner(System.in);
-            System.out.println("Inserisci passeggero (ID /tab/ Nome /tab/ Cognome /tab/ NPosto /tab/ Classe");
+            System.out.println("Inserisci passeggero (ID - Nome - Cognome - NPosto - Classe - Aggiunte");
             s = input2.nextLine();
             String[] vet1 = s.split("\t");
+            //aggiunte
+            ArrayList
+            for(int j=5;j<vet1.length;j++){
+                
+            }
+            
             TicketPassenger p = new TicketPassenger(vet1[0], vet1[1], vet1[2], Integer.parseInt(vet1[3]), Integer.parseInt(vet1[4]));
             passengers.add(p);
             i++;
