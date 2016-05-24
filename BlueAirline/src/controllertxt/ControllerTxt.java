@@ -58,16 +58,17 @@ public class ControllerTxt {
         int i = 0;
         ArrayList<TicketPassenger> passengers = new ArrayList<>();
         while (i < n) {
+            Scanner input2 = new Scanner(System.in);
             System.out.println("Inserisci passeggero (ID /tab/ Nome /tab/ Cognome /tab/ NPosto /tab/ Classe");
-            s = input.nextLine();
-            vet = s.split("\t");
-            TicketPassenger p = new TicketPassenger(vet[0], vet[1], vet[2], Integer.parseInt(vet[3]), Integer.parseInt(vet[4]));
+            s = input2.nextLine();
+            String[] vet1 = s.split("\t");
+            TicketPassenger p = new TicketPassenger(vet1[0], vet1[1], vet1[2], Integer.parseInt(vet1[3]), Integer.parseInt(vet1[4]));
             passengers.add(p);
             i++;
         }
         
         CC.makeReservation(reservation,passengers);
-        //System.out.println("Prenotazione effettuata, codice prenotazione: " + (CC.makeReservation(vet[0], vet[1], vet[2])).getCode());
+        
     }
 
 }

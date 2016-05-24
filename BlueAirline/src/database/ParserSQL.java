@@ -64,7 +64,7 @@ public class ParserSQL {
         return reservation;
     }
     
-    public static int parseFunctionSQL(ResultSet resultQuery, String value) throws SQLException{ //SINGOLI MAX,MIN,COUNT...
+    public static double parseFunctionSQL(ResultSet resultQuery, String value) throws SQLException{ //SINGOLI MAX,MIN,COUNT...
         resultQuery.next();
         return resultQuery.getInt(value);
     }
