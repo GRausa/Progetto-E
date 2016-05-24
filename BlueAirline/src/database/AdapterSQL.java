@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import objects.Flight;
 import objects.Reservation;
 import objects.Route;
+import objects.TicketPassenger;
 
 /**
  *
@@ -63,18 +64,34 @@ public class AdapterSQL {
         return reservation;
     }
     
-    public Reservation makeReservation(String codeFlight, String email, String number) throws SQLException{
-        Reservation reservation;
+    public Reservation makeReservation(Reservation reservation, ArrayList<TicketPassenger> passengers) throws SQLException{   
+        
+        //prenotazione
         String query =
         "SELECT MAX(COD_PRENOTAZIONE) AS MAXCOD\n" +
         "FROM Prenotazione";        
         ResultSet resultQuery = SQL.queryRead(query);
-        int code = ParserSQL.parseFunctionSQL(resultQuery, "MAXCOD");
-        code++;
-        query="INSERT INTO Prenotazione VALUES ('"+code+"', '"+codeFlight+"', '"+email+"', '"+number+"')";
+        int codeReservation = ParserSQL.parseFunctionSQL(resultQuery, "MAXCOD");
+        codeReservation++;
+        query="INSERT INTO Prenotazione VALUES ('"+codeReservation+"', '"+reservation.getCodeFlight()+"', '"+reservation.getEmail()+"', '"+reservation.getNumber()+"')";
         SQL.queryWrite(query);
-        reservation = new Reservation(code,codeFlight,email,number);
-        return reservation;
+        reservation.setCode(codeReservation);
+        
+        
+        //aggiunta passeggeri
+        int i=0;
+        //flight
+        for(TicketPassenger tp : passengers){
+            i++;
+            String codeTicket = reservation.getCodeFlight()+""+reservation.getCode()+""+i;
+            query = "INSERT INTO TicketPasseggero "+
+                    "VALUES ('"+codeTicket+"', '"+tp.getID()+"', '"+tp.getName()+"', '"+tp.getSurname()+"', '"+reservation.getCode()+"', '"+reservation.getCodeFlight()+"', '"+tp.getNseat()+"', '"+tp.getSeatClass()+"', '120'";
+        }
+        
+        return reservation;  
+       
     }
+    
+   
 }
 

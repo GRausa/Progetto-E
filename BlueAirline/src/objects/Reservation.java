@@ -13,10 +13,18 @@ public class Reservation {
     private int code;
     private String email, number, codeFlight;
 
-    public Reservation(int code, String email, String numero, String codeFlight) {
+    public Reservation(String email, String number, String codeFlight) {
+        this.email = email;
+        this.number = number;
+        this.codeFlight = codeFlight;
+    }
+    
+    
+
+    public Reservation(int code, String email, String number, String codeFlight) {
         this.code = code;
         this.email = email;
-        this.number = numero;
+        this.number = number;
         this.codeFlight = codeFlight;
     }
 
@@ -28,9 +36,10 @@ public class Reservation {
         return email;
     }
 
-    public String getNumero() {
+    public String getNumber() {
         return number;
     }
+
 
     public String getCodeFlight() {
         return codeFlight;
@@ -39,5 +48,11 @@ public class Reservation {
     public String toString(){
         return code+" "+email+" "+number+" "+codeFlight;
     }
+
+    public void setCode(int code) {
+        this.code = code;
+    }
+    
+    
     
 }

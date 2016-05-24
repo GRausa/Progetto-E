@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import objects.Flight;
 import objects.Reservation;
 import objects.Route;
+import objects.TicketPassenger;
 
 /**
  *
@@ -36,8 +37,8 @@ public class ControllerClient {
         return adapter.searchReservation(code);
     }
     
-    public Reservation makeReservation(String codeFlight, String email, String number) throws SQLException{
-        return adapter.makeReservation(codeFlight, email, number);
+    public Reservation makeReservation(Reservation reservation, ArrayList<TicketPassenger> passengers) throws SQLException{
+        return adapter.makeReservation(reservation, passengers);
     }
     
 
