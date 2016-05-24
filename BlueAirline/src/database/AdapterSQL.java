@@ -26,6 +26,66 @@ public class AdapterSQL {
         SQL.startConnection();
 
     }
+    
+    public int numberSeatFlight(String cod) throws SQLException{
+        
+        String query
+                = "SELECT POSTI\n"
+                + "FROM Aereo A,Volo V\n"
+                + "WHERE A.COD_AEREO = V.AEREO AND V.COD_VOLO='"+cod+"'";
+        ResultSet resultQuery = SQL.queryRead(query);
+        return (int)ParserSQL.parseFunctionSQL(resultQuery, "POSTI");
+        
+    }
+    public int numberSeatFirstClassFlight(String cod) throws SQLException{
+        
+        String query
+                = "SELECT POSTI1CLASSE \n"
+                + "FROM Aereo A,Volo V\n"
+                + "WHERE A.COD_AEREO = V.AEREO AND V.COD_VOLO='"+cod+"'";
+        ResultSet resultQuery = SQL.queryRead(query);
+        return (int)ParserSQL.parseFunctionSQL(resultQuery, "POSTI1CLASSE");
+        
+    }
+    
+    public void riempiseatflight(Flight volo) throws SQLException{
+        int numeroseat=numberSeatFlight(volo.getCode());
+        int prima=numberSeatFirstClassFlight(volo.getCode());
+        for(int i=0;i<numeroseat;i++){
+            if(i<prima){
+                    setSeat(volo.getCode(),i+1,1);
+                    }
+            else
+                setSeat(volo.getCode(),i+1,2);
+        }
+    }
+    
+    public void setSeat(String volo,int num,int classe) throws SQLException{
+        String query = "INSERT INTO Posto VALUES ('" + num + "', '" + volo + "', '" + classe + "', '0')";
+        SQL.queryWrite(query);
+        
+    }
+    
+    public ArrayList<Flight> riempivoli() throws SQLException{
+        ArrayList<Flight> flights;
+        String query
+                = "SELECT V.COD_VOLO, A1.CITTA \"CITTAPARTENZA\", A1.NOME \"AEROPORTOPARTENZA\", A2.CITTA \"CITTAARRIVO\", A2.NOME \"AEROPORTOARRIVO\", V.DATAPARTENZA, V.ORAPARTENZA, V.DATAARRIVO, V.ORAARRIVO, V.PREZZO "
+                + "FROM Rotta R, Aeroporto A1, Aeroporto A2, Volo V "
+                + "WHERE R.AEROPORTOPARTENZA = A1.COD_AEROPORTO AND R.AEROPORTOARRIVO=A2.COD_AEROPORTO AND R.COD_ROTTA=V.ROTTA";
+        ResultSet resultQuery = SQL.queryRead(query);
+        flights = ParserSQL.parseFlights(resultQuery);
+        
+        for(Flight fli:flights){
+            System.out.println(fli);
+            riempiseatflight(fli);
+        }
+        
+        resultQuery.close();
+        return flights;
+        
+    }
+    
+    
 
     public ArrayList<Route> searchRoutes() throws SQLException {
         ArrayList<Route> routes;

@@ -28,6 +28,10 @@ public class ControllerClient {
     public ArrayList<Route> searchRoutes() throws SQLException {
         return adapter.searchRoutes();
     }
+    
+    public ArrayList<Flight> riempi() throws SQLException{
+        return adapter.riempivoli();
+    }
 
     public ArrayList<Flight> searchFlights(String departure, String destination, String date) throws SQLException {
         return adapter.searchFlights(departure, destination, date);

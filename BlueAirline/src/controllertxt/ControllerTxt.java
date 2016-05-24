@@ -29,6 +29,11 @@ public class ControllerTxt {
         CA = new ControllerAdministrator();
     }
 
+    public void riempi() throws SQLException {
+        ArrayList<Flight> flights = CC.riempi();
+        
+    }
+    
     public void searchRoutes() throws SQLException {
         ArrayList<Route> routes = CC.searchRoutes();
         for (Route r : routes) {
