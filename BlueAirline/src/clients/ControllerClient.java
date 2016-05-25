@@ -45,6 +45,10 @@ public class ControllerClient {
         return adapter.makeReservation(reservation, passengers);
     }
     
+    public int numberSeatFree(String codeFlight) throws SQLException{
+        return adapter.numberSeatFree(codeFlight);
+    }
+    
     public ArrayList<String> searchAllCitys() throws SQLException{
         return adapter.searchAllCitys();
     }

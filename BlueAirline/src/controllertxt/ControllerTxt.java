@@ -67,42 +67,47 @@ public class ControllerTxt {
         Reservation reservation = new Reservation(vet[0], vet[1], vet[2]);
         System.out.println("Inserisci numero passeggeri: ");
         int n = input.nextInt();
-        int i = 0;
-        ArrayList<TicketPassenger> passengers = new ArrayList<>();
-        while (i < n) {
-            Scanner input2 = new Scanner(System.in);
-            System.out.println("Inserisci passeggero (ID - Nome - Cognome - NPosto - Classe - Aggiunte");
-            s = input2.nextLine();
-            String[] vet1 = s.split("\t");
+        if(n < CC.numberSeatFree(vet[0])){
+            int i = 0;
+            ArrayList<TicketPassenger> passengers = new ArrayList<>();
+            while (i < n) {
+                Scanner input2 = new Scanner(System.in);
+                System.out.println("Inserisci passeggero (ID - Nome - Cognome - NPosto - Classe - Aggiunte");
+                s = input2.nextLine();
+                String[] vet1 = s.split("\t");
 
-            //aggiunte
-            ArrayList<String> meals = new ArrayList<>();
-            ArrayList<String> holdLuggages = new ArrayList<>();
-            ArrayList<String> insurances = new ArrayList<>();
-            for (int j = 5; j < vet1.length; j++) {
-                String v = vet1[j];
-                switch (vet1[j].charAt(0)) {
-                    case 'M':
-                        meals.add(v);
-                        break;
-                    case 'H':
-                        holdLuggages.add(v);
-                        break;
-                    case 'I':
-                        insurances.add(v);
-                        break;
-                    default:
-                        break;
+                //aggiunte
+                ArrayList<String> meals = new ArrayList<>();
+                ArrayList<String> holdLuggages = new ArrayList<>();
+                ArrayList<String> insurances = new ArrayList<>();
+                for (int j = 5; j < vet1.length; j++) {
+                    String v = vet1[j];
+                    switch (vet1[j].charAt(0)) {
+                        case 'M':
+                            meals.add(v);
+                            break;
+                        case 'H':
+                            holdLuggages.add(v);
+                            break;
+                        case 'I':
+                            insurances.add(v);
+                            break;
+                        default:
+                            break;
+                    }
                 }
+                TicketPassenger p = new TicketPassenger(vet1[0], vet1[1], vet1[2], Integer.parseInt(vet1[3]), Integer.parseInt(vet1[4]));
+                p.setMeals(meals);
+                p.setHoldLuggages(holdLuggages);
+                p.setInsurances(insurances);
+                passengers.add(p);
+                i++;
             }
-            TicketPassenger p = new TicketPassenger(vet1[0], vet1[1], vet1[2], Integer.parseInt(vet1[3]), Integer.parseInt(vet1[4]));
-            p.setMeals(meals);
-            p.setHoldLuggages(holdLuggages);
-            p.setInsurances(insurances);
-            passengers.add(p);
-            i++;
+            CC.makeReservation(reservation, passengers);
         }
-        CC.makeReservation(reservation, passengers);
+        else{
+            System.out.println("Posti non sufficenti");
+        }
     }
 
 }
