@@ -64,30 +64,10 @@ public class ClientBlueAirline {
         return false;
     }
     
-    public boolean calendar(String partenza,String destinazione) throws IOException{
-        out.println("CALENDAR "+partenza+" "+destinazione);
-        String serverout=in.readLine();
-        if(serverout.equals("0k")){
-            System.out.println("NON ESISTE LA ROTTA, CONSULTA LE ROTTE CON IL COMANDO VERIFICA_TRATTA");
-            return false;
-        }
-        else if(serverout.equals("-1k")){
-            System.out.println("NON CI SONO VOLI PROGRAMMATI PER QUESTA TRATTA");
-            return true;
-        }
-        else{
-            String[] app=serverout.split("\t");
-            if(app[0].equals("1k")){
-                System.out.println("SONO PRESENTI VOLI PER QUESTA TRATTA");
-                int n=Integer.parseInt(app[1]);
-                System.out.println("STAMPO CALENDARIO PER :"+partenza+"->"+destinazione);
-                for(int i=0;i<n;i++){
-                    System.out.println(in.readLine());
-                }
-                return true;
-            }
-        }
-        return false;
+    public Flight[] calendar(Route rotta) throws IOException{
+        out.println("CALENDAR "+gson.toJson(rotta));
+        Flight[] flights= gson.fromJson(in.readLine(), Flight[].class);
+        return flights;
     }
 
     public void scrittura() throws IOException {

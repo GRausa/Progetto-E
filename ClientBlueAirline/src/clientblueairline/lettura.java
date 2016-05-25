@@ -96,20 +96,26 @@ public class lettura implements Runnable {
                     }
                     break;
 
-                /*case "CALENDARIO_VOLI":
+                case "CALENDARIO_VOLI":
 
                  System.out.println("Inserisci Aeroporto partenza");
-                 String part1 = input.nextLine();
+                 String part2 = input.nextLine();
                  System.out.println("Inserisci Aeroporto destinazione");
-                 String dest1 = input.nextLine();
+                 String dest2 = input.nextLine();
+                 Route tmproute2= new Route();
+                 tmproute2.setDeparutreAirport(part2);
+                 tmproute2.setDestinationAirport(dest2);
                  {
                  try {
-                 client.calendar(part1, dest1);
+                 Flight[] calendario=client.calendar(tmproute2);
+                 for(Flight a:calendario){
+                     System.out.println(a);
+                 }
                  } catch (IOException ex) {
                  Logger.getLogger(lettura.class.getName()).log(Level.SEVERE, null, ex);
                  }
                  }
-                 break;*/
+                 break;
                 default:
                     System.out.println("idiota scrivi giusto");
 

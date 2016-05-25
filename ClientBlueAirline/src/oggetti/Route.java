@@ -25,7 +25,21 @@ public class Route {
         this.departureCity = departureCity;
         this.destinationCity = destinationCity;
     }
+    public Route(){
+        this.deparutreAirport = null;
+        this.destinationAirport = null;
+        this.departureCity = null;
+        this.destinationCity = null;
+    }
 
+    public void setDeparutreAirport(String deparutreAirport) {
+        this.deparutreAirport = deparutreAirport;
+    }
+
+    public void setDestinationAirport(String destinationAirport) {
+        this.destinationAirport = destinationAirport;
+    }
+    
     public String getDeparutreAirport() {
         return deparutreAirport;
     }

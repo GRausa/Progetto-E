@@ -36,6 +36,9 @@ public class ControllerClient {
     public ArrayList<Flight> searchFlights(String departure, String destination, String date) throws SQLException {
         return adapter.searchFlights(departure, destination, date);
     }
+    public ArrayList<Flight> searchFlights(Route route) throws SQLException {
+        return adapter.searchFlights(route);
+    }
     
     public Reservation searchReservation(int code) throws SQLException{
         return adapter.searchReservation(code);
