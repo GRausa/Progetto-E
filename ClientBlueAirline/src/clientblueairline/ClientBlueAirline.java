@@ -5,11 +5,14 @@
  */
 package clientblueairline;
 
+import com.google.gson.Gson;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
+import oggetti.Flight;
+import oggetti.Route;
 
 /**
  *
@@ -21,6 +24,7 @@ public class ClientBlueAirline {
     int PortNumber = 8888;
     public PrintWriter out;
     public BufferedReader in;
+    Gson gson = new Gson();
 
     public ClientBlueAirline() throws IOException {
         clientSocket = new Socket("localhost", PortNumber);
@@ -36,25 +40,16 @@ public class ClientBlueAirline {
         }
     }
     
-    public boolean checkRoute(String partenza,String destinazione) throws IOException{
-        out.println("CHECK "+partenza+" "+destinazione);
+    public boolean checkFligt(Flight flight){
+        out.println("RICERCAVOLO"+gson.toJson(flight));
+        
+        return true;
+    }
+    
+    public boolean checkRoute(Route rotta) throws IOException{
+        out.println("CHECK "+gson.toJson(rotta));
         String serverout=in.readLine();
-        if(serverout.equals("0c")){
-            System.out.println("NON EFFETTUIAMO QUESTA TRATTA");
-            return true;
-        }
-        else{
-            String[] app=serverout.split("\t");
-            if(app[0].equals("1c")){
-                System.out.println("LE DUE CITTA SONO COLLEGATE");
-                int n=Integer.parseInt(app[1]);
-                System.out.println("I COLLEGAMENTI PER :"+partenza+"->"+destinazione+" sono :"+n);
-                for(int i=0;i<n;i++){
-                    System.out.println(in.readLine());
-                }
-                return true;
-            }
-        }
+        
         return false;
     }
     

@@ -158,10 +158,10 @@ class RemoteUser extends Thread {
             public void execute(String args) {
 
                 try {
-                    Flight r = gson.fromJson(in.readLine(), Flight.class);
+                    Flight r = gson.fromJson(args, Flight.class);
                     //DA MODIFICARE LA DATA DEVE ESSERE NEL FORMATO DI COME DICE IL DB
                     ArrayList<Flight> flights = company.searchFlights(r.getRoute().getDepartureCity(),r.getRoute().getDestinationCity(),r.getDateDeparture().toString());
-                } catch (SQLException | IOException ex) {
+                } catch (SQLException ex) {
                     Logger.getLogger(RemoteUser.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
