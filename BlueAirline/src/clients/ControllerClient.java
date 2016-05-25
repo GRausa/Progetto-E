@@ -45,5 +45,9 @@ public class ControllerClient {
         return adapter.makeReservation(reservation, passengers);
     }
     
+    public ArrayList<String> searchAllCitys() throws SQLException{
+        return adapter.searchAllCitys();
+    }
+    
 
 }

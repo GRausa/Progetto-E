@@ -70,6 +70,14 @@ public class ParserSQL {
         return resultQuery.getDouble(value);
     }
     
+    public static ArrayList<String> parseCitis(ResultSet resultQuery) throws SQLException{
+        ArrayList<String> citys = new ArrayList<>();
+        while (resultQuery.next()) {
+            citys.add(resultQuery.getString("NOME"));
+        }
+        return citys;
+    }
+    
     //METODI GENERICI
     
     public static Calendar returnCalendar(String stringDate, String stringTime){
@@ -85,7 +93,7 @@ public class ParserSQL {
     }
     
     public static String stringDate(GregorianCalendar date){
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MMM/yyyy");
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         String d = sdf.format(date.getTime());
         String[] vet = d.split("/");
         return vet[2]+"-"+vet[1]+"-"+vet[0];

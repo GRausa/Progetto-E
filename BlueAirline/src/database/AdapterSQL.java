@@ -122,6 +122,17 @@ public class AdapterSQL {
         resultQuery.close();
         return reservation;
     }
+    
+    public ArrayList<String> searchAllCitys() throws SQLException{
+        ArrayList<String> citys;
+        String query 
+                = "SELECT NOME\n"
+                + "FROM Citta ";
+        ResultSet resultQuery = SQL.queryRead(query);
+        citys = ParserSQL.parseCitis(resultQuery);
+        resultQuery.close();
+        return citys;    
+    }
 
     public double returnPriceFlight(String codflight) throws SQLException {
         String query

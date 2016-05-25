@@ -40,6 +40,13 @@ public class ControllerTxt {
             System.out.println(r);
         }
     }
+    
+    public void searchAllCitys() throws SQLException{
+        ArrayList<String> citys = CC.searchAllCitys();
+        for(String c: citys){
+            System.out.println(c);
+        }
+    }
 
     public void searchFlights() throws SQLException {
         Scanner input = new Scanner(System.in);
@@ -67,7 +74,7 @@ public class ControllerTxt {
             System.out.println("Inserisci passeggero (ID - Nome - Cognome - NPosto - Classe - Aggiunte");
             s = input2.nextLine();
             String[] vet1 = s.split("\t");
-            
+
             //aggiunte
             ArrayList<String> meals = new ArrayList<>();
             ArrayList<String> holdLuggages = new ArrayList<>();
@@ -97,4 +104,5 @@ public class ControllerTxt {
         }
         CC.makeReservation(reservation, passengers);
     }
+
 }
