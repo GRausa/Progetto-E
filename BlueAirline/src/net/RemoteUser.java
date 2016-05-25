@@ -11,11 +11,14 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import static jdk.nashorn.internal.objects.NativeMath.log;
+import objects.Route;
 
 /**
  *
@@ -83,49 +86,68 @@ class RemoteUser extends Thread {
         });
 
         /*commands.put("CALENDAR", new Command() {
+         @Override
+         public void execute(String args) {
+         String argoments[] = args.split(" ");
+         Route rotta = company.searchRouteForAirport(argoments[0], argoments[1]);
+         if (rotta==null){
+         out.println("0k");
+         }
+         else{
+         ArrayList<Flight> voli = company.calendarFlight(rotta);
+
+         if (voli.isEmpty()) {
+         out.println("-1k");
+         } else {
+         //voli.sort(null);
+                    
+         out.println("2k\t"+voli.size());
+         for (Flight vo : voli) {
+         out.println(vo);
+         }
+         }
+         }
+
+         }
+         });
+         */
+        commands.put("CHECK", new Command() {
             @Override
             public void execute(String args) {
-                String argoments[] = args.split(" ");
-                Route rotta = company.searchRouteForAirport(argoments[0], argoments[1]);
-                if (rotta==null){
-                    out.println("0k");
-                }
-                else{
-                ArrayList<Flight> voli = company.calendarFlight(rotta);
 
-                if (voli.isEmpty()) {
-                    out.println("-1k");
-                } else {
-                    //voli.sort(null);
-                    
-                    out.println("2k\t"+voli.size());
-                    for (Flight vo : voli) {
-                        out.println(vo);
-                    }
+                ArrayList<Route> rottes = null;
+                try {
+                    rottes = company.searchRoutes();
+                } catch (SQLException ex) {
+                    Logger.getLogger(RemoteUser.class.getName()).log(Level.SEVERE, null, ex);
                 }
+                if (args.equalsIgnoreCase("")) {
+                    for (Route rotte : rottes) {
+
+                        out.println(rotte);
+
+                    }
+                } else {
+                    String argoments[] = args.split(" ");
+                    if (argoments.length == 2) {
+                        for (Route rotte : rottes) {
+                            if ((rotte.getDepartureCity().equalsIgnoreCase(argoments[0])) & (rotte.getDestinationCity().equalsIgnoreCase(argoments[1]))) {
+                                out.println(rotte);
+                            }
+                        }
+                    }
+                    if (argoments.length == 1) {
+                        for (Route rotte : rottes) {
+                            if ((rotte.getDepartureCity().equalsIgnoreCase(argoments[0]))) {
+                                out.println(rotte);
+                            }
+                        }
+                    }
+
                 }
 
             }
         });
-        */
-        /*commands.put("CHECK", new Command() {
-            @Override
-            public void execute(String args) {
-                String argoments[] = args.split(" ");
-                ArrayList<Route> rottes = company.searchRouteForCityAndAirport(argoments[0], argoments[1]);
-
-                if (rottes.isEmpty()) {
-                    out.println("0c");//
-                } else {
-                    out.println("1c\t" + rottes.size());
-                    for (Route a : rottes) {
-                        out.println(a.toString());
-                    }
-
-                }
-            }
-
-        });*/
 
         /* DA TENERE
          
@@ -248,162 +270,160 @@ class RemoteUser extends Thread {
      }
      }
      */
-    
     /*
-    private void ricercaPosti() {
-        try {
-            out.println("RICERCA POSTI IN UN VOLO. ");
-            Scanner input = new Scanner(System.in);
-            out.println("Inserisci codice volo: ");
-            String s1 = in.readLine();
-            Flight flight = company.searchFlights(s1);
-            if (flight != null) {
-                out.println("Inserisci numero passeggeri: ");
-                int n = Integer.parseInt(in.readLine());
-                if (n > flight.getSeatFree()) {
-                    out.println("Posti non disponibili.");
-                } else {
-                    out.println("Posti disponibili: " + flight.getSeatFree());
-                }
-            } else {
-                out.println("Errore nell'inserimento, codice non trovato.");
-            }
-        } catch (IOException ex) {
-            Logger.getLogger(RemoteUser.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }*/
-/*
-    private void Order() {
-        try {
-            out.println("AREA 3: PRENOTAZIONE VOLO. ");
+     private void ricercaPosti() {
+     try {
+     out.println("RICERCA POSTI IN UN VOLO. ");
+     Scanner input = new Scanner(System.in);
+     out.println("Inserisci codice volo: ");
+     String s1 = in.readLine();
+     Flight flight = company.searchFlights(s1);
+     if (flight != null) {
+     out.println("Inserisci numero passeggeri: ");
+     int n = Integer.parseInt(in.readLine());
+     if (n > flight.getSeatFree()) {
+     out.println("Posti non disponibili.");
+     } else {
+     out.println("Posti disponibili: " + flight.getSeatFree());
+     }
+     } else {
+     out.println("Errore nell'inserimento, codice non trovato.");
+     }
+     } catch (IOException ex) {
+     Logger.getLogger(RemoteUser.class.getName()).log(Level.SEVERE, null, ex);
+     }
+     }*/
+    /*
+     private void Order() {
+     try {
+     out.println("AREA 3: PRENOTAZIONE VOLO. ");
 
-            out.println("Inserisci codice volo: ");
-            String s1 = in.readLine();
-            Flight flight = company.searchFlights(s1);
-            if (flight != null) {
-                out.println("Inserisci numero passeggeri: ");
-                int n = Integer.parseInt(in.readLine());
-                if (n > flight.getSeatFree()) {
-                    out.println("Posti non disponibili.");
-                } else {
-                    ArrayList<Passenger> listPassengers = new ArrayList<>();
-                    ArrayList<Integer> listSeats = new ArrayList<>();
-                    out.println("Posti disponibili: " + flight.getSeatFree());
-                    out.println("Inserisci email Customer: ");
-                    String emailCustomer = in.readLine();
-                    if (emailCustomer.isEmpty()) {
-                        emailCustomer = in.readLine();
-                    }
-                    out.println("Inserisci numero di telefono Customer: ");
-                    String numberCustomer = in.readLine();
-                    Customer customer = new Customer(emailCustomer, numberCustomer);
-                    for (int i = 0; i < n; i++) {
-                        try {
-                            out.println("Inserisci passegero n" + (i + 1) + " (IDCard Cognome Nome): ");
-                            if (s1.isEmpty()) {
-                                s1 = in.readLine();
-                            }
-                            String[] vet = new String[3];
-                            vet = s1.split(" ");
-                            Passenger p = new Passenger(vet[0], vet[1], vet[2]);
-                            listPassengers.add(p);
-                            int j = 1, seat = 0;
-                            while (j != 0) {
-                                out.println("Inserisci scelta posto: ");
-                                seat = Integer.parseInt(in.readLine());
-                                if (seat > flight.getAirplane().getNumSeat()) {
-                                    out.println("Posto inserito superiore alla capienza massima");
-                                    continue;
-                                }
-                                if (!flight.seatIsOccuped(seat) & !listSeats.contains(seat)) {
-                                    listSeats.add(seat);
-                                    j = 0;
-                                } else {
-                                    out.println("Il posto è occupato, digiti: \n1)Decidere nuovamente il posto\n2)Assegnazione automatica");
-                                    j = Integer.parseInt(in.readLine());
-                                    switch (j) {
-                                        case 1:
-                                            continue;
-                                        case 2:
-                                            seat = flight.automaticSeatOccuped();
-                                            listSeats.add(seat);
-                                            j = 0;
-                                            break;
-                                    }
-                                }
-                            }
-                            out.println("Posto " + seat + "assegnato.");
-                            out.println("-> OPZIONI DI VIAGGIO AGGIUNTIVE <-");
-                            //MEAL
-                            while (true) {
-                                out.println("Aggiungi un pasto! Inserisci il codice (0 per uscire): ");
-                                String str = in.readLine();
-                                if (str.isEmpty()) {
-                                    str = in.readLine();
-                                }
-                                if (str.equals("0")) {
-                                    break;
-                                }
-                                Meal m = company.searchMeal(str);
-                                if (m != null) {
-                                    if (flight.getFlightTime() >= m.getTimeMeal()) {
-                                        p.addMeal(m);
-                                        out.println("Hai scelto il pasto:\n" + m.toString());
-                                    } else {
-                                        out.println("Questo pasto è riservato a tempi di volo più lunghi, riprova.");
-                                    }
-                                } else {
-                                    out.println("Errore inserimento del codice pasto.");
-                                }
-                            }   //HOLD LUGGAGE
-                            while (true) {
-                                out.println("Aggiungi un bagaglio! Inserisci il codice (0 per uscire): ");
-                                String str = in.readLine();
-                                if (str.isEmpty()) {
-                                    str = in.readLine();
-                                }
-                                if (str.equals("0")) {
-                                    break;
-                                }
-                                HoldLuggage h = company.searchHoldLuggage(str);
-                                if (h != null) {
-                                    p.addHoldLuggage(h);
-                                    out.println("Hai scelto il bagaglio:\n" + h.toString());
-                                } else {
-                                    out.println("Errore inserimento del codice bagaglio.");
-                                }
-                            }   //INSURANCE (solo una)
-                            out.println("Aggiungi un' assicurazione! Inserisci il codice (0 per uscire): ");
-                            String str = in.readLine();
-                            if (str.isEmpty()) {
-                                str = in.readLine();
-                            }
-                            if (!str.equals("0")) {
-                                Insurance ins = company.searchInsurance(str);
-                                if (ins != null) {
-                                    p.addInsurance(ins);
-                                    out.println("Hai scelto l'assicurazione:\n" + ins.toString());
-                                } else {
-                                    out.println("Errore inserimento del codice assicurazione.");
-                                }
-                            }
-                        } catch (IOException ex) {
-                            Logger.getLogger(RemoteUser.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                    }
-                    String code = (company.makeReservation(flight, listPassengers, listSeats, customer)).getPrenotationCode();
-                    out.println("Prenotazione effettuata.");
-                    out.println(company.searchReservation(code).toString());
-                }
-            } else {
-                out.println("Errore nell'inserimento, codice non trovato.");
-            }
-        } catch (IOException ex) {
-            Logger.getLogger(RemoteUser.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-    */
-
+     out.println("Inserisci codice volo: ");
+     String s1 = in.readLine();
+     Flight flight = company.searchFlights(s1);
+     if (flight != null) {
+     out.println("Inserisci numero passeggeri: ");
+     int n = Integer.parseInt(in.readLine());
+     if (n > flight.getSeatFree()) {
+     out.println("Posti non disponibili.");
+     } else {
+     ArrayList<Passenger> listPassengers = new ArrayList<>();
+     ArrayList<Integer> listSeats = new ArrayList<>();
+     out.println("Posti disponibili: " + flight.getSeatFree());
+     out.println("Inserisci email Customer: ");
+     String emailCustomer = in.readLine();
+     if (emailCustomer.isEmpty()) {
+     emailCustomer = in.readLine();
+     }
+     out.println("Inserisci numero di telefono Customer: ");
+     String numberCustomer = in.readLine();
+     Customer customer = new Customer(emailCustomer, numberCustomer);
+     for (int i = 0; i < n; i++) {
+     try {
+     out.println("Inserisci passegero n" + (i + 1) + " (IDCard Cognome Nome): ");
+     if (s1.isEmpty()) {
+     s1 = in.readLine();
+     }
+     String[] vet = new String[3];
+     vet = s1.split(" ");
+     Passenger p = new Passenger(vet[0], vet[1], vet[2]);
+     listPassengers.add(p);
+     int j = 1, seat = 0;
+     while (j != 0) {
+     out.println("Inserisci scelta posto: ");
+     seat = Integer.parseInt(in.readLine());
+     if (seat > flight.getAirplane().getNumSeat()) {
+     out.println("Posto inserito superiore alla capienza massima");
+     continue;
+     }
+     if (!flight.seatIsOccuped(seat) & !listSeats.contains(seat)) {
+     listSeats.add(seat);
+     j = 0;
+     } else {
+     out.println("Il posto è occupato, digiti: \n1)Decidere nuovamente il posto\n2)Assegnazione automatica");
+     j = Integer.parseInt(in.readLine());
+     switch (j) {
+     case 1:
+     continue;
+     case 2:
+     seat = flight.automaticSeatOccuped();
+     listSeats.add(seat);
+     j = 0;
+     break;
+     }
+     }
+     }
+     out.println("Posto " + seat + "assegnato.");
+     out.println("-> OPZIONI DI VIAGGIO AGGIUNTIVE <-");
+     //MEAL
+     while (true) {
+     out.println("Aggiungi un pasto! Inserisci il codice (0 per uscire): ");
+     String str = in.readLine();
+     if (str.isEmpty()) {
+     str = in.readLine();
+     }
+     if (str.equals("0")) {
+     break;
+     }
+     Meal m = company.searchMeal(str);
+     if (m != null) {
+     if (flight.getFlightTime() >= m.getTimeMeal()) {
+     p.addMeal(m);
+     out.println("Hai scelto il pasto:\n" + m.toString());
+     } else {
+     out.println("Questo pasto è riservato a tempi di volo più lunghi, riprova.");
+     }
+     } else {
+     out.println("Errore inserimento del codice pasto.");
+     }
+     }   //HOLD LUGGAGE
+     while (true) {
+     out.println("Aggiungi un bagaglio! Inserisci il codice (0 per uscire): ");
+     String str = in.readLine();
+     if (str.isEmpty()) {
+     str = in.readLine();
+     }
+     if (str.equals("0")) {
+     break;
+     }
+     HoldLuggage h = company.searchHoldLuggage(str);
+     if (h != null) {
+     p.addHoldLuggage(h);
+     out.println("Hai scelto il bagaglio:\n" + h.toString());
+     } else {
+     out.println("Errore inserimento del codice bagaglio.");
+     }
+     }   //INSURANCE (solo una)
+     out.println("Aggiungi un' assicurazione! Inserisci il codice (0 per uscire): ");
+     String str = in.readLine();
+     if (str.isEmpty()) {
+     str = in.readLine();
+     }
+     if (!str.equals("0")) {
+     Insurance ins = company.searchInsurance(str);
+     if (ins != null) {
+     p.addInsurance(ins);
+     out.println("Hai scelto l'assicurazione:\n" + ins.toString());
+     } else {
+     out.println("Errore inserimento del codice assicurazione.");
+     }
+     }
+     } catch (IOException ex) {
+     Logger.getLogger(RemoteUser.class.getName()).log(Level.SEVERE, null, ex);
+     }
+     }
+     String code = (company.makeReservation(flight, listPassengers, listSeats, customer)).getPrenotationCode();
+     out.println("Prenotazione effettuata.");
+     out.println(company.searchReservation(code).toString());
+     }
+     } else {
+     out.println("Errore nell'inserimento, codice non trovato.");
+     }
+     } catch (IOException ex) {
+     Logger.getLogger(RemoteUser.class.getName()).log(Level.SEVERE, null, ex);
+     }
+     }
+     */
 }
 
 /**
