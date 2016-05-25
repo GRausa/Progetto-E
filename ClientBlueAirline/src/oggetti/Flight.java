@@ -30,7 +30,7 @@ public class Flight {
         this.code = null;
         this.r = r;
         this.dateDeparture = dateDeparture;
-        this.dateDestination = null;
+        this.dateDestination = dateDeparture;
         this.prezzo = 0;
     }
 

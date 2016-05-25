@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.ArrayList;
 import oggetti.Flight;
 import oggetti.Route;
 
@@ -40,16 +41,26 @@ public class ClientBlueAirline {
         }
     }
     
-    public boolean checkFligt(Flight flight){
-        out.println("RICERCAVOLO"+gson.toJson(flight));
+    public Flight[] checkFligt(Flight flight) throws IOException{
         
-        return true;
+        out.println("RICERCAVOLO "+gson.toJson(flight));
+        Flight[] flights= gson.fromJson(in.readLine(), Flight[].class);
+        return flights;
     }
     
     public boolean checkRoute(Route rotta) throws IOException{
+        
         out.println("CHECK "+gson.toJson(rotta));
         String serverout=in.readLine();
-        
+       
+        Route []rotte=gson.fromJson(serverout, Route[].class);
+        if(rotte.length>0){
+        for(Route r:rotte){
+            System.out.println(r);
+        }
+        }
+        else 
+            System.out.println("NON ESISTE TRATTA PER QUESTA CITTA'");
         return false;
     }
     

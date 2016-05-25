@@ -6,6 +6,7 @@
 package clientblueairline;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.Scanner;
 import java.util.logging.Level;
@@ -51,17 +52,35 @@ public class lettura implements Runnable {
                     System.out.println("Inserisci data di partenza AAAA-MM-GG");
                     String data = input.nextLine();
                     
+                    int day,month,year;
                     String[] vetDate = data.split("-");
-                    int year = Integer.parseInt(vetDate[0]);
-                    int month = Integer.parseInt(vetDate[1]);
-                    int day = Integer.parseInt(vetDate[2]);
-                    
+                    if(vetDate.length==3){
+                    year = Integer.parseInt(vetDate[0]);
+                    month = Integer.parseInt(vetDate[1])-1;
+                    day = Integer.parseInt(vetDate[2]);
+                    }
+                    else{
+                        System.out.println("INSERITO DATA SBAGLIATA");
+                        break;
+                    }
+                        
+
                     GregorianCalendar date = new GregorianCalendar(year, month, day);
+
+                    Flight tmpflight = new Flight(tmproute, date);
                     
-                    Flight tmpflight = new Flight(tmproute,date);
-                    client.checkFligt(tmpflight);
+                     {
+                        try {
+                            Flight[] volit=client.checkFligt(tmpflight);
+                            for(Flight v:volit){
+                                System.out.println(v);
+                            }
+                        } catch (IOException ex) {
+                            Logger.getLogger(lettura.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
                     break;
-                    
+
                 case "VERIFICA_TRATTA":
                     System.out.println("Inserisci partenza");
                     String part1 = input.nextLine();
@@ -76,28 +95,27 @@ public class lettura implements Runnable {
                         }
                     }
                     break;
-                    
+
                 /*case "CALENDARIO_VOLI":
 
-                    System.out.println("Inserisci Aeroporto partenza");
-                    String part1 = input.nextLine();
-                    System.out.println("Inserisci Aeroporto destinazione");
-                    String dest1 = input.nextLine();
-                     {
-                        try {
-                            client.calendar(part1, dest1);
-                        } catch (IOException ex) {
-                            Logger.getLogger(lettura.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                    }
-                    break;*/
-
+                 System.out.println("Inserisci Aeroporto partenza");
+                 String part1 = input.nextLine();
+                 System.out.println("Inserisci Aeroporto destinazione");
+                 String dest1 = input.nextLine();
+                 {
+                 try {
+                 client.calendar(part1, dest1);
+                 } catch (IOException ex) {
+                 Logger.getLogger(lettura.class.getName()).log(Level.SEVERE, null, ex);
+                 }
+                 }
+                 break;*/
                 default:
                     System.out.println("idiota scrivi giusto");
 
             }
             try {
-                Thread.sleep(300);
+                Thread.sleep(1000);
             } catch (InterruptedException ex) {
                 //Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
             }
