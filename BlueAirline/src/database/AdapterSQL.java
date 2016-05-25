@@ -169,9 +169,9 @@ public class AdapterSQL {
             i++;
             String codeTicket = reservation.getCodeFlight() + "" + reservation.getCode() + "" + i;
             query = "INSERT INTO TicketPasseggero\n"
-                    + "VALUES ('" + codeTicket + "', '" + tp.getID() + "', '" + tp.getName() + "', '" + tp.getSurname() + "', '" + reservation.getCode() + "', '" + reservation.getCodeFlight() + "', '" + tp.getNseat() + "', '" + tp.getSeatClass() + "', '" + this.returnPriceFlight(reservation.getCodeFlight()) + "')";
+                    + "VALUES ('" + codeTicket + "', '" + tp.getID() + "', '" + tp.getName() + "', '" + tp.getSurname() + "', '" + reservation.getCode() + "', '" + reservation.getCodeFlight() + "', '" + tp.getNseat() + "')";
             SQL.queryWrite(query);
-
+            this.setSeatBoolean(reservation.getCodeFlight(), tp.getNseat(), 1); //lo metto a 1 cioè occupato
             //aggiunte
             ArrayList<String> meals = tp.getMeals();
             for (String s : meals) {
@@ -187,6 +187,12 @@ public class AdapterSQL {
             }
         }
         return reservation;
+    }
+
+    public void setSeatBoolean(String codeFlight, int nSeat, int isSeat) throws SQLException {
+        String query = "UPDATE Posto SET Occupato = '"+isSeat+"'\n"
+                + "WHERE Numero=" +nSeat+ " AND Volo = '" + codeFlight+ "'";
+        SQL.queryWrite(query);
     }
 
     public void insertAggiunta(String code, String codeTicket) throws SQLException {

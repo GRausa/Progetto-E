@@ -72,7 +72,7 @@ public class ControllerTxt {
             ArrayList<TicketPassenger> passengers = new ArrayList<>();
             while (i < n) {
                 Scanner input2 = new Scanner(System.in);
-                System.out.println("Inserisci passeggero (ID - Nome - Cognome - NPosto - Classe - Aggiunte");
+                System.out.println("Inserisci passeggero (ID - Nome - Cognome - NPosto - Aggiunte");
                 s = input2.nextLine();
                 String[] vet1 = s.split("\t");
 
@@ -80,7 +80,7 @@ public class ControllerTxt {
                 ArrayList<String> meals = new ArrayList<>();
                 ArrayList<String> holdLuggages = new ArrayList<>();
                 ArrayList<String> insurances = new ArrayList<>();
-                for (int j = 5; j < vet1.length; j++) {
+                for (int j = 4; j < vet1.length; j++) {
                     String v = vet1[j];
                     switch (vet1[j].charAt(0)) {
                         case 'M':
@@ -96,7 +96,7 @@ public class ControllerTxt {
                             break;
                     }
                 }
-                TicketPassenger p = new TicketPassenger(vet1[0], vet1[1], vet1[2], Integer.parseInt(vet1[3]), Integer.parseInt(vet1[4]));
+                TicketPassenger p = new TicketPassenger(vet1[0], vet1[1], vet1[2], Integer.parseInt(vet1[3]));
                 p.setMeals(meals);
                 p.setHoldLuggages(holdLuggages);
                 p.setInsurances(insurances);
