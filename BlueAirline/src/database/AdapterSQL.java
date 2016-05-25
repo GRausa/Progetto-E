@@ -28,15 +28,22 @@ public class AdapterSQL {
 
     }
 
-    public int numberSeatFlight(String cod) throws SQLException {
-
+    public int numberSeatFlight(String codeFlight) throws SQLException {
         String query
                 = "SELECT POSTI\n"
                 + "FROM Aereo A,Volo V\n"
-                + "WHERE A.COD_AEREO = V.AEREO AND V.COD_VOLO='" + cod + "'";
+                + "WHERE A.COD_AEREO = V.AEREO AND V.COD_VOLO='" + codeFlight + "'";
         ResultSet resultQuery = SQL.queryRead(query);
         return (int) ParserSQL.parseFunctionSQL(resultQuery, "POSTI");
+    }
 
+    public int numberSeatFree(String codeFlight) throws SQLException {
+        String query
+                = "SELECT COUNT(*) AS NUM\n"
+                + "FROM Posto\n"
+                + "WHERE Volo='" + codeFlight + "' AND OCCUPATO=0 ";
+        ResultSet resultQuery = SQL.queryRead(query);
+        return (int) ParserSQL.parseFunctionSQL(resultQuery, "NUM");
     }
 
     public int numberSeatFirstClassFlight(String cod) throws SQLException {
@@ -122,16 +129,16 @@ public class AdapterSQL {
         resultQuery.close();
         return reservation;
     }
-    
-    public ArrayList<String> searchAllCitys() throws SQLException{
+
+    public ArrayList<String> searchAllCitys() throws SQLException {
         ArrayList<String> citys;
-        String query 
+        String query
                 = "SELECT NOME\n"
                 + "FROM Citta ";
         ResultSet resultQuery = SQL.queryRead(query);
         citys = ParserSQL.parseCitis(resultQuery);
         resultQuery.close();
-        return citys;    
+        return citys;
     }
 
     public double returnPriceFlight(String codflight) throws SQLException {
@@ -162,24 +169,30 @@ public class AdapterSQL {
             i++;
             String codeTicket = reservation.getCodeFlight() + "" + reservation.getCode() + "" + i;
             query = "INSERT INTO TicketPasseggero\n"
-                    + "VALUES ('" + codeTicket + "', '" + tp.getID() + "', '" + tp.getName() + "', '" + tp.getSurname() + "', '" + reservation.getCode() + "', '" + reservation.getCodeFlight() + "', '" + tp.getNseat() + "', '" + tp.getSeatClass() + "', '" + this.returnPriceFlight(reservation.getCodeFlight()) + "')";
+                    + "VALUES ('" + codeTicket + "', '" + tp.getID() + "', '" + tp.getName() + "', '" + tp.getSurname() + "', '" + reservation.getCode() + "', '" + reservation.getCodeFlight() + "', '" + tp.getNseat() + "')";
             SQL.queryWrite(query);
-            
+            this.setSeatBoolean(reservation.getCodeFlight(), tp.getNseat(), 1); //lo metto a 1 cioè occupato
             //aggiunte
             ArrayList<String> meals = tp.getMeals();
-            for(String s:meals){
+            for (String s : meals) {
                 this.insertAggiunta(s, codeTicket);
             }
             ArrayList<String> insurances = tp.getInsurances();
-            for(String s:insurances){
+            for (String s : insurances) {
                 this.insertAggiunta(s, codeTicket);
             }
             ArrayList<String> holdLuggages = tp.getHoldLuggages();
-            for(String s:holdLuggages){
+            for (String s : holdLuggages) {
                 this.insertAggiunta(s, codeTicket);
             }
         }
         return reservation;
+    }
+
+    public void setSeatBoolean(String codeFlight, int nSeat, int isSeat) throws SQLException {
+        String query = "UPDATE Posto SET Occupato = '"+isSeat+"'\n"
+                + "WHERE Numero=" +nSeat+ " AND Volo = '" + codeFlight+ "'";
+        SQL.queryWrite(query);
     }
 
     public void insertAggiunta(String code, String codeTicket) throws SQLException {
@@ -191,36 +204,37 @@ public class AdapterSQL {
                 query
                         = "SELECT PREZZO\n"
                         + "FROM Pasto\n"
-                        + "WHERE COD_PASTO='" + code+"'";
-                
+                        + "WHERE COD_PASTO='" + code + "'";
+
                 resultQuery = SQL.queryRead(query);
                 price = ParserSQL.parseFunctionSQL(resultQuery, "PREZZO");
                 query = "INSERT INTO Pasto_Passeggero\n"
-                        + "VALUES ('" + code + "', '" + codeTicket + "','" + price +"')";
+                        + "VALUES ('" + code + "', '" + codeTicket + "','" + price + "')";
                 SQL.queryWrite(query);
                 break;
             case 'H':
                 query
                         = "SELECT PREZZO\n"
                         + "FROM Bagaglio\n"
-                        + "WHERE COD_BAGAGLIO='" + code+"'";;
-                
+                        + "WHERE COD_BAGAGLIO='" + code + "'";
+                ;
+
                 resultQuery = SQL.queryRead(query);
                 price = ParserSQL.parseFunctionSQL(resultQuery, "PREZZO");
                 query = "INSERT INTO Bagaglio_Passeggero\n"
-                        + "VALUES ('" + code + "', '" + codeTicket + "','" + price +"')";
+                        + "VALUES ('" + code + "', '" + codeTicket + "','" + price + "')";
                 SQL.queryWrite(query);
                 break;
             case 'I':
                 query
                         = "SELECT PREZZO\n"
                         + "FROM Assicurazione\n"
-                        + "WHERE COD_ASSICURAZIONE='" + code+"'";
-                
+                        + "WHERE COD_ASSICURAZIONE='" + code + "'";
+
                 resultQuery = SQL.queryRead(query);
                 price = ParserSQL.parseFunctionSQL(resultQuery, "PREZZO");
                 query = "INSERT INTO Assicurazione_Passeggero\n"
-                        + "VALUES ('" + code + "', '" + codeTicket + "','" + price +"')";
+                        + "VALUES ('" + code + "', '" + codeTicket + "','" + price + "')";
                 SQL.queryWrite(query);
                 break;
             default:

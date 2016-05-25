@@ -14,16 +14,15 @@ import java.util.ArrayList;
 public class TicketPassenger {
 
     private String code, ID, name, surname, codeFlight;
-    private int nseat, seatClass, codeReservation;
+    private int nseat, codeReservation;
     private double totalPrice;
     private ArrayList<String> meals, holdLuggages, insurances;
 
-    public TicketPassenger(String ID, String name, String surname, int nseat, int seatClass) {
+    public TicketPassenger(String ID, String name, String surname, int nseat) {
         this.ID = ID;
         this.name = name;
         this.surname = surname;
         this.nseat = nseat;
-        this.seatClass = seatClass;
         this.meals = new ArrayList<>();
         this.holdLuggages = new ArrayList<>();
         this.insurances = new ArrayList<>();
@@ -51,10 +50,6 @@ public class TicketPassenger {
 
     public int getNseat() {
         return nseat;
-    }
-
-    public int getSeatClass() {
-        return seatClass;
     }
 
     public int getCodeReservation() {
