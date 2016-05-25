@@ -6,6 +6,7 @@
 package net;
 
 import clients.ControllerClient;
+import com.google.gson.Gson;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -18,6 +19,7 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import static jdk.nashorn.internal.objects.NativeMath.log;
+import objects.Flight;
 import objects.Route;
 
 /**
@@ -32,6 +34,7 @@ class RemoteUser extends Thread {
     BufferedReader in;
     private static int counter = 0;
     private int progressiven;
+    Gson gson = new Gson();
 
     boolean stop;
     Map<String, Command> commands;
@@ -124,7 +127,7 @@ class RemoteUser extends Thread {
                 if (args.equalsIgnoreCase("")) {
                     for (Route rotte : rottes) {
 
-                        out.println(rotte);
+                        out.println(gson.toJson(rotte));
 
                     }
                 } else {
@@ -132,14 +135,14 @@ class RemoteUser extends Thread {
                     if (argoments.length == 2) {
                         for (Route rotte : rottes) {
                             if ((rotte.getDepartureCity().equalsIgnoreCase(argoments[0])) & (rotte.getDestinationCity().equalsIgnoreCase(argoments[1]))) {
-                                out.println(rotte);
+                                out.println(gson.toJson(rotte));
                             }
                         }
                     }
                     if (argoments.length == 1) {
                         for (Route rotte : rottes) {
                             if ((rotte.getDepartureCity().equalsIgnoreCase(argoments[0]))) {
-                                out.println(rotte);
+                                out.println(gson.toJson(rotte));
                             }
                         }
                     }
@@ -149,16 +152,21 @@ class RemoteUser extends Thread {
             }
         });
 
-        /* DA TENERE
-         
-         commands.put("RICERCAVOLO", new Command() {
-            
-         @Override
-         public void execute(String args) {
-         ricercaVolo();
-         }
-         });
-        
+        commands.put("RICERCAVOLO", new Command() {
+
+            @Override
+            public void execute(String args) {
+
+                try {
+                    Flight r = gson.fromJson(in.readLine(), Flight.class);
+                    //DA MODIFICARE LA DATA DEVE ESSERE NEL FORMATO DI COME DICE IL DB
+                    ArrayList<Flight> flights = company.searchFlights(r.getRoute().getDepartureCity(),r.getRoute().getDestinationCity(),r.getDateDeparture().toString());
+                } catch (SQLException | IOException ex) {
+                    Logger.getLogger(RemoteUser.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        });
+        /*
          commands.put("RICERCAPOSTI", new Command() {
             
          @Override
@@ -229,47 +237,6 @@ class RemoteUser extends Thread {
 
     }
 
-    /*private void ricercaVolo()
-     {
-    
-     try {
-     out.println("Inserisci partenza: ");
-     String s1 = in.readLine();
-     out.println("Inserisci arrivo: ");
-     String s2 = in.readLine();
-     Route r = company.searchRoute(s1, s2);
-     if (r != null) {
-     out.println("Route presente.");
-     out.println("Inserisci Data (gg/mm/aaaa): ");
-     s1 = in.readLine();
-     String[] vet = new String[3];
-     vet = s1.split("/");
-     GregorianCalendar date = new GregorianCalendar(Integer.parseInt(vet[2]), Integer.parseInt(vet[1]) - 1, Integer.parseInt(vet[0]));
-     ArrayList<Flight> arrayFlight = company.searchFlights(r, date);
-     if (!arrayFlight.isEmpty()) {
-     for (Flight f : arrayFlight) {
-     out.println("Trovato il seguente volo:");
-     out.println(f);
-     }
-     }
-     else{
-     ArrayList<Flight> calendar= company.calendarFlight(r);
-     if(calendar.isEmpty()){
-     out.println("La compagnia gestisce la route ma non ci sono voli presenti.");
-     }
-     else{
-     out.println("Nessun volo per questa data, suggerimenti: ");
-     for(Flight a:calendar)
-     out.println(a);
-     }
-     }
-     } else {
-     out.println("Route non presente.");
-     }       } catch (IOException ex) {
-     Logger.getLogger(RemoteUser.class.getName()).log(Level.SEVERE, null, ex);
-     }
-     }
-     */
     /*
      private void ricercaPosti() {
      try {

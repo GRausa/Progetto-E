@@ -31,7 +31,7 @@ public class Flight {
         return code;
     }
 
-    public Route getR() {
+    public Route getRoute() {
         return r;
     }
 
