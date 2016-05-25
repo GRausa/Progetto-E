@@ -7,6 +7,7 @@ package database;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -81,5 +82,12 @@ public class ParserSQL {
         int minute = Integer.parseInt(vetTime[1]);
         GregorianCalendar date = new GregorianCalendar(year,month,day,hour,minute);
         return date;
+    }
+    
+    public static String stringDate(GregorianCalendar date){
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MMM/yyyy");
+        String d = sdf.format(date.getTime());
+        String[] vet = d.split("/");
+        return vet[2]+"-"+vet[1]+"-"+vet[0];
     }
 }
