@@ -83,6 +83,11 @@ public class TicketPassenger {
     public ArrayList<String> getInsurances() {
         return insurances;
     }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+    
     
     
 }

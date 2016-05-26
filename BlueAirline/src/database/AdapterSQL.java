@@ -41,7 +41,7 @@ public class AdapterSQL {
         String query
                 = "SELECT COUNT(*) AS NUM\n"
                 + "FROM Posto\n"
-                + "WHERE Volo='" + codeFlight + "' AND PASSEGGERO=null ";
+                + "WHERE Volo='" + codeFlight + "' AND PASSEGGERO IS NULL ";
         ResultSet resultQuery = SQL.queryRead(query);
         return (int) ParserSQL.parseFunctionSQL(resultQuery, "NUM");
     }
@@ -181,10 +181,12 @@ public class AdapterSQL {
         for (TicketPassenger tp : passengers) {
             i++;
             String codeTicket = reservation.getCodeFlight() + "" + reservation.getCode() + "" + i;
+            tp.setCode(codeTicket);
             query = "INSERT INTO TicketPasseggero\n"
-                    + "VALUES ('" + codeTicket + "', '" + tp.getID() + "', '" + tp.getName() + "', '" + tp.getSurname() + "', '" + reservation.getCode() + "', '" + reservation.getCodeFlight() + "', '" + tp.getNseat() + "')";
+            //        + "VALUES ('" + codeTicket + "', '" + tp.getID() + "', '" + tp.getName() + "', '" + tp.getSurname() + "', '" + reservation.getCode() + "', '" + reservation.getCodeFlight() + "', '" + tp.getNseat() + "')";
+                      + "VALUES ('" + tp.getCode() + "', '" + tp.getID() + "', '" + tp.getName() + "', '" + tp.getSurname() + "', '" + reservation.getCode() + "')";
             SQL.queryWrite(query);
-            this.setSeatBoolean(reservation.getCodeFlight(), tp.getNseat(), 1); //lo metto a 1 cioè occupato
+            this.setSeatBoolean(reservation.getCodeFlight(), tp.getNseat(), tp.getCode()); //lo metto a 1 cioè occupato
             //aggiunte
             ArrayList<String> meals = tp.getMeals();
             for (String s : meals) {
@@ -202,8 +204,8 @@ public class AdapterSQL {
         return reservation;
     }
 
-    public void setSeatBoolean(String codeFlight, int nSeat, int isSeat) throws SQLException {
-        String query = "UPDATE Posto SET Occupato = '"+isSeat+"'\n"
+    public void setSeatBoolean(String codeFlight, int nSeat, String ticketPassenger) throws SQLException {
+        String query = "UPDATE Posto SET PASSEGGERO = '"+ticketPassenger+"'\n"
                 + "WHERE Numero=" +nSeat+ " AND Volo = '" + codeFlight+ "'";
         SQL.queryWrite(query);
     }

@@ -31,7 +31,6 @@ public class ControllerTxt {
 
     public void riempi() throws SQLException {
         ArrayList<Flight> flights = CC.riempi();
-
     }
 
     public void searchRoutes() throws SQLException {
