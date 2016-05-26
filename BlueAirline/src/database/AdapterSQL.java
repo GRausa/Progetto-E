@@ -41,7 +41,7 @@ public class AdapterSQL {
         String query
                 = "SELECT COUNT(*) AS NUM\n"
                 + "FROM Posto\n"
-                + "WHERE Volo='" + codeFlight + "' AND OCCUPATO=0 ";
+                + "WHERE Volo='" + codeFlight + "' AND PASSEGGERO=null ";
         ResultSet resultQuery = SQL.queryRead(query);
         return (int) ParserSQL.parseFunctionSQL(resultQuery, "NUM");
     }
@@ -70,7 +70,7 @@ public class AdapterSQL {
     }
 
     public void setSeat(String volo, int num, int classe) throws SQLException {
-        String query = "INSERT INTO Posto VALUES ('" + num + "', '" + volo + "', '" + classe + "', '0')";
+        String query = "INSERT INTO Posto VALUES ('" + num + "', '" + volo + "', '" + classe + "', null)";
         SQL.queryWrite(query);
 
     }
