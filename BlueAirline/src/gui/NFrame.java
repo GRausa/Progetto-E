@@ -43,7 +43,7 @@ public class NFrame extends JFrame{
         setMinimumSize(new Dimension(WEIGHT,HEIGHT+(40*this.n)));
         this.setResizable(false);
         initComponents();
-        this.setVisible(true);
+        this.setVisible(false);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); 
         
         Dimension screenSize = Toolkit.getDefaultToolkit ().getScreenSize ();
@@ -112,6 +112,35 @@ public class NFrame extends JFrame{
         
     }
 }
+
+    void rezise(JTextField numero) {
+    int n = Integer.parseInt(numero.getText());
+    setSize(WEIGHT, HEIGHT+(30*n));
+    setMinimumSize(new Dimension(WEIGHT,HEIGHT+(30*n)));
+    for(int i=0; i<combo.size();i++)
+    this.remove(combo.get(i));
+    for(int i=0;i<n;i++)
+    {
+        GridBagConstraints c = new GridBagConstraints();
+        
+        if (shouldWeightX) {
+            c.weightx = 3;
+        }
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.ipady = 20;
+        c.gridx = 0;
+        c.gridy = i+2;
+        JComboBox combo = new JComboBox();
+        this.combo.add(combo);
+        combo.setFont(new Font("Helvetica",Font.BOLD,15));
+        
+        add(combo, c);
+        
+    }
+  
+  
+   
+    }
     
     
 }
