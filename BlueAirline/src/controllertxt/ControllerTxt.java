@@ -97,7 +97,8 @@ public class ControllerTxt {
                 passengers.add(p);
                 i++;
             }
-            CC.makeReservation(reservation, passengers);
+            reservation.setPassengers(passengers);
+            CC.makeReservation(reservation);
         }
         else{
             System.out.println("Posti non sufficenti");
