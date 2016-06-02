@@ -7,7 +7,6 @@ package net;
 
 import clients.ControllerClient;
 import com.google.gson.Gson;
-import database.ParserSQL;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -16,7 +15,6 @@ import java.net.Socket;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;

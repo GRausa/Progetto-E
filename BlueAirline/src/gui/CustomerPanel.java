@@ -588,9 +588,6 @@ public class CustomerPanel extends JPanel{
    };
    return evento;
 }
-    
-
-        
     public static void changeFont ( Component component, Font font )
                     
 {
