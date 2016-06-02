@@ -37,44 +37,44 @@ public class ClientBlueAirline {
 
     public void hello() throws IOException {
         out.println("HI!");
-        if(in.readLine().equals("HI!")){
+        if (in.readLine().equals("HI!")) {
             System.out.println("RICEVUTA RISPOSTA DAL SERVER, IL SERVER è ATTIVO");
         }
     }
-    
-    public Flight[] checkFligt(Flight flight) throws IOException{
-        
-        out.println("RICERCAVOLO "+gson.toJson(flight));
-        Flight[] flights= gson.fromJson(in.readLine(), Flight[].class);
+
+    public Flight[] checkFligt(Flight flight) throws IOException {
+
+        out.println("RICERCAVOLO " + gson.toJson(flight));
+        Flight[] flights = gson.fromJson(in.readLine(), Flight[].class);
         return flights;
     }
-    
-    public Reservation makeReservation(Reservation res) throws IOException{
-        
-        out.println("RESERVATION "+gson.toJson(res));
-        
+
+    public Reservation makeReservation(Reservation res) throws IOException {
+
+        out.println("RESERVATION " + gson.toJson(res));
+
         return null;
     }
-    
-    public boolean checkRoute(Route rotta) throws IOException{
-        
-        out.println("CHECK "+gson.toJson(rotta));
-        String serverout=in.readLine();
-       
-        Route []rotte=gson.fromJson(serverout, Route[].class);
-        if(rotte.length>0){
-        for(Route r:rotte){
-            System.out.println(r);
-        }
-        }
-        else 
+
+    public boolean checkRoute(Route rotta) throws IOException {
+
+        out.println("CHECK " + gson.toJson(rotta));
+        String serverout = in.readLine();
+
+        Route[] rotte = gson.fromJson(serverout, Route[].class);
+        if (rotte.length > 0) {
+            for (Route r : rotte) {
+                System.out.println(r);
+            }
+        } else {
             System.out.println("NON ESISTE TRATTA PER QUESTA CITTA'");
+        }
         return false;
     }
-    
-    public Flight[] calendar(Route rotta) throws IOException{
-        out.println("CALENDAR "+gson.toJson(rotta));
-        Flight[] flights= gson.fromJson(in.readLine(), Flight[].class);
+
+    public Flight[] calendar(Route rotta) throws IOException {
+        out.println("CALENDAR " + gson.toJson(rotta));
+        Flight[] flights = gson.fromJson(in.readLine(), Flight[].class);
         return flights;
     }
 

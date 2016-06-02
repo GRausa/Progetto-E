@@ -44,10 +44,11 @@ public class ControllerClient {
     public Flight getFlightWithSeats(Flight flight) throws SQLException{
         return adapter.getFlightWithSeats(flight);
     }
+    /*
     public Reservation searchReservation(int code) throws SQLException{
         return adapter.searchReservation(code);
     }
-    
+    */
     public Reservation makeReservation(Reservation reservation) throws SQLException{
         return adapter.makeReservation(reservation);
     }

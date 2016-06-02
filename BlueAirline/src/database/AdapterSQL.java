@@ -134,7 +134,7 @@ public class AdapterSQL {
         resultQuery.close();
         return flights;
     }
-
+    /*
     public Reservation searchReservation(int code) throws SQLException {
         Reservation reservation;
         String query
@@ -146,7 +146,7 @@ public class AdapterSQL {
         resultQuery.close();
         return reservation;
     }
-
+*/
     public ArrayList<String> searchAllCitys() throws SQLException {
         ArrayList<String> citys;
         String query
@@ -179,18 +179,19 @@ public class AdapterSQL {
         query = "INSERT INTO Prenotazione VALUES ('" + codeReservation + "', '" + reservation.getCodeFlight() + "', '" + reservation.getEmail() + "', '" + reservation.getNumber() + "')";
         SQL.queryWrite(query);
         reservation.setCode(codeReservation);
-        
             
         //aggiunta passeggeri
         int i = 0;
+        String codeTicket="";
         for (TicketPassenger tp : reservation.getPassengers()) {
             i++;
-            String codeTicket = reservation.getCodeFlight() +""+reservation.getCode()+""+i;
+            codeTicket = reservation.getCodeFlight() +""+ reservation.getCode()+"" + i;
+            //codeTicketreservation.getCodeFlight() +"3"+i;
             tp.setCode(codeTicket);
             
             query = "INSERT INTO TicketPasseggero\n"
             //        + "VALUES ('" + codeTicket + "', '" + tp.getID() + "', '" + tp.getName() + "', '" + tp.getSurname() + "', '" + reservation.getCode() + "', '" + reservation.getCodeFlight() + "', '" + tp.getNseat() + "')";
-                       + "VALUES ('" + tp.getCode() + "', '" + tp.getID() + "', '" + tp.getName() + "', '" + tp.getSurname() + "', '" + reservation.getCode() + "',0)";
+                  + "VALUES ('" + tp.getCode() + "', '" + tp.getID() + "', '" + tp.getName() + "', '" + tp.getSurname() + "', '" + reservation.getCode() + "',0)";
             SQL.queryWrite(query);
             this.setSeatBoolean(reservation.getCodeFlight(), tp.getNseat(), tp.getCode()); //lo metto a 1 cioè occupato
             //aggiunte

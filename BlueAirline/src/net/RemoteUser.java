@@ -91,36 +91,32 @@ class RemoteUser extends Thread {
         });
 
         commands.put("CALENDAR", new Command() {
-         @Override
-         public void execute(String args) {
-             try {
-                 ArrayList<Route> rottes = null;
-                 Route r = gson.fromJson(args, Route.class);
-                 rottes = company.searchRoutes();
-                 ArrayList<Flight> flights = company.searchFlights(r);
-                 out.println(gson.toJson(flights));
-             } catch (SQLException ex) {
-                 Logger.getLogger(RemoteUser.class.getName()).log(Level.SEVERE, null, ex);
-             }
-         }
-         });
-         
-        commands.put("RESERVATION", new Command() {
-        @Override
+            @Override
             public void execute(String args) {
-           
                 try {
-               
-                Reservation res=gson.fromJson(args, Reservation.class);
-               
-                company.makeReservation(res);
-                
-            } catch (SQLException ex) {
-                Logger.getLogger(RemoteUser.class.getName()).log(Level.SEVERE, null, ex);
-            }
+                    ArrayList<Route> rottes = null;
+                    Route r = gson.fromJson(args, Route.class);
+                    rottes = company.searchRoutes();
+                    ArrayList<Flight> flights = company.searchFlights(r);
+                    out.println(gson.toJson(flights));
+                } catch (SQLException ex) {
+                    Logger.getLogger(RemoteUser.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
-        
+
+        commands.put("RESERVATION", new Command() {
+            @Override
+            public void execute(String args) {
+                try {
+                    Reservation res = gson.fromJson(args, Reservation.class);
+                    company.makeReservation(res);
+                } catch (SQLException ex) {
+                    Logger.getLogger(RemoteUser.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        });
+
         commands.put("CHECK", new Command() {
             @Override
             public void execute(String args) {
@@ -178,15 +174,15 @@ class RemoteUser extends Thread {
                     }
                 }
         );
-        
-         commands.put("RICERCAPOSTI", new Command() {
-            
-         @Override
-         public void execute(String args) {
-         //ricercaPosti();
-         }
-         });
-         /*
+
+        commands.put("RICERCAPOSTI", new Command() {
+
+            @Override
+            public void execute(String args) {
+                //ricercaPosti();
+            }
+        });
+        /*
          commands.put("PRENOTAZIONE", new Command() {
             
          @Override

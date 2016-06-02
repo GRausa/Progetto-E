@@ -56,7 +56,7 @@ public class ParserSQL {
         }
         return flights;        
     }
-    
+    /*
     public static Reservation parseReservation(ResultSet resultQuery) throws SQLException{        
         int code = resultQuery.getInt("COD_PRENOTAZIONE");
         String codeFlight = resultQuery.getString("VOLO");
@@ -65,7 +65,7 @@ public class ParserSQL {
         Reservation reservation = new Reservation(code,codeFlight,email,number);
         return reservation;
     }
-    
+    */
     public static double parseFunctionSQL(ResultSet resultQuery, String value) throws SQLException{ //SINGOLI MAX,MIN,COUNT...
         resultQuery.next();
         return resultQuery.getDouble(value);
