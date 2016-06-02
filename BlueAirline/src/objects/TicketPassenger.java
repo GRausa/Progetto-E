@@ -28,6 +28,11 @@ public class TicketPassenger {
         this.insurances = new ArrayList<>();
     }
 
+    @Override
+    public String toString() {
+        return "TicketPassenger{" + "code=" + code + ", ID=" + ID + ", name=" + name + ", surname=" + surname + ", codeFlight=" + codeFlight + ", nseat=" + nseat + ", codeReservation=" + codeReservation + ", totalPrice=" + totalPrice + ", meals=" + meals + ", holdLuggages=" + holdLuggages + ", insurances=" + insurances + '}';
+    }
+
     public String getCode() {
         return code;
     }

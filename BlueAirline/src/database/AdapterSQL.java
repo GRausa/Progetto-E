@@ -168,7 +168,7 @@ public class AdapterSQL {
     }
 
     public Reservation makeReservation(Reservation reservation) throws SQLException {
-
+        
         //prenotazione
         String query
                 = "SELECT MAX(COD_PRENOTAZIONE) AS MAXCOD\n"
@@ -179,16 +179,17 @@ public class AdapterSQL {
         query = "INSERT INTO Prenotazione VALUES ('" + codeReservation + "', '" + reservation.getCodeFlight() + "', '" + reservation.getEmail() + "', '" + reservation.getNumber() + "')";
         SQL.queryWrite(query);
         reservation.setCode(codeReservation);
-
+        
+            
         //aggiunta passeggeri
         int i = 0;
         for (TicketPassenger tp : reservation.getPassengers()) {
             i++;
-            String codeTicket = reservation.getCodeFlight() + "" + reservation.getCode() + "" + i;
+            String codeTicket = reservation.getCodeFlight()+ i;
             tp.setCode(codeTicket);
-            query = "INSERT INTO TicketPasseggero\n"
-            //        + "VALUES ('" + codeTicket + "', '" + tp.getID() + "', '" + tp.getName() + "', '" + tp.getSurname() + "', '" + reservation.getCode() + "', '" + reservation.getCodeFlight() + "', '" + tp.getNseat() + "')";
-                      + "VALUES ('" + tp.getCode() + "', '" + tp.getID() + "', '" + tp.getName() + "', '" + tp.getSurname() + "', '" + reservation.getCode() + "')";
+            
+            query = "INSERT INTO `sql7120060`.`TicketPasseggero` (`COD_TICKET`, `ID`, `NOME`, `COGNOME`, `PRENOTAZIONE`, `CHECKIN`)\n"+
+                    "VALUES ('"+tp.getCode()+"', '"+tp.getID()+"', '"+tp.getName()+"'"+tp.getSurname()+"', '"+reservation.getCode()+"', '0')";
             SQL.queryWrite(query);
             this.setSeatBoolean(reservation.getCodeFlight(), tp.getNseat(), tp.getCode()); //lo metto a 1 cioè occupato
             //aggiunte

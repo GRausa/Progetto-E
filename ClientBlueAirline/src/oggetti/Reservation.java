@@ -22,8 +22,8 @@ public class Reservation {
         this.codeFlight = codeFlight;
     }
     
-    public Reservation(String codeFlight,String email, String number, ArrayList<TicketPassenger> p) {
-        this.code = code;
+    public Reservation(String codeFlight, String number, String email,ArrayList<TicketPassenger> p) {
+        
         this.email = email;
         this.number = number;
         this.codeFlight = codeFlight;
@@ -54,12 +54,13 @@ public class Reservation {
     public String getCodeFlight() {
         return codeFlight;
     }
-    
-    @Override
-    public String toString(){
-        return code+" "+email+" "+number+" "+codeFlight;
-    }
 
+    @Override
+    public String toString() {
+        return "Reservation{" + "passengers=" + passengers.get(0) + ", code=" + code + ", email=" + email + ", number=" + number + ", codeFlight=" + codeFlight + '}';
+    }
+    
+ 
     public void setCode(int code) {
         this.code = code;
     }

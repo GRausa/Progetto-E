@@ -53,11 +53,13 @@ public class Reservation {
     public String getCodeFlight() {
         return codeFlight;
     }
-    
+
     @Override
-    public String toString(){
-        return code+" "+email+" "+number+" "+codeFlight;
+    public String toString() {
+        return "Reservation{" + "passengers=" + passengers.get(0) + ", code=" + code + ", email=" + email + ", number=" + number + ", codeFlight=" + codeFlight + '}';
     }
+    
+    
 
     public void setCode(int code) {
         this.code = code;

@@ -50,7 +50,7 @@ public class ClientBlueAirline {
     }
     
     public Reservation makeReservation(Reservation res) throws IOException{
-        
+        System.out.println(res);
         out.println("RESERVATION "+gson.toJson(res));
         
         return null;
