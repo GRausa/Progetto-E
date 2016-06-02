@@ -13,9 +13,24 @@ public class Seat {
     private int number;
     private int classe;
     private String passenger;
+    
     public Seat(int numero,int classe, String passeggero){
         this.passenger=passeggero;
         this.classe=classe;
         this.number=numero;
     }
+
+    public int getNumber() {
+        return number;
+    }
+
+    public int getClasse() {
+        return classe;
+    }
+
+    public String getPassenger() {
+        return passenger;
+    }
+    
+    
 }
