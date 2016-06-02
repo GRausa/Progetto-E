@@ -22,6 +22,7 @@ import java.util.logging.Logger;
 import static jdk.nashorn.internal.objects.NativeMath.log;
 import objects.Flight;
 import objects.Route;
+import objects.Reservation;
 
 /**
  *
@@ -104,6 +105,14 @@ class RemoteUser extends Thread {
          }
          });
          
+        commands.put("RESERVATION ", new Command() {
+        @Override
+            public void execute(String args) {
+            Reservation res=gson.fromJson(args, Reservation.class);
+            company.makeReservation(res);
+            }
+        });
+        
         commands.put("CHECK", new Command() {
             @Override
             public void execute(String args) {
