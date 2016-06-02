@@ -60,16 +60,16 @@ public class TicketPassenger {
         return totalPrice;
     }
 
-    public void setMeals(ArrayList<String> meals) {
-        this.meals = meals;
+    public void addMeals(String meal) {
+        this.meals.add(meal);
     }
 
-    public void setHoldLuggages(ArrayList<String> holdLuggages) {
-        this.holdLuggages = holdLuggages;
+    public void addHoldLuggage(String holdLuggage) {
+        this.holdLuggages.add(holdLuggage);
     }
 
-    public void setInsurances(ArrayList<String> insurances) {
-        this.insurances = insurances;
+    public void addInsurance(String insurance) {
+        this.insurances.add(insurance);
     }
 
     public ArrayList<String> getMeals() {

@@ -45,6 +45,7 @@ public class Reservation {
         return codeFlight;
     }
     
+    @Override
     public String toString(){
         return code+" "+email+" "+number+" "+codeFlight;
     }

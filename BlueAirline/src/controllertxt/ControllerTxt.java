@@ -76,29 +76,24 @@ public class ControllerTxt {
                 String[] vet1 = s.split("\t");
 
                 //aggiunte
-                ArrayList<String> meals = new ArrayList<>();
-                ArrayList<String> holdLuggages = new ArrayList<>();
-                ArrayList<String> insurances = new ArrayList<>();
+                TicketPassenger p = new TicketPassenger(vet1[0], vet1[1], vet1[2], Integer.parseInt(vet1[3]));
+             
                 for (int j = 4; j < vet1.length; j++) {
                     String v = vet1[j];
                     switch (vet1[j].charAt(0)) {
                         case 'M':
-                            meals.add(v);
+                           p.addMeals(v);
                             break;
                         case 'H':
-                            holdLuggages.add(v);
+                            p.addHoldLuggage(v);
                             break;
                         case 'I':
-                            insurances.add(v);
+                            p.addInsurance(v);
                             break;
                         default:
                             break;
                     }
                 }
-                TicketPassenger p = new TicketPassenger(vet1[0], vet1[1], vet1[2], Integer.parseInt(vet1[3]));
-                p.setMeals(meals);
-                p.setHoldLuggages(holdLuggages);
-                p.setInsurances(insurances);
                 passengers.add(p);
                 i++;
             }
