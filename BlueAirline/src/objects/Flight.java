@@ -6,6 +6,7 @@
 package objects;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 
 /**
@@ -18,6 +19,7 @@ public class Flight {
     private Calendar dateDeparture;
     private Calendar dateDestination;
     private double prezzo;
+    private ArrayList<Seat> seats;
 
     public Flight(String code, Route r, Calendar dateDeparture, Calendar dateDestination, double prezzo) {
         this.code = code;
@@ -25,6 +27,15 @@ public class Flight {
         this.dateDeparture = dateDeparture;
         this.dateDestination = dateDestination;
         this.prezzo = prezzo;
+    }
+    
+    public Flight(String code, Route r, Calendar dateDeparture, Calendar dateDestination, double prezzo, ArrayList<Seat> seats) {
+        this.code = code;
+        this.r = r;
+        this.dateDeparture = dateDeparture;
+        this.dateDestination = dateDestination;
+        this.prezzo = prezzo;
+        this.seats = seats;
     }
 
     public String getCode() {
@@ -51,6 +62,12 @@ public class Flight {
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MMM/yyyy HH:mm");
         return code+" "+r.toString()+"\n"+sdf.format(this.dateDeparture.getTime())+" - "+sdf.format(this.dateDestination.getTime())+"\n"+prezzo+"€";
     }
+
+    public ArrayList<Seat> getSeats() {
+        return seats;
+    }
+    
+    
     
     
 }
