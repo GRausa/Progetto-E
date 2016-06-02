@@ -12,6 +12,7 @@ import objects.Flight;
 import objects.Meal;
 import objects.Reservation;
 import objects.Route;
+import objects.Seat;
 import objects.TicketPassenger;
 
 /**
@@ -256,4 +257,11 @@ public class AdapterSQL {
                 break;
         }
     }
+
+    public Flight getFlightWithSeats(Flight flight) {
+        
+        flight.setSeats(null);
+    }
+    
+    public ArrayList<Seat> getSeatsFlight
 }
