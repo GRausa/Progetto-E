@@ -185,11 +185,12 @@ public class AdapterSQL {
         int i = 0;
         for (TicketPassenger tp : reservation.getPassengers()) {
             i++;
-            String codeTicket = reservation.getCodeFlight()+ i;
+            String codeTicket = reservation.getCodeFlight() +""+i;
             tp.setCode(codeTicket);
             
-            query = "INSERT INTO `sql7120060`.`TicketPasseggero` (`COD_TICKET`, `ID`, `NOME`, `COGNOME`, `PRENOTAZIONE`, `CHECKIN`)\n"+
-                    "VALUES ('"+tp.getCode()+"', '"+tp.getID()+"', '"+tp.getName()+"'"+tp.getSurname()+"', '"+reservation.getCode()+"', '0')";
+            query = "INSERT INTO TicketPasseggero\n"
+            //        + "VALUES ('" + codeTicket + "', '" + tp.getID() + "', '" + tp.getName() + "', '" + tp.getSurname() + "', '" + reservation.getCode() + "', '" + reservation.getCodeFlight() + "', '" + tp.getNseat() + "')";
+                       + "VALUES ('" + tp.getCode() + "', '" + tp.getID() + "', '" + tp.getName() + "', '" + tp.getSurname() + "', '" + reservation.getCode() + "',0)";
             SQL.queryWrite(query);
             this.setSeatBoolean(reservation.getCodeFlight(), tp.getNseat(), tp.getCode()); //lo metto a 1 cioè occupato
             //aggiunte
