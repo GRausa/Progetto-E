@@ -185,7 +185,7 @@ public class AdapterSQL {
         int i = 0;
         for (TicketPassenger tp : reservation.getPassengers()) {
             i++;
-            String codeTicket = reservation.getCodeFlight() +""+i;
+            String codeTicket = reservation.getCodeFlight() +""+reservation.getCode()+""+i;
             tp.setCode(codeTicket);
             
             query = "INSERT INTO TicketPasseggero\n"
