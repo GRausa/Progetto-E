@@ -33,9 +33,10 @@ public class ControllerClient {
         return adapter.riempivoli();
     }
 
-    public ArrayList<Flight> searchFlights(String departure, String destination, String date) throws SQLException {
+    public ArrayList<Flight> searchFlights(String departure, String destination, String date) throws SQLException {       
         return adapter.searchFlights(departure, destination, date);
     }
+    
     public ArrayList<Flight> searchFlights(Route route) throws SQLException {
         return adapter.searchFlights(route);
     }

@@ -115,6 +115,9 @@ public class AdapterSQL {
                 + "WHERE R.AEROPORTOPARTENZA = A1.COD_AEROPORTO AND R.AEROPORTOARRIVO=A2.COD_AEROPORTO AND R.COD_ROTTA=V.ROTTA AND A1.CITTA='" + departure + "' AND A2.CITTA ='" + destination + "' AND V.DATAPARTENZA = '" + date + "'";
         ResultSet resultQuery = SQL.queryRead(query);
         flights = ParserSQL.parseFlights(resultQuery);
+        for(Flight f : flights){
+            this.getFlightWithSeats(f);
+        }
         resultQuery.close();
         return flights;
     }
