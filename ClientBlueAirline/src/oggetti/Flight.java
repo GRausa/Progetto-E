@@ -6,6 +6,7 @@
 package oggetti;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 
 /**
@@ -18,7 +19,8 @@ public class Flight {
     private Calendar dateDeparture;
     private Calendar dateDestination;
     private double prezzo;
-
+    private ArrayList<Seat> seats;
+    
     public Flight(String code, Route r, Calendar dateDeparture, Calendar dateDestination, double prezzo) {
         this.code = code;
         this.r = r;
@@ -52,6 +54,10 @@ public class Flight {
 
     public double getPrezzo() {
         return prezzo;
+    }
+
+    public ArrayList<Seat> getSeats() {
+        return seats;
     }
     
     public String toString(){

@@ -13,6 +13,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import oggetti.Flight;
 import oggetti.Route;
+import oggetti.Seat;
 
 /**
  *
@@ -68,15 +69,22 @@ public class lettura implements Runnable {
                     GregorianCalendar date = new GregorianCalendar(year, month, day);
 
                     Flight tmpflight = new Flight(tmproute, date);
-                    
+                    Flight[] volit = null;
                      {
                         try {
-                            Flight[] volit=client.checkFligt(tmpflight);
+                            volit=client.checkFligt(tmpflight);
                             for(Flight v:volit){
                                 System.out.println(v);
                             }
                         } catch (IOException ex) {
                             Logger.getLogger(lettura.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
+                    if (volit.length==1){
+                        System.out.println("STO STAMPANDO TUTTI I POSTI PER QUESTO FLIGHT :"+volit[0].getCode());
+                        ArrayList<Seat> posti=volit[0].getSeats();
+                        for(Seat p:posti){
+                            System.out.println(p);
                         }
                     }
                     break;
@@ -95,6 +103,8 @@ public class lettura implements Runnable {
                         }
                     }
                     break;
+                    
+                
 
                 case "CALENDARIO_VOLI":
 
