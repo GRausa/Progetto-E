@@ -40,6 +40,9 @@ public class ControllerClient {
         return adapter.searchFlights(route);
     }
     
+    public Flight getFlightWithSeats(Flight flight) throws SQLException{
+        return adapter.getFlightWithSeats(flight);
+    }
     public Reservation searchReservation(int code) throws SQLException{
         return adapter.searchReservation(code);
     }

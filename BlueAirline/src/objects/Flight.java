@@ -65,6 +65,10 @@ public class Flight {
 
     public ArrayList<Seat> getSeats() {
         return seats;
-    }   
+    }
+
+    public void setSeats(ArrayList<Seat> seats) {
+        this.seats = seats;
+    }    
     
 }

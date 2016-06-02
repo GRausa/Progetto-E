@@ -14,6 +14,7 @@ import java.util.GregorianCalendar;
 import objects.Flight;
 import objects.Reservation;
 import objects.Route;
+import objects.Seat;
 
 /**
  *
@@ -78,6 +79,17 @@ public class ParserSQL {
         return citys;
     }
     
+    static ArrayList<Seat> parseSeats(ResultSet resultQuery) throws SQLException {
+        ArrayList<Seat> seats = new ArrayList<>();
+        while (resultQuery.next()) {
+            int num = Integer.parseInt(resultQuery.getString("NUMERO"));
+            int classe = Integer.parseInt(resultQuery.getString("Classe"));
+            String passenger = resultQuery.getString("PASSEGGERO");
+            seats.add(new Seat(num, classe, passenger));
+        }
+        return seats;    
+    }
+    
     //METODI GENERICI
     
     public static Calendar returnCalendar(String stringDate, String stringTime){
@@ -98,4 +110,6 @@ public class ParserSQL {
         String[] vet = d.split("/");
         return vet[2]+"-"+vet[1]+"-"+vet[0];
     }
+
+    
 }

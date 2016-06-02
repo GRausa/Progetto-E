@@ -258,10 +258,20 @@ public class AdapterSQL {
         }
     }
 
-    public Flight getFlightWithSeats(Flight flight) {
-        
-        flight.setSeats(null);
+    public Flight getFlightWithSeats(Flight flight) throws SQLException {
+        flight.setSeats(this.getSeatsFlight(flight.getCode()));
+        return flight;
     }
     
-    public ArrayList<Seat> getSeatsFlight
+    public ArrayList<Seat> getSeatsFlight(String codeFlight) throws SQLException{
+        ArrayList<Seat> seats;
+        String query
+                = "SELECT NUMERO, Classe, PASSEGGERO\n"
+                + "FROM Posto\n"
+                + "WHERE Volo='"+codeFlight+"' ";
+        ResultSet resultQuery = SQL.queryRead(query);
+        seats = ParserSQL.parseSeats(resultQuery);
+        resultQuery.close();
+        return seats;
+    }
 }
