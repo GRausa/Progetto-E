@@ -48,8 +48,8 @@ public class ControllerClient {
         return adapter.searchReservation(code);
     }
     
-    public Reservation makeReservation(Reservation reservation, ArrayList<TicketPassenger> passengers) throws SQLException{
-        return adapter.makeReservation(reservation, passengers);
+    public Reservation makeReservation(Reservation reservation) throws SQLException{
+        return adapter.makeReservation(reservation);
     }
     
     public int numberSeatFree(String codeFlight) throws SQLException{

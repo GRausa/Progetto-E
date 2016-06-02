@@ -5,11 +5,14 @@
  */
 package objects;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Giovanni
  */
 public class Reservation {
+    private ArrayList<TicketPassenger> passengers;
     private int code;
     private String email, number, codeFlight;
 
@@ -19,8 +22,6 @@ public class Reservation {
         this.codeFlight = codeFlight;
     }
     
-    
-
     public Reservation(int code, String email, String number, String codeFlight) {
         this.code = code;
         this.email = email;
@@ -28,6 +29,14 @@ public class Reservation {
         this.codeFlight = codeFlight;
     }
 
+    public ArrayList<TicketPassenger> getPassengers() {
+        return passengers;
+    }
+
+    public void setPassengers(ArrayList<TicketPassenger> passengers) {
+        this.passengers = passengers;
+    }
+    
     public int getCode() {
         return code;
     }

@@ -167,7 +167,7 @@ public class AdapterSQL {
         return ParserSQL.parseFunctionSQL(resultQuery, "PREZZOVOLO");
     }
 
-    public Reservation makeReservation(Reservation reservation, ArrayList<TicketPassenger> passengers) throws SQLException {
+    public Reservation makeReservation(Reservation reservation) throws SQLException {
 
         //prenotazione
         String query
@@ -182,7 +182,7 @@ public class AdapterSQL {
 
         //aggiunta passeggeri
         int i = 0;
-        for (TicketPassenger tp : passengers) {
+        for (TicketPassenger tp : reservation.getPassengers()) {
             i++;
             String codeTicket = reservation.getCodeFlight() + "" + reservation.getCode() + "" + i;
             tp.setCode(codeTicket);
