@@ -13,6 +13,7 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.ArrayList;
 import oggetti.Flight;
+import oggetti.Reservation;
 import oggetti.Route;
 
 /**
@@ -46,6 +47,13 @@ public class ClientBlueAirline {
         out.println("RICERCAVOLO "+gson.toJson(flight));
         Flight[] flights= gson.fromJson(in.readLine(), Flight[].class);
         return flights;
+    }
+    
+    public Reservation makeReservation(Reservation res) throws IOException{
+        
+        out.println("RESERVATION "+gson.toJson(res));
+        
+        return null;
     }
     
     public boolean checkRoute(Route rotta) throws IOException{

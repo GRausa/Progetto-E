@@ -108,8 +108,13 @@ class RemoteUser extends Thread {
         commands.put("RESERVATION ", new Command() {
         @Override
             public void execute(String args) {
-            Reservation res=gson.fromJson(args, Reservation.class);
-            company.makeReservation(res);
+            try {
+                Reservation res=gson.fromJson(args, Reservation.class);
+                company.makeReservation(res);
+                System.out.println(res);
+            } catch (SQLException ex) {
+                Logger.getLogger(RemoteUser.class.getName()).log(Level.SEVERE, null, ex);
+            }
             }
         });
         
