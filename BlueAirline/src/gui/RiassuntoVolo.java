@@ -132,7 +132,7 @@ public class RiassuntoVolo extends JPanel  {
      
     c.gridx = 0;
     c.gridy = 0;
-    conferma.addActionListener(SendReservation());
+  //  conferma.addActionListener(SendReservation());
     pane.add(conferma, c);
     
   /*  
@@ -528,17 +528,17 @@ public class RiassuntoVolo extends JPanel  {
     home.trasparentTextField(this.nassicurazioni);
     */
     }
-    
+   /* 
       private ActionListener SendReservation() {
         ActionListener evento = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                try {
-                    controller.makeReservation(home.getReservation(), home.getPassengers());
+            //    try {
+                   // controller.makeReservation(home.getReservation(), home.getPassengers());
                       int dialogResult = JOptionPane.showConfirmDialog(home, "Prenotaziona effettuata\n", "Errore", JOptionPane.YES_OPTION);
                       if(dialogResult==1)
                       home.returnHome();
-                } catch (SQLException ex) {
+          //      } catch (SQLException ex) {
                     Logger.getLogger(Riassuntovolo2.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
@@ -546,7 +546,7 @@ public class RiassuntoVolo extends JPanel  {
            
         };
         return evento;
-    }
+    }*/
     
     }
 
