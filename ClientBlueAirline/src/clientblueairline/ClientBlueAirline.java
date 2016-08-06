@@ -11,7 +11,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
-import java.util.ArrayList;
 import oggetti.Flight;
 import oggetti.Reservation;
 import oggetti.Route;
@@ -38,7 +37,7 @@ public class ClientBlueAirline {
     public void hello() throws IOException {
         out.println("HI!");
         if (in.readLine().equals("HI!")) {
-            System.out.println("RICEVUTA RISPOSTA DAL SERVER, IL SERVER è ATTIVO");
+            System.out.println("RICEVUTA RISPOSTA DAL SERVER, IL SERVER E' ATTIVO");
         }
     }
 
@@ -80,7 +79,6 @@ public class ClientBlueAirline {
 
     public void scrittura() throws IOException {
         System.out.println("RICEVUTO DAL SERVER: " + in.readLine());
-
     }
 
 }

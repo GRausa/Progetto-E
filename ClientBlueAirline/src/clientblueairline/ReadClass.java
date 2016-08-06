@@ -21,11 +21,11 @@ import oggetti.TicketPassenger;
  *
  * @author riccardo
  */
-public class lettura implements Runnable {
+public class ReadClass implements Runnable {
 
     ClientBlueAirline client;
 
-    public lettura(ClientBlueAirline n) {
+    public ReadClass(ClientBlueAirline n) {
         this.client = n;
     }
 
@@ -41,7 +41,7 @@ public class lettura implements Runnable {
                     try {
                         client.hello();
                     } catch (IOException ex) {
-                        Logger.getLogger(lettura.class.getName()).log(Level.SEVERE, null, ex);
+                        Logger.getLogger(ReadClass.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
                 break;
@@ -54,7 +54,6 @@ public class lettura implements Runnable {
                     Route tmproute = new Route(part, dest);
                     System.out.println("Inserisci data di partenza AAAA-MM-GG");
                     String data = input.nextLine();
-
                     int day,
                      month,
                      year;
@@ -79,7 +78,7 @@ public class lettura implements Runnable {
                                 System.out.println(v);
                             }
                         } catch (IOException ex) {
-                            Logger.getLogger(lettura.class.getName()).log(Level.SEVERE, null, ex);
+                            Logger.getLogger(ReadClass.class.getName()).log(Level.SEVERE, null, ex);
                         }
                     }
                     if (volit.length == 1) {
@@ -101,7 +100,7 @@ public class lettura implements Runnable {
                         try {
                             client.checkRoute(tmproute1);
                         } catch (IOException ex) {
-                            Logger.getLogger(lettura.class.getName()).log(Level.SEVERE, null, ex);
+                            Logger.getLogger(ReadClass.class.getName()).log(Level.SEVERE, null, ex);
                         }
                     }
                     break;
@@ -146,7 +145,7 @@ public class lettura implements Runnable {
                         try {
                             client.makeReservation(res);
                         } catch (IOException ex) {
-                            Logger.getLogger(lettura.class.getName()).log(Level.SEVERE, null, ex);
+                            Logger.getLogger(ReadClass.class.getName()).log(Level.SEVERE, null, ex);
                         }
                     }
                     break;
@@ -167,12 +166,12 @@ public class lettura implements Runnable {
                                 System.out.println(a);
                             }
                         } catch (IOException ex) {
-                            Logger.getLogger(lettura.class.getName()).log(Level.SEVERE, null, ex);
+                            Logger.getLogger(ReadClass.class.getName()).log(Level.SEVERE, null, ex);
                         }
                     }
                     break;
                 default:
-                    System.out.println("idiota scrivi giusto");
+                    System.out.println("Errore inserimento");
 
             }
             try {
