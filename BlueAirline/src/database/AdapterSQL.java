@@ -9,7 +9,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import objects.Flight;
-import objects.Meal;
 import objects.Reservation;
 import objects.Route;
 import objects.Seat;
@@ -58,7 +57,7 @@ public class AdapterSQL {
 
     }
 
-    public void riempiseatflight(Flight volo) throws SQLException {
+    public void setAllSeatFlight(Flight volo) throws SQLException {
         int numeroseat = numberSeatFlight(volo.getCode());
         int prima = numberSeatFirstClassFlight(volo.getCode());
         for (int i = 0; i < numeroseat; i++) {
@@ -76,7 +75,7 @@ public class AdapterSQL {
 
     }
 
-    public ArrayList<Flight> riempivoli() throws SQLException {
+    public ArrayList<Flight> setAllSeatFlights() throws SQLException {
         ArrayList<Flight> flights;
         String query
                 = "SELECT V.COD_VOLO, A1.CITTA \"CITTAPARTENZA\", A1.NOME \"AEROPORTOPARTENZA\", A2.CITTA \"CITTAARRIVO\", A2.NOME \"AEROPORTOARRIVO\", V.DATAPARTENZA, V.ORAPARTENZA, V.DATAARRIVO, V.ORAARRIVO, V.PREZZO "
@@ -87,7 +86,7 @@ public class AdapterSQL {
 
         for (Flight fli : flights) {
             System.out.println(fli);
-            riempiseatflight(fli);
+            AdapterSQL.this.setAllSeatFlight(fli);
         }
 
         resultQuery.close();

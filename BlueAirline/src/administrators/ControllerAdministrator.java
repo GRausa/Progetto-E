@@ -6,7 +6,6 @@
 package administrators;
 
 import database.AdapterSQL;
-import java.util.ArrayList;
 
 /**
  *
