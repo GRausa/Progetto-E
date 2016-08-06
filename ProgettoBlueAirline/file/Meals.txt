@@ -1,6 +1,0 @@
-M1	Caffe'	3	0
-M2	Te'	3.50	0
-M3	Panino con salumi	4.50	30
-M4	Pasta all'amatriciana	12.90	360
-M5	Aperitivo con bevanda	9.80	120
-M6	Bottiglia d'acqua	2	0

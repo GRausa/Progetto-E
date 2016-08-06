@@ -1,3 +1,0 @@
-I1	Assicurazione minima	6.50
-I2	Assicurazione parziale	15.80
-I3	Assicurazione completa	22.90
