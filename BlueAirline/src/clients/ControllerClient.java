@@ -71,5 +71,10 @@ public class ControllerClient {
         return adapter.searchAllCitys();
     }
     
+    //dato volo e posto vedere se è libero
+    public boolean seatIsFree(String codeFlight, int nseat) throws SQLException{
+        return adapter.seatIsFree(codeFlight, nseat);
+    }
+    
 
 }

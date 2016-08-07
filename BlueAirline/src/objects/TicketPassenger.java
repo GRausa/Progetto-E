@@ -93,6 +93,10 @@ public class TicketPassenger {
         this.code = code;
     }
     
+    public void setNSeat(int nseat){
+        this.nseat=nseat;
+    }
+    
     
     
 }

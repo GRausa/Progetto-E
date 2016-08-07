@@ -141,9 +141,16 @@ public class ReadClass implements Runnable {
                     String mail = input.nextLine();
 
                     Reservation res = new Reservation(cod, numero, mail, passengers);
-                     {
+                    {
                         try {
-                            client.makeReservation(res);
+                            res=client.makeReservation(res);
+                            for(TicketPassenger tp : res.getPassengers()){
+                                if(tp.getNseat()==-1){
+                                    System.out.println("Passeggero: "+tp.getID()+" non inserito, scelta posto occupato.");
+                                    //DOVREI FARE UN MODIFICATICKET DA USARE DOPO!
+                                }
+                            }
+                            System.out.println("Prenotazione effettuata:"+res.getCode());
                         } catch (IOException ex) {
                             Logger.getLogger(ReadClass.class.getName()).log(Level.SEVERE, null, ex);
                         }
@@ -162,6 +169,9 @@ public class ReadClass implements Runnable {
                      {
                         try {
                             Flight[] calendario = client.calendar(tmproute2);
+                            if(calendario.length==0){
+                                System.out.println("Nessun volo trovato");
+                            }
                             for (Flight a : calendario) {
                                 System.out.println(a);
                             }

@@ -42,17 +42,14 @@ public class ClientBlueAirline {
     }
 
     public Flight[] checkFligt(Flight flight) throws IOException {
-
         out.println("RICERCAVOLO " + gson.toJson(flight));
         Flight[] flights = gson.fromJson(in.readLine(), Flight[].class);
         return flights;
     }
 
     public Reservation makeReservation(Reservation res) throws IOException {
-
         out.println("RESERVATION " + gson.toJson(res));
-
-        return null;
+        return gson.fromJson(in.readLine(), Reservation.class);
     }
 
     public boolean checkRoute(Route rotta) throws IOException {

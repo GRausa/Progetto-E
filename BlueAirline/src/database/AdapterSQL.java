@@ -188,23 +188,29 @@ public class AdapterSQL {
             //codeTicketreservation.getCodeFlight() +"3"+i;
             tp.setCode(codeTicket);
             
-            query = "INSERT INTO TicketPasseggero\n"
-            //        + "VALUES ('" + codeTicket + "', '" + tp.getID() + "', '" + tp.getName() + "', '" + tp.getSurname() + "', '" + reservation.getCode() + "', '" + reservation.getCodeFlight() + "', '" + tp.getNseat() + "')";
-                  + "VALUES ('" + tp.getCode() + "', '" + tp.getID() + "', '" + tp.getName() + "', '" + tp.getSurname() + "', '" + reservation.getCode() + "',0)";
-            SQL.queryWrite(query);
-            this.setSeatBoolean(reservation.getCodeFlight(), tp.getNseat(), tp.getCode()); //lo metto a 1 cioè occupato
-            //aggiunte
-            ArrayList<String> meals = tp.getMeals();
-            for (String s : meals) {
-                this.insertAggiunta(s, codeTicket);
+            if(this.seatIsFree(reservation.getCodeFlight(), tp.getNseat())){
+            
+                query = "INSERT INTO TicketPasseggero\n"
+                //        + "VALUES ('" + codeTicket + "', '" + tp.getID() + "', '" + tp.getName() + "', '" + tp.getSurname() + "', '" + reservation.getCode() + "', '" + reservation.getCodeFlight() + "', '" + tp.getNseat() + "')";
+                      + "VALUES ('" + tp.getCode() + "', '" + tp.getID() + "', '" + tp.getName() + "', '" + tp.getSurname() + "', '" + reservation.getCode() + "',0)";
+                SQL.queryWrite(query);
+                this.setSeatBoolean(reservation.getCodeFlight(), tp.getNseat(), tp.getCode()); //lo metto a 1 cioè occupato
+                //aggiunte
+                ArrayList<String> meals = tp.getMeals();
+                for (String s : meals) {
+                    this.insertAggiunta(s, codeTicket);
+                }
+                ArrayList<String> insurances = tp.getInsurances();
+                for (String s : insurances) {
+                    this.insertAggiunta(s, codeTicket);
+                }
+                ArrayList<String> holdLuggages = tp.getHoldLuggages();
+                for (String s : holdLuggages) {
+                    this.insertAggiunta(s, codeTicket);
+                }
             }
-            ArrayList<String> insurances = tp.getInsurances();
-            for (String s : insurances) {
-                this.insertAggiunta(s, codeTicket);
-            }
-            ArrayList<String> holdLuggages = tp.getHoldLuggages();
-            for (String s : holdLuggages) {
-                this.insertAggiunta(s, codeTicket);
+            else{
+                tp.setNSeat(-1); //posto -1 non assegnato
             }
         }
         return reservation;
@@ -278,5 +284,20 @@ public class AdapterSQL {
         seats = ParserSQL.parseSeats(resultQuery);
         resultQuery.close();
         return seats;
+    }
+    
+    public boolean seatIsFree(String codeFlight, int nseat) throws SQLException{
+        String query
+                = "SELECT COUNT(*) AS C\n"
+                + "FROM Posto\n"
+                + "WHERE Volo='"+codeFlight+"' AND NUMERO='"+nseat+"' AND PASSEGGERO IS NULL ";
+        ResultSet resultQuery = SQL.queryRead(query);
+        double b = ParserSQL.parseFunctionSQL(resultQuery, "C");
+        if(b==1){ //is null -> libero
+            return true;
+        }
+        else{   // is not null -> occupato
+            return false;
+        }
     }
 }
