@@ -34,6 +34,14 @@ public class ReadClass implements Runnable {
         Scanner input = new Scanner(System.in);
 
         while (true) {
+            System.out.println("COMANDI DISPONIBILI");
+            System.out.println(">>>HI");
+            System.out.println(">>>VERIFICA_VOLO");
+            System.out.println(">>>VERIFICA_TRATTA");
+            System.out.println(">>>PRENOTA");
+            System.out.println(">>>CALENDARIO");
+                        
+            
             String s1 = input.nextLine().toUpperCase();
             switch (s1) {
 
@@ -219,7 +227,6 @@ public class ReadClass implements Runnable {
                     break;
 
                 case "CALENDARIO_VOLI":
-
                     System.out.println("Inserisci Aeroporto partenza");
                     String part2 = input.nextLine();
                     System.out.println("Inserisci Aeroporto destinazione");
