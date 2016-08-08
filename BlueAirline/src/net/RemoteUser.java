@@ -23,6 +23,7 @@ import static jdk.nashorn.internal.objects.NativeMath.log;
 import objects.Flight;
 import objects.Route;
 import objects.Reservation;
+import objects.TicketPassenger;
 
 /**
  *
@@ -117,6 +118,19 @@ class RemoteUser extends Thread {
                 }
             }
         });
+        
+        commands.put("EDITSEATTICKETPASSENGER", new Command() {
+            @Override
+            public void execute(String args) {
+                try {
+                    TicketPassenger tp = gson.fromJson(args, TicketPassenger.class);
+                    tp=company.editSeatTicketPassenger(tp);
+                    out.println(gson.toJson(tp));
+                } catch (SQLException ex) {
+                    Logger.getLogger(RemoteUser.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        });
 
         commands.put("CHECK", new Command() {
             @Override
@@ -165,7 +179,7 @@ class RemoteUser extends Thread {
                             SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
                             String formatted = format1.format(r.getDateDeparture().getTime());
 
-                            //DA MRIODIFICARE LA DATA DEVE ESSERE NEL FORMATO DI COME DICE IL DB
+                            //DA MODIFICARE LA DATA DEVE ESSERE NEL FORMATO DI COME DICE IL DB
                             ArrayList<Flight> flights = new ArrayList<>();
                             flights = company.searchFlights(r.getRoute().getDepartureCity(), r.getRoute().getDestinationCity(), formatted);
                             out.println(gson.toJson(flights));
@@ -175,6 +189,24 @@ class RemoteUser extends Thread {
                     }
                 }
         );
+        
+        commands.put(
+                "RICERCAVOLOCODICE", new Command() {
+
+                    @Override
+                    public void execute(String args) {
+
+                        try {
+                            Flight flight = gson.fromJson(args, Flight.class);
+                            flight = company.searchFlight(flight.getCode());
+                            out.println(gson.toJson(flight));
+                        } catch (SQLException ex) {
+                            Logger.getLogger(RemoteUser.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
+                }
+        );        
+        
 
         commands.put("RICERCAPOSTI", new Command() {
 

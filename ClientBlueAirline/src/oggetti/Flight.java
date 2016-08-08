@@ -35,6 +35,10 @@ public class Flight {
         this.dateDestination = dateDeparture;
         this.prezzo = 0;
     }
+    
+    public Flight(String code){
+        this.code=code;
+    }
 
     public String getCode() {
         return code;
@@ -63,6 +67,32 @@ public class Flight {
     public String toString(){
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MMM/yyyy HH:mm");
         return code+" "+r.toString()+"\n"+sdf.format(this.dateDeparture.getTime())+" - "+sdf.format(this.dateDestination.getTime())+"\n"+prezzo+"€";
+    }
+    
+    public int getSeatFree(){
+        int n=0;
+        for(Seat s : seats){
+            if(s.getPassenger()==null){
+                n++;
+            }
+        }
+        return n;
+    }
+    
+    public String printSeatFree(){
+        String st="PRIMA CLASSE\n";
+        for(Seat s : seats){
+            if(s.getPassenger()==null && s.getClasse()==1){
+                st+=s.getNumber()+" | ";
+            }
+        }
+        st+="\nSECONDA CLASSE\n";
+        for(Seat s : seats){
+            if(s.getPassenger()==null && s.getClasse()==2){
+                st+=s.getNumber()+" | ";
+            }
+        }
+        return st;
     }
     
     

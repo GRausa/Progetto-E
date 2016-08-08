@@ -96,6 +96,16 @@ public class TicketPassenger {
     public void setNSeat(int nseat){
         this.nseat=nseat;
     }
+
+    public void setCodeFlight(String codeFlight) {
+        this.codeFlight = codeFlight;
+    }
+
+    public void setCodeReservation(int codeReservation) {
+        this.codeReservation = codeReservation;
+    }
+    
+    
     
     
     

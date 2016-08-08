@@ -73,7 +73,7 @@ public class ReadClass implements Runnable {
                     Flight[] volit = null;
                      {
                         try {
-                            volit = client.checkFligt(tmpflight);
+                            volit = client.checkFlight(tmpflight);
                             for (Flight v : volit) {
                                 System.out.println(v);
                             }
@@ -108,46 +108,107 @@ public class ReadClass implements Runnable {
                 case "PRENOTA":
                     System.out.println("INSERISCI CODICE VOLO");
                     String cod = input.nextLine();
-                    System.out.println("Inserisci numero passaggeri");
-                    int num = Integer.parseInt(input.nextLine());
+                    Flight flight = new Flight(cod);
+                    //ottengo il volo
+                    {
+                        try {                            
+                            flight=client.searchFlight(flight);
+                            if(flight==null){
+                                System.out.println("Volo non trovato");
+                                break;
+                            }
+                        } catch (IOException ex) {
+                            Logger.getLogger(ReadClass.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }               
+                    
+                    System.out.println("Posti disponibili: "+flight.getSeatFree()+"/"+flight.getSeats().size());
+                    System.out.println(flight.printSeatFree());
+                    if(flight.getSeatFree()==0){
+                        System.out.println("Posti esauriti.");
+                        break;
+                    }
+                    int num;
+                    do{
+                        System.out.println("Inserisci numero passaggeri");
+                        num = Integer.parseInt(input.nextLine());
+                        if(num>flight.getSeatFree()){
+                            System.out.println("Il numero dei passeggeri inseriti supera la disponibilità di posti.");
+                        }
+                    }while(num>flight.getSeatFree());
                     ArrayList<TicketPassenger> passengers = new ArrayList<>(num);
                     for (int k = 0; k < num; k++) {
-
-                        System.out.println("INSERISCI PASSEGGERO (ID- NOME - COGNOME - NPOSTO - AGGIUNTE");
-                        String s = input.nextLine();
-                        String[] vetsplit = s.split("\t");
-                        TicketPassenger p = new TicketPassenger(vetsplit[0], vetsplit[1], vetsplit[2], Integer.parseInt(vetsplit[3]));
-                        for (int j = 4; j < vetsplit.length; j++) {
-                            String v = vetsplit[j];
-                            switch (vetsplit[j].charAt(0)) {
-                                case 'M':
-                                    p.addMeals(v);
-                                    break;
-                                case 'H':
-                                    p.addHoldLuggage(v);
-                                    break;
-                                case 'I':
-                                    p.addInsurance(v);
-                                    break;
-                                default:
-                                    break;
+                        boolean c = false;
+                        do{
+                            System.out.println("INSERISCI PASSEGGERO (ID- NOME - COGNOME - NPOSTO - AGGIUNTE)");
+                            String s = input.nextLine();
+                            String[] vetsplit = s.split("\t");                        
+                            if(vetsplit.length>3){
+                                int seat = Integer.parseInt(vetsplit[3]);
+                                if(flight.getSeats().get(seat-1).getPassenger()==null){
+                                    TicketPassenger p = new TicketPassenger(vetsplit[0], vetsplit[1], vetsplit[2], seat);
+                                    for (int j = 4; j < vetsplit.length; j++) {
+                                        String v = vetsplit[j];
+                                        switch (vetsplit[j].charAt(0)) {
+                                            case 'M':
+                                                p.addMeals(v);
+                                                break;
+                                            case 'H':
+                                                p.addHoldLuggage(v);
+                                                break;
+                                            case 'I':
+                                                p.addInsurance(v);
+                                                break;
+                                            default:
+                                                break;
+                                        }
+                                    }  
+                                    c=true;
+                                    passengers.add(p);                                     
+                                }
+                                else{
+                                    System.out.println("Posto non disponibile.");
+                                }
                             }
-                        }
-                        passengers.add(p);
+                            else{
+                                System.out.println("Errore inserimento");
+                            }
+                        }while(!c);                                             
                     }
+                    
                     System.out.println("INSERISCI NUMERO");
                     String numero = input.nextLine();
                     System.out.println("INSERISCI MAIL");
                     String mail = input.nextLine();
-
-                    Reservation res = new Reservation(cod, numero, mail, passengers);
+                    
+                    Reservation res = new Reservation(cod, numero, mail, passengers);                    
                     {
-                        try {
+                        try {                            
                             res=client.makeReservation(res);
-                            for(TicketPassenger tp : res.getPassengers()){
+                            flight=client.searchFlight(flight); //aggiorno il flight dopo la prenotazione
+                            for(TicketPassenger tp : res.getPassengers()){ //controllo assegnamento posti
                                 if(tp.getNseat()==-1){
-                                    System.out.println("Passeggero: "+tp.getID()+" non inserito, scelta posto occupato.");
-                                    //DOVREI FARE UN MODIFICATICKET DA USARE DOPO!
+                                    System.out.println("Passeggero: "+tp.getID()+" non inserito, il posto è stato occupato.\nPosti disponibili:");
+                                    System.out.println(flight.printSeatFree());
+                                    boolean c=false;
+                                    do{
+                                        System.out.println("Inserisci il nuovo posto");
+                                        int set = input.nextInt();
+                                        if(flight.getSeats().get(set-1).getPassenger()==null){
+                                            tp.setNSeat(set);
+                                            tp=client.editSeatTicketPassenger(tp);
+                                            if(tp.getNseat()==set){
+                                                System.out.println("Modifica effettuata.");
+                                                c=true;
+                                            }
+                                            else{
+                                                System.out.println("Posto non assegnato.");
+                                            }
+                                        }
+                                        else{
+                                            System.out.println("Errore inserimento.");
+                                        }
+                                    }while(!c);                                    
                                 }
                             }
                             System.out.println("Prenotazione effettuata:"+res.getCode());

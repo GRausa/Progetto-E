@@ -74,7 +74,8 @@ public class AdapterSQL {
         SQL.queryWrite(query);
 
     }
-
+    
+    /* USATO NELL'INIZIALIZZAZIONE DEI POSTI*/
     public ArrayList<Flight> setAllSeatFlights() throws SQLException {
         ArrayList<Flight> flights;
         String query
@@ -115,7 +116,7 @@ public class AdapterSQL {
         ResultSet resultQuery = SQL.queryRead(query);
         flights = ParserSQL.parseFlights(resultQuery);
         for(Flight f : flights){
-            this.getFlightWithSeats(f);
+            this.setSeatsFlight(f);
         }
         resultQuery.close();
         return flights;
@@ -133,6 +134,19 @@ public class AdapterSQL {
         resultQuery.close();
         return flights;
     }
+    
+    public Flight searchFlight(String codeFlight) throws SQLException{
+        Flight flight;
+        String query
+                = "SELECT V.COD_VOLO, A1.CITTA \"CITTAPARTENZA\", A1.NOME \"AEROPORTOPARTENZA\", A2.CITTA \"CITTAARRIVO\", A2.NOME \"AEROPORTOARRIVO\", V.DATAPARTENZA, V.ORAPARTENZA, V.DATAARRIVO, V.ORAARRIVO, V.PREZZO, P.NUMERO, P.Classe, P.PASSEGGERO "
+                + "FROM Rotta R, Aeroporto A1, Aeroporto A2, Volo V, Posto P "
+                + "WHERE R.AEROPORTOPARTENZA = A1.COD_AEROPORTO AND R.AEROPORTOARRIVO=A2.COD_AEROPORTO AND R.COD_ROTTA=V.ROTTA AND V.COD_VOLO='" + codeFlight + "' AND P.Volo=V.COD_VOLO ";
+        ResultSet resultQuery = SQL.queryRead(query);
+        flight = ParserSQL.parseFlight(resultQuery);
+        resultQuery.close();
+        return flight;
+    }
+    
     /*
     public Reservation searchReservation(int code) throws SQLException {
         Reservation reservation;
@@ -187,27 +201,26 @@ public class AdapterSQL {
             codeTicket = reservation.getCodeFlight() +""+ reservation.getCode()+"" + i;
             //codeTicketreservation.getCodeFlight() +"3"+i;
             tp.setCode(codeTicket);
-            
+            tp.setCodeFlight(reservation.getCodeFlight());
+            tp.setCodeReservation(codeReservation);
+            query = "INSERT INTO TicketPasseggero\n"
+                    + "VALUES ('" + tp.getCode() + "', '" + tp.getID() + "', '" + tp.getName() + "', '" + tp.getSurname() + "', '" + reservation.getCode() + "',0)";
+            SQL.queryWrite(query);
+            //aggiunte
+            ArrayList<String> meals = tp.getMeals();
+            for (String s : meals) {
+                this.insertAggiunta(s, codeTicket);
+            }
+            ArrayList<String> insurances = tp.getInsurances();
+            for (String s : insurances) {
+                this.insertAggiunta(s, codeTicket);
+            }
+            ArrayList<String> holdLuggages = tp.getHoldLuggages();
+            for (String s : holdLuggages) {
+                this.insertAggiunta(s, codeTicket);
+            }
             if(this.seatIsFree(reservation.getCodeFlight(), tp.getNseat())){
-            
-                query = "INSERT INTO TicketPasseggero\n"
-                //        + "VALUES ('" + codeTicket + "', '" + tp.getID() + "', '" + tp.getName() + "', '" + tp.getSurname() + "', '" + reservation.getCode() + "', '" + reservation.getCodeFlight() + "', '" + tp.getNseat() + "')";
-                      + "VALUES ('" + tp.getCode() + "', '" + tp.getID() + "', '" + tp.getName() + "', '" + tp.getSurname() + "', '" + reservation.getCode() + "',0)";
-                SQL.queryWrite(query);
                 this.setSeatBoolean(reservation.getCodeFlight(), tp.getNseat(), tp.getCode()); //lo metto a 1 cioè occupato
-                //aggiunte
-                ArrayList<String> meals = tp.getMeals();
-                for (String s : meals) {
-                    this.insertAggiunta(s, codeTicket);
-                }
-                ArrayList<String> insurances = tp.getInsurances();
-                for (String s : insurances) {
-                    this.insertAggiunta(s, codeTicket);
-                }
-                ArrayList<String> holdLuggages = tp.getHoldLuggages();
-                for (String s : holdLuggages) {
-                    this.insertAggiunta(s, codeTicket);
-                }
             }
             else{
                 tp.setNSeat(-1); //posto -1 non assegnato
@@ -269,7 +282,7 @@ public class AdapterSQL {
         }
     }
 
-    public Flight getFlightWithSeats(Flight flight) throws SQLException {
+    public Flight setSeatsFlight(Flight flight) throws SQLException {
         flight.setSeats(this.getSeatsFlight(flight.getCode()));
         return flight;
     }
@@ -299,5 +312,15 @@ public class AdapterSQL {
         else{   // is not null -> occupato
             return false;
         }
+    }
+    
+    public TicketPassenger editSeatTicketPassenger(TicketPassenger tp) throws SQLException{
+        if(this.seatIsFree(tp.getCodeFlight(), tp.getNseat())){
+            this.setSeatBoolean(tp.getCodeFlight(), tp.getNseat(), tp.getCode());
+        }
+        else{
+            tp.setNSeat(-1);
+        }
+        return tp;
     }
 }

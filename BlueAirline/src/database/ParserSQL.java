@@ -55,6 +55,44 @@ public class ParserSQL {
         }
         return flights;        
     }
+    
+    public static Flight parseFlight(ResultSet resultQuery) throws SQLException{
+        if(resultQuery.next()){
+            String code = resultQuery.getString("COD_VOLO");
+            String departureCity = resultQuery.getString("CITTAPARTENZA");
+            String departureAirport = resultQuery.getString("AEROPORTOPARTENZA");
+            String destinationCity = resultQuery.getString("CITTAARRIVO");
+            String destinationAirport = resultQuery.getString("AEROPORTOARRIVO");
+            String departureDate  = resultQuery.getString("DATAPARTENZA"); 
+            String departureTime = resultQuery.getString("ORAPARTENZA");
+            String destinationDate  = resultQuery.getString("DATAARRIVO"); 
+            String destinationTime = resultQuery.getString("ORAARRIVO");
+            double price = resultQuery.getDouble("PREZZO");
+            
+            Route r = new Route(departureAirport, destinationAirport, departureCity, destinationCity);
+            Calendar departureCalendar = ParserSQL.returnCalendar(departureDate, departureTime);
+            Calendar destinationCalendar = ParserSQL.returnCalendar(destinationDate, destinationTime);
+            Flight flight = new Flight(code,r,departureCalendar,destinationCalendar,price); 
+            
+            ArrayList<Seat> seats = new ArrayList<>();
+            int numberSeat = resultQuery.getInt("NUMERO");
+            int classSeat = resultQuery.getInt("Classe");
+            String passenger = resultQuery.getString("PASSEGGERO"); //è null se il ticket nel db è NULL 
+            seats.add(new Seat(numberSeat,classSeat,passenger));
+      
+            while (resultQuery.next()) {
+                numberSeat = resultQuery.getInt("NUMERO");
+                classSeat = resultQuery.getInt("Classe");
+                passenger = resultQuery.getString("PASSEGGERO");
+                seats.add(new Seat(numberSeat,classSeat,passenger));
+            }            
+            flight.setSeats(seats);        
+            return flight;
+        }
+        else{
+            return null;
+        }
+    }
     /*
     public static Reservation parseReservation(ResultSet resultQuery) throws SQLException{        
         int code = resultQuery.getInt("COD_PRENOTAZIONE");

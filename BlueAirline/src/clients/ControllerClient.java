@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import objects.Flight;
 import objects.Reservation;
 import objects.Route;
+import objects.TicketPassenger;
 
 /**
  *
@@ -44,9 +45,14 @@ public class ControllerClient {
         return adapter.searchFlights(route);
     }
     
+    //ricerca volo in base al codice -> restituisce tutto il volo con i posti
+    public Flight searchFlight(String codeFlight) throws SQLException{
+        return adapter.searchFlight(codeFlight);
+    }
+    
     //ricerca il volo con i posti 
     public Flight getFlightWithSeats(Flight flight) throws SQLException{
-        return adapter.getFlightWithSeats(flight);
+        return adapter.setSeatsFlight(flight);
     }
     
     
@@ -64,6 +70,10 @@ public class ControllerClient {
     //numero posti liberi in un volo
     public int numberSeatFree(String codeFlight) throws SQLException{
         return adapter.numberSeatFree(codeFlight);
+    }
+    
+    public TicketPassenger editSeatTicketPassenger(TicketPassenger tp) throws SQLException{
+        return adapter.editSeatTicketPassenger(tp);
     }
     
     //ricerca di tutte le città

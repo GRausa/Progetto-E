@@ -14,6 +14,7 @@ import java.net.Socket;
 import oggetti.Flight;
 import oggetti.Reservation;
 import oggetti.Route;
+import oggetti.TicketPassenger;
 
 /**
  *
@@ -41,15 +42,27 @@ public class ClientBlueAirline {
         }
     }
 
-    public Flight[] checkFligt(Flight flight) throws IOException {
+    public Flight[] checkFlight(Flight flight) throws IOException {
         out.println("RICERCAVOLO " + gson.toJson(flight));
         Flight[] flights = gson.fromJson(in.readLine(), Flight[].class);
         return flights;
     }
+    
+    public Flight searchFlight(Flight flight) throws IOException {
+        out.println("RICERCAVOLOCODICE " + gson.toJson(flight));
+        Flight f = gson.fromJson(in.readLine(), Flight.class);
+        return f;
+    }
+   
 
     public Reservation makeReservation(Reservation res) throws IOException {
         out.println("RESERVATION " + gson.toJson(res));
         return gson.fromJson(in.readLine(), Reservation.class);
+    }
+    
+    public TicketPassenger editSeatTicketPassenger(TicketPassenger tp) throws IOException{
+        out.println("EDITSEATTICKETPASSENGER " + gson.toJson(tp));
+        return gson.fromJson(in.readLine(), TicketPassenger.class);
     }
 
     public boolean checkRoute(Route rotta) throws IOException {
