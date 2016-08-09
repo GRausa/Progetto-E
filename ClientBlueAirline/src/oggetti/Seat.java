@@ -31,6 +31,11 @@ public class Seat {
     public String getPassenger() {
         return passenger;
     }
+
+    public void setPassenger(String passenger) {
+        this.passenger = passenger;
+    }  
+    
     
     @Override
     public String toString(){

@@ -176,18 +176,34 @@ public class ReadClass implements Runnable {
                             if(vetsplit.length>3){
                                 int seat = Integer.parseInt(vetsplit[3]);
                                 if(flight.getSeats().get(seat-1).getPassenger()==null){
+                                    flight.getSeats().get(seat-1).setPassenger(vetsplit[0]);
                                     TicketPassenger p = new TicketPassenger(vetsplit[0], vetsplit[1], vetsplit[2], seat);
                                     for (int j = 4; j < vetsplit.length; j++) {
                                         String v = vetsplit[j];
                                         switch (vetsplit[j].charAt(0)) {
                                             case 'M':
-                                                p.addMeals(v);
+                                                for(Meal m : meals){
+                                                    if(m.getCode().equals(v)){
+                                                        p.addMeals(v);
+                                                        break;
+                                                    }
+                                                }                                                
                                                 break;
                                             case 'H':
-                                                p.addHoldLuggage(v);
+                                                for(HoldLuggage hl : holdLuggages){
+                                                    if(hl.getCode().equals(v)){
+                                                        p.addHoldLuggage(v);
+                                                        break;
+                                                    }
+                                                }
                                                 break;
                                             case 'I':
-                                                p.addInsurance(v);
+                                                for(Insurance in : insurances){
+                                                    if(in.getCode().equals(v)){
+                                                        p.addInsurance(v);
+                                                        break;
+                                                    }
+                                                }
                                                 break;
                                             default:
                                                 break;
@@ -218,7 +234,7 @@ public class ReadClass implements Runnable {
                             flight=client.searchFlight(flight); //aggiorno il flight dopo la prenotazione
                             for(TicketPassenger tp : res.getPassengers()){ //controllo assegnamento posti
                                 if(tp.getNseat()==-1){
-                                    System.out.println("Passeggero: "+tp.getID()+" non inserito, il posto è stato occupato.\nPosti disponibili:");
+                                    System.out.println("Passeggero: "+tp.getName()+" "+tp.getSurname()+" ("+tp.getID()+") non inserito, il posto è stato occupato.\nPosti disponibili:");
                                     System.out.println(flight.printSeatsFree());
                                     boolean c=false;
                                     do{
@@ -241,7 +257,7 @@ public class ReadClass implements Runnable {
                                     }while(!c);                                    
                                 }
                             }
-                            System.out.println("Prenotazione effettuata:"+res.getCode());
+                            System.out.println("PRENOTAZIONE EFFETTUATA\nCodice Prenotazione: "+res.getCode());
                         } catch (IOException ex) {
                             Logger.getLogger(ReadClass.class.getName()).log(Level.SEVERE, null, ex);
                         }
