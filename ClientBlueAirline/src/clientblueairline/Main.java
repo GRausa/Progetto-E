@@ -14,6 +14,8 @@ import java.io.IOException;
 public class Main {
     public static void main(String[] args) throws IOException {
             ClientBlueAirline clientBlueAirline=new ClientBlueAirline();
+            
+            
             ReadClass r1 = new ReadClass(clientBlueAirline);
             //scrittura r2 = new scrittura(ciao);
 		
