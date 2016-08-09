@@ -561,7 +561,7 @@ public class CustomerPanel extends JPanel{
                     else
                 {
                     home.setReservation(new Reservation(home.getCodeflight(),email0.getText(),tell0.getText()));
-                    home.addPassenger(id0.getText(), nome0.getText(), cognome0.getText(), Integer.parseInt(posto0.getText()));
+                    home.addPassenger(id0.getText(), nome0.getText(), cognome0.getText(), Integer.parseInt(posto0.getText()), Integer.parseInt(classe.getText()));
                     home.refreshGUI(new PasseggeriPanel(home,controller));  
                 }
                 }

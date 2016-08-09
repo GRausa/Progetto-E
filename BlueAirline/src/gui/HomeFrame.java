@@ -230,8 +230,8 @@ public class HomeFrame extends JFrame {
         return passengers;
     }
 
-    public void addPassenger(String ID, String name, String surname, int nseat) {
-        TicketPassenger t = new TicketPassenger(ID, name, surname, nseat);
+    public void addPassenger(String ID, String name, String surname, int nseat, int classe) {
+        TicketPassenger t = new TicketPassenger(ID, name, surname, nseat, classe);
         this.passengers.add(t);
     }
 
