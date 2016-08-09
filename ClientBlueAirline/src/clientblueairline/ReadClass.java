@@ -36,15 +36,15 @@ public class ReadClass implements Runnable {
     public void run() {
         Scanner input = new Scanner(System.in);
 
-        while (true) {
+        loop:while (true) {
             System.out.println("COMANDI DISPONIBILI");
             System.out.println(">>>HI");
             System.out.println(">>>VERIFICA_VOLO");
             System.out.println(">>>VERIFICA_TRATTA");
             System.out.println(">>>PRENOTA");
-            System.out.println(">>>CALENDARIO");
-                        
-            
+            System.out.println(">>>CALENDARIO_VOLI");
+            System.out.println(">>>EXIT");
+
             String s1 = input.nextLine().toUpperCase();
             switch (s1) {
 
@@ -65,7 +65,9 @@ public class ReadClass implements Runnable {
                     Route tmproute = new Route(part, dest);
                     System.out.println("Inserisci data di partenza AAAA-MM-GG");
                     String data = input.nextLine();
-                    int day,month,year;
+                    int day,
+                     month,
+                     year;
                     String[] vetDate = data.split("-");
                     if (vetDate.length == 3) {
                         year = Integer.parseInt(vetDate[0]);
@@ -78,7 +80,7 @@ public class ReadClass implements Runnable {
                     GregorianCalendar date = new GregorianCalendar(year, month, day);
                     Flight tmpflight = new Flight(tmproute, date);
                     Flight[] volit = null;
-                    {
+                     {
                         try {
                             volit = client.searchFlights(tmpflight);
                             for (Flight v : volit) {
@@ -101,9 +103,9 @@ public class ReadClass implements Runnable {
                     String dest1 = input.nextLine();
                     Route tmproute1 = new Route(part1, dest1);
                     Route[] rotte = null;
-                    {
+                     {
                         try {
-                            rotte=client.checkRoute(tmproute1);
+                            rotte = client.checkRoute(tmproute1);
                         } catch (IOException ex) {
                             Logger.getLogger(ReadClass.class.getName()).log(Level.SEVERE, null, ex);
                         }
@@ -111,9 +113,8 @@ public class ReadClass implements Runnable {
                     if (rotte.length > 0) {
                         for (Route r : rotte) {
                             System.out.println(r);
-                            }
-                    }
-                    else {
+                        }
+                    } else {
                         System.out.println("Non esiste tratta per queste città");
                     }
                     break;
@@ -123,91 +124,90 @@ public class ReadClass implements Runnable {
                     String cod = input.nextLine();
                     Flight flight = new Flight(cod);
                     //ottengo il volo
-                    {
-                        try {                            
-                            flight=client.searchFlight(flight);
-                            if(flight==null){
+                     {
+                        try {
+                            flight = client.searchFlight(flight);
+                            if (flight == null) {
                                 System.out.println("Volo non trovato");
                                 break;
                             }
                         } catch (IOException ex) {
                             Logger.getLogger(ReadClass.class.getName()).log(Level.SEVERE, null, ex);
                         }
-                    }               
-                    
-                    System.out.println("Posti disponibili: "+flight.getSeatFree()+"/"+flight.getSeats().size());
+                    }
+
+                    System.out.println("Posti disponibili: " + flight.getSeatFree() + "/" + flight.getSeats().size());
                     System.out.println(flight.printSeatsFree());
-                    if(flight.getSeatFree()==0){
+                    if (flight.getSeatFree() == 0) {
                         System.out.println("Posti esauriti.");
                         break;
                     }
                     int num;
-                    do{
+                    do {
                         System.out.println("Inserisci numero passaggeri");
                         num = Integer.parseInt(input.nextLine());
-                        if(num>flight.getSeatFree()){
+                        if (num > flight.getSeatFree()) {
                             System.out.println("Il numero dei passeggeri inseriti supera la disponibilità di posti.");
                         }
-                    }while(num>flight.getSeatFree());
+                    } while (num > flight.getSeatFree());
                     ArrayList<TicketPassenger> passengers = new ArrayList<>(num);
-                    Meal[] meals=null;
-                    Insurance[] insurances=null;
-                    HoldLuggage[] holdLuggages=null;
-                    {
-                        try {                            
-                            meals=client.getAllMeals();
-                            insurances=client.getAllInsurances();
-                            holdLuggages=client.getAllHoldLuggages();
+                    Meal[] meals = null;
+                    Insurance[] insurances = null;
+                    HoldLuggage[] holdLuggages = null;
+                     {
+                        try {
+                            meals = client.getAllMeals();
+                            insurances = client.getAllInsurances();
+                            holdLuggages = client.getAllHoldLuggages();
                         } catch (IOException ex) {
                             Logger.getLogger(ReadClass.class.getName()).log(Level.SEVERE, null, ex);
                         }
                     }
                     System.out.println("Scelte in aggiunta:\nPASTI: ");
-                    for(Meal m:meals){
+                    for (Meal m : meals) {
                         System.out.println(m.toString());
                     }
                     System.out.println("BAGAGLI: ");
-                    for(HoldLuggage hl:holdLuggages){
+                    for (HoldLuggage hl : holdLuggages) {
                         System.out.println(hl.toString());
                     }
                     System.out.println("ASSICURAZIONI: ");
-                    for(Insurance in:insurances){
+                    for (Insurance in : insurances) {
                         System.out.println(in.toString());
                     }
-                    
+
                     for (int k = 0; k < num; k++) {
                         boolean c = false;
-                        do{
+                        do {
                             System.out.println("INSERISCI PASSEGGERO (ID- NOME - COGNOME - NPOSTO - AGGIUNTE)");
                             String s = input.nextLine();
-                            String[] vetsplit = s.split("\t");                        
-                            if(vetsplit.length>3){
+                            String[] vetsplit = s.split("\t");
+                            if (vetsplit.length > 3) {
                                 int seat = Integer.parseInt(vetsplit[3]);
-                                if(flight.getSeats().get(seat-1).getPassenger()==null){
-                                    flight.getSeats().get(seat-1).setPassenger(vetsplit[0]);
-                                    int classe = flight.getSeats().get(seat-1).getClasse();
+                                if (flight.getSeats().get(seat).getPassenger() == null) {
+                                    flight.getSeats().get(seat).setPassenger(vetsplit[0]);
+                                    int classe = flight.getSeats().get(seat).getClasse();
                                     TicketPassenger p = new TicketPassenger(vetsplit[0], vetsplit[1], vetsplit[2], seat, classe);
-                                    if(classe==1){
-                                        p.addTotalPrice(flight.getPrezzo()+Flight.COSTOPRIMACLASSE);
-                                    }
-                                    else{
+                                    if (classe == 1) {
+                                        p.addTotalPrice(flight.getPrezzo() + Flight.COSTOPRIMACLASSE);
+                                    } else {
                                         p.addTotalPrice(flight.getPrezzo());
                                     }
                                     for (int j = 4; j < vetsplit.length; j++) {
                                         String v = vetsplit[j];
                                         switch (vetsplit[j].charAt(0)) {
                                             case 'M':
-                                                for(Meal m : meals){
-                                                    if(m.getCode().equals(v)){
+                                                for (Meal m : meals) {
+                                                    if (m.getCode().equals(v)) {
                                                         p.addMeals(v);
                                                         p.addTotalPrice(m.getPrice());
                                                         break;
                                                     }
-                                                }                                                
+                                                }
                                                 break;
                                             case 'H':
-                                                for(HoldLuggage hl : holdLuggages){
-                                                    if(hl.getCode().equals(v)){
+                                                for (HoldLuggage hl : holdLuggages) {
+                                                    if (hl.getCode().equals(v)) {
                                                         p.addHoldLuggage(v);
                                                         p.addTotalPrice(hl.getPrice());
                                                         break;
@@ -215,8 +215,8 @@ public class ReadClass implements Runnable {
                                                 }
                                                 break;
                                             case 'I':
-                                                for(Insurance in : insurances){
-                                                    if(in.getCode().equals(v)){
+                                                for (Insurance in : insurances) {
+                                                    if (in.getCode().equals(v)) {
                                                         p.addInsurance(v);
                                                         p.addTotalPrice(in.getPrice());
                                                         break;
@@ -226,70 +226,68 @@ public class ReadClass implements Runnable {
                                             default:
                                                 break;
                                         }
-                                    }  
-                                    c=true;
-                                    passengers.add(p);                                     
-                                }
-                                else{
+                                    }
+                                    c = true;
+                                    passengers.add(p);
+                                } else {
                                     System.out.println("Posto non disponibile.");
                                 }
-                            }
-                            else{
+                            } else {
                                 System.out.println("Errore inserimento");
                             }
-                        }while(!c);                                             
+                        } while (!c);
                     }
-                    
+
                     System.out.println("INSERISCI NUMERO");
                     String numero = input.nextLine();
                     System.out.println("INSERISCI MAIL");
                     String mail = input.nextLine();
-                    
-                    Reservation res = new Reservation(cod, numero, mail, passengers);                    
-                    {
-                        try {                            
-                            res=client.makeReservation(res);
-                            flight=client.searchFlight(flight); //aggiorno il flight dopo la prenotazione
-                            for(TicketPassenger tp : res.getPassengers()){ //controllo assegnamento posti
-                                if(tp.getNseat()==-1){
-                                    System.out.println("Passeggero: "+tp.getName()+" "+tp.getSurname()+" ("+tp.getID()+") non inserito, il posto è stato occupato.\nPosti disponibili:");
+
+                    Reservation res = new Reservation(cod, numero, mail, passengers);
+                     {
+                        try {
+                            res = client.makeReservation(res);
+                            flight = client.searchFlight(flight); //aggiorno il flight dopo la prenotazione
+                            for (TicketPassenger tp : res.getPassengers()) { //controllo assegnamento posti
+                                if (tp.getNseat() == -1) {
+                                    System.out.println("Passeggero: " + tp.getName() + " " + tp.getSurname() + " (" + tp.getID() + ") non inserito, il posto è stato occupato.\nPosti disponibili:");
                                     System.out.println(flight.printSeatsFree());
-                                    boolean c=false;
-                                    do{
+                                    boolean c = false;
+                                    do {
                                         System.out.println("Inserisci il nuovo posto");
                                         int set = input.nextInt();
-                                        if(flight.getSeats().get(set-1).getPassenger()==null){
+                                        if (flight.getSeats().get(set - 1).getPassenger() == null) {
                                             tp.setNSeat(set);
-                                            tp=client.editSeatTicketPassenger(tp);
-                                            if(tp.getNseat()==set){
+                                            tp = client.editSeatTicketPassenger(tp);
+                                            if (tp.getNseat() == set) {
                                                 System.out.println("Modifica effettuata.");
-                                                c=true;
-                                            }
-                                            else{
+                                                c = true;
+                                            } else {
                                                 System.out.println("Posto non assegnato.");
                                             }
-                                        }
-                                        else{
+                                        } else {
                                             System.out.println("Errore inserimento.");
                                         }
-                                    }while(!c);                                    
+                                    } while (!c);
                                 }
                             }
-                            System.out.println("PRENOTAZIONE EFFETTUATA\nCodice Prenotazione: "+res.getCode());
+                            System.out.println("PRENOTAZIONE EFFETTUATA\nCodice Prenotazione: " + res.getCode());
                             System.out.println("Riepilogo:");
                             System.out.println(flight.toString());
-                            double totalAllPrice=0;
-                            for(TicketPassenger tp:res.getPassengers()){
-                                totalAllPrice+=tp.getTotalPrice();
+                            double totalAllPrice = 0;
+                            for (TicketPassenger tp : res.getPassengers()) {
+                                totalAllPrice += tp.getTotalPrice();
                                 System.out.println(tp.printTicketPassenger());
                             }
-                            System.out.println("Prezzo totale prenotazione: "+totalAllPrice+"€");
+                            System.out.println("Prezzo totale prenotazione: " + totalAllPrice + "€");
                         } catch (IOException ex) {
                             Logger.getLogger(ReadClass.class.getName()).log(Level.SEVERE, null, ex);
                         }
                     }
                     break;
-
+                case "EXIT":
+                    break loop;
+                    
                 case "CALENDARIO_VOLI":
                     System.out.println("Inserisci Aeroporto partenza");
                     String part2 = input.nextLine();
@@ -301,7 +299,7 @@ public class ReadClass implements Runnable {
                      {
                         try {
                             Flight[] calendario = client.calendar(tmproute2);
-                            if(calendario.length==0){
+                            if (calendario.length == 0) {
                                 System.out.println("Nessun volo trovato");
                             }
                             for (Flight a : calendario) {
@@ -312,6 +310,7 @@ public class ReadClass implements Runnable {
                         }
                     }
                     break;
+
                 default:
                     System.out.println("Errore inserimento");
 
