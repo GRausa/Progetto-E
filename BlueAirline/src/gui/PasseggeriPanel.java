@@ -461,7 +461,7 @@ public class PasseggeriPanel extends JPanel{
                     JOptionPane.showConfirmDialog(home, "Riempire tutti i campi"+"per poter proseguire.", "Errore", JOptionPane.OK_CANCEL_OPTION);
                     else
                 { 
-                    home.addPassenger(id0.getText(), nome0.getText(), cognome0.getText(), Integer.parseInt(posto0.getText()));
+                    home.addPassenger(id0.getText(), nome0.getText(), cognome0.getText(), Integer.parseInt(posto0.getText()), Integer.parseInt(classe.getText()));
                     home.refreshGUI(new PasseggeriPanel(home,controller));  
                 }}
                 else
