@@ -21,6 +21,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import static jdk.nashorn.internal.objects.NativeMath.log;
 import objects.Flight;
+import objects.HoldLuggage;
+import objects.Insurance;
+import objects.Meal;
 import objects.Route;
 import objects.Reservation;
 import objects.TicketPassenger;
@@ -173,13 +176,10 @@ class RemoteUser extends Thread {
 
                     @Override
                     public void execute(String args) {
-
                         try {
                             Flight r = gson.fromJson(args, Flight.class);
                             SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
                             String formatted = format1.format(r.getDateDeparture().getTime());
-
-                            //DA MODIFICARE LA DATA DEVE ESSERE NEL FORMATO DI COME DICE IL DB
                             ArrayList<Flight> flights = new ArrayList<>();
                             flights = company.searchFlights(r.getRoute().getDepartureCity(), r.getRoute().getDestinationCity(), formatted);
                             out.println(gson.toJson(flights));
@@ -192,10 +192,8 @@ class RemoteUser extends Thread {
         
         commands.put(
                 "RICERCAVOLOCODICE", new Command() {
-
                     @Override
                     public void execute(String args) {
-
                         try {
                             Flight flight = gson.fromJson(args, Flight.class);
                             flight = company.searchFlight(flight.getCode());
@@ -205,33 +203,49 @@ class RemoteUser extends Thread {
                         }
                     }
                 }
-        );        
+        ); 
         
-
-        commands.put("RICERCAPOSTI", new Command() {
-
+        commands.put("PASTI", new Command() {
             @Override
             public void execute(String args) {
-                //ricercaPosti();
+                ArrayList<Meal> meals;
+                try {
+                    meals=company.getAllMeals();
+                    out.println(gson.toJson(meals));
+                } catch (SQLException ex) {
+                    Logger.getLogger(RemoteUser.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
-        /*
-         commands.put("PRENOTAZIONE", new Command() {
-            
-         @Override
-         public void execute(String args) {
-         Order();
-         }
-         });*/
+        
+        commands.put("BAGAGLI", new Command() {
+            @Override
+            public void execute(String args) {
+                ArrayList<HoldLuggage> holdLuggages;
+                try {
+                    holdLuggages=company.getAllHoldLuggages();
+                    out.println(gson.toJson(holdLuggages));
+                } catch (SQLException ex) {
+                    Logger.getLogger(RemoteUser.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        });
+        
+        commands.put("ASSICURAZIONI", new Command() {
+            @Override
+            public void execute(String args) {
+                ArrayList<Insurance> insurances;
+                try {
+                    insurances=company.getAllInsurances();
+                    out.println(gson.toJson(insurances));
+                } catch (SQLException ex) {
+                    Logger.getLogger(RemoteUser.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        });
+        
     }
 
-    /**
-     * Execute the given command.
-     *
-     * @param command name of the command
-     * @param args optional argument(s) for the command
-     * @throws ChatError
-     */
     private void executeCommand(String command, String args) {
         Command cmd = commands.get(command);
         if (cmd == null) {
@@ -292,6 +306,5 @@ class RemoteUser extends Thread {
  * @author Andrea Cavagna
  */
 interface Command {
-
     void execute(String args);
 }

@@ -14,6 +14,7 @@ import java.util.Calendar;
  * @author Giovanni
  */
 public class Flight {
+    public static double COSTOPRIMACLASSE=30;
     private String code;
     private Route r;
     private Calendar dateDeparture;

@@ -9,6 +9,9 @@ import database.AdapterSQL;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import objects.Flight;
+import objects.HoldLuggage;
+import objects.Insurance;
+import objects.Meal;
 import objects.Reservation;
 import objects.Route;
 import objects.TicketPassenger;
@@ -84,6 +87,20 @@ public class ControllerClient {
     //dato volo e posto vedere se è libero
     public boolean seatIsFree(String codeFlight, int nseat) throws SQLException{
         return adapter.seatIsFree(codeFlight, nseat);
+    }
+    
+    //ritorna tutti i meal
+    public ArrayList<Meal> getAllMeals() throws SQLException{
+        return adapter.getAllMeals();
+    }
+    
+    //ritorna tutti i bagagli
+    public ArrayList<HoldLuggage> getAllHoldLuggages() throws SQLException{
+        return adapter.getAllHoldLuggages();
+    }
+    
+    public ArrayList<Insurance> getAllInsurances() throws SQLException{
+        return adapter.getAllInsurances();
     }
     
 

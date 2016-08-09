@@ -9,6 +9,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import objects.Flight;
+import objects.HoldLuggage;
+import objects.Insurance;
+import objects.Meal;
 import objects.Reservation;
 import objects.Route;
 import objects.Seat;
@@ -312,6 +315,39 @@ public class AdapterSQL {
         else{   // is not null -> occupato
             return false;
         }
+    }
+    
+    public ArrayList<Meal> getAllMeals() throws SQLException{
+        ArrayList<Meal> meals;
+        String query
+                = "SELECT *\n"
+                + "FROM Pasto ";
+        ResultSet resultQuery = SQL.queryRead(query);
+        meals = ParserSQL.parseMeals(resultQuery);
+        resultQuery.close();
+        return meals;
+    }
+    
+    public ArrayList<HoldLuggage> getAllHoldLuggages() throws SQLException{
+        ArrayList<HoldLuggage> holdLuggages;
+        String query
+                = "SELECT *\n"
+                + "FROM Bagaglio ";
+        ResultSet resultQuery = SQL.queryRead(query);
+        holdLuggages = ParserSQL.parseHoldLuggages(resultQuery);
+        resultQuery.close();
+        return holdLuggages;
+    }
+    
+    public ArrayList<Insurance> getAllInsurances() throws SQLException{
+        ArrayList<Insurance> insurances;
+        String query
+                = "SELECT *\n"
+                + "FROM Assicurazione ";
+        ResultSet resultQuery = SQL.queryRead(query);
+        insurances = ParserSQL.parseInsurances(resultQuery);
+        resultQuery.close();
+        return insurances;
     }
     
     public TicketPassenger editSeatTicketPassenger(TicketPassenger tp) throws SQLException{

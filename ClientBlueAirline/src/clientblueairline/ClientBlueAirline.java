@@ -11,7 +11,11 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.ArrayList;
 import oggetti.Flight;
+import oggetti.HoldLuggage;
+import oggetti.Insurance;
+import oggetti.Meal;
 import oggetti.Reservation;
 import oggetti.Route;
 import oggetti.TicketPassenger;
@@ -42,7 +46,7 @@ public class ClientBlueAirline {
         }
     }
 
-    public Flight[] checkFlight(Flight flight) throws IOException {
+    public Flight[] searchFlights(Flight flight) throws IOException {
         out.println("RICERCAVOLO " + gson.toJson(flight));
         Flight[] flights = gson.fromJson(in.readLine(), Flight[].class);
         return flights;
@@ -65,26 +69,36 @@ public class ClientBlueAirline {
         return gson.fromJson(in.readLine(), TicketPassenger.class);
     }
 
-    public boolean checkRoute(Route rotta) throws IOException {
+    public Route[] checkRoute(Route rotta) throws IOException {
 
         out.println("CHECK " + gson.toJson(rotta));
         String serverout = in.readLine();
-
-        Route[] rotte = gson.fromJson(serverout, Route[].class);
-        if (rotte.length > 0) {
-            for (Route r : rotte) {
-                System.out.println(r);
-            }
-        } else {
-            System.out.println("NON ESISTE TRATTA PER QUESTA CITTA'");
-        }
-        return false;
+        Route[] rotte = gson.fromJson(serverout, Route[].class);        
+        return rotte;
     }
 
     public Flight[] calendar(Route rotta) throws IOException {
         out.println("CALENDAR " + gson.toJson(rotta));
         Flight[] flights = gson.fromJson(in.readLine(), Flight[].class);
         return flights;
+    }
+    
+    public Meal[] getAllMeals() throws IOException{
+        out.println("PASTI ");
+        Meal[] meals = gson.fromJson(in.readLine(), Meal[].class);
+        return meals;
+    }
+    
+    public HoldLuggage[] getAllHoldLuggages() throws IOException{
+        out.println("BAGAGLI ");
+        HoldLuggage[] holdLuggages = gson.fromJson(in.readLine(), HoldLuggage[].class);
+        return holdLuggages;
+    }
+    
+    public Insurance[] getAllInsurances() throws IOException{
+        out.println("ASSICURAZIONI ");
+        Insurance[] insurances = gson.fromJson(in.readLine(), Insurance[].class);
+        return insurances;
     }
 
     public void scrittura() throws IOException {

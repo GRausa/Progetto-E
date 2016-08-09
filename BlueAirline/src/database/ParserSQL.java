@@ -12,6 +12,9 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import objects.Flight;
+import objects.HoldLuggage;
+import objects.Insurance;
+import objects.Meal;
 import objects.Route;
 import objects.Seat;
 
@@ -116,7 +119,7 @@ public class ParserSQL {
         return citys;
     }
     
-    static ArrayList<Seat> parseSeats(ResultSet resultQuery) throws SQLException {
+    public static ArrayList<Seat> parseSeats(ResultSet resultQuery) throws SQLException {
         ArrayList<Seat> seats = new ArrayList<>();
         while (resultQuery.next()) {
             int num = Integer.parseInt(resultQuery.getString("NUMERO"));
@@ -125,6 +128,42 @@ public class ParserSQL {
             seats.add(new Seat(num, classe, passenger));
         }
         return seats;    
+    }
+    
+    public static ArrayList<Meal> parseMeals(ResultSet resultQuery) throws SQLException{
+        ArrayList<Meal> meals = new ArrayList<>();
+        while (resultQuery.next()) {
+            String code = resultQuery.getString("COD_PASTO");
+            String name = resultQuery.getString("NOME");
+            double price = resultQuery.getDouble("PREZZO");
+            int timeMeal = resultQuery.getInt("TEMPOVIAGGIO");
+            meals.add(new Meal(code,name,price,timeMeal));
+        }
+        return meals;   
+    } 
+    
+    public static ArrayList<HoldLuggage> parseHoldLuggages(ResultSet resultQuery) throws SQLException{
+        ArrayList<HoldLuggage> holdLuggages = new ArrayList<>();
+        while (resultQuery.next()) {
+            String code = resultQuery.getString("COD_BAGAGLIO");
+            double kg = resultQuery.getDouble("KG");
+            double price = resultQuery.getDouble("PREZZO");
+            String description = resultQuery.getString("DESCRIZIONE");
+            holdLuggages.add(new HoldLuggage(code,kg,price,description));
+        }
+        return holdLuggages; 
+    }
+    
+    public static ArrayList<Insurance> parseInsurances(ResultSet resultQuery) throws SQLException{
+        ArrayList<Insurance> insurances = new ArrayList<>();
+        while (resultQuery.next()) {
+            String code = resultQuery.getString("COD_ASSICURAZIONE");
+            String name = resultQuery.getString("NOME");
+            double price = resultQuery.getDouble("PREZZO");
+            String description = resultQuery.getString("DESCRIZIONE");
+            insurances.add(new Insurance(code,name,price,description));
+        }
+        return insurances; 
     }
     
     //METODI GENERICI
