@@ -185,7 +185,14 @@ public class ReadClass implements Runnable {
                                 int seat = Integer.parseInt(vetsplit[3]);
                                 if(flight.getSeats().get(seat-1).getPassenger()==null){
                                     flight.getSeats().get(seat-1).setPassenger(vetsplit[0]);
-                                    TicketPassenger p = new TicketPassenger(vetsplit[0], vetsplit[1], vetsplit[2], seat);
+                                    int classe = flight.getSeats().get(seat-1).getClasse();
+                                    TicketPassenger p = new TicketPassenger(vetsplit[0], vetsplit[1], vetsplit[2], seat, classe);
+                                    if(classe==1){
+                                        p.addTotalPrice(flight.getPrezzo()+Flight.COSTOPRIMACLASSE);
+                                    }
+                                    else{
+                                        p.addTotalPrice(flight.getPrezzo());
+                                    }
                                     for (int j = 4; j < vetsplit.length; j++) {
                                         String v = vetsplit[j];
                                         switch (vetsplit[j].charAt(0)) {
@@ -193,6 +200,7 @@ public class ReadClass implements Runnable {
                                                 for(Meal m : meals){
                                                     if(m.getCode().equals(v)){
                                                         p.addMeals(v);
+                                                        p.addTotalPrice(m.getPrice());
                                                         break;
                                                     }
                                                 }                                                
@@ -201,6 +209,7 @@ public class ReadClass implements Runnable {
                                                 for(HoldLuggage hl : holdLuggages){
                                                     if(hl.getCode().equals(v)){
                                                         p.addHoldLuggage(v);
+                                                        p.addTotalPrice(hl.getPrice());
                                                         break;
                                                     }
                                                 }
@@ -209,6 +218,7 @@ public class ReadClass implements Runnable {
                                                 for(Insurance in : insurances){
                                                     if(in.getCode().equals(v)){
                                                         p.addInsurance(v);
+                                                        p.addTotalPrice(in.getPrice());
                                                         break;
                                                     }
                                                 }
@@ -266,6 +276,14 @@ public class ReadClass implements Runnable {
                                 }
                             }
                             System.out.println("PRENOTAZIONE EFFETTUATA\nCodice Prenotazione: "+res.getCode());
+                            System.out.println("Riepilogo:");
+                            System.out.println(flight.toString());
+                            double totalAllPrice=0;
+                            for(TicketPassenger tp:res.getPassengers()){
+                                totalAllPrice+=tp.getTotalPrice();
+                                System.out.println(tp.printTicketPassenger());
+                            }
+                            System.out.println("Prezzo totale prenotazione: "+totalAllPrice+"€");
                         } catch (IOException ex) {
                             Logger.getLogger(ReadClass.class.getName()).log(Level.SEVERE, null, ex);
                         }

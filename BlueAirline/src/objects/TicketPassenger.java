@@ -14,11 +14,11 @@ import java.util.ArrayList;
 public class TicketPassenger {
 
     private String code, ID, name, surname, codeFlight;
-    private int nseat, codeReservation;
+    private int nseat, codeReservation, classe;
     private double totalPrice;
     private ArrayList<String> meals, holdLuggages, insurances;
 
-    public TicketPassenger(String ID, String name, String surname, int nseat) {
+    public TicketPassenger(String ID, String name, String surname, int nseat, int classe) {
         this.ID = ID;
         this.name = name;
         this.surname = surname;
@@ -26,6 +26,7 @@ public class TicketPassenger {
         this.meals = new ArrayList<>();
         this.holdLuggages = new ArrayList<>();
         this.insurances = new ArrayList<>();
+        this.classe=classe;
     }
 
     @Override
@@ -103,6 +104,10 @@ public class TicketPassenger {
 
     public void setCodeReservation(int codeReservation) {
         this.codeReservation = codeReservation;
+    }
+    
+    public void addTotalPrice(double price){
+        this.totalPrice+=price;
     }
     
     

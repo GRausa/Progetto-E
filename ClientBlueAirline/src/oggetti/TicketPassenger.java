@@ -14,11 +14,11 @@ import java.util.ArrayList;
 public class TicketPassenger {
 
     private String code, ID, name, surname, codeFlight;
-    private int nseat, codeReservation;
+    private int nseat, codeReservation, classe;
     private double totalPrice;
     private ArrayList<String> meals, holdLuggages, insurances;
 
-    public TicketPassenger(String ID, String name, String surname, int nseat) {
+    public TicketPassenger(String ID, String name, String surname, int nseat, int classe) {
         this.ID = ID;
         this.name = name;
         this.surname = surname;
@@ -26,6 +26,7 @@ public class TicketPassenger {
         this.meals = new ArrayList<>();
         this.holdLuggages = new ArrayList<>();
         this.insurances = new ArrayList<>();
+        this.classe=classe;
     }
 
     public String getCode() {
@@ -100,6 +101,32 @@ public class TicketPassenger {
     @Override
     public String toString() {
         return "TicketPassenger{" + "code=" + code + ", ID=" + ID + ", name=" + name + ", surname=" + surname + ", codeFlight=" + codeFlight + ", nseat=" + nseat + ", codeReservation=" + codeReservation + ", totalPrice=" + totalPrice + ", meals=" + meals + ", holdLuggages=" + holdLuggages + ", insurances=" + insurances + '}';
+    }
+    
+    public String printTicketPassenger(){
+        String s = code+" "+ID+" "+name+" "+surname+" Posto: "+nseat+" ("+classe+" classe ) Aggiunte: ";
+        boolean c=false;
+        for(String m:meals){
+            s+=m.toString()+" ";
+            c=true;
+        }
+        for(String hl:holdLuggages){
+            s+=hl.toString()+" ";
+            c=true;
+        }
+        for(String in:insurances){
+            s+=in.toString()+" ";
+            c=true;
+        }
+        if(!c){
+            s+="0";
+        }
+        s+="\nPrezzo biglietto: "+totalPrice+"€";
+        return s;
+    }
+    
+    public void addTotalPrice(double price){
+        this.totalPrice+=price;
     }
     
     
