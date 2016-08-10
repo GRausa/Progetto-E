@@ -2,6 +2,7 @@ package gui;
 
 import clients.ControllerClient;
 import java.awt.*;
+import com.toedter.calendar.JDateChooser;
 
 import java.awt.event.*;
 import java.util.ArrayList;
@@ -302,6 +303,11 @@ public class HomeFrame extends JFrame {
         t.setOpaque(false);
     }
 
+     public void trasparentJDateChooser(final JDateChooser d) {
+        d.setBackground(new Color(0, 0, 0, 0));
+        d.setOpaque(false);
+    }
+    
     public void setallFont(final JComponent c) {
         if (c.getComponentCount() == 0) {
             if (c instanceof JLabel || c instanceof JButton) {

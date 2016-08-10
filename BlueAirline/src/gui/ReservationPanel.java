@@ -7,6 +7,7 @@ package gui;
 
 
 import clients.ControllerClient;
+import com.toedter.calendar.JDateChooser;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -43,7 +44,6 @@ public class ReservationPanel extends JPanel{
     JComboBox ritorno = new JComboBox();
     JLabel titandata = new JLabel("ANDATA :");
     JLabel titritorno = new JLabel("RITORNO :");
-    JTextField data = new JTextField();
     JButton prenota;
     JPanel reservationPanel = new JPanel(new GridLayout(4,2,10,10));
     JLabel titdata = new JLabel("Data :");
@@ -55,6 +55,7 @@ public class ReservationPanel extends JPanel{
     JLabel logo = new JLabel();
     JPanel panelsud = new JPanel(new GridLayout(0,2));
     JButton ricerca = new JButton("Ricerca");
+    JDateChooser data = new JDateChooser();
     
     public ReservationPanel(ControllerClient company, HomeFrame home) 
     {
@@ -81,7 +82,7 @@ public class ReservationPanel extends JPanel{
                 int st = 0;
                 try {
                     for (String fin : controller.searchAllCitys()) {
-                        if (fin.startsWith(a)) { andata.addItem(fin); st++;}
+                        if (fin.toLowerCase().startsWith(a.toLowerCase())) { andata.addItem(fin); st++;}
                     }
                 } catch (SQLException ex) {
                     Logger.getLogger(ReservationPanel.class.getName()).log(Level.SEVERE, null, ex);
@@ -107,7 +108,7 @@ public class ReservationPanel extends JPanel{
            
             try {
                 for (String fin : controller.searchAllCitys()) {
-                    if (fin.startsWith(a)) { ritorno.addItem(fin); st++; }
+                    if (fin.toLowerCase().startsWith(a.toLowerCase())) { ritorno.addItem(fin); st++; }
                 }
             } catch (SQLException ex) {
                 Logger.getLogger(ReservationPanel.class.getName()).log(Level.SEVERE, null, ex);
@@ -134,7 +135,7 @@ public class ReservationPanel extends JPanel{
         reservationPanel.add(titdata);
         titdata.setFont(new Font("Helvetica",Font.BOLD,25));
         
-        data.setEditable(true);
+        data.setDateFormatString("dd/MM/yyyy");       
         data.setPreferredSize(new java.awt.Dimension(170, 30));
         data.addKeyListener(new KeyAdapter() {
             public void keyTyped(KeyEvent e) {
@@ -146,7 +147,6 @@ public class ReservationPanel extends JPanel{
             }
         });
         data.setSize(new java.awt.Dimension(170, 30));
-        data.setText("Inserisci data");
         data.setFont(new Font("Helvetica",Font.BOLD,15));
         
         
@@ -247,14 +247,14 @@ public class ReservationPanel extends JPanel{
             public void actionPerformed(ActionEvent e) {
                 if((!npasseggeri.getText().isEmpty()) && !(andata.getSelectedIndex()==-1) && !(ritorno.getSelectedIndex()==-1)){
                     try {
-                        DateFormat format = new SimpleDateFormat("yyyy-MM-dd"); // ho cambiato il formato data e funziona ma non mi piace, cambiare formato data adapter!
-                        Date       date = format.parse(data.getText());
+                        //DateFormat format = new SimpleDateFormat("yyyy-MM-dd"); // ho cambiato il formato data e funziona ma non mi piace, cambiare formato data adapter!
+                        //Date       date = format.parse(data.getDate().toString());
                         Calendar   calendar = new GregorianCalendar();
-                        calendar.setTime(date);
+                        calendar.setTime(data.getDate());
                         if(Integer.parseInt(npasseggeri.getText())>0){
                             
                             home.notifiche.setText("Ricerco informazioni sulla rotta.. ");
-                            ArrayList<Flight> a=  controller.searchFlights(andata.getSelectedItem().toString(),ritorno.getSelectedItem().toString(),data.getText());
+                            ArrayList<Flight> a=  controller.searchFlights(andata.getSelectedItem().toString(),ritorno.getSelectedItem().toString(),data.toString());
                             System.out.println(a);
                             if(a.isEmpty())
                             JOptionPane.showConfirmDialog(home, "Non risulta nessuna rotta nei voli"+"della compagnia aerea", "Errore", JOptionPane.OK_CANCEL_OPTION);
@@ -267,8 +267,8 @@ public class ReservationPanel extends JPanel{
                         else{
                         home.notifiche.setText("Attenzione: aggiungere almeno un passeggero.");
                         }
-                    } catch (ParseException ex) {
-                      int dialogResult = JOptionPane.showConfirmDialog(home, "Errore nell'inserimento della data.\n"+"Inserire la data nel formato\n dd-mm-yyyy", "Errore", JOptionPane.OK_CANCEL_OPTION); 
+                    //} catch (ParseException ex) {
+                      //int dialogResult = JOptionPane.showConfirmDialog(home, "Errore nell'inserimento della data.\n"+"Inserire la data nel formato\n dd-mm-yyyy", "Errore", JOptionPane.OK_CANCEL_OPTION); 
                     } catch (SQLException ex) {
                         Logger.getLogger(ReservationPanel.class.getName()).log(Level.SEVERE, null, ex);
                     }
@@ -286,7 +286,7 @@ public class ReservationPanel extends JPanel{
   
    public void MakeComponentsTrasparent()
    {
-       home.trasparentTextField(data);
+       home.trasparentJDateChooser(data);
        home.trasparentButton(ricerca);
        home.trasparentButton(passeggeripiu);
        home.trasparentButton(passeggerimeno);
