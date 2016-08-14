@@ -7,6 +7,7 @@ package clientblueairline;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import static java.util.Arrays.asList;
 import java.util.GregorianCalendar;
 import java.util.Scanner;
 import java.util.logging.Level;
@@ -17,7 +18,6 @@ import oggetti.Insurance;
 import oggetti.Meal;
 import oggetti.Reservation;
 import oggetti.Route;
-import oggetti.Seat;
 import oggetti.TicketPassenger;
 
 /**
@@ -56,13 +56,15 @@ public class ReadClass implements Runnable {
                     }
                 }
                 break;
-
+                
+                
                 case "VERIFICA_VOLO":
-                    System.out.println("Inserisci città partenza");
+                    ArrayList<String> inputtxt=MethodsControl.lettura(new ArrayList<>(asList("Inserisci città partenza", "Inserisci città destinazione")));
+                    /*System.out.println("Inserisci città partenza");
                     String part = input.nextLine();
                     System.out.println("Inserisci città destinazione");
-                    String dest = input.nextLine();
-                    Route tmproute = new Route(part, dest);
+                    String dest = input.nextLine();*/
+                    Route tmproute = new Route(inputtxt.get(0), inputtxt.get(1));
                     System.out.println("Inserisci data di partenza AAAA-MM-GG");
                     String data = input.nextLine();
                     int day,
@@ -97,11 +99,9 @@ public class ReadClass implements Runnable {
                     break;
 
                 case "VERIFICA_TRATTA":
-                    System.out.println("Inserisci città partenza");
-                    String part1 = input.nextLine();
-                    System.out.println("Inserisci città destinazione");
-                    String dest1 = input.nextLine();
-                    Route tmproute1 = new Route(part1, dest1);
+                    ArrayList<String> inputtxt1=MethodsControl.lettura(new ArrayList<>(asList("Inserisci città partenza", "Inserisci città destinazione")));
+                    
+                    Route tmproute1 = new Route(inputtxt1.get(0), inputtxt1.get(1));
                     Route[] rotte = null;
                      {
                         try {
@@ -111,7 +111,7 @@ public class ReadClass implements Runnable {
                         }
                     }
                     if (rotte.length > 0) {
-                        for (Route r : rotte) {
+                       for (Route r : rotte) {
                             System.out.println(r);
                         }
                     } else {
@@ -120,8 +120,7 @@ public class ReadClass implements Runnable {
                     break;
 
                 case "PRENOTA":
-                    System.out.println("Inserisci codice volo:");
-                    String cod = input.nextLine();
+                    String cod=MethodsControl.lettura(new ArrayList<>(asList("Inserisci codice Volo"))).get(0);
                     Flight flight = new Flight(cod);
                     //ottengo il volo
                      {
@@ -289,13 +288,10 @@ public class ReadClass implements Runnable {
                     break loop;
                     
                 case "CALENDARIO_VOLI":
-                    System.out.println("Inserisci Aeroporto partenza");
-                    String part2 = input.nextLine();
-                    System.out.println("Inserisci Aeroporto destinazione");
-                    String dest2 = input.nextLine();
+                    ArrayList<String> inputtxt2=MethodsControl.lettura(new ArrayList<>(asList("Inserisci Aeroporto partenza", "Inserisci Aeroporto destinazione")));
                     Route tmproute2 = new Route();
-                    tmproute2.setDeparutreAirport(part2);
-                    tmproute2.setDestinationAirport(dest2);
+                    tmproute2.setDeparutreAirport(inputtxt2.get(0));
+                    tmproute2.setDestinationAirport(inputtxt2.get(1));
                      {
                         try {
                             Flight[] calendario = client.calendar(tmproute2);
