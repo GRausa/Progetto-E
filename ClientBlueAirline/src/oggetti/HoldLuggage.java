@@ -30,6 +30,10 @@ public class HoldLuggage {
         this.price=price;
         this.description=description;
     }
+    
+    public HoldLuggage(String code){
+        this.code=code;
+    }
     /**
      * 
      * @return peso del bagaglio in kili 
@@ -49,7 +53,7 @@ public class HoldLuggage {
      * @return descrizione scritta dell'oggetto 
      */
     public String toString(){
-        return code+" "+kg+"Kg "+price+"€";
+        return code+" "+description+" "+kg+"Kg "+price+"€";
     }
     /**
      * 

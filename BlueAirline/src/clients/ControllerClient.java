@@ -99,9 +99,42 @@ public class ControllerClient {
         return adapter.getAllHoldLuggages();
     }
     
+    //ritorna tutte le assicurazioni
     public ArrayList<Insurance> getAllInsurances() throws SQLException{
         return adapter.getAllInsurances();
     }
     
-
+    //effettua checkin
+    public void setCheckIn(String codeTicket) throws SQLException{
+        adapter.setCheckIn(codeTicket);
+    }
+    
+    //ritorna ticketPassenger
+    public TicketPassenger getTicketPassenger(String codeTicket) throws SQLException{
+        //ritorna tutte le caraterristiche passeggero NOME,COGNOME, POSTO, PRENOTAZIONE ECC..
+        //metodo che mi ritorna le aggiunte bagagli, un altro che mi ritorna assicurazioni e un altro per pasti
+        TicketPassenger tp = adapter.getTicketPassenger(codeTicket);
+        tp.setMeals(this.getMealsTicketPassenger(codeTicket));
+        tp.setHoldLuggages(this.getHoldLuggagesTicketPassenger(codeTicket));
+        tp.setInsurances(this.getInsurancesTicketPassenger(codeTicket));        
+        return tp;
+        
+    }
+    
+    //ritorna i pasti di un ticket
+    public ArrayList<Meal> getMealsTicketPassenger(String codeTicket) throws SQLException{
+        return adapter.getMealsTicketPassenger(codeTicket);
+    }
+    
+    //ritorna le assicurazioni di un ticket
+    public ArrayList<Insurance> getInsurancesTicketPassenger(String codeTicket) throws SQLException{
+        return adapter.getInsurancesTicketPassenger(codeTicket);
+    }
+    
+    //ritorna i bagagli di un ticket
+    public ArrayList<HoldLuggage> getHoldLuggagesTicketPassenger(String codeTicket) throws SQLException{
+        return adapter.getHoldLuggagesTicketPassenger(codeTicket);
+    }
+    
+    
 }

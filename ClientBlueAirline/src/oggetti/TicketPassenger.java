@@ -15,10 +15,13 @@ public class TicketPassenger {
 
     private String code, ID, name, surname, codeFlight;
     private int nseat, codeReservation, classe;
-    private double totalPrice;
-    private ArrayList<String> meals, holdLuggages, insurances;
+    private double priceFlight;
+    private ArrayList<Meal> meals;
+    private ArrayList<HoldLuggage> holdLuggages;
+    private ArrayList<Insurance> insurances;
+    boolean checkIn;
 
-    public TicketPassenger(String ID, String name, String surname, int nseat, int classe) {
+    public TicketPassenger(String ID, String name, String surname, int nseat, int classe, String codeFlight, double priceFlight) {
         this.ID = ID;
         this.name = name;
         this.surname = surname;
@@ -27,6 +30,13 @@ public class TicketPassenger {
         this.holdLuggages = new ArrayList<>();
         this.insurances = new ArrayList<>();
         this.classe=classe;
+        this.codeFlight=codeFlight;
+        this.priceFlight=priceFlight;
+        this.checkIn=false;
+    }
+    
+    public TicketPassenger(String code){
+        this.code=code;
     }
 
     public String getCode() {
@@ -56,32 +66,49 @@ public class TicketPassenger {
     public int getCodeReservation() {
         return codeReservation;
     }
-
+    
+    public double getPriceFlight(){
+        return priceFlight;
+    }
+    
     public double getTotalPrice() {
+        double totalPrice=priceFlight;
+        if(classe==1){
+            totalPrice+=Flight.COSTOPRIMACLASSE;
+        }
+        for(Meal m :meals){
+            totalPrice+=m.getPrice();
+        }
+        for(Insurance i:insurances){
+            totalPrice+=i.getPrice();
+        }
+        for(HoldLuggage hl:holdLuggages){
+            totalPrice+=hl.getPrice();
+        }
         return totalPrice;
     }
 
-    public void addMeals(String meal) {
+    public void addMeals(Meal meal) {
         this.meals.add(meal);
     }
 
-    public void addHoldLuggage(String holdLuggage) {
+    public void addHoldLuggage(HoldLuggage holdLuggage) {
         this.holdLuggages.add(holdLuggage);
     }
 
-    public void addInsurance(String insurance) {
+    public void addInsurance(Insurance insurance) {
         this.insurances.add(insurance);
     }
 
-    public ArrayList<String> getMeals() {
+    public ArrayList<Meal> getMeals() {
         return meals;
     }
 
-    public ArrayList<String> getHoldLuggages() {
+    public ArrayList<HoldLuggage> getHoldLuggages() {
         return holdLuggages;
     }
 
-    public ArrayList<String> getInsurances() {
+    public ArrayList<Insurance> getInsurances() {
         return insurances;
     }
 
@@ -100,34 +127,50 @@ public class TicketPassenger {
     
     @Override
     public String toString() {
-        return "TicketPassenger{" + "code=" + code + ", ID=" + ID + ", name=" + name + ", surname=" + surname + ", codeFlight=" + codeFlight + ", nseat=" + nseat + ", codeReservation=" + codeReservation + ", totalPrice=" + totalPrice + ", meals=" + meals + ", holdLuggages=" + holdLuggages + ", insurances=" + insurances + '}';
+        return "TicketPassenger{" + "code=" + code + ", ID=" + ID + ", name=" + name + ", surname=" + surname + ", codeFlight=" + codeFlight + ", nseat=" + nseat + ", codeReservation=" + codeReservation + ", totalPrice=" + this.getTotalPrice() + ", meals=" + meals + ", holdLuggages=" + holdLuggages + ", insurances=" + insurances + '}';
     }
     
     public String printTicketPassenger(){
-        String s = code+" "+ID+" "+name+" "+surname+" Posto: "+nseat+" ("+classe+" classe ) Aggiunte: ";
+        double priceAggiunte=0;
+        String s = code+" "+ID+" "+name+" "+surname+" Posto: "+nseat+" ("+classe+" classe) Aggiunte: ";
         boolean c=false;
-        for(String m:meals){
+        for(Meal m:meals){
             s+=m.toString()+" ";
+            priceAggiunte += m.getPrice();
             c=true;
         }
-        for(String hl:holdLuggages){
+        for(HoldLuggage hl:holdLuggages){
             s+=hl.toString()+" ";
+            priceAggiunte += hl.getPrice();
             c=true;
         }
-        for(String in:insurances){
+        for(Insurance in:insurances){
             s+=in.toString()+" ";
+            priceAggiunte += in.getPrice();
             c=true;
         }
         if(!c){
             s+="0";
         }
-        s+="\nPrezzo biglietto: "+totalPrice+"€";
+        if(classe==1){
+            s+="\nPrezzo biglietto: "+(priceFlight+priceAggiunte+Flight.COSTOPRIMACLASSE)+"€ (Volo: "+priceFlight+"€ + Prima Classe: "+Flight.COSTOPRIMACLASSE+"€ + Aggiunte: "+priceAggiunte+"€)";
+        }
+        else{
+            s+="\nPrezzo biglietto: "+(priceFlight+priceAggiunte)+"€ (Volo "+priceFlight+"€ + Aggiunte: "+priceAggiunte+"€)";
+        }
+        
+        if(checkIn)
+            s+="\nCheck-In: Effettuato";
+        else
+            s+="\nCheck-In: Non effettuato";
         return s;
+    }   
+
+    public boolean isCheckIn() {
+        return checkIn;
     }
     
-    public void addTotalPrice(double price){
-        this.totalPrice+=price;
-    }
+    
     
     
     

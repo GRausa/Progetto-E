@@ -210,17 +210,17 @@ public class AdapterSQL {
                     + "VALUES ('" + tp.getCode() + "', '" + tp.getID() + "', '" + tp.getName() + "', '" + tp.getSurname() + "', '" + reservation.getCode() + "',0)";
             SQL.queryWrite(query);
             //aggiunte
-            ArrayList<String> meals = tp.getMeals();
-            for (String s : meals) {
-                this.insertAggiunta(s, codeTicket);
+            ArrayList<Meal> meals = tp.getMeals();
+            for (Meal s : meals) {
+                this.insertAggiunta(s.getCode(), codeTicket);
             }
-            ArrayList<String> insurances = tp.getInsurances();
-            for (String s : insurances) {
-                this.insertAggiunta(s, codeTicket);
+            ArrayList<Insurance> insurances = tp.getInsurances();
+            for (Insurance s : insurances) {
+                this.insertAggiunta(s.getCode(), codeTicket);
             }
-            ArrayList<String> holdLuggages = tp.getHoldLuggages();
-            for (String s : holdLuggages) {
-                this.insertAggiunta(s, codeTicket);
+            ArrayList<HoldLuggage> holdLuggages = tp.getHoldLuggages();
+            for (HoldLuggage s : holdLuggages) {
+                this.insertAggiunta(s.getCode(), codeTicket);
             }
             if(this.seatIsFree(reservation.getCodeFlight(), tp.getNseat())){
                 this.setSeatBoolean(reservation.getCodeFlight(), tp.getNseat(), tp.getCode()); //lo metto a 1 cioè occupato
@@ -359,4 +359,86 @@ public class AdapterSQL {
         }
         return tp;
     }
+    
+    //verifico se è stato fatto il checkIn
+    public boolean isCheckIn(String codeTicket) throws SQLException{
+        String query
+                = "SELECT CHECKIN\n" 
+                + "FROM `TicketPasseggero`\n" 
+                + "WHERE COD_TICKET = '"+ codeTicket + "' ";
+        ResultSet resultQuery = SQL.queryRead(query);
+        int r = (int) ParserSQL.parseFunctionSQL(resultQuery, "CHECKIN");
+        if(r==0){
+            return false;
+        }
+        else{
+            return true;
+        }
+    }
+
+    public void setCheckIn(String codeTicket) throws SQLException{
+        //verificare se è stato fatto altrimenti fallo
+        if(!this.isCheckIn(codeTicket)){
+            String query
+                    = "UPDATE `TicketPasseggero`\n"
+                    + "SET `CHECKIN` = '1'\n"
+                    + "WHERE `TicketPasseggero`.`COD_TICKET` = '"+ codeTicket +"';";
+            SQL.queryWrite(query);            
+        }
+    }
+    
+    public ArrayList<Meal> getMealsTicketPassenger(String codeTicket) throws SQLException{
+        ArrayList<Meal> mealsTicketPassenger;
+        String query
+                = "SELECT COD_PASTO, NOME, PREZZOPASTO AS PREZZO, TEMPOVIAGGIO\n" 
+                + "FROM `Pasto_Passeggero` , Pasto\n" 
+                + "WHERE PASSEGGERO = '" + codeTicket + "'\n" 
+                + "AND PASTO = COD_PASTO" ;
+        ResultSet resultQuery = SQL.queryRead(query);
+        mealsTicketPassenger = ParserSQL.parseMeals(resultQuery);
+        resultQuery.close();
+        return mealsTicketPassenger;               
+    }
+    
+    public ArrayList<Insurance> getInsurancesTicketPassenger(String codeTicket) throws SQLException{
+        ArrayList<Insurance> insurancesTicketPassenger;
+        String query
+                = "SELECT COD_ASSICURAZIONE, NOME, PREZZOASSICURAZIONE AS PREZZO, DESCRIZIONE\n" 
+                + "FROM `Assicurazione_Passeggero` , Assicurazione\n" 
+                + "WHERE PASSEGGERO = '" + codeTicket + "'\n" 
+                + "AND ASSICURAZIONE = COD_ASSICURAZIONE";
+        ResultSet resultQuery = SQL.queryRead(query);
+        insurancesTicketPassenger = ParserSQL.parseInsurances(resultQuery);
+        resultQuery.close();
+        return insurancesTicketPassenger;        
+    }
+    
+    public ArrayList<HoldLuggage> getHoldLuggagesTicketPassenger(String codeTicket) throws SQLException{
+        ArrayList<HoldLuggage> holdLuggagesTicketPassenger;
+        String query
+                = "SELECT COD_BAGAGLIO, KG, PREZZOBAGAGLIO AS PREZZO, DESCRIZIONE\n" 
+                + "FROM Bagaglio_Passeggero, Bagaglio\n" 
+                + "WHERE PASSEGGERO = '" + codeTicket + "'\n" 
+                + "AND COD_BAGAGLIO = BAGAGLIO";
+        ResultSet resultQuery = SQL.queryRead(query);
+        holdLuggagesTicketPassenger = ParserSQL.parseHoldLuggages(resultQuery);
+        resultQuery.close();
+        return holdLuggagesTicketPassenger;
+    }
+    
+    public TicketPassenger getTicketPassenger(String codeTicket) throws SQLException{
+        TicketPassenger tp;
+        String query
+                = "SELECT COD_TICKET, PREZZO, COD_PRENOTAZIONE, ID, NOME, COGNOME, Prenotazione.VOLO, Posto.NUMERO AS NPOSTO, Classe AS CLASSE, CHECKIN\n" 
+                + "FROM TicketPasseggero, Prenotazione, Posto, Volo\n" 
+                + "WHERE COD_TICKET = '" + codeTicket + "'\n" 
+                + "AND PRENOTAZIONE = COD_PRENOTAZIONE\n" 
+                + "AND COD_TICKET = PASSEGGERO";
+        ResultSet resultQuery = SQL.queryRead(query);
+        tp = ParserSQL.parseTicketPassenger(resultQuery);
+        resultQuery.close();
+        return tp;
+    }
+    
+    
 }

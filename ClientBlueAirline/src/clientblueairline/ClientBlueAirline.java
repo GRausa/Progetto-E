@@ -100,6 +100,12 @@ public class ClientBlueAirline {
         Insurance[] insurances = gson.fromJson(in.readLine(), Insurance[].class);
         return insurances;
     }
+    
+    public TicketPassenger checkIn(TicketPassenger tp) throws IOException{
+        out.println("CHECKIN " + gson.toJson(tp));
+        TicketPassenger tp1 = gson.fromJson(in.readLine(), TicketPassenger.class);
+        return tp1;
+    }
 
     public void scrittura() throws IOException {
         System.out.println("RICEVUTO DAL SERVER: " + in.readLine());

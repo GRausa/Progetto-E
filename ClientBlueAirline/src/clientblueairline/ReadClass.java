@@ -17,7 +17,6 @@ import oggetti.Insurance;
 import oggetti.Meal;
 import oggetti.Reservation;
 import oggetti.Route;
-import oggetti.Seat;
 import oggetti.TicketPassenger;
 
 /**
@@ -43,6 +42,7 @@ public class ReadClass implements Runnable {
             System.out.println(">>>VERIFICA_TRATTA");
             System.out.println(">>>PRENOTA");
             System.out.println(">>>CALENDARIO_VOLI");
+            System.out.println(">>>CHECK_IN");
             System.out.println(">>>EXIT");
 
             String s1 = input.nextLine().toUpperCase();
@@ -83,6 +83,9 @@ public class ReadClass implements Runnable {
                      {
                         try {
                             volit = client.searchFlights(tmpflight);
+                            if(volit.length==0){
+                                System.out.println("Nessun volo trovato.");
+                            }
                             for (Flight v : volit) {
                                 System.out.println(v);
                             }
@@ -154,7 +157,7 @@ public class ReadClass implements Runnable {
                     Meal[] meals = null;
                     Insurance[] insurances = null;
                     HoldLuggage[] holdLuggages = null;
-                     {
+                    {
                         try {
                             meals = client.getAllMeals();
                             insurances = client.getAllInsurances();
@@ -187,20 +190,15 @@ public class ReadClass implements Runnable {
                                 if (flight.getSeats().get(seat).getPassenger() == null) {
                                     flight.getSeats().get(seat).setPassenger(vetsplit[0]);
                                     int classe = flight.getSeats().get(seat).getClasse();
-                                    TicketPassenger p = new TicketPassenger(vetsplit[0], vetsplit[1], vetsplit[2], seat, classe);
-                                    if (classe == 1) {
-                                        p.addTotalPrice(flight.getPrezzo() + Flight.COSTOPRIMACLASSE);
-                                    } else {
-                                        p.addTotalPrice(flight.getPrezzo());
-                                    }
+                                    TicketPassenger p = new TicketPassenger(vetsplit[0], vetsplit[1], vetsplit[2], seat, classe, flight.getCode(), flight.getPrezzo());
                                     for (int j = 4; j < vetsplit.length; j++) {
                                         String v = vetsplit[j];
                                         switch (vetsplit[j].charAt(0)) {
                                             case 'M':
                                                 for (Meal m : meals) {
                                                     if (m.getCode().equals(v)) {
-                                                        p.addMeals(v);
-                                                        p.addTotalPrice(m.getPrice());
+                                                        p.addMeals(m);
+                                                        //p.addTotalPrice(m.getPrice());
                                                         break;
                                                     }
                                                 }
@@ -208,8 +206,8 @@ public class ReadClass implements Runnable {
                                             case 'H':
                                                 for (HoldLuggage hl : holdLuggages) {
                                                     if (hl.getCode().equals(v)) {
-                                                        p.addHoldLuggage(v);
-                                                        p.addTotalPrice(hl.getPrice());
+                                                        p.addHoldLuggage(hl);
+                                                        //p.addTotalPrice(hl.getPrice());
                                                         break;
                                                     }
                                                 }
@@ -217,8 +215,8 @@ public class ReadClass implements Runnable {
                                             case 'I':
                                                 for (Insurance in : insurances) {
                                                     if (in.getCode().equals(v)) {
-                                                        p.addInsurance(v);
-                                                        p.addTotalPrice(in.getPrice());
+                                                        p.addInsurance(in);
+                                                        //p.addTotalPrice(in.getPrice());
                                                         break;
                                                     }
                                                 }
@@ -244,7 +242,7 @@ public class ReadClass implements Runnable {
                     String mail = input.nextLine();
 
                     Reservation res = new Reservation(cod, numero, mail, passengers);
-                     {
+                    {
                         try {
                             res = client.makeReservation(res);
                             flight = client.searchFlight(flight); //aggiorno il flight dopo la prenotazione
@@ -271,6 +269,7 @@ public class ReadClass implements Runnable {
                                     } while (!c);
                                 }
                             }
+                            //il seguito sarà modificato con il RICERCA PRENOTAZIONE e il stampa total price sarà in Reservation
                             System.out.println("PRENOTAZIONE EFFETTUATA\nCodice Prenotazione: " + res.getCode());
                             System.out.println("Riepilogo:");
                             System.out.println(flight.toString());
@@ -285,6 +284,14 @@ public class ReadClass implements Runnable {
                         }
                     }
                     break;
+                    /*
+                    CONTROLLARE CHE LA PRENOTAZIONE FUNZIONA (ORA CHE HO MESSO GLI ARRAY)
+                    CONTROLLARE CHE IL CHECKIN FUNZIONA (E CHE IL GET-TICKET-PASSENGER FUNZIONA)
+                    IN QUESTO MODO SI PUò IMPLEMENTARE:
+                    - GET PRENOTAZIONE -> FACILE DAL GET TICKET
+                    - MODIFICA POSTO E AGGIUNTE (SE NON HO FATTO IL CHECKIN -> USO METODO IMPLEMENTATO ISCHECK)
+                    */
+                    
                 case "EXIT":
                     break loop;
                     
@@ -296,7 +303,7 @@ public class ReadClass implements Runnable {
                     Route tmproute2 = new Route();
                     tmproute2.setDeparutreAirport(part2);
                     tmproute2.setDestinationAirport(dest2);
-                     {
+                    {
                         try {
                             Flight[] calendario = client.calendar(tmproute2);
                             if (calendario.length == 0) {
@@ -310,6 +317,21 @@ public class ReadClass implements Runnable {
                         }
                     }
                     break;
+                
+                case "CHECK_IN":
+                    System.out.println("Inserisci il codice ticket per effettuare il check-in:");
+                    String codeTicket = input.nextLine();
+                    TicketPassenger tp = new TicketPassenger(codeTicket);
+                    {
+                        try {
+                            tp = client.checkIn(tp);
+                        } catch (IOException ex) {
+                            Logger.getLogger(ReadClass.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
+                    System.out.println("Check-in effettuato.\n"+tp.printTicketPassenger());
+                    break;
+                    
 
                 default:
                     System.out.println("Errore inserimento");

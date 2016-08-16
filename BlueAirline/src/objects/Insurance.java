@@ -29,6 +29,12 @@ public class Insurance { //ASSICURAZIONE
         this.price=price;
         this.description=description;
     }
+
+    public Insurance(String code) {
+        this.code = code;
+    }
+    
+    
     /**
      * 
      * @return nome dell'assicurazione

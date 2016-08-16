@@ -17,6 +17,7 @@ import objects.Insurance;
 import objects.Meal;
 import objects.Route;
 import objects.Seat;
+import objects.TicketPassenger;
 
 /**
  *
@@ -164,6 +165,23 @@ public class ParserSQL {
             insurances.add(new Insurance(code,name,price,description));
         }
         return insurances; 
+    }
+    
+    public static TicketPassenger parseTicketPassenger(ResultSet resultQuery) throws SQLException{
+        resultQuery.next();
+        String codeTicket = resultQuery.getString("COD_TICKET");
+        double priceFlight = resultQuery.getDouble("PREZZO");
+        int codeReservation = resultQuery.getInt("COD_PRENOTAZIONE");
+        String ID = resultQuery.getString("ID");
+        String name = resultQuery.getString("NOME");
+        String surname = resultQuery.getString("COGNOME");
+        String codeFlight = resultQuery.getString("VOLO");
+        int nseat = resultQuery.getInt("NPOSTO");
+        int classe = resultQuery.getInt("CLASSE");
+        boolean cheakIn  = resultQuery.getBoolean("CHECKIN");
+        //TicketPassenger(String code, String name, String surname, String codeFlight, int nseat, int codeReservation, int classe, boolean checkIn) {
+        TicketPassenger tp = new TicketPassenger(codeTicket, priceFlight, ID, name, surname, codeFlight, nseat, codeReservation, classe, cheakIn);
+        return tp;
     }
     
     //METODI GENERICI

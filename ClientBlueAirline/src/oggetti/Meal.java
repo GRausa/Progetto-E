@@ -29,6 +29,10 @@ public class Meal {
         this.price=price;
         this.timeMeal=timeMeal;
     }
+    
+    public Meal (String code){
+        this.code=code;
+    }
     /**
      * 
      * @return nome del pasto 
