@@ -94,6 +94,21 @@ class RemoteUser extends Thread {
             }
         });
 
+        
+        commands.put("getCITY",new Command() {
+            @Override
+            public void execute(String args) {
+                    ArrayList<String> cities;
+                try {
+                    cities = company.searchAllCitys();
+                    out.println(gson.toJson(cities));
+                } catch (SQLException ex) {
+                    Logger.getLogger(RemoteUser.class.getName()).log(Level.SEVERE, null, ex);
+                }                                        
+            }
+            
+        } 
+        );
         commands.put("CALENDAR", new Command() {
             @Override
             public void execute(String args) {

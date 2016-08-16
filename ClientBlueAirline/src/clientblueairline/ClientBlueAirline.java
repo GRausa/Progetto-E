@@ -76,6 +76,12 @@ public class ClientBlueAirline {
         Route[] rotte = gson.fromJson(serverout, Route[].class);        
         return rotte;
     }
+    
+    public String[] listOfCity() throws IOException{
+        out.println("getCITY");
+        String[] cities = gson.fromJson(in.readLine(), String[].class);
+        return cities;
+    }
 
     public Flight[] calendar(Route rotta) throws IOException {
         out.println("CALENDAR " + gson.toJson(rotta));
