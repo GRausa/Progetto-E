@@ -131,12 +131,15 @@ public class ControllerClient {
     //ritorna tutta la prenotazione
     public Reservation getReservtion(int codeReservation) throws SQLException{
         Reservation res = adapter.getReservation(codeReservation);
-        ArrayList<TicketPassenger> ticketPassengers = new ArrayList<>();
-        for(TicketPassenger tp : res.getPassengers()){
-            ticketPassengers.add(this.getTicketPassenger(tp.getCode()));
+        if(res!=null){
+            ArrayList<TicketPassenger> ticketPassengers = new ArrayList<>();
+            for(TicketPassenger tp : res.getPassengers()){
+                ticketPassengers.add(this.getTicketPassenger(tp.getCode()));
+            }
+            res.setPassengers(ticketPassengers);;
         }
-        res.setPassengers(ticketPassengers);;
         return res;
+        
     }
     
     

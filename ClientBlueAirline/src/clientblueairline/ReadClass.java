@@ -46,9 +46,7 @@ public class ReadClass implements Runnable {
             System.out.println(">>>CHECK_IN");
             System.out.println(">>>CERCA_TICKETPASSENGER");
             System.out.println(">>>CERCA_PRENOTAZIONE");
-            System.out.println(">>>EXIT");
-            
-
+            System.out.println(">>>EXIT");        
             String s1 = input.nextLine().toUpperCase();
             switch (s1) {
 
@@ -361,7 +359,8 @@ public class ReadClass implements Runnable {
                     {
                         try {
                             r = client.getReservation(r);   
-                            f1 = client.searchFlight(new Flight(r.getCodeFlight()));
+                            if(r!=null)
+                                f1 = client.searchFlight(new Flight(r.getCodeFlight()));
                         } catch (IOException ex) {
                             Logger.getLogger(ReadClass.class.getName()).log(Level.SEVERE, null, ex);
                         }
@@ -375,8 +374,7 @@ public class ReadClass implements Runnable {
                     else{
                         System.out.println("Prenotazione non trovata.");
                     }                    
-                    break;
-                    
+                    break;                    
 
                 default:
                     System.out.println("Errore inserimento");
