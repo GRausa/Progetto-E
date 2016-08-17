@@ -37,16 +37,16 @@ public class ReadClass implements Runnable {
         Scanner input = new Scanner(System.in);
 
         loop:while (true) {
-            System.out.println("COMANDI DISPONIBILI");
-            System.out.println(">>>HI");
-            System.out.println(">>>VERIFICA_VOLO");
-            System.out.println(">>>VERIFICA_TRATTA");
-            System.out.println(">>>PRENOTA");
-            System.out.println(">>>CALENDARIO_VOLI");
-            System.out.println(">>>CHECK_IN");
-            System.out.println(">>>CERCA_TICKETPASSENGER");
-            System.out.println(">>>CERCA_PRENOTAZIONE");
-            System.out.println(">>>EXIT");        
+            System.out.println("\nCOMANDI DISPONIBILI");
+            System.out.println("\n>>> HI -> Test server");
+            System.out.println("\nAREA RICERCA:\n\n>>> CERCA_VOLO -> Ricerca il volo tra 2 città in una precisa data ( + mappa posti )");
+            System.out.println(">>> CERCA_VOLO_AEROPORTI -> Ricerca i voli disponibili tra 2 aeroporti");
+            System.out.println(">>> VERIFICA_TRATTA -> Controlla se esiste una tratta tra 2 città");
+            System.out.println("\nAREA CLIENTE:\n\n>>> PRENOTA -> Effettua una prenotazione di un posto a sedere");            
+            System.out.println(">>> CHECK_IN -> Effettua il check-in del tuo biglietto aereo");
+            System.out.println(">>> CERCA_TICKETPASSENGER -> Ricerca il tuo biglietto aereo");
+            System.out.println(">>> CERCA_PRENOTAZIONE -> Ricerca la tua prenotazione");
+            System.out.println(">>> EXIT");        
             String s1 = input.nextLine().toUpperCase();
             switch (s1) {
 
@@ -60,18 +60,12 @@ public class ReadClass implements Runnable {
                 break;
                 
                 
-                case "VERIFICA_VOLO":
+                case "CERCA_VOLO":
                     ArrayList<String> inputtxt=MethodsControl.lettura(new ArrayList<>(asList("Inserisci città partenza", "Inserisci città destinazione")));
-                    /*System.out.println("Inserisci città partenza");
-                    String part = input.nextLine();
-                    System.out.println("Inserisci città destinazione");
-                    String dest = input.nextLine();*/
                     Route tmproute = new Route(inputtxt.get(0), inputtxt.get(1));
                     System.out.println("Inserisci data di partenza AAAA-MM-GG");
                     String data = input.nextLine();
-                    int day,
-                     month,
-                     year;
+                    int day,month,year;
                     String[] vetDate = data.split("-");
                     if (vetDate.length == 3) {
                         year = Integer.parseInt(vetDate[0]);
@@ -293,7 +287,7 @@ public class ReadClass implements Runnable {
                 case "EXIT":
                     break loop;
                     
-                case "CALENDARIO_VOLI":
+                case "CERCA_VOLO_AEROPORTI":
                     ArrayList<String> inputtxt2=MethodsControl.lettura(new ArrayList<>(asList("Inserisci Aeroporto partenza", "Inserisci Aeroporto destinazione")));
                     Route tmproute2 = new Route();
                     tmproute2.setDeparutreAirport(inputtxt2.get(0));
@@ -335,7 +329,8 @@ public class ReadClass implements Runnable {
                     {
                         try {
                             tp1 = client.getTicketPassenger(tp1);   
-                            f = client.searchFlight(new Flight(tp1.getCodeFlight()));
+                            if(tp1!=null)
+                                f = client.searchFlight(new Flight(tp1.getCodeFlight()));
                         } catch (IOException ex) {
                             Logger.getLogger(ReadClass.class.getName()).log(Level.SEVERE, null, ex);
                         }
@@ -369,7 +364,7 @@ public class ReadClass implements Runnable {
                     }
                     else{
                         System.out.println("Prenotazione non trovata.");
-                    }                    
+                    }      
                     break;                    
 
                 default:

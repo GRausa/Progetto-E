@@ -95,7 +95,7 @@ class RemoteUser extends Thread {
         });
 
         
-        commands.put("getCITY",new Command() {
+        commands.put("GETALLCITY",new Command() {
             @Override
             public void execute(String args) {
                     ArrayList<String> cities;

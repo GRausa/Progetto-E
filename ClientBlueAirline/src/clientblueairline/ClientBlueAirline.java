@@ -78,7 +78,7 @@ public class ClientBlueAirline {
     }
     
     public String[] listOfCity() throws IOException{
-        out.println("getCITY");
+        out.println("GETALLCITY");
         String[] cities = gson.fromJson(in.readLine(), String[].class);
         return cities;
     }
