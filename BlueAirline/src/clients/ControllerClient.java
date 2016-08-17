@@ -54,7 +54,7 @@ public class ControllerClient {
     }
     
     //ricerca il volo con i posti 
-    public Flight getFlightWithSeats(Flight flight) throws SQLException{
+    public Flight setFlightWithSeats(Flight flight) throws SQLException{
         return adapter.setSeatsFlight(flight);
     }
     
@@ -138,8 +138,7 @@ public class ControllerClient {
             }
             res.setPassengers(ticketPassengers);;
         }
-        return res;
-        
+        return res;        
     }
     
     

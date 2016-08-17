@@ -209,7 +209,7 @@ public class ParserSQL {
     public static Calendar returnCalendar(String stringDate, String stringTime){
         String[] vetDate = stringDate.split("-");
         int year = Integer.parseInt(vetDate[0]);
-        int month = Integer.parseInt(vetDate[1]);
+        int month = Integer.parseInt(vetDate[1])-1;
         int day = Integer.parseInt(vetDate[2]);
         String[] vetTime = stringTime.split(":");
         int hour = Integer.parseInt(vetTime[0]);

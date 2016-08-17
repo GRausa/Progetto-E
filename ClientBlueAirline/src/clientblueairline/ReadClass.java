@@ -273,13 +273,10 @@ public class ReadClass implements Runnable {
                             //il seguito sarà modificato con il RICERCA PRENOTAZIONE e il stampa total price sarà in Reservation
                             System.out.println("PRENOTAZIONE EFFETTUATA\nCodice Prenotazione: " + res.getCode());
                             System.out.println("Riepilogo:");
+                            res = client.getReservation(res);
                             System.out.println(flight.toString());
-                            double totalAllPrice = 0;
-                            for (TicketPassenger tp : res.getPassengers()) {
-                                totalAllPrice += tp.getTotalPrice();
-                                System.out.println(tp.printTicketPassenger());
-                            }
-                            System.out.println("Prezzo totale prenotazione: " + totalAllPrice + "€");
+                            System.out.println(res.printReservation());
+                            System.out.println(res.printPassengers());
                         } catch (IOException ex) {
                             Logger.getLogger(ReadClass.class.getName()).log(Level.SEVERE, null, ex);
                         }
@@ -368,8 +365,7 @@ public class ReadClass implements Runnable {
                     if(r!=null){
                         System.out.println(f1.toString());
                         System.out.println(r.printReservation());
-                        System.out.println(r.printPassengers());
-                        
+                        System.out.println(r.printPassengers());                        
                     }
                     else{
                         System.out.println("Prenotazione non trovata.");

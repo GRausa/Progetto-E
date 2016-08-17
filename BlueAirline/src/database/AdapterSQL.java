@@ -433,6 +433,7 @@ public class AdapterSQL {
                 + "FROM TicketPasseggero, Prenotazione, Posto, Volo\n" 
                 + "WHERE COD_TICKET = '" + codeTicket + "'\n" 
                 + "AND PRENOTAZIONE = COD_PRENOTAZIONE\n" 
+                + "AND Posto.VOLO = COD_VOLO\n"
                 + "AND COD_TICKET = PASSEGGERO";
         ResultSet resultQuery = SQL.queryRead(query);
         tp = ParserSQL.parseTicketPassenger(resultQuery);
