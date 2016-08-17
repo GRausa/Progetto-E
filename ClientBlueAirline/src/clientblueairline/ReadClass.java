@@ -44,7 +44,10 @@ public class ReadClass implements Runnable {
             System.out.println(">>>PRENOTA");
             System.out.println(">>>CALENDARIO_VOLI");
             System.out.println(">>>CHECK_IN");
+            System.out.println(">>>CERCA_TICKETPASSENGER");
+            System.out.println(">>>CERCA_PRENOTAZIONE");
             System.out.println(">>>EXIT");
+            
 
             String s1 = input.nextLine().toUpperCase();
             switch (s1) {
@@ -327,6 +330,51 @@ public class ReadClass implements Runnable {
                         }
                     }
                     System.out.println("Check-in effettuato.\n"+tp.printTicketPassenger());
+                    break;
+                
+                case "CERCA_TICKETPASSENGER":
+                    System.out.println("Inserisci il codice del biglietto: ");
+                    String codeT = input.nextLine();
+                    TicketPassenger tp1 = new TicketPassenger(codeT);
+                    Flight f = null;
+                    {
+                        try {
+                            tp1 = client.getTicketPassenger(tp1);   
+                            f = client.searchFlight(new Flight(tp1.getCodeFlight()));
+                        } catch (IOException ex) {
+                            Logger.getLogger(ReadClass.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
+                    if(tp1!=null){
+                        System.out.println(f.toString());
+                        System.out.println(tp1.printTicketPassenger());
+                    }
+                    else
+                        System.out.println("Biglietto non trovato");
+                    break;
+                 
+                case "CERCA_PRENOTAZIONE":
+                    System.out.println("Inserisci il codice della prenotazione: ");
+                    int codeReservation = input.nextInt();
+                    Reservation r = new Reservation(codeReservation);
+                    Flight f1 = null;
+                    {
+                        try {
+                            r = client.getReservation(r);   
+                            f1 = client.searchFlight(new Flight(r.getCodeFlight()));
+                        } catch (IOException ex) {
+                            Logger.getLogger(ReadClass.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
+                    if(r!=null){
+                        System.out.println(f1.toString());
+                        System.out.println(r.printReservation());
+                        System.out.println(r.printPassengers());
+                        
+                    }
+                    else{
+                        System.out.println("Prenotazione non trovata.");
+                    }                    
                     break;
                     
 

@@ -112,6 +112,18 @@ public class ClientBlueAirline {
         TicketPassenger tp1 = gson.fromJson(in.readLine(), TicketPassenger.class);
         return tp1;
     }
+    
+    public TicketPassenger getTicketPassenger(TicketPassenger tp) throws IOException{
+        out.println("PASSEGGERO " + gson.toJson(tp));
+        TicketPassenger tp1 = gson.fromJson(in.readLine(), TicketPassenger.class);
+        return tp1;
+    }
+    
+    public Reservation getReservation(Reservation res) throws IOException{
+        out.println("PRENOTAZIONE " + gson.toJson(res));
+        Reservation res1 = gson.fromJson(in.readLine(), Reservation.class);
+        return res1;
+    }
 
     public void scrittura() throws IOException {
         System.out.println("RICEVUTO DAL SERVER: " + in.readLine());

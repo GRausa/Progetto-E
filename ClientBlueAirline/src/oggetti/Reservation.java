@@ -29,6 +29,10 @@ public class Reservation {
         this.codeFlight = codeFlight;
         this.passengers=p;
     }
+    
+    public Reservation(int code){
+        this.code=code;
+    }
 
     public ArrayList<TicketPassenger> getPassengers() {
         return passengers;
@@ -60,9 +64,25 @@ public class Reservation {
         return "Reservation{" + "passengers=" + passengers.get(0) + ", code=" + code + ", email=" + email + ", number=" + number + ", codeFlight=" + codeFlight + '}';
     }
     
+    public String printReservation(){
+        String s="";
+        s+="Prenotazione: "+code+" ("+email+" "+number+")\n";
+        s+="Volo: "+codeFlight+"\n";
+        s+="Numero passeggeri: "+passengers.size();
+        return s;
+    }
+    
  
     public void setCode(int code) {
         this.code = code;
+    }
+
+    public String printPassengers() {
+        String s="";
+        for(TicketPassenger tp:passengers){
+            s+=tp.printTicketPassenger()+"\n";
+        }
+        return s;
     }
     
     

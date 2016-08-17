@@ -132,7 +132,7 @@ public class TicketPassenger {
     
     public String printTicketPassenger(){
         double priceAggiunte=0;
-        String s = code+" "+ID+" "+name+" "+surname+" Posto: "+nseat+" ("+classe+" classe) Aggiunte: ";
+        String s = "Codice Biglietto: "+code+"\n"+ID+" "+name+" "+surname+"\nVolo: "+codeFlight+" Posto: "+nseat+" ("+classe+" classe)\nAggiunte: ";
         boolean c=false;
         for(Meal m:meals){
             s+=m.toString()+" ";

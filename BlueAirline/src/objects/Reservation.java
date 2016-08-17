@@ -21,14 +21,14 @@ public class Reservation {
         this.number = number;
         this.codeFlight = codeFlight;
     }
-    /*
+    
     public Reservation(int code, String email, String number, String codeFlight) {
         this.code = code;
         this.email = email;
         this.number = number;
         this.codeFlight = codeFlight;
     }
-*/
+    
     public ArrayList<TicketPassenger> getPassengers() {
         return passengers;
     }

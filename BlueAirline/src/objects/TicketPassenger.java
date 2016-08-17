@@ -48,6 +48,9 @@ public class TicketPassenger {
         this.checkIn = checkIn;
     }
     
+    public TicketPassenger(String code){
+        this.code = code;
+    }
 
     @Override
     public String toString() {

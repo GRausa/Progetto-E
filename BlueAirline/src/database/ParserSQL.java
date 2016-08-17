@@ -15,6 +15,7 @@ import objects.Flight;
 import objects.HoldLuggage;
 import objects.Insurance;
 import objects.Meal;
+import objects.Reservation;
 import objects.Route;
 import objects.Seat;
 import objects.TicketPassenger;
@@ -97,16 +98,31 @@ public class ParserSQL {
             return null;
         }
     }
-    /*
-    public static Reservation parseReservation(ResultSet resultQuery) throws SQLException{        
-        int code = resultQuery.getInt("COD_PRENOTAZIONE");
-        String codeFlight = resultQuery.getString("VOLO");
-        String email = resultQuery.getString("EMAIL");
-        String number = resultQuery.getString("NUMERO");
-        Reservation reservation = new Reservation(code,codeFlight,email,number);
-        return reservation;
+    
+    public static Reservation parseReservation(ResultSet resultQuery) throws SQLException{
+        if(resultQuery.next()){
+            int codeReservation = resultQuery.getInt("COD_PRENOTAZIONE");
+            String codeFlight = resultQuery.getString("VOLO");
+            String email = resultQuery.getString("EMAIL");
+            String number = resultQuery.getString("NUMERO");
+            Reservation res = new Reservation(codeReservation, email, number, codeFlight);
+            
+            ArrayList<TicketPassenger> ticketPassengers = new ArrayList<>();
+            String codeTicket = resultQuery.getString("COD_TICKET");
+            ticketPassengers.add(new TicketPassenger(codeTicket));
+            
+            while (resultQuery.next()){
+                codeTicket = resultQuery.getString("COD_TICKET");
+                ticketPassengers.add(new TicketPassenger(codeTicket));
+            }
+            res.setPassengers(ticketPassengers);
+            return res;
+        }
+        else{
+            return null;
+        }
     }
-    */
+    
     public static double parseFunctionSQL(ResultSet resultQuery, String value) throws SQLException{ //SINGOLI MAX,MIN,COUNT...
         resultQuery.next();
         return resultQuery.getDouble(value);
@@ -168,20 +184,24 @@ public class ParserSQL {
     }
     
     public static TicketPassenger parseTicketPassenger(ResultSet resultQuery) throws SQLException{
-        resultQuery.next();
-        String codeTicket = resultQuery.getString("COD_TICKET");
-        double priceFlight = resultQuery.getDouble("PREZZO");
-        int codeReservation = resultQuery.getInt("COD_PRENOTAZIONE");
-        String ID = resultQuery.getString("ID");
-        String name = resultQuery.getString("NOME");
-        String surname = resultQuery.getString("COGNOME");
-        String codeFlight = resultQuery.getString("VOLO");
-        int nseat = resultQuery.getInt("NPOSTO");
-        int classe = resultQuery.getInt("CLASSE");
-        boolean cheakIn  = resultQuery.getBoolean("CHECKIN");
-        //TicketPassenger(String code, String name, String surname, String codeFlight, int nseat, int codeReservation, int classe, boolean checkIn) {
-        TicketPassenger tp = new TicketPassenger(codeTicket, priceFlight, ID, name, surname, codeFlight, nseat, codeReservation, classe, cheakIn);
-        return tp;
+        if(resultQuery.next()){
+            String codeTicket = resultQuery.getString("COD_TICKET");
+            double priceFlight = resultQuery.getDouble("PREZZO");
+            int codeReservation = resultQuery.getInt("COD_PRENOTAZIONE");
+            String ID = resultQuery.getString("ID");
+            String name = resultQuery.getString("NOME");
+            String surname = resultQuery.getString("COGNOME");
+            String codeFlight = resultQuery.getString("VOLO");
+            int nseat = resultQuery.getInt("NPOSTO");
+            int classe = resultQuery.getInt("CLASSE");
+            boolean cheakIn  = resultQuery.getBoolean("CHECKIN");
+            //TicketPassenger(String code, String name, String surname, String codeFlight, int nseat, int codeReservation, int classe, boolean checkIn) {
+            TicketPassenger tp = new TicketPassenger(codeTicket, priceFlight, ID, name, surname, codeFlight, nseat, codeReservation, classe, cheakIn);
+            return tp;
+        }
+        else{
+            return null;
+        }
     }
     
     //METODI GENERICI

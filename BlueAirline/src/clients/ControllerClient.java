@@ -58,13 +58,6 @@ public class ControllerClient {
         return adapter.setSeatsFlight(flight);
     }
     
-    
-    /* da implementare
-    public Reservation searchReservation(int code) throws SQLException{
-        return adapter.searchReservation(code);
-    }
-    */
-    
     //effettua prenotazione
     public Reservation makeReservation(Reservation reservation) throws SQLException{
         return adapter.makeReservation(reservation);
@@ -111,14 +104,13 @@ public class ControllerClient {
     
     //ritorna ticketPassenger
     public TicketPassenger getTicketPassenger(String codeTicket) throws SQLException{
-        //ritorna tutte le caraterristiche passeggero NOME,COGNOME, POSTO, PRENOTAZIONE ECC..
-        //metodo che mi ritorna le aggiunte bagagli, un altro che mi ritorna assicurazioni e un altro per pasti
         TicketPassenger tp = adapter.getTicketPassenger(codeTicket);
-        tp.setMeals(this.getMealsTicketPassenger(codeTicket));
-        tp.setHoldLuggages(this.getHoldLuggagesTicketPassenger(codeTicket));
-        tp.setInsurances(this.getInsurancesTicketPassenger(codeTicket));        
-        return tp;
-        
+        if(tp!=null){
+            tp.setMeals(this.getMealsTicketPassenger(codeTicket));
+            tp.setHoldLuggages(this.getHoldLuggagesTicketPassenger(codeTicket));
+            tp.setInsurances(this.getInsurancesTicketPassenger(codeTicket)); 
+        }
+        return tp;        
     }
     
     //ritorna i pasti di un ticket
@@ -134,6 +126,17 @@ public class ControllerClient {
     //ritorna i bagagli di un ticket
     public ArrayList<HoldLuggage> getHoldLuggagesTicketPassenger(String codeTicket) throws SQLException{
         return adapter.getHoldLuggagesTicketPassenger(codeTicket);
+    }
+    
+    //ritorna tutta la prenotazione
+    public Reservation getReservtion(int codeReservation) throws SQLException{
+        Reservation res = adapter.getReservation(codeReservation);
+        ArrayList<TicketPassenger> ticketPassengers = new ArrayList<>();
+        for(TicketPassenger tp : res.getPassengers()){
+            ticketPassengers.add(this.getTicketPassenger(tp.getCode()));
+        }
+        res.setPassengers(ticketPassengers);;
+        return res;
     }
     
     

@@ -440,5 +440,18 @@ public class AdapterSQL {
         return tp;
     }
     
+    public Reservation getReservation(int codeReservation) throws SQLException{
+        Reservation res;
+        String query
+                = "SELECT COD_PRENOTAZIONE, VOLO, EMAIL, NUMERO, COD_TICKET\n" 
+                + "FROM Prenotazione, TicketPasseggero\n" 
+                + "WHERE COD_PRENOTAZIONE =" + codeReservation + "\n" 
+                + "AND PRENOTAZIONE = COD_PRENOTAZIONE";
+        ResultSet resultQuery = SQL.queryRead(query);
+        res = ParserSQL.parseReservation(resultQuery);
+        resultQuery.close();
+        return res;
+    }
+    
     
 }
