@@ -86,24 +86,24 @@ public class CustomerPanel extends JPanel{
         home.setallFont(this);
         this.makeComponentsTrasparent();
      
-  
+       posto0.setVisible(false);
 
        this.add( nome0, new GridBagConstraints( 0, 0, 1, 1, 1.0,1.0, GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets( 0, 100, 0, 0 ), 200, 40 ) );
        this.add( cognome0, new GridBagConstraints( 1, 0, 1, 1, 1.0,1.0, GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets( 0, 150, 0, 0 ), 150, 40 ) );
-         this.add( nome, new GridBagConstraints( 0, 0, 1, 1, 1.0,1.0, GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets( 0, 0, 0, 0 ), 200, 40 ) );
+       this.add( nome, new GridBagConstraints( 0, 0, 1, 1, 1.0,1.0, GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets( 0, 0, 0, 0 ), 200, 40 ) );
        this.add( cognome, new GridBagConstraints( 1, 0, 1, 1, 1.0,1.0, GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets( 0, 0, 0, 0 ), 200, 40 ) );
-   this.add( id, new GridBagConstraints( 1, 0, 1, 1, 1.0,1.0, GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets( 0, 310, 0, 0 ), 100, 40 ) );
+       this.add( id, new GridBagConstraints( 1, 0, 1, 1, 1.0,1.0, GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets( 0, 310, 0, 0 ), 100, 40 ) );
        this.add( id0, new GridBagConstraints( 1, 0, 1, 1, 1.0,1.0, GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets( 0, 350, 0, 0 ),150, 40 ) );
   
        this.add( email0, new GridBagConstraints( 0, 1, 1, 1, 1.0,1.0, GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets( 0, 100, 0, 0 ), 200, 40 ) );
        this.add( tell, new GridBagConstraints( 1, 1, 1, 1, 1.0,1.0, GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets( 0, 0, 0, 0 ), 100, 40 ) );
-         this.add( email, new GridBagConstraints( 0, 1, 1, 1, 1.0,1.0, GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets( 0, 0, 0, 0 ), 150, 40 ) );
+       this.add( email, new GridBagConstraints( 0, 1, 1, 1, 1.0,1.0, GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets( 0, 0, 0, 0 ), 150, 40 ) );
        this.add( tell0, new GridBagConstraints( 1, 1, 1, 1, 1.0,1.0, GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets( 0, 150, 0, 0 ), 150, 40 ) );
   
-    this.add( posto0, new GridBagConstraints( 1, 3, 1, 1, 1.0,1.0, GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets( 0, 0, 0, 0 ), 150, 40 ) );
+       this.add( posto0, new GridBagConstraints( 1, 3, 1, 1, 1.0,1.0, GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets( 0, 0, 0, 0 ), 150, 40 ) );
        this.add( posto, new GridBagConstraints( 0, 3, 1, 1, 1.0,1.0, GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets( 0, 0, 0, 0 ), 100, 40 ) );
         
-         this.add( classe, new GridBagConstraints( 0, 2, 1, 1, 1.0,1.0, GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets( 0, 0, 0, 0 ), 100, 40 ) );
+       this.add( classe, new GridBagConstraints( 0, 2, 1, 1, 1.0,1.0, GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets( 0, 0, 0, 0 ), 100, 40 ) );
        this.add( cbclasse, new GridBagConstraints( 1, 2, 1, 1, 1.0,1.0, GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets( 0, 0, 0, 0 ), 50, 40 ) );
   
     }
@@ -272,7 +272,7 @@ public class CustomerPanel extends JPanel{
     
     
    // button = new JButton("Button 1");
-      cbclasse.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "poveracci ", "Prima Classe" }));
+      cbclasse.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Prima Classe ", "Seconda Classe" }));
    
     if (shouldWeightX) {
     c.weightx = 3;
@@ -282,7 +282,25 @@ public class CustomerPanel extends JPanel{
     c.gridx = 1;
     c.gridy = 2;
     pane.add(cbclasse, c);
-    
+    cbclasse.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                posto0.setVisible(true);
+                if(((String)cbclasse.getSelectedItem()).equals("Prima Classe"))
+                {
+                    posto0.addKeyListener(new KeyAdapter() {
+            public void keyTyped(KeyEvent e) {
+                char caracter = e.getKeyChar();
+                if (((caracter < '0') || (caracter > '9'))) {
+                    if(Integer.parseInt(posto0.getSelectedText())<=home.getNpasseggeri())
+                    e.consume();                
+                }
+            }
+        });
+                }
+            }
+        });
    
 
     
@@ -571,7 +589,7 @@ public class CustomerPanel extends JPanel{
         };
         return evento;
     }
-
+ 
   
     private ActionListener NListener(final JTextField numero,final String messaggio,final String notifica) {
    ActionListener evento = new ActionListener() {
@@ -588,6 +606,8 @@ public class CustomerPanel extends JPanel{
    };
    return evento;
 }
+    
+    
     public static void changeFont ( Component component, Font font )
                     
 {

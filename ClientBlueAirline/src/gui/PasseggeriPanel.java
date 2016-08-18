@@ -174,8 +174,8 @@ public class PasseggeriPanel extends JPanel{
     pane.add(classe, c);
     
     
-      cbclasse.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "poveracci ", "Prima Classe" }));
-   
+      cbclasse.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Prima Classe ", "Seconda Classe" }));
+      
     if (shouldWeightX) {
     c.weightx = 3;
     }
