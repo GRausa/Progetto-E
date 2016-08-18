@@ -27,7 +27,7 @@ import oggetti.TicketPassenger;
 public class ClientBlueAirline {
 
     public Socket clientSocket;
-    int PortNumber = 8888;
+    int PortNumber = 8901;
     public PrintWriter out;
     public BufferedReader in;
     Gson gson = new Gson();
