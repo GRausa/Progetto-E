@@ -42,6 +42,7 @@ public class ReadClass implements Runnable {
             System.out.println("\nAREA RICERCA:\n\n>>> CERCA_VOLO -> Ricerca il volo tra 2 città in una precisa data ( + mappa posti )");
             System.out.println(">>> CERCA_VOLO_AEROPORTI -> Ricerca i voli disponibili tra 2 aeroporti");
             System.out.println(">>> VERIFICA_TRATTA -> Controlla se esiste una tratta tra 2 città");
+            System.out.println(">>> CITTA_DISPONIBILI -> Controlla in quali città puoi viaggiare");
             System.out.println("\nAREA CLIENTE:\n\n>>> PRENOTA -> Effettua una prenotazione di un posto a sedere");            
             System.out.println(">>> CHECK_IN -> Effettua il check-in del tuo biglietto aereo");
             System.out.println(">>> CERCA_TICKETPASSENGER -> Ricerca il tuo biglietto aereo");
@@ -365,8 +366,25 @@ public class ReadClass implements Runnable {
                     else{
                         System.out.println("Prenotazione non trovata.");
                     }                    
-                    break;                    
 
+                    break;
+                    
+                case "CITTA_DISPONIBILI":
+                    String[] citta=null;
+                    try{
+                        citta = client.listOfCity();
+                        System.out.println("Le città disponibili sono:");
+                        for (String a :citta)
+                        {
+                            System.out.println(a);
+                        }
+                    }
+                    catch(IOException ex)
+                    {
+                        Logger.getLogger(ReadClass.class.getName()).log(Level.SEVERE,null,ex);
+                    }
+                    break;
+                
                 default:
                     System.out.println("Errore inserimento");
 
