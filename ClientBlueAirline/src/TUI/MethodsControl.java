@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package clientblueairline;
+package TUI;
 
+import clientblueairline.ClientBlueAirline;
 import java.io.IOException;
 import java.util.ArrayList;
 import static java.util.Arrays.asList;
@@ -52,6 +53,7 @@ public class MethodsControl {
             +   ">>> CHECK_IN -> Effettua il check-in del tuo biglietto aereo\n"
             +   ">>> CERCA_TICKETPASSENGER -> Ricerca il tuo biglietto aereo\n"
             +   ">>> CERCA_PRENOTAZIONE -> Ricerca la tua prenotazione\n"
+            +   ">>> MODIFICA_BIGLIETTO -> Modifica il tuo posto a sedere o inserisci ulteriori aggiunte"
             +   ">>> EXIT";
         System.out.println(s);
         String s1 = input.nextLine().toUpperCase();
@@ -62,7 +64,7 @@ public class MethodsControl {
         try {
             client.hello();
         } catch (IOException ex) {
-            Logger.getLogger(ReadClass.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ControllerTxt.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
@@ -91,7 +93,7 @@ public class MethodsControl {
                         System.out.println(v);
                     }
                 } catch (IOException ex) {
-                    Logger.getLogger(ReadClass.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(ControllerTxt.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
             if (volit.length == 1) {
@@ -111,7 +113,7 @@ public class MethodsControl {
             try {
                 rotte = client.checkRoute(tmproute1);
             } catch (IOException ex) {
-                Logger.getLogger(ReadClass.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(ControllerTxt.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         if (rotte.length > 0) {
@@ -138,7 +140,7 @@ public class MethodsControl {
                     return null;
                 }
             } catch (IOException ex) {
-                Logger.getLogger(ReadClass.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(ControllerTxt.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         System.out.println(flight.toString());
@@ -224,9 +226,9 @@ public class MethodsControl {
                 String[] vetsplit = s.split("\t");
                 if (vetsplit.length > 3) {
                     int seat = Integer.parseInt(vetsplit[3]);
-                    if (flight.getSeats().get(seat).getPassenger() == null) {
-                        flight.getSeats().get(seat).setPassenger(vetsplit[0]);
-                        int classe = flight.getSeats().get(seat).getClasse();
+                    if (flight.getSeats().get(seat-1).getPassenger() == null) {
+                        flight.getSeats().get(seat-1).setPassenger(vetsplit[0]);
+                        int classe = flight.getSeats().get(seat-1).getClasse();
                         TicketPassenger p = MethodsControl.insertAggiuntePassenger(vetsplit, seat, classe, flight.getCode(), flight.getPrezzo(), meals, insurances, holdLuggages);
                         c = true;
                         passengers.add(p);
@@ -261,7 +263,7 @@ public class MethodsControl {
                 insurances = client.getAllInsurances();
                 holdLuggages = client.getAllHoldLuggages();
             } catch (IOException ex) {
-                Logger.getLogger(ReadClass.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(ControllerTxt.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         MethodsControl.toStringAggiunte(meals,insurances,holdLuggages);
@@ -309,7 +311,7 @@ public class MethodsControl {
             System.out.println(res.printReservation());
             System.out.println(res.printPassengers());
         } catch (IOException ex) {
-            Logger.getLogger(ReadClass.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ControllerTxt.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
@@ -328,98 +330,67 @@ public class MethodsControl {
     
     /*MODIFICA BIGLIETTO*/
     
-    /*
-    public static void addOtherMealPassenger(TicketPassenger p, Meal[] meals, String v){
-        ArrayList<Meal> mealsPassenger = p.getMeals();
-        ArrayList<Meal> otherMeals = new ArrayList<Meal>();
-        boolean c = false;
-        for(Meal m : meals){ //analizzo quelle che voglio aggiungre
-            c=false;
-            for(Meal m1 : mealsPassenger){ //analizzo se non è già presente
-                if(m.getCode().equals(m1.getCode())){
-                    c=true;
-                    break;
-                }
-            }
-            if(!c){ //non ho trovato corrispondenza -> ok aggiungo quella che manca
-                otherMeals.add(m);
-            }
-        }
-        p.addOtherMeals(otherMeals);        
-    }
-    
-    public static void addOtherHoldLuggagesPassenger(TicketPassenger p, HoldLuggage[] holdLuggages, String v){
-        ArrayList<HoldLuggage> holdLuggagesPassenger = p.getHoldLuggages();
-        ArrayList<HoldLuggage> otherHoldLuggages = new ArrayList<HoldLuggage>();
-        boolean c = false;
-        for(HoldLuggage h : holdLuggages){ //analizzo quelle che voglio aggiungre
-            c=false;
-            for(HoldLuggage h1 : holdLuggagesPassenger){ //analizzo se non è già presente
-                if(h.getCode().equals(h1.getCode()) & v.equals(h.getCode())){
-                    c=true;
-                    break;
-                }
-            }
-            if(!c){ //non ho trovato corrispondenza -> ok aggiungo quella che manca
-                otherHoldLuggages.add(h);
-            }
-        }
-        p.addOtherHoldLuggages(otherHoldLuggages);        
-    }
-    
-    
     public static void editTicketPassenger(ClientBlueAirline client){
         Scanner input = new Scanner(System.in);
         TicketPassenger tp = MethodsControl.searchTicketPassenger(client);
         if(tp!=null){
             Flight flight = MethodsControl.searchFlight(client, tp.getCodeFlight());
-            Meal[] meals = client.getAllMeals();
-            Insurance[] insurances = client.getAllInsurances();
-            HoldLuggage[] holdLuggages = client.getAllHoldLuggages();
-            if(MethodsControl.isCheckIn(client, tp)){
-                boolean c = false;
-                do{
-                    System.out.println("Modifica il posto e inserisci le nuove scelte (saranno aggiunte alle vecchie già acquistate)");
-                    System.out.println("INSERISCI MODIFICHE (NPOSTO - AGGIUNTE)");
-                    String s = input.nextLine();
-                    String[] vetsplit = s.split("\t");
-                    if (vetsplit.length > 1) {
-                        int seat = Integer.parseInt(vetsplit[0]);
-                        if (flight.getSeats().get(seat).getPassenger() == null) {
-                            for (int j = 1; j < vetsplit.length; j++) {
-                                String v = vetsplit[j];
-                                switch (vetsplit[j].charAt(0)) {
-                                    case 'M':
-                                        MethodsControl.addOtherMealPassenger(tp, meals, v);
-                                        break;
-                                    case 'H':
-                                        MethodsControl.addOtherHoldLuggagesPassenger(tp, meals, v);
-                                        //MethodsControl.addHoldLuggagePassenger(p, holdLuggages, v);
-                                        break;
-                                    case 'I':
-                                        //MethodsControl.addHoldLuggagePassenger(p, holdLuggages, v);
-                                        break;
-                                    default:
-                                        break;
+            Meal[] meals = null;
+            Insurance[] insurances = null;
+            HoldLuggage[] holdLuggages = null;
+            try {
+                meals = client.getAllMeals();
+                insurances = client.getAllInsurances();
+                holdLuggages = client.getAllHoldLuggages();
+            } catch (IOException ex) {
+                Logger.getLogger(MethodsControl.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            try {
+                if(!MethodsControl.isCheckIn(client, tp)){
+                    boolean c = false;
+                    do {
+                        System.out.println("Modifica il posto e inserisci le nuove scelte (saranno aggiunte alle vecchie già acquistate)");
+                        System.out.println("INSERISCI MODIFICHE (NPOSTO - AGGIUNTE)");
+                        String s=tp.getID()+"\t"+tp.getName()+"\t"+tp.getSurname()+"\t";
+                        s += input.nextLine();
+                        String[] vetsplit = s.split("\t");
+                        if (vetsplit.length > 3) {
+                            int seat = Integer.parseInt(vetsplit[3]);
+                            if (flight.getSeats().get(seat-1).getPassenger() == null) { //OSS -> -1
+                                flight.getSeats().get(seat-1).setPassenger(tp.getCode()); //forse da eliminare
+                                int classe = flight.getSeats().get(seat-1).getClasse();
+                                TicketPassenger p2 = MethodsControl.insertAggiuntePassenger(vetsplit, seat, classe, flight.getCode(), flight.getPrezzo(), meals, insurances, holdLuggages);
+                                p2.setCode(tp.getCode());
+                                //metodo modifica
+                                if(client.editTicketPassenger(p2).getNseat()==-1){
+                                    System.out.println("Il posto è stato occupato. Riprova.");
                                 }
-                            }                            
-                            c = true;
+                                else{
+                                    TicketPassenger tp2 = client.getTicketPassenger(p2);
+                                    System.out.println(tp2.printTicketPassenger());
+                                    System.out.println("Aggiunta totale di: "+(tp2.getTotalPrice()-tp.getTotalPrice())+" euro");
+                                    c = true;
+                                }                                
+                            } else {
+                                System.out.println("Posto non disponibile.");
+                            }
                         } else {
-                            System.out.println("Posto non disponibile.");
+                            System.out.println("Errore inserimento");
                         }
-                    } 
-                    else {
-                        System.out.println("Errore inserimento");
-                    }
-                } while (!c);
-                
-            } 
-            else{
-                System.out.println("Hai effettuato il check-in, non puoi modificare il biglietto.");
+                    } while (!c);
+                }
+                else{
+                    System.out.println("Hai effettuato il check-in, non puoi modificare il biglietto.");
+                }
+            } catch (IOException ex) {
+                Logger.getLogger(MethodsControl.class.getName()).log(Level.SEVERE, null, ex);
             }
         }        
     }
-    */
+    //FINE MODIFICA//
+    
+    
+    
     public static void searchFlightAirport(ClientBlueAirline client){
         ArrayList<String> inputtxt2=MethodsControl.lettura(new ArrayList<>(asList("Inserisci Aeroporto partenza", "Inserisci Aeroporto destinazione")));
         Route tmproute2 = new Route();
@@ -435,7 +406,7 @@ public class MethodsControl {
                     System.out.println(a);
                 }
             } catch (IOException ex) {
-                Logger.getLogger(ReadClass.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(ControllerTxt.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }
@@ -479,7 +450,7 @@ public class MethodsControl {
                 if(tp1!=null)
                     f = client.searchFlight(new Flight(tp1.getCodeFlight()));
             } catch (IOException ex) {
-                Logger.getLogger(ReadClass.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(ControllerTxt.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         if(tp1!=null){
@@ -505,7 +476,7 @@ public class MethodsControl {
                 if(r!=null)
                     f1 = client.searchFlight(new Flight(r.getCodeFlight()));
             } catch (IOException ex) {
-                Logger.getLogger(ReadClass.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(ControllerTxt.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         if(r!=null){
@@ -530,7 +501,7 @@ public class MethodsControl {
         }
         catch(IOException ex)
         {
-            Logger.getLogger(ReadClass.class.getName()).log(Level.SEVERE,null,ex);
+            Logger.getLogger(ControllerTxt.class.getName()).log(Level.SEVERE,null,ex);
         }
     }
 

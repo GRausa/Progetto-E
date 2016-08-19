@@ -102,6 +102,7 @@ public class ControllerClient {
         adapter.setCheckIn(codeTicket);
     }
     
+    //controlla se è stato fatto il checkin
     public boolean isCheckIn(String codeTicket) throws SQLException{
         return adapter.isCheckIn(codeTicket);
     }
@@ -143,6 +144,11 @@ public class ControllerClient {
             res.setPassengers(ticketPassengers);;
         }
         return res;        
+    }
+    
+    //modifica il biglietto 
+    public TicketPassenger editTicketPassenger(TicketPassenger tp) throws SQLException {
+        return adapter.editTicketPassenger(tp);
     }
     
     

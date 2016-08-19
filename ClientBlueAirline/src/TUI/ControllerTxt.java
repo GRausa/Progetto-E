@@ -3,14 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package clientblueairline;
+package TUI;
 
-public class ReadClass implements Runnable {
+import clientblueairline.ClientBlueAirline;
+
+public class ControllerTxt implements Runnable {
 
     private ClientBlueAirline client;
     
 
-    public ReadClass(ClientBlueAirline n) {
+    public ControllerTxt(ClientBlueAirline n) {
         this.client = n;
     }
 
@@ -60,11 +62,11 @@ public class ReadClass implements Runnable {
                 case "CERCA_VOLO_CODICE":
                     MethodsControl.searchFlightCode(client);
                     break;
-                /*    
+                 
                 case "MODIFICA_BIGLIETTO":
                     MethodsControl.editTicketPassenger(client);
                     break;
-                  */  
+                   
                 case "EXIT":
                     break loop;
                 

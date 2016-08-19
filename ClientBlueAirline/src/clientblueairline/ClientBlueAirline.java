@@ -11,7 +11,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
-import java.util.ArrayList;
 import oggetti.Flight;
 import oggetti.HoldLuggage;
 import oggetti.Insurance;
@@ -125,6 +124,12 @@ public class ClientBlueAirline {
         return tp1;
     }
     
+    public TicketPassenger editTicketPassenger(TicketPassenger ticketPassenger) throws IOException {
+        out.println("EDITTICKETPASSENGER " + gson.toJson(ticketPassenger));
+        TicketPassenger tp = gson.fromJson(in.readLine(), TicketPassenger.class);
+        return tp;
+    }
+    
     public Reservation getReservation(Reservation res) throws IOException{
         out.println("PRENOTAZIONE " + gson.toJson(res));
         Reservation res1 = gson.fromJson(in.readLine(), Reservation.class);
@@ -134,5 +139,7 @@ public class ClientBlueAirline {
     public void scrittura() throws IOException {
         System.out.println("RICEVUTO DAL SERVER: " + in.readLine());
     }
+
+    
 
 }

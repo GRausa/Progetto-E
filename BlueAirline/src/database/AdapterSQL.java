@@ -210,7 +210,7 @@ public class AdapterSQL {
                 this.insertAggiunta(s.getCode(), codeTicket);
             }
             if(this.seatIsFree(reservation.getCodeFlight(), tp.getNseat())){
-                this.setSeatBoolean(reservation.getCodeFlight(), tp.getNseat(), tp.getCode()); //lo metto a 1 cioè occupato
+                this.setSeatBoolean(reservation.getCodeFlight(), tp.getNseat(), tp.getCode(), true); //lo metto a 1 cioè occupato
             }
             else{
                 tp.setNSeat(-1); //posto -1 non assegnato
@@ -219,9 +219,17 @@ public class AdapterSQL {
         return reservation;
     }
 
-    public void setSeatBoolean(String codeFlight, int nSeat, String ticketPassenger) throws SQLException {
-        String query = "UPDATE Posto SET PASSEGGERO = '"+ticketPassenger+"'\n"
+    public void setSeatBoolean(String codeFlight, int nSeat, String ticketPassenger, boolean b) throws SQLException {
+        String query;
+        if(b){ //IMPOSTA IL POSTO A SEDERE
+            query 
+                    = "UPDATE Posto SET PASSEGGERO = '"+ticketPassenger+"'\n"
+                    + "WHERE Numero=" +nSeat+ " AND Volo = '" + codeFlight+ "'";            
+        }
+        else{ //IMPOSTA NULL IL POSTO A SEDERE
+            query = "UPDATE Posto SET PASSEGGERO = NULL\n"
                 + "WHERE Numero=" +nSeat+ " AND Volo = '" + codeFlight+ "'";
+        }        
         SQL.queryWrite(query);
     }
 
@@ -339,7 +347,7 @@ public class AdapterSQL {
     
     public TicketPassenger editSeatTicketPassenger(TicketPassenger tp) throws SQLException{
         if(this.seatIsFree(tp.getCodeFlight(), tp.getNseat())){
-            this.setSeatBoolean(tp.getCodeFlight(), tp.getNseat(), tp.getCode());
+            this.setSeatBoolean(tp.getCodeFlight(), tp.getNseat(), tp.getCode(),true);
         }
         else{
             tp.setNSeat(-1);
@@ -439,6 +447,27 @@ public class AdapterSQL {
         res = ParserSQL.parseReservation(resultQuery);
         resultQuery.close();
         return res;
+    }
+
+    public TicketPassenger editTicketPassenger(TicketPassenger tp) throws SQLException {        
+        if(this.seatIsFree(tp.getCodeFlight(), tp.getNseat())){
+            TicketPassenger tp2 = this.getTicketPassenger(tp.getCode());
+            this.setSeatBoolean(tp2.getCodeFlight(), tp2.getNseat(), tp2.getCode(), false); //metto null il vecchio posto a sedere
+            this.setSeatBoolean(tp.getCodeFlight(), tp.getNseat(), tp.getCode(), true); //limposto il nuovo posto a sedere
+            for(Meal m : tp.getMeals()){
+                this.insertAggiunta(m.getCode(), tp.getCode());
+            }
+            for(Insurance i : tp.getInsurances()){
+                this.insertAggiunta(i.getCode(), tp.getCode());
+            }
+            for(HoldLuggage hl : tp.getHoldLuggages()){
+                this.insertAggiunta(hl.getCode(), tp.getCode());
+            }
+        }
+        else{
+            tp.setNSeat(-1); //posto -1 non assegnato
+        }        
+        return tp;
     }
     
     

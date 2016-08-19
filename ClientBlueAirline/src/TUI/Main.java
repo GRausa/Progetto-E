@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package clientblueairline;
+package TUI;
 
+import clientblueairline.ClientBlueAirline;
 import java.io.IOException;
 
 /**
@@ -16,7 +17,7 @@ public class Main {
             ClientBlueAirline clientBlueAirline=new ClientBlueAirline();
           
             
-            ReadClass r1 = new ReadClass(clientBlueAirline);
+            ControllerTxt r1 = new ControllerTxt(clientBlueAirline);
             //scrittura r2 = new scrittura(ciao);
 		
             Thread nuovoThread1 = new Thread(r1);
