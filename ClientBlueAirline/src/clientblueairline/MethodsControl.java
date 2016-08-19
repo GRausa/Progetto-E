@@ -143,7 +143,7 @@ public class MethodsControl {
         }
         System.out.println(flight.toString());
         System.out.println("Posti disponibili: " + flight.getSeatFree() + "/" + flight.getSeats().size());
-        System.out.println(flight.printSeatsFree());
+        System.out.println(flight.printAllSeats());
         if (flight.getSeatFree() == 0) {
             System.out.println("Posti esauriti.");            
         }
@@ -282,7 +282,7 @@ public class MethodsControl {
             for (TicketPassenger tp : res.getPassengers()) { //controllo assegnamento posti
                 if (tp.getNseat() == -1) {
                     System.out.println("Passeggero: " + tp.getName() + " " + tp.getSurname() + " (" + tp.getID() + ") non inserito, il posto è stato occupato.\nPosti disponibili:");
-                    System.out.println(flight.printSeatsFree());
+                    System.out.println(flight.printAllSeats());
                     boolean c = false;
                     do {
                         System.out.println("Inserisci il nuovo posto");

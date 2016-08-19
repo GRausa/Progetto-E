@@ -80,11 +80,16 @@ public class Flight {
         return n;
     }
     
-    public String printSeatsFree(){
+    public String printAllSeats(){
         String st="PRIMA CLASSE -> prezzo: "+(this.getPrezzo()+Flight.COSTOPRIMACLASSE)+"€\n";
         for(Seat s : seats){
             if(s.getPassenger()==null && s.getClasse()==1){
                 st+=s.getNumber()+" | ";
+            }
+            else{
+                if(s.getPassenger()!=null && s.getClasse()==1){
+                    st+="X | ";
+                }
             }
         }
         st+="\nSECONDA CLASSE -> prezzo: "+this.getPrezzo()+"€\n";
@@ -92,37 +97,15 @@ public class Flight {
             if(s.getPassenger()==null && s.getClasse()==2){
                 st+=s.getNumber()+" | ";
             }
+            else{
+                if(s.getPassenger()!=null && s.getClasse()==2){
+                    st+="X | ";
+                }
+            }
         }
         return st;
     }
     
-    public String printAllSeats(){
-        String st="PRIMA CLASSE\n";
-        for(Seat s : seats){
-            if(s.getClasse()==1){
-                if(s.getPassenger()==null ){
-                    st+=s.getNumber()+"(Libero)";
-                }
-                else{
-                    st+=s.getNumber()+"(Occupato)";
-                }
-                st+=" | ";
-            }
-        }
-        st+="\nSECONDA CLASSE\n";
-        for(Seat s : seats){
-            if(s.getClasse()==2){
-                if(s.getPassenger()==null ){
-                    st+=s.getNumber()+"(Libero) ";
-                }
-                else{
-                    st+=s.getNumber()+"(Occupato) ";
-                }
-                st+=s.getNumber()+" | ";
-            }
-        }
-        return st;
-    }
     
     
 }

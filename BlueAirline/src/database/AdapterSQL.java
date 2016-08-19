@@ -150,19 +150,6 @@ public class AdapterSQL {
         return flight;
     }
     
-    /*
-    public Reservation searchReservation(int code) throws SQLException {
-        Reservation reservation;
-        String query
-                = "SELECT COD_PRENOTAZIONE, VOLO, EMAIL, NUMERO\n"
-                + "FROM Prenotazione\n"
-                + "WHERE COD_PRENOTAZIONE = " + code;
-        ResultSet resultQuery = SQL.queryRead(query);
-        reservation = ParserSQL.parseReservation(resultQuery);
-        resultQuery.close();
-        return reservation;
-    }
-*/
     public ArrayList<String> searchAllCitys() throws SQLException {
         ArrayList<String> citys;
         String query
@@ -252,7 +239,7 @@ public class AdapterSQL {
                 resultQuery = SQL.queryRead(query);
                 price = ParserSQL.parseFunctionSQL(resultQuery, "PREZZO");
                 query = "INSERT INTO Pasto_Passeggero\n"
-                        + "VALUES ('" + code + "', '" + codeTicket + "','" + price + "')";
+                        + "VALUES (NULL,'" + code + "', '" + codeTicket + "','" + price + "')";
                 SQL.queryWrite(query);
                 break;
             case 'H':
@@ -265,7 +252,7 @@ public class AdapterSQL {
                 resultQuery = SQL.queryRead(query);
                 price = ParserSQL.parseFunctionSQL(resultQuery, "PREZZO");
                 query = "INSERT INTO Bagaglio_Passeggero\n"
-                        + "VALUES ('" + code + "', '" + codeTicket + "','" + price + "')";
+                        + "VALUES (NULL,'" + code + "', '" + codeTicket + "','" + price + "')";
                 SQL.queryWrite(query);
                 break;
             case 'I':
@@ -277,7 +264,7 @@ public class AdapterSQL {
                 resultQuery = SQL.queryRead(query);
                 price = ParserSQL.parseFunctionSQL(resultQuery, "PREZZO");
                 query = "INSERT INTO Assicurazione_Passeggero\n"
-                        + "VALUES ('" + code + "', '" + codeTicket + "','" + price + "')";
+                        + "VALUES (NULL,'" + code + "', '" + codeTicket + "','" + price + "')";
                 SQL.queryWrite(query);
                 break;
             default:
