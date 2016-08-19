@@ -102,6 +102,10 @@ public class ControllerClient {
         adapter.setCheckIn(codeTicket);
     }
     
+    public boolean isCheckIn(String codeTicket) throws SQLException{
+        return adapter.isCheckIn(codeTicket);
+    }
+    
     //ritorna ticketPassenger
     public TicketPassenger getTicketPassenger(String codeTicket) throws SQLException{
         TicketPassenger tp = adapter.getTicketPassenger(codeTicket);

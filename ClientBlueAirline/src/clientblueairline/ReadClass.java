@@ -60,7 +60,11 @@ public class ReadClass implements Runnable {
                 case "CERCA_VOLO_CODICE":
                     MethodsControl.searchFlightCode(client);
                     break;
-                    
+                /*    
+                case "MODIFICA_BIGLIETTO":
+                    MethodsControl.editTicketPassenger(client);
+                    break;
+                  */  
                 case "EXIT":
                     break loop;
                 

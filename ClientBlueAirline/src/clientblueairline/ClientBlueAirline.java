@@ -71,7 +71,7 @@ public class ClientBlueAirline {
 
     public Route[] checkRoute(Route rotta) throws IOException {
 
-        out.println("CHECK " + gson.toJson(rotta));
+        out.println("ROTTE " + gson.toJson(rotta));
         String serverout = in.readLine();
         Route[] rotte = gson.fromJson(serverout, Route[].class);        
         return rotte;
@@ -111,6 +111,12 @@ public class ClientBlueAirline {
         out.println("CHECKIN " + gson.toJson(tp));
         TicketPassenger tp1 = gson.fromJson(in.readLine(), TicketPassenger.class);
         return tp1;
+    }
+    
+    public boolean isCheckIn(TicketPassenger tp) throws IOException{
+        out.println("ISCHECKIN " + gson.toJson(tp));
+        Boolean isCheckIn = gson.fromJson(in.readLine(), Boolean.class);
+        return isCheckIn;
     }
     
     public TicketPassenger getTicketPassenger(TicketPassenger tp) throws IOException{

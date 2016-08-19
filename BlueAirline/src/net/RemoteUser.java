@@ -150,12 +150,13 @@ class RemoteUser extends Thread {
             }
         });
 
-        commands.put("CHECK", new Command() {
+        commands.put("ROTTE", new Command() {
             @Override
             public void execute(String args) {
                 ArrayList<Route> rottes = null;
                 Route r = gson.fromJson(args, Route.class);
                 try {
+                    //tutte le rotte
                     rottes = company.searchRoutes();
                 } catch (SQLException ex) {
                     Logger.getLogger(RemoteUser.class.getName()).log(Level.SEVERE, null, ex);
@@ -267,6 +268,20 @@ class RemoteUser extends Thread {
                     company.setCheckIn(tp.getCode());
                     tp = company.getTicketPassenger(tp.getCode());
                     out.println(gson.toJson(tp));
+                } catch (SQLException ex) {
+                    Logger.getLogger(RemoteUser.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
+            }
+        });
+        
+        commands.put("ISCHECKIN", new Command() {
+            @Override
+            public void execute(String args) {                
+                try {
+                    TicketPassenger tp = gson.fromJson(args, TicketPassenger.class);
+                    Boolean checkIn = company.isCheckIn(tp.getCode());
+                    out.println(gson.toJson(checkIn));
                 } catch (SQLException ex) {
                     Logger.getLogger(RemoteUser.class.getName()).log(Level.SEVERE, null, ex);
                 }

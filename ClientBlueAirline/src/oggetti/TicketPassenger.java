@@ -169,8 +169,8 @@ public class TicketPassenger {
     public boolean isCheckIn() {
         return checkIn;
     }
-    
-    
+
+  
     
     
     
