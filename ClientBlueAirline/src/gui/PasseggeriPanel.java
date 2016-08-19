@@ -12,7 +12,14 @@ package gui;
 import clientblueairline.ClientBlueAirline;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.*;
+import oggetti.HoldLuggage;
+import oggetti.Insurance;
+import oggetti.Meal;
 import oggetti.Reservation;
 
 /**
@@ -26,6 +33,8 @@ public class PasseggeriPanel extends JPanel{
  
     private HomeFrame home;
     private ClientBlueAirline controller;
+    
+    private ArrayList<Meal> meal;
 
     
         JButton conferma = new JButton("Conferma");
@@ -174,8 +183,8 @@ public class PasseggeriPanel extends JPanel{
     pane.add(classe, c);
     
     
-      cbclasse.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "poveracci ", "Prima Classe" }));
-   
+      cbclasse.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Prima Classe ", "Seconda Classe" }));
+      
     if (shouldWeightX) {
     c.weightx = 3;
     }
@@ -489,21 +498,56 @@ public class PasseggeriPanel extends JPanel{
     }
 
   
-    private ActionListener NListener(final JTextField numero,final String messaggio,final String notifica) {
+  private ActionListener NListener(final JTextField numero,final String messaggio,final String notifica) {
    ActionListener evento = new ActionListener() {
        @Override
        public void actionPerformed(ActionEvent e) {
            NFrame frame = new NFrame(controller,Integer.parseInt(numero.getText()),messaggio);
+           frame.setVisible(true);
+         
            home.notifiche.setText(notifica);
            frame.setAlwaysOnTop(true);
-           frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+           
+           for (JComboBox combo :frame.getCombo())
+           {
+               try {
+                   if(messaggio.equals("Inserisci i pasti per il volo"))
+                   {
+                    for(Meal m: controller.getAllMeals())
+                    {
+                        combo.addItem(m.toString());
+                    }
+                   }
+                   else
+                   {
+                       if(messaggio.equals("Quale assicurazione vuoi?"))
+                       {
+                          for(Insurance m: controller.getAllInsurances())
+                            {
+                                combo.addItem(m.toString());
+                            } 
+                          
+                       } 
+                           else
+                       {
+                            for(HoldLuggage m: controller.getAllHoldLuggages())
+                            {
+                                combo.addItem(m.toString());
+                            }
+                       }
+                           
+                   }
+                       
+               } catch (IOException ex) {
+                   Logger.getLogger(CustomerPanel.class.getName()).log(Level.SEVERE, null, ex);
+               }
+           }
        }
 
 
    };
    return evento;
 }
-    
 
         
     public static void changeFont ( Component component, Font font )

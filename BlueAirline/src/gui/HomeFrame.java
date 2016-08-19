@@ -232,8 +232,8 @@ public class HomeFrame extends JFrame {
     }
 
     public void addPassenger(String ID, String name, String surname, int nseat, int classe) {
-        TicketPassenger t = new TicketPassenger(ID, name, surname, nseat, classe);
-        this.passengers.add(t);
+     //   TicketPassenger t = new TicketPassenger(ID, name, surname, nseat, classe);
+     //   this.passengers.add(t);
     }
 
     public Reservation getReservation() {

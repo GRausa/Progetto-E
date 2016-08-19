@@ -162,7 +162,7 @@ public class HomeFrame extends JFrame {
         menuBar = new JMenuBar();
 
         menu = new JMenu("Home");
-        menu.setMnemonic(KeyEvent.VK_A);
+        menu.setMnemonic(KeyEvent.VK_H);
         menu.getAccessibleContext().setAccessibleDescription("Return to the Home Page");
         menuBar.add(menu);
 

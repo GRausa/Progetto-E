@@ -154,7 +154,7 @@ public void addComponentsToPane(Container pane) {
            
             home.notifiche.setText((String)voli.getValueAt(m.getRiga(),0));
             home.setCodeflight((String)voli.getValueAt(m.getRiga(),1));
-            home.setPriceflight(Double.parseDouble((String)voli.getValueAt(m.getRiga(),2)));
+            home.setPriceflight((double)voli.getValueAt(m.getRiga(),5));
             }
             else
             JOptionPane.showConfirmDialog(home, "Selezionare almeno un volo\n"+"per poter proseguire.\n", "Errore", JOptionPane.OK_CANCEL_OPTION);

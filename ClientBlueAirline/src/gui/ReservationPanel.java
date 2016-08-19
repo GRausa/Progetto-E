@@ -248,9 +248,9 @@ public class ReservationPanel extends JPanel{
                         
                         try {
                             home.notifiche.setText("Ricerco informazioni sulla rotta.. ");
-                            
-                            Calendar c1 = DateToCalendar(data.getDate());
-                            Flight[] a=  controller.searchFlights(new Flight(new Route(andata.getSelectedItem().toString(),ritorno.getSelectedItem().toString()),c1));
+                            Calendar   c = new GregorianCalendar();
+                            c.setTime(data.getDate());
+                            Flight[] a=  controller.searchFlights(new Flight(new Route(andata.getSelectedItem().toString(),ritorno.getSelectedItem().toString()),c));
                             System.out.println(a);
                             if(a.length==0)
                                 JOptionPane.showConfirmDialog(home, "Non risulta nessuna rotta nei voli"+"della compagnia aerea", "Errore", JOptionPane.OK_CANCEL_OPTION);
