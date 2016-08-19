@@ -10,8 +10,14 @@ package gui;
 import clientblueairline.ClientBlueAirline;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.*;
+import oggetti.HoldLuggage;
+import oggetti.Insurance;
+import oggetti.Meal;
 import oggetti.Reservation;
 
 /**
@@ -572,20 +578,25 @@ public class CustomerPanel extends JPanel{
         ActionListener evento = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(home.PassengerMeno())
-                {
                 if(email0.getText().isEmpty()  && cognome0.getText().isEmpty() && tell0.getText().isEmpty() && nome0.getText().isEmpty() && (cbclasse.getSelectedIndex()==-1))
                     JOptionPane.showConfirmDialog(home, "Riempire tutti i campi"+"per poter proseguire", "Errore", JOptionPane.OK_CANCEL_OPTION);
-                    else
                 {
                     home.setReservation(new Reservation(home.getCodeflight(),email0.getText(),tell0.getText()));
-                    home.addPassenger(id0.getText(), nome0.getText(), cognome0.getText(), Integer.parseInt(posto0.getText()), Integer.parseInt(classe.getText()),home.getCodeflight(),home.getPriceflight());
+                    
+                    home.addPassenger(id0.getText(), nome0.getText(), cognome0.getText(), Integer.parseInt(posto0.getText()), cbclasse.getSelectedIndex()+1,home.getCodeflight(),home.getPriceflight());
+                   
+                if(home.PassengerMeno())
+                {
                     home.refreshGUI(new PasseggeriPanel(home,controller));  
                 }
+                else 
+                {
+                    home.refreshGUI(new RiassuntoVolo(home,controller));
                 }
             }
-
-           
+            
+            }
+ 
         };
         return evento;
     }
@@ -596,10 +607,44 @@ public class CustomerPanel extends JPanel{
        @Override
        public void actionPerformed(ActionEvent e) {
            NFrame frame = new NFrame(controller,Integer.parseInt(numero.getText()),messaggio);
+           frame.setVisible(true);
           // combo =  frame.getCombo(); problema con il final!!
            home.notifiche.setText(notifica);
            frame.setAlwaysOnTop(true);
-          
+           //inserisco nei combobox dell'NFrame le corrette stringhe
+           for (JComboBox combo :frame.getCombo())
+           {
+               try {
+                   if(messaggio.equals("Inserisci i pasti per il volo"))
+                   {
+                    for(Meal m: controller.getAllMeals())
+                    {
+                        combo.addItem(m.toString());
+                    }
+                   }
+                   else
+                   {
+                       if(messaggio.equals("Quale assicurazione vuoi?"))
+                       {
+                          for(Insurance m: controller.getAllInsurances())
+                            {
+                                combo.addItem(m.toString());
+                            } 
+                       } 
+                           else
+                       {
+                            for(HoldLuggage m: controller.getAllHoldLuggages())
+                            {
+                                combo.addItem(m.toString());
+                            }
+                       }
+                           
+                   }
+                       
+               } catch (IOException ex) {
+                   Logger.getLogger(CustomerPanel.class.getName()).log(Level.SEVERE, null, ex);
+               }
+           }
        }
 
 
@@ -646,4 +691,5 @@ public class CustomerPanel extends JPanel{
     home.trasparentTextField(this.npasti);
     home.trasparentTextField(this.nassicurazioni);
     }
+    
 }
