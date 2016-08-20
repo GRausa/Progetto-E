@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package gui;
+package GUI;
 
 
 
 import clientblueairline.ClientBlueAirline;
-import clientblueairline.ReadClass;
+import TUI.ControllerTxt;
 import java.awt.Dimension;
 import java.awt.HeadlessException;
 import java.io.FileNotFoundException;
@@ -29,7 +29,7 @@ public class TestUi {
              HomeFrame frame = new HomeFrame("BLUE AIRLINES",clientBlueAirline);
         
             
-            ReadClass r1 = new ReadClass(clientBlueAirline);
+            ControllerTxt r1 = new ControllerTxt(clientBlueAirline);
             //scrittura r2 = new scrittura(ciao);
 		
             Thread nuovoThread1 = new Thread(r1);

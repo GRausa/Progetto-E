@@ -3,15 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package gui;
+package GUI;
 
 
 
 
 import clientblueairline.ClientBlueAirline;
-import static gui.CustomerPanel.RIGHT_TO_LEFT;
-import static gui.CustomerPanel.shouldFill;
-import static gui.CustomerPanel.shouldWeightX;
+import static GUI.CustomerPanel.RIGHT_TO_LEFT;
+import static GUI.CustomerPanel.shouldFill;
+import static GUI.CustomerPanel.shouldWeightX;
 import java.awt.*;
 import java.util.ArrayList;
 import javax.swing.*;
