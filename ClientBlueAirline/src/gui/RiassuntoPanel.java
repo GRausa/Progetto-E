@@ -7,6 +7,7 @@ package gui;
 
 import clientblueairline.ClientBlueAirline;
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Container;
 import java.awt.Font;
 import java.awt.GridLayout;
@@ -59,7 +60,7 @@ public class RiassuntoPanel extends JPanel {
     JButton conferma = new JButton("Conferma");
     
     
-    public RiassuntoPanel(HomeFrame home, ClientBlueAirline controller) {
+    public RiassuntoPanel(HomeFrame home, ClientBlueAirline controller) throws IOException {
         this.home = home;
         passengers = home.getPassengers();
         reservation = home.getReservation();
@@ -67,22 +68,20 @@ public class RiassuntoPanel extends JPanel {
         flight = new Flight(home.getCodeflight());
         this.setVisible(true);
         setOpaque(false);
-      
+        addComponents(this);
         home.setallFont(infoGenerali);
         home.setallFont(this.info);
         home.setallFont(this.infoPasseggero);
-        addComponents(this);
         this.makeComponentsTrasparent();
+        passeggeri.setForeground(Color.black);
         
-    
     }
 
-    private void addComponents(Container pane) {
+    private void addComponents(Container pane) throws IOException {
         
         pane.setLayout(new BorderLayout());
         initInfoGenerali();
         pane.add(infoGenerali, BorderLayout.NORTH);
-        
         initInfoPasseggero();
         pane.add(info, BorderLayout.CENTER);
         
@@ -118,7 +117,7 @@ public class RiassuntoPanel extends JPanel {
         
     }
 
-    private void initInfoPasseggero() {
+    private void initInfoPasseggero() throws IOException {
        
         info.setLayout(new BorderLayout());
         info.setOpaque(false);
@@ -128,7 +127,24 @@ public class RiassuntoPanel extends JPanel {
         }
         infoPasseggero.setLayout(new GridLayout(3,2));
         infoPasseggero.setOpaque(false);
-        info.add(infoPasseggero,BorderLayout.CENTER);
+        
+        Flight f= controller.searchFlight(flight);
+        numPosto.setText("Posto a sedere: " + passengers.get(0).getNseat());
+        infoPasseggero.add(numPosto);
+        
+        classe.setText("Classe: " );
+        infoPasseggero.add(classe);
+        prezzo.setText("Prezzo: " + passengers.get(0).getTotalPrice() +"€");
+        infoPasseggero.add(prezzo);
+        bagaglio.setText("Bagaglio: ");
+        infoPasseggero.add(bagaglio); 
+        pasto.setText("Pasto: ");
+        infoPasseggero.add(pasto);
+        assicurazione.setText("Assicurazione: ");
+        infoPasseggero.add(assicurazione);
+        
+        info.add(infoPasseggero,BorderLayout.SOUTH);
+       
         passeggeri.addActionListener(PassengerListener());
     }
 
@@ -148,7 +164,8 @@ public class RiassuntoPanel extends JPanel {
                for(int j = 0; j<passengers.size(); j++) {
                    if(spl[0].equals(passengers.get(j).getName()) && spl[1].equals(passengers.get(j).getSurname())) {
                        //come facciamo a mettere gli arrayList? io ho pensato a un comboBox non modificabile ma non so se va bene
-                       
+                        infoPasseggero.removeAll();
+                        infoPasseggero.setLayout(new GridLayout(3,2));
                         pasto.setText("Pasto: ");
                         infoPasseggero.add(pasto);
                         assicurazione.setText("Assicurazione: ");

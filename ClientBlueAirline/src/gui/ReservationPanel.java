@@ -263,12 +263,13 @@ public class ReservationPanel extends JPanel{
                         }
                     }
                     else{
+                        JOptionPane.showConfirmDialog(home, "Selezionare almeno un passeggero"+" per poter proseguire", "Errore", JOptionPane.OK_CANCEL_OPTION); 
                         home.notifiche.setText("Attenzione: aggiungere almeno un passeggero.");
                     }
                 }
                 else
                 {
-                   int dialogResult = JOptionPane.showConfirmDialog(home, "Riempire tutti i campi\n"+"per poter proseguire.\n", "Errore", JOptionPane.OK_CANCEL_OPTION);
+                   int dialogResult = JOptionPane.showConfirmDialog(home, "Riempire tutti i campi\n"+" per poter proseguire.\n", "Errore", JOptionPane.OK_CANCEL_OPTION);
                 }
             }
 

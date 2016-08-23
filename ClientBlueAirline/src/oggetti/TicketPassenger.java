@@ -35,6 +35,23 @@ public class TicketPassenger {
         this.checkIn=false;
     }
     
+    public TicketPassenger(String ID, String name, String surname, int nseat, int classe, String codeFlight, double priceFlight,ArrayList<Meal> meal,ArrayList<Insurance> insurance,ArrayList<HoldLuggage> holdluggage) {
+        this.ID = ID;
+        this.name = name;
+        this.surname = surname;
+        this.nseat = nseat;
+        this.meals = new ArrayList<>();
+        this.holdLuggages = new ArrayList<>();
+        this.insurances = new ArrayList<>();
+        this.classe=classe;
+        this.codeFlight=codeFlight;
+        this.priceFlight=priceFlight;
+        this.checkIn=false;
+        this.meals= meal;
+        this.insurances=insurance;
+        this.holdLuggages=holdluggage;
+    }
+    
     public TicketPassenger(String code){
         this.code=code;
     }

@@ -8,6 +8,9 @@ import com.toedter.calendar.JDateChooser;
 import java.awt.event.*;
 import java.util.ArrayList;
 import javax.swing.*;
+import oggetti.HoldLuggage;
+import oggetti.Insurance;
+import oggetti.Meal;
 import oggetti.Reservation;
 import oggetti.TicketPassenger;
 
@@ -233,7 +236,12 @@ public class HomeFrame extends JFrame {
         return passengers;
     }
 
-    public void addPassenger(String ID, String name, String surname, int nseat, int classe,String codflight,double priceticket) {
+    public void addPassenger(String ID, String name, String surname, int nseat, int classe,String codflight,double priceticket,ArrayList<Meal> meals,ArrayList<Insurance> insurances,ArrayList<HoldLuggage> holdluggages) {
+        TicketPassenger t = new TicketPassenger(ID, name, surname, nseat, classe,codflight,priceticket,meals,insurances,holdluggages);
+        this.passengers.add(t);
+    }
+    
+     public void addPassenger(String ID, String name, String surname, int nseat, int classe,String codflight,double priceticket) {
         TicketPassenger t = new TicketPassenger(ID, name, surname, nseat, classe,codflight,priceticket);
         this.passengers.add(t);
     }
@@ -312,10 +320,13 @@ public class HomeFrame extends JFrame {
     
     public void setallFont(final JComponent c) {
         if (c.getComponentCount() == 0) {
+            if(!(c instanceof JComboBox))
+            {
             if (c instanceof JLabel || c instanceof JButton) {
                 c.setFont(new Font("Helvetica", Font.BOLD, 25));
             } else {
                 c.setFont(new Font("Helvetica", Font.BOLD, 15));
+            }
             }
         }
 

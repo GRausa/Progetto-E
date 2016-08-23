@@ -13,6 +13,7 @@ import clientblueairline.ClientBlueAirline;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.*;
@@ -29,7 +30,10 @@ public class PasseggeriPanel extends JPanel{
  
     private HomeFrame home;
     private ClientBlueAirline controller;
-
+    protected ArrayList<JComboBox> meal;
+    protected ArrayList<JComboBox> insurance;
+    protected ArrayList<JComboBox> holdluggage;
+    
     JButton conferma = new JButton("Conferma");  
     JPanel pasti= new JPanel(new GridLayout(0,4));
     JTextField npasti = new JTextField(1);
@@ -66,7 +70,7 @@ public class PasseggeriPanel extends JPanel{
 
     JTextField nome0 =new JTextField("Inserisci Nome");
 
-      JLabel nome=new JLabel("Nome");
+    JLabel nome=new JLabel("Nome");
 
     JTextField id0 =new JTextField("Inserisci id");
     JLabel id = new JLabel("ID");
@@ -79,15 +83,15 @@ public class PasseggeriPanel extends JPanel{
         addComponentsToPane(this);
         home.setallFont(this);
         this.makeComponentsTrasparent();
-     
+        cbclasse.setForeground(Color.black);
+        cbclasse.setPopupVisible(false);
   
 
        this.add( nome0, new GridBagConstraints( 0, 0, 1, 1, 1.0,1.0, GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets( 0, 100, 0, 0 ), 200, 40 ) );
        this.add( cognome0, new GridBagConstraints( 1, 0, 1, 1, 1.0,1.0, GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets( 0, 150, 0, 0 ), 150, 40 ) );
        this.add( nome, new GridBagConstraints( 0, 0, 1, 1, 1.0,1.0, GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets( 0, 0, 0, 0 ), 200, 40 ) );
        this.add( cognome, new GridBagConstraints( 1, 0, 1, 1, 1.0,1.0, GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets( 0, 0, 0, 0 ), 200, 40 ) );
-       this.add( id0, new GridBagConstraints( 0, 0, 1, 1, 1.0,1.0, GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets( 0, 200, 0, 0 ), 200, 40 ) );
-      
+       
        this.add( posto0, new GridBagConstraints( 1, 3, 1, 1, 1.0,1.0, GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets( 0, 0, 0, 0 ), 150, 40 ) );
        this.add( posto, new GridBagConstraints( 0, 3, 1, 1, 1.0,1.0, GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets( 0, 0, 0, 0 ), 100, 40 ) );
        
@@ -135,6 +139,22 @@ public class PasseggeriPanel extends JPanel{
     pane.add(cognome0, c);
  
 
+    c.weightx=0.1;
+    c.ipady = 15;
+    c.gridx = 0;
+    c.gridy = 1;
+    
+    pane.add(id, c);
+    
+    c.weightx=0.1;
+    c.ipady = 15;
+    c.gridx = 1;
+    c.gridy = 1;
+    
+    pane.add(id0, c);
+    
+ 
+    
     c.weightx = 3;
     c.ipady = 50;
     c.gridx = 0;
@@ -401,13 +421,19 @@ public class PasseggeriPanel extends JPanel{
                   JOptionPane.showConfirmDialog(home, "Riempire tutti i campi"+" per poter proseguire.", "Errore", JOptionPane.OK_CANCEL_OPTION);
                        else
                     {
-                           home.addPassenger(id0.getText(), nome0.getText(), cognome0.getText(), Integer.parseInt(posto0.getText()), cbclasse.getSelectedIndex()+1,home.getCodeflight(),home.getPriceflight());
-                    
-                        if(home.PassengerMeno())
-                            home.refreshGUI(new PasseggeriPanel(home,controller));
-                        else
+                   try {
+                       home.addPassenger(id0.getText(), nome0.getText(), cognome0.getText(), Integer.parseInt(posto0.getText()), cbclasse.getSelectedIndex()+1,home.getCodeflight(),home.getPriceflight()); 
+                       
+                       if(home.PassengerMeno())
+                           home.refreshGUI(new PasseggeriPanel(home,controller));
+                       else
+                       {
                             home.notifiche.setText("Riassunto volo:");
                             home.refreshGUI(new RiassuntoPanel(home,controller));
+                       }
+                   } catch (IOException ex) {
+                       Logger.getLogger(PasseggeriPanel.class.getName()).log(Level.SEVERE, null, ex);
+                   }
                     }
             }
 
@@ -425,6 +451,7 @@ public class PasseggeriPanel extends JPanel{
        public void actionPerformed(ActionEvent e) {
            NFrame frame = new NFrame(controller,Integer.parseInt(numero.getText()),messaggio);
            frame.setVisible(true);
+          
          
            home.notifiche.setText(notifica);
            frame.setAlwaysOnTop(true);
@@ -438,6 +465,7 @@ public class PasseggeriPanel extends JPanel{
                     {
                         combo.addItem(m.toString());
                     }
+                    meal = frame.getCombo(); 
                    }
                    else
                    {
@@ -447,7 +475,7 @@ public class PasseggeriPanel extends JPanel{
                             {
                                 combo.addItem(m.toString());
                             } 
-                          
+                    insurance = frame.getCombo();
                        } 
                            else
                        {
@@ -455,10 +483,11 @@ public class PasseggeriPanel extends JPanel{
                             {
                                 combo.addItem(m.toString());
                             }
+                    holdluggage = frame.getCombo();
                        }
                            
                    }
-                       
+                      
                } catch (IOException ex) {
                    Logger.getLogger(CustomerPanel.class.getName()).log(Level.SEVERE, null, ex);
                }
@@ -505,6 +534,7 @@ public class PasseggeriPanel extends JPanel{
     home.trasparentTextField(this.posto0);
     home.trasparentTextField(this.npasti);
     home.trasparentTextField(this.nassicurazioni);
+    home.trasparentTextField(this.id0);
     }
     
     

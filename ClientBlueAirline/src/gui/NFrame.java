@@ -11,6 +11,9 @@ package gui;
 import clientblueairline.ClientBlueAirline;
 
 import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.util.ArrayList;
 import javax.swing.*;
 
@@ -50,7 +53,13 @@ public class NFrame extends JFrame{
 
         this.setLocation ((screenSize.width - frameSize.width) / 2,
         (screenSize.height - frameSize.height) / 2);
-
+        this.addWindowListener(new WindowAdapter() {
+            
+            @Override
+            public void windowClosing(WindowEvent e) {
+          
+            }
+        });
     }
 
     public void setMessage(String message)
@@ -129,10 +138,11 @@ public class NFrame extends JFrame{
         add(combo, c);
         
     }
-  
+   
   
    
     }
-    
+
+  
     
 }
