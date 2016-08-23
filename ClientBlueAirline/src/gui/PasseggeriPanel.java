@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package GUI;
+package gui;
 
 
 
@@ -13,71 +13,63 @@ import clientblueairline.ClientBlueAirline;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.*;
 import oggetti.HoldLuggage;
 import oggetti.Insurance;
 import oggetti.Meal;
-import oggetti.Reservation;
 
 /**
  *
  * @author alexandra
  */
 public class PasseggeriPanel extends JPanel{
-    final static boolean shouldFill = true;
-    final static boolean shouldWeightX = true;
-    final static boolean RIGHT_TO_LEFT = false;
+    
  
     private HomeFrame home;
     private ClientBlueAirline controller;
-    
-    private ArrayList<Meal> meal;
 
-    
-        JButton conferma = new JButton("Conferma");
-        
-        JPanel pasti= new JPanel(new GridLayout(0,4));
-        JTextField npasti = new JTextField(1);
-        JButton pastimeno = new JButton("-");
-        JButton pastipiu = new JButton("+");
-        JButton pastibutton = new JButton();
-        JLabel pasto=new JLabel("Pasto");
-        
-        JLabel posto1 = new JLabel("");
-        JTextField posto0 = new JTextField();
-        JLabel posto= new JLabel("Posto");
-        
-        JPanel assicurazioni = new JPanel(new GridLayout(0,4));
-        JTextField nassicurazioni = new JTextField(1);
-        JButton assicurazionimeno = new JButton("-");
-        JButton assicurazionipiu = new JButton("+");
-        JButton assicurazionibutton = new JButton();
-        JLabel assicurazione =new JLabel("Assicurazione");
-        
-        JPanel bagagli = new JPanel(new GridLayout(0,4));
-        JTextField nbagagli = new JTextField(1);
-       
-        JButton bagaglimeno = new JButton("-");
-        JButton bagaglipiu = new JButton("+");
-        JLabel bagaglio=new JLabel("Bagaglio");
-        JButton bagagliobutton = new JButton();
-        
-        JComboBox cbclasse =new JComboBox();
-        JLabel classe=new JLabel("Classe");
-        
-       
-        JTextField cognome0 =new JTextField ("Inserisci Cognome");
-        JLabel cognome = new JLabel("Cognome");
-        
-        JTextField nome0 =new JTextField("Inserisci Nome");
-   
-          JLabel nome=new JLabel("Nome");
-       
-        JTextField id0 =new JTextField("Inserisci id");
-        JLabel id = new JLabel("ID");
+    JButton conferma = new JButton("Conferma");  
+    JPanel pasti= new JPanel(new GridLayout(0,4));
+    JTextField npasti = new JTextField(1);
+    JButton pastimeno = new JButton("-");
+    JButton pastipiu = new JButton("+");
+    JButton pastibutton = new JButton();
+    JLabel pasto=new JLabel("Pasto");
+
+    JLabel posto1 = new JLabel("");
+    JTextField posto0 = new JTextField();
+    JLabel posto= new JLabel("Posto");
+
+    JPanel assicurazioni = new JPanel(new GridLayout(0,4));
+    JTextField nassicurazioni = new JTextField(1);
+    JButton assicurazionimeno = new JButton("-");
+    JButton assicurazionipiu = new JButton("+");
+    JButton assicurazionibutton = new JButton();
+    JLabel assicurazione =new JLabel("Assicurazione");
+
+    JPanel bagagli = new JPanel(new GridLayout(0,4));
+    JTextField nbagagli = new JTextField(1);
+
+    JButton bagaglimeno = new JButton("-");
+    JButton bagaglipiu = new JButton("+");
+    JLabel bagaglio=new JLabel("Bagaglio");
+    JButton bagagliobutton = new JButton();
+
+    JComboBox cbclasse =new JComboBox();
+    JLabel classe=new JLabel("Classe");
+
+
+    JTextField cognome0 =new JTextField ("Inserisci Cognome");
+    JLabel cognome = new JLabel("Cognome");
+
+    JTextField nome0 =new JTextField("Inserisci Nome");
+
+      JLabel nome=new JLabel("Nome");
+
+    JTextField id0 =new JTextField("Inserisci id");
+    JLabel id = new JLabel("ID");
         
     public PasseggeriPanel(HomeFrame home, ClientBlueAirline controller) {
         this.home = home;
@@ -107,26 +99,11 @@ public class PasseggeriPanel extends JPanel{
     
     
     public  void addComponentsToPane(Container pane) {
-        if (RIGHT_TO_LEFT) {
-            pane.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
-}
-
+  
     pane.setLayout(new GridBagLayout());
     GridBagConstraints c = new GridBagConstraints();
-   
-    if (shouldFill) {
-    //natural height, maximum width
-    c.fill = GridBagConstraints.HORIZONTAL;
-    
-    }
  
     
-  
-     
-  
-   // if (shouldWeightX) {
-   // c.weightx = 3;
-   // }
     c.fill = GridBagConstraints.HORIZONTAL;
     c.weightx=0.1;
      c.ipady = 15;
@@ -134,14 +111,7 @@ public class PasseggeriPanel extends JPanel{
     c.gridx = 0;
     c.gridy = 0;
     pane.add(nome, c);
-    
-    
-
-   // if (shouldWeightX) {
-  //  c.weightx = 1;
-    
-   // }
-    c.fill = GridBagConstraints.HORIZONTAL;
+ 
     c.weightx=0.1;
     c.ipady = 15;
     c.gridx = 1;
@@ -149,8 +119,6 @@ public class PasseggeriPanel extends JPanel{
     pane.add(nome0, c);
  
 
-     
-    c.fill = GridBagConstraints.HORIZONTAL;
     c.weightx=0.1;
     c.ipady = 15;
     c.weightx = 3;
@@ -159,11 +127,6 @@ public class PasseggeriPanel extends JPanel{
     pane.add(cognome, c);
     
 
-   // if (shouldWeightX) {
-   // c.weightx = 3;
-    
-   // }
-    c.fill = GridBagConstraints.HORIZONTAL;
     c.weightx=0.1;
     c.ipady = 15;
     c.gridx = 3;
@@ -171,38 +134,29 @@ public class PasseggeriPanel extends JPanel{
     
     pane.add(cognome0, c);
  
-  
-   
-    if (shouldWeightX) {
+
     c.weightx = 3;
-    }
-    c.fill = GridBagConstraints.HORIZONTAL;
-     c.ipady = 50;
+    c.ipady = 50;
     c.gridx = 0;
     c.gridy = 2;
     pane.add(classe, c);
     
     
-      cbclasse.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Prima Classe ", "Seconda Classe" }));
+    cbclasse.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Prima Classe ", "Seconda Classe" }));
       
-    if (shouldWeightX) {
+
     c.weightx = 3;
-    }
+
     c.fill = GridBagConstraints.HORIZONTAL;
-     c.ipady = 40;
+    c.ipady = 40;
     c.gridx = 1;
     c.gridy = 2;
     pane.add(cbclasse, c);
     
-   
 
-    
-    
-    if (shouldWeightX) {
     c.weightx = 3;
-    }
     c.fill = GridBagConstraints.HORIZONTAL;
-     c.ipady = 50;
+    c.ipady = 50;
     c.gridx = 0;
     c.gridy = 4;
     pane.add(bagaglio, c);
@@ -254,25 +208,18 @@ public class PasseggeriPanel extends JPanel{
         });
         bagagli.setOpaque(false);
         
-    
-    
-    if (shouldWeightX) {
+
     c.weightx = 1;
-    }
+
     c.fill = GridBagConstraints.HORIZONTAL;
     c.ipady = 2;
     c.gridx = 1;
     c.gridy = 4;
     pane.add(bagagli, c);
  
-    
-   
-  
-    
-    
-    if (shouldWeightX) {
+
     c.weightx = 3;
-    }
+    
     c.fill = GridBagConstraints.HORIZONTAL;
     c.ipady = 50;
     c.gridx = 0;
@@ -326,38 +273,29 @@ public class PasseggeriPanel extends JPanel{
         });
         assicurazioni.setOpaque(false);
         
-    
-    
-    if (shouldWeightX) {
+
     c.weightx = 1;
-    }
-    c.fill = GridBagConstraints.HORIZONTAL;
+
     c.ipady = 2;
     c.gridx = 1;
     c.gridy = 5;
     pane.add(assicurazioni, c);
  
-    
-   
-   
-    
-     if(shouldWeightX){
-     c.weightx=3;
-     }
-    c.fill = GridBagConstraints.HORIZONTAL;
+
+    c.weightx=3;
     c.ipady = 15;     
     c.gridx = 0;
     c.gridy = 3;
     pane.add(posto, c);
 
-    if(shouldWeightX){
+
     c.weightx=3;
-    }
     c.fill = GridBagConstraints.HORIZONTAL;
     c.ipady = 15;   
     c.ipadx = 30;
     c.gridx = 1;
     c.gridy = 3;
+    posto0.setVisible(true);
     pane.add(posto0, c);
     posto0.addKeyListener(new KeyAdapter() {
             public void keyTyped(KeyEvent e) {
@@ -369,8 +307,7 @@ public class PasseggeriPanel extends JPanel{
             }
         });
     
-       c.fill = GridBagConstraints.HORIZONTAL;
-     c.ipady = 40;
+    c.ipady = 40;
     c.weightx = 3;
     c.gridx = 2;
     c.gridy = 3;
@@ -378,11 +315,8 @@ public class PasseggeriPanel extends JPanel{
     
     
 
-    if (shouldWeightX) {
     c.weightx = 3;
-    }
-    c.fill = GridBagConstraints.HORIZONTAL;
-     c.ipady = 50;
+    c.ipady = 50;
     c.gridx = 0;
     c.gridy = 6;
     pane.add(pasto, c);
@@ -435,9 +369,8 @@ public class PasseggeriPanel extends JPanel{
         
     
     
-    if (shouldWeightX) {
+
     c.weightx = 1;
-    }
     c.fill = GridBagConstraints.HORIZONTAL;
     c.ipady = 2;
     c.gridx = 1;
@@ -464,19 +397,18 @@ public class PasseggeriPanel extends JPanel{
         ActionListener evento = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(home.PassengerMeno())
-                {
-                if(cognome0.getText().isEmpty() &&  nome0.getText().isEmpty() && (cbclasse.getSelectedIndex()==-1))
-                    JOptionPane.showConfirmDialog(home, "Riempire tutti i campi"+"per poter proseguire.", "Errore", JOptionPane.OK_CANCEL_OPTION);
-                    else
-                { 
-                    home.addPassenger(id0.getText(), nome0.getText(), cognome0.getText(), Integer.parseInt(posto0.getText()), Integer.parseInt(classe.getText()),home.getCodeflight(),home.getPriceflight());
-                    home.refreshGUI(new PasseggeriPanel(home,controller));  
-                }}
-                else
-                {
-                home.refreshGUI(new RiassuntoVolo(home,controller));
-                }
+               if(cognome0.getText().isEmpty() ||  nome0.getText().isEmpty() || id0.getText().isEmpty() || posto0.getText().isEmpty()|| cognome0.getText().equals("Inserisci Cognome") || nome0.getText().equals("Inserisci Nome") || id0.getText().equals("Inserisci id"))
+                  JOptionPane.showConfirmDialog(home, "Riempire tutti i campi"+" per poter proseguire.", "Errore", JOptionPane.OK_CANCEL_OPTION);
+                       else
+                    {
+                           home.addPassenger(id0.getText(), nome0.getText(), cognome0.getText(), Integer.parseInt(posto0.getText()), cbclasse.getSelectedIndex()+1,home.getCodeflight(),home.getPriceflight());
+                    
+                        if(home.PassengerMeno())
+                            home.refreshGUI(new PasseggeriPanel(home,controller));
+                        else
+                            home.notifiche.setText("Riassunto volo:");
+                            home.refreshGUI(new RiassuntoPanel(home,controller));
+                    }
             }
 
            
@@ -484,18 +416,7 @@ public class PasseggeriPanel extends JPanel{
         return evento;
     }
     
-    private ActionListener riassuntovolo() {
-        ActionListener evento = new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                home.refreshGUI(new RiassuntoVolo(home,controller));
-                home.notifiche.setText("riassunto volo: ");
-            }
-
-           
-        };
-        return evento;
-    }
+    
 
   
   private ActionListener NListener(final JTextField numero,final String messaggio,final String notifica) {

@@ -5,18 +5,23 @@
  */
 package gui;
 
-import static GUI.PasseggeriPanel.changeFont;
+import clientblueairline.ClientBlueAirline;
 import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import oggetti.Flight;
 import oggetti.Reservation;
 import oggetti.TicketPassenger;
 
@@ -26,13 +31,12 @@ import oggetti.TicketPassenger;
  */
 
 public class RiassuntoPanel extends JPanel {
-    final static boolean shouldFill = true;
-    final static boolean shouldWeightX = true;
-    final static boolean RIGHT_TO_LEFT = false;
-    
+
     private HomeFrame home;
+    private ClientBlueAirline controller;
     private ArrayList<TicketPassenger> passengers;
     private Reservation reservation;
+    private Flight flight;
     
     JPanel infoGenerali = new JPanel();
     JLabel email = new JLabel();
@@ -42,6 +46,7 @@ public class RiassuntoPanel extends JPanel {
     JLabel data = new JLabel();
     JLabel orario = new JLabel();
     
+    JPanel info =new JPanel();
     JPanel infoPasseggero = new JPanel();
     JLabel assicurazione = new JLabel();
     JLabel pasto = new JLabel();
@@ -54,27 +59,32 @@ public class RiassuntoPanel extends JPanel {
     JButton conferma = new JButton("Conferma");
     
     
-    public RiassuntoPanel(HomeFrame home) {
+    public RiassuntoPanel(HomeFrame home, ClientBlueAirline controller) {
         this.home = home;
         passengers = home.getPassengers();
         reservation = home.getReservation();
+        this.controller=controller;
+        flight = new Flight(home.getCodeflight());
         this.setVisible(true);
         setOpaque(false);
-        changeFont(this,new Font("Helvetica", Font.BOLD,15));
+      
+        home.setallFont(infoGenerali);
+        home.setallFont(this.info);
+        home.setallFont(this.infoPasseggero);
         addComponents(this);
-        home.setallFont(this);
         this.makeComponentsTrasparent();
+        
     
     }
 
     private void addComponents(Container pane) {
         
-        setLayout(new BorderLayout());
+        pane.setLayout(new BorderLayout());
         initInfoGenerali();
         pane.add(infoGenerali, BorderLayout.NORTH);
         
         initInfoPasseggero();
-        pane.add(infoPasseggero, BorderLayout.CENTER);
+        pane.add(info, BorderLayout.CENTER);
         
         
         pane.add(conferma, BorderLayout.SOUTH);
@@ -82,30 +92,55 @@ public class RiassuntoPanel extends JPanel {
     }
 
     private void initInfoGenerali() {
-        infoGenerali.setLayout(new GridLayout(3,2));
-        codice.setText(reservation.getCodeFlight());
-        infoGenerali.add(codice);
-        email.setText(reservation.getEmail());
-        infoGenerali.add(email);
-        andata.setText(" "); // Non so da dove pigliare andata,ritorno,data e ora
-        infoGenerali.add(andata);
-        ritorno.setText(" ");
-        infoGenerali.add(ritorno);
-        data.setText(" ");
-        infoGenerali.add(data);
-        orario.setText(" ");
-        infoGenerali.add(orario);
+        try {
+            infoGenerali.setLayout(new GridLayout(3,2));
+            infoGenerali.setOpaque(false);
+            codice.setText(reservation.getCodeFlight());
+            infoGenerali.add(codice);
+            email.setText(reservation.getEmail());
+            infoGenerali.add(email);
+            Flight f= controller.searchFlight(flight);
+            andata.setText(f.getRoute().getDepartureCity() +" "+f.getRoute().getDeparutreAirport()); // Non so da dove pigliare andata,ritorno,data e ora
+            infoGenerali.add(andata);
+            ritorno.setText(f.getRoute().getDestinationCity()+ " " + f.getRoute().getDestinationAirport());
+            infoGenerali.add(ritorno);
+            SimpleDateFormat format1 = new SimpleDateFormat("dd-MM-yyyy");
+            String d = format1.format(f.getDateDeparture().getTime());
+            data.setText(d);
+            infoGenerali.add(data);
+            SimpleDateFormat format2 = new SimpleDateFormat("hh:mm a");
+            String d2= format2.format(f.getDateDeparture().getTime());
+            orario.setText(d2);
+            infoGenerali.add(orario);
+        } catch (IOException ex) {
+            Logger.getLogger(RiassuntoPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
     }
 
     private void initInfoPasseggero() {
-        
-       add(passeggeri, BorderLayout.CENTER);
+       
+        info.setLayout(new BorderLayout());
+        info.setOpaque(false);
+        info.add(passeggeri, BorderLayout.NORTH);
         for(int i=0; i<passengers.size(); i++) {
             passeggeri.addItem(passengers.get(i).getName() + " " + passengers.get(i).getSurname());
         }
         infoPasseggero.setLayout(new GridLayout(3,2));
-        passeggeri.addActionListener(new ActionListener() {
+        infoPasseggero.setOpaque(false);
+        info.add(infoPasseggero,BorderLayout.CENTER);
+        passeggeri.addActionListener(PassengerListener());
+    }
+
+    private void makeComponentsTrasparent() {
+        home.trasparentButton(conferma);
+        //home.transparentComboBox(passeggeri);
+    }
+    
+    private ActionListener PassengerListener()
+    {
+     ActionListener evento = new ActionListener() {
+         
            @Override
            public void actionPerformed(ActionEvent e) {
                String tmp = passeggeri.getSelectedItem().toString();
@@ -113,6 +148,7 @@ public class RiassuntoPanel extends JPanel {
                for(int j = 0; j<passengers.size(); j++) {
                    if(spl[0].equals(passengers.get(j).getName()) && spl[1].equals(passengers.get(j).getSurname())) {
                        //come facciamo a mettere gli arrayList? io ho pensato a un comboBox non modificabile ma non so se va bene
+                       
                         pasto.setText("Pasto: ");
                         infoPasseggero.add(pasto);
                         assicurazione.setText("Assicurazione: ");
@@ -128,13 +164,9 @@ public class RiassuntoPanel extends JPanel {
                    } 
                }              
            }
-       });    
+     };
+     return evento;
     }
 
-    private void makeComponentsTrasparent() {
-        home.transparentButton(conferma);
-        home.transparentComboBox(passeggeri);
-    }
-    
-    
+   
 }

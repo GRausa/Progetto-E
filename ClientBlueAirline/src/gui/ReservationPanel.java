@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package GUI;
+package gui;
 
 
 import clientblueairline.ClientBlueAirline;
@@ -11,12 +11,8 @@ import com.toedter.calendar.JDateChooser;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.IOException;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -71,9 +67,7 @@ public class ReservationPanel extends JPanel{
     
     private void initComponents() throws IOException {
          final String[] city=  controller.listOfCity();
-         Meal[] m = controller.getAllMeals();     
-                
-                
+                 
         andata.setFont(new java.awt.Font("Helvetica", 0, 14)); 
         andata.setEditable(true);
         andata.setSelectedItem("");
@@ -293,20 +287,6 @@ public class ReservationPanel extends JPanel{
    }
    
    
-       public static Calendar DateToCalendar(Date date ) 
-{ 
- Calendar cal = null;
- try {   
-  DateFormat formatter = new SimpleDateFormat("yyyyMMdd");
-  date = (Date)formatter.parse(date.toString()); 
-  cal=Calendar.getInstance();
-  cal.setTime(date);
-  }
-  catch (ParseException e)
-  {
-      System.out.println("Exception :"+e);  
-  }  
-  return cal;
- }
+ 
 
 }

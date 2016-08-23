@@ -1,4 +1,4 @@
-package GUI;
+package gui;
 
 
 import clientblueairline.ClientBlueAirline;
@@ -334,7 +334,8 @@ public class HomeFrame extends JFrame {
     }
 
     public boolean PassengerMeno() {
-        if (npasseggeri != 0) {
+       
+        if (npasseggeri != 0) { 
             this.npasseggeri--;
             return true;
         } else {

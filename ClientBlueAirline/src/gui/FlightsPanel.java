@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package GUI;
+package gui;
 
 
 import clientblueairline.ClientBlueAirline;
@@ -18,6 +18,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.Time;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import javax.swing.JButton;
@@ -63,7 +64,7 @@ public class FlightsPanel  extends JPanel {
         home.setallFont(this);
     }
       
-public void addComponentsToPane(Container pane) {
+private void addComponentsToPane(Container pane) {
         if (RIGHT_TO_LEFT) {
             pane.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
            }
@@ -94,8 +95,12 @@ public void addComponentsToPane(Container pane) {
           data[i][0] = f.getCode();
           data[i][1] = f.getRoute().getDeparutreAirport();
           data[i][2] = f.getRoute().getDestinationAirport();
-          data[i][3] = f.getDateDeparture().getTime();
-          data[i][4] = f.getDateDestination().getTime();
+          SimpleDateFormat format1 = new SimpleDateFormat("dd-MM-yyyy");
+          String d = format1.format(f.getDateDeparture().getTime());
+          SimpleDateFormat format2 = new SimpleDateFormat("hh:mm a");
+          String d2= format2.format(f.getDateDeparture().getTime());
+          data[i][3] = d;
+          data[i][4] = d2;
           data[i][5] = f.getPrezzo();
           data[i][6] = false;
           i++;
@@ -142,19 +147,10 @@ public void addComponentsToPane(Container pane) {
             home.notifiche.setText("Seleziono il volo da prenotare..");
             MyTableModel m =(MyTableModel)voli.getModel();
             if(m.getRiga()!=null)
-            {
-                if(home.PassengerMeno())    
-                {
-                    for(int j=0; j<voli.getRowCount();j++)
-                    {
-
-                    home.refreshGUI(new CustomerPanel(home,controller));
-                    }
-                }
-           
-            home.notifiche.setText((String)voli.getValueAt(m.getRiga(),0));
-            home.setCodeflight((String)voli.getValueAt(m.getRiga(),1));
-            home.setPriceflight((double)voli.getValueAt(m.getRiga(),5));
+            {             
+            home.setCodeflight((String)voli.getValueAt(m.getRiga(),0));
+            home.setPriceflight((double)voli.getValueAt(m.getRiga(),5));       
+            home.refreshGUI(new CustomerPanel(home,controller));
             }
             else
             JOptionPane.showConfirmDialog(home, "Selezionare almeno un volo\n"+"per poter proseguire.\n", "Errore", JOptionPane.OK_CANCEL_OPTION);

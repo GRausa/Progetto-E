@@ -3,15 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package GUI;
+package gui;
 
 
 
 
 import clientblueairline.ClientBlueAirline;
-import static GUI.CustomerPanel.RIGHT_TO_LEFT;
-import static GUI.CustomerPanel.shouldFill;
-import static GUI.CustomerPanel.shouldWeightX;
+
 import java.awt.*;
 import java.util.ArrayList;
 import javax.swing.*;
@@ -75,20 +73,13 @@ public class NFrame extends JFrame{
 
     private void initComponents() {
     setLayout(new GridBagLayout());
-    
-     if (RIGHT_TO_LEFT) {
-            setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
-}
-    
+
     GridBagConstraints c = new GridBagConstraints();
-    if (shouldFill) {
-    
+
     c.fill = GridBagConstraints.HORIZONTAL;
-    } 
-     
-     if (shouldWeightX) {
+   
+  
     c.weightx = 3;
-    }
     c.fill = GridBagConstraints.HORIZONTAL;
     c.ipady = 30;
     c.gridx = 0;
@@ -98,9 +89,9 @@ public class NFrame extends JFrame{
     
    for(int i=0;i<this.n;i++)
     {
-        if (shouldWeightX) {
+       
             c.weightx = 3;
-        }
+      
         c.fill = GridBagConstraints.HORIZONTAL;
         c.ipady = 20;
         c.gridx = 0;
@@ -124,9 +115,9 @@ public class NFrame extends JFrame{
     {
         GridBagConstraints c = new GridBagConstraints();
         
-        if (shouldWeightX) {
+     
             c.weightx = 3;
-        }
+        
         c.fill = GridBagConstraints.HORIZONTAL;
         c.ipady = 20;
         c.gridx = 0;

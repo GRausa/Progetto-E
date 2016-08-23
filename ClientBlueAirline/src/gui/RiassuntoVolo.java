@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package GUI;
+package gui;
 
 
 import clientblueairline.ClientBlueAirline;
@@ -16,6 +16,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import oggetti.Flight;
 /**
  *
  * @author alexandra
@@ -25,12 +26,12 @@ public class RiassuntoVolo extends JPanel{
      
       ClientBlueAirline controller;
       HomeFrame home;
-      
+      Flight f;
     
- JPanel modificapanel = new JPanel(new GridLayout(4,2,10,10));
- JLabel nome= new JLabel("BlueAirlines");
- JLabel codice=new JLabel("Inserisci il Codice");
- JLabel andata=new JLabel("andata");
+JPanel modificapanel = new JPanel(new GridLayout(4,2,10,10));
+JLabel nome= new JLabel("BlueAirlines");
+JLabel codice=new JLabel("Inserisci il Codice");
+JLabel andata=new JLabel("andata");
 JLabel ritorno=new JLabel("ritorno");
 JLabel data=new JLabel("data");
 JLabel orario=new JLabel("orario");
