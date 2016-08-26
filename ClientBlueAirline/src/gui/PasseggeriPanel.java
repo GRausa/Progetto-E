@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.*;
+import oggetti.Flight;
 import oggetti.HoldLuggage;
 import oggetti.Insurance;
 import oggetti.Meal;
@@ -46,7 +47,7 @@ public class PasseggeriPanel extends JPanel{
     JLabel pasto=new JLabel("Pasto");
 
     JLabel posto1 = new JLabel("");
-    JTextField posto0 = new JTextField();
+    JComboBox posto0 = new JComboBox();
     JLabel posto= new JLabel("Posto");
 
     JPanel assicurazioni = new JPanel(new GridLayout(0,4));
@@ -88,7 +89,7 @@ public class PasseggeriPanel extends JPanel{
         this.makeComponentsTrasparent();
         cbclasse.setForeground(Color.black);
         cbclasse.setPopupVisible(false);
-  
+        posto0.setForeground(Color.black);
 
        this.add( nome0, new GridBagConstraints( 0, 0, 1, 1, 1.0,1.0, GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets( 0, 100, 0, 0 ), 200, 40 ) );
        this.add( cognome0, new GridBagConstraints( 1, 0, 1, 1, 1.0,1.0, GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets( 0, 150, 0, 0 ), 150, 40 ) );
@@ -174,7 +175,30 @@ public class PasseggeriPanel extends JPanel{
     c.ipady = 40;
     c.gridx = 1;
     c.gridy = 2;
+    cbclasse.addActionListener(new ActionListener() {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            posto0.removeAllItems();
+            for(Seat s:getSeatFlight())
+        {
+            if(s.getPassenger()==null)
+            {
+                if(s.getClasse()==1 && cbclasse.getSelectedIndex()==0)
+                {
+                posto0.addItem(s.getNumber());
+                }
+
+                 if(s.getClasse()==2 && cbclasse.getSelectedIndex()==1)
+                {
+                posto0.addItem(s.getNumber());
+                }
+            }
+        }
+        }
+    });
     pane.add(cbclasse, c);
+    
 
     c.weightx = 3;
     c.fill = GridBagConstraints.HORIZONTAL;
@@ -318,16 +342,14 @@ public class PasseggeriPanel extends JPanel{
     c.gridx = 1;
     c.gridy = 3;
     posto0.setVisible(true);
+    posto0.setEditable(false);
+    posto0.setForeground(Color.black);
+    posto0.addItem("selezionare Classe");
+        
+  
+    Flight f = home.getFlighttmp();
+    
     pane.add(posto0, c);
-    posto0.addKeyListener(new KeyAdapter() {
-            public void keyTyped(KeyEvent e) {
-                char caracter = e.getKeyChar();
-                if (((caracter < '0') || (caracter > '9'))) {
-                    e.consume();
-                    home.notifiche.setText("Inserire solo numeri interi.");
-                }
-            }
-        });
     
     c.ipady = 40;
     c.weightx = 3;
@@ -419,12 +441,12 @@ public class PasseggeriPanel extends JPanel{
         ActionListener evento = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-               if(cognome0.getText().isEmpty() ||  nome0.getText().isEmpty() || id0.getText().isEmpty() || posto0.getText().isEmpty()|| cognome0.getText().equals("Inserisci Cognome") || nome0.getText().equals("Inserisci Nome") || id0.getText().equals("Inserisci id"))
+               if(cognome0.getText().isEmpty() ||  nome0.getText().isEmpty() || id0.getText().isEmpty() || cognome0.getText().equals("Inserisci Cognome") || nome0.getText().equals("Inserisci Nome") || id0.getText().equals("Inserisci id"))
                   JOptionPane.showConfirmDialog(home, "Riempire tutti i campi"+" per poter proseguire.", "Errore", JOptionPane.OK_CANCEL_OPTION);
                        else
                     {
                    try {
-                       home.addPassenger(id0.getText(), nome0.getText(), cognome0.getText(), Integer.parseInt(posto0.getText()), cbclasse.getSelectedIndex()+1,home.getCodeflight(),home.getPriceflight()); 
+                       home.addPassenger(id0.getText(), nome0.getText(), cognome0.getText(), Integer.parseInt((String)posto0.getSelectedItem()), cbclasse.getSelectedIndex()+1,home.getCodeflight(),home.getPriceflight()); 
                        
                        if(home.PassengerMeno())
                            home.refreshGUI(new PasseggeriPanel(home,controller));
@@ -493,7 +515,7 @@ public class PasseggeriPanel extends JPanel{
     home.trasparentTextField(this.cognome0);
     home.trasparentTextField(this.nbagagli);
     home.trasparentTextField(this.nome0);
-    home.trasparentTextField(this.posto0);
+    
     home.trasparentTextField(this.npasti);
     home.trasparentTextField(this.nassicurazioni);
     home.trasparentTextField(this.id0);
