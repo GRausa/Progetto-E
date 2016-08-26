@@ -346,14 +346,9 @@ public class HomeFrame extends JFrame {
         c.setForeground(Color.white);
     }
 
-    public boolean PassengerMeno() {
-       
-        if (npasseggeri != 0) { 
+    public boolean PassengerMeno() {  
             this.npasseggeri--;
-            return true;
-        } else {
-            return false;
-        }
+        return npasseggeri != 0;
     }
 
     public void setPriceflight(double priceflight) {

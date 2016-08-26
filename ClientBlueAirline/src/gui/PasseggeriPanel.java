@@ -180,9 +180,15 @@ public class PasseggeriPanel extends JPanel{
         @Override
         public void actionPerformed(ActionEvent e) {
             posto0.removeAllItems();
+            ArrayList<Integer> numeri = new ArrayList();
+            numeri.add(0);
             for(Seat s:getSeatFlight())
         {
-            if(s.getPassenger()==null)
+            for(TicketPassenger t:home.getPassengers())
+                {
+                numeri.add(t.getNseat());
+                }
+            if(s.getPassenger()==null && (!numeri.contains((int)s.getNumber())))  
             {
                 if(s.getClasse()==1 && cbclasse.getSelectedIndex()==0)
                 {
@@ -192,7 +198,7 @@ public class PasseggeriPanel extends JPanel{
                  if(s.getClasse()==2 && cbclasse.getSelectedIndex()==1)
                 {
                 posto0.addItem(s.getNumber());
-                }
+               }
             }
         }
         }
@@ -446,7 +452,7 @@ public class PasseggeriPanel extends JPanel{
                        else
                     {
                    try {
-                       home.addPassenger(id0.getText(), nome0.getText(), cognome0.getText(), Integer.parseInt((String)posto0.getSelectedItem()), cbclasse.getSelectedIndex()+1,home.getCodeflight(),home.getPriceflight()); 
+                       home.addPassenger(id0.getText(), nome0.getText(), cognome0.getText(),(int) posto0.getSelectedItem(), cbclasse.getSelectedIndex()+1,home.getCodeflight(),home.getPriceflight()); 
                        
                        if(home.PassengerMeno())
                            home.refreshGUI(new PasseggeriPanel(home,controller));
