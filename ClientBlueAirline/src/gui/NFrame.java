@@ -30,15 +30,16 @@ public class NFrame extends JFrame{
     private int n;
     private ClientBlueAirline controller;
     private boolean opened;
-   
+    private HomeFrame home;
     ArrayList<JComboBox> combo;
     JLabel tit ;
     
-    public NFrame(ClientBlueAirline controller,int n,String notifica)
+    public NFrame(HomeFrame home,ClientBlueAirline controller,int n,String notifica)
     {
         this.controller = controller;
         this.opened = true;
         this.n = n;
+        this.home=home;
         this.combo = new ArrayList();
         this.tit = new JLabel(notifica);
         setSize(WEIGHT, HEIGHT+(30*this.n));
@@ -53,13 +54,7 @@ public class NFrame extends JFrame{
 
         this.setLocation ((screenSize.width - frameSize.width) / 2,
         (screenSize.height - frameSize.height) / 2);
-        this.addWindowListener(new WindowAdapter() {
-            
-            @Override
-            public void windowClosing(WindowEvent e) {
-          
-            }
-        });
+      
     }
 
     public void setMessage(String message)

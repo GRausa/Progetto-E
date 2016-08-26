@@ -9,6 +9,7 @@ package gui;
 
 
 
+import TUI.MethodsControl;
 import clientblueairline.ClientBlueAirline;
 import java.awt.*;
 import java.awt.event.*;
@@ -20,6 +21,8 @@ import javax.swing.*;
 import oggetti.HoldLuggage;
 import oggetti.Insurance;
 import oggetti.Meal;
+import oggetti.Seat;
+import oggetti.TicketPassenger;
 
 /**
  *
@@ -172,7 +175,6 @@ public class PasseggeriPanel extends JPanel{
     c.gridx = 1;
     c.gridy = 2;
     pane.add(cbclasse, c);
-    
 
     c.weightx = 3;
     c.fill = GridBagConstraints.HORIZONTAL;
@@ -449,52 +451,12 @@ public class PasseggeriPanel extends JPanel{
    ActionListener evento = new ActionListener() {
        @Override
        public void actionPerformed(ActionEvent e) {
-           NFrame frame = new NFrame(controller,Integer.parseInt(numero.getText()),messaggio);
+           NFrame frame = new NFrame(home,controller,Integer.parseInt(numero.getText()),messaggio);
            frame.setVisible(true);
-          
-         
            home.notifiche.setText(notifica);
-           frame.setAlwaysOnTop(true);
            
-           for (JComboBox combo :frame.getCombo())
-           {
-               try {
-                   if(messaggio.equals("Inserisci i pasti per il volo"))
-                   {
-                    for(Meal m: controller.getAllMeals())
-                    {
-                        combo.addItem(m.toString());
-                    }
-                    meal = frame.getCombo(); 
-                   }
-                   else
-                   {
-                       if(messaggio.equals("Quale assicurazione vuoi?"))
-                       {
-                          for(Insurance m: controller.getAllInsurances())
-                            {
-                                combo.addItem(m.toString());
-                            } 
-                    insurance = frame.getCombo();
-                       } 
-                           else
-                       {
-                            for(HoldLuggage m: controller.getAllHoldLuggages())
-                            {
-                                combo.addItem(m.toString());
-                            }
-                    holdluggage = frame.getCombo();
-                       }
-                           
-                   }
-                      
-               } catch (IOException ex) {
-                   Logger.getLogger(CustomerPanel.class.getName()).log(Level.SEVERE, null, ex);
-               }
-           }
+           frame.setAlwaysOnTop(true);
        }
-
-
    };
    return evento;
 }
@@ -538,7 +500,30 @@ public class PasseggeriPanel extends JPanel{
     }
     
     
+    private ArrayList<Seat> getSeatFlight()
+    {
+       return    home.getFlighttmp().getSeats();
+    }   
     
+    
+    private int getnSecondaClasse()
+    {
+        int ret=0;
+                for (Seat s:getSeatFlight())
+                {
+                    if(s.getClasse()==2)
+                        ret= s.getNumber();
+                }
+                return ret;
+    }
      
+    private boolean isSeatFree(int posto)
+    {
+    if (getSeatFlight().get(posto-1).getPassenger() == null) 
+        return true;
+    else 
+        return false;            
+    }
+            
 
 }

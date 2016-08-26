@@ -17,6 +17,7 @@ import oggetti.Insurance;
 import oggetti.Meal;
 import oggetti.Reservation;
 import oggetti.Route;
+import oggetti.Seat;
 import oggetti.TicketPassenger;
 
 /**
@@ -140,6 +141,5 @@ public class ClientBlueAirline {
         System.out.println("RICEVUTO DAL SERVER: " + in.readLine());
     }
 
-    
-
+  
 }

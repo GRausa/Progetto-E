@@ -15,12 +15,12 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.sql.Time;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -29,7 +29,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.DefaultTableModel;
 import oggetti.Flight;
 
 
@@ -148,9 +147,15 @@ private void addComponentsToPane(Container pane) {
             MyTableModel m =(MyTableModel)voli.getModel();
             if(m.getRiga()!=null)
             {             
-            home.setCodeflight((String)voli.getValueAt(m.getRiga(),0));
-            home.setPriceflight((double)voli.getValueAt(m.getRiga(),5));       
-            home.refreshGUI(new CustomerPanel(home,controller));
+                try {
+                    Flight f = controller.searchFlight(new Flight((String)voli.getValueAt(m.getRiga(),0)));
+                    home.setFlighttmp(f);
+                    home.setCodeflight((String)voli.getValueAt(m.getRiga(),0));
+                    home.setPriceflight((double)voli.getValueAt(m.getRiga(),5));
+                    home.refreshGUI(new CustomerPanel(home,controller));
+                } catch (IOException ex) {
+                    Logger.getLogger(FlightsPanel.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
             else
             JOptionPane.showConfirmDialog(home, "Selezionare almeno un volo\n"+"per poter proseguire.\n", "Errore", JOptionPane.OK_CANCEL_OPTION);

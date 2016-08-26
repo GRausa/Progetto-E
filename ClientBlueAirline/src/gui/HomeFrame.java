@@ -8,6 +8,7 @@ import com.toedter.calendar.JDateChooser;
 import java.awt.event.*;
 import java.util.ArrayList;
 import javax.swing.*;
+import oggetti.Flight;
 import oggetti.HoldLuggage;
 import oggetti.Insurance;
 import oggetti.Meal;
@@ -29,6 +30,7 @@ public class HomeFrame extends JFrame {
     private double priceflight;
     private ArrayList<TicketPassenger> passengers;
     private Reservation reservation;
+    private Flight flighttmp;
 
     private final String DEFAULT = "Benvenuti in Blue Airline";
     final boolean shouldFill = true;
@@ -62,7 +64,7 @@ public class HomeFrame extends JFrame {
         initComponents();
         this.setVisible(true);
         this.passengers = new ArrayList<>();
-
+        
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setContentPane(sfondo);
         notifiche.setFont(new Font("Helvetica", Font.BOLD, 15));
@@ -360,6 +362,14 @@ public class HomeFrame extends JFrame {
 
     public double getPriceflight() {
         return priceflight;
+    }
+
+    public Flight getFlighttmp() {
+        return flighttmp;
+    }
+
+    public void setFlighttmp(Flight flighttmp) {
+        this.flighttmp = flighttmp;
     }
     
     

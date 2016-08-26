@@ -116,13 +116,7 @@ public class CustomerPanel extends JPanel{
             }
            
         });
-    
 
-   
-   
-    
-     
-    
     c.fill = GridBagConstraints.HORIZONTAL;
     c.ipady = 0;       //reset to default
     c.weighty = 1.0;   //request any extra vertical space
@@ -154,62 +148,7 @@ public class CustomerPanel extends JPanel{
         };
         return evento;
     }
- 
   
-    private ActionListener NListener(final JTextField numero,final String messaggio,final String notifica) {
-   ActionListener evento = new ActionListener() {
-       @Override
-       public void actionPerformed(ActionEvent e) {
-           NFrame frame = new NFrame(controller,Integer.parseInt(numero.getText()),messaggio);
-           frame.setVisible(true);
-          // combo =  frame.getCombo(); problema con il final!!
-           home.notifiche.setText(notifica);
-           frame.setAlwaysOnTop(true);
-           //inserisco nei combobox dell'NFrame le corrette stringhe
-           for (JComboBox combo :frame.getCombo())
-           {
-               try {
-                   if(messaggio.equals("Inserisci i pasti per il volo"))
-                   {
-                    for(Meal m: controller.getAllMeals())
-                    {
-                        combo.addItem(m.toString());
-                    }
-                   }
-                   else
-                   {
-                       if(messaggio.equals("Quale assicurazione vuoi?"))
-                       {
-                          for(Insurance m: controller.getAllInsurances())
-                            {
-                                combo.addItem(m.toString());
-                            } 
-                       } 
-                           else
-                       {
-                            for(HoldLuggage m: controller.getAllHoldLuggages())
-                            {
-                                combo.addItem(m.toString());
-                            }
-                       }
-                           
-                   }
-                       
-               } catch (IOException ex) {
-                   Logger.getLogger(CustomerPanel.class.getName()).log(Level.SEVERE, null, ex);
-               }
-           }
-       }
-
-
-   };
-   return evento;
-}
-    
-    
-  
-   
-    
     public void makeComponentsTrasparent()
     {
         //tutti i Button e i TextField diventano trasparenti
