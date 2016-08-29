@@ -38,6 +38,10 @@ public class PasseggeriPanel extends JPanel{
     protected ArrayList<JComboBox> insurance;
     protected ArrayList<JComboBox> holdluggage;
     
+    private ArrayList<Meal> meals;
+    private ArrayList<Insurance> insurances;
+    private ArrayList<HoldLuggage> luggages;
+    
     JButton conferma = new JButton("Conferma");  
     JPanel pasti= new JPanel(new GridLayout(0,4));
     JTextField npasti = new JTextField(1);
@@ -242,6 +246,8 @@ public class PasseggeriPanel extends JPanel{
         bagagli.add(bagaglipiu);
         ImageIcon immagine=new ImageIcon("immagini/HoldLuggage.png");
         bagagliobutton.setIcon(immagine);
+        luggages = new ArrayList();
+        home.setLuggages(luggages);
         bagagliobutton.addActionListener(NListener(nbagagli,"Scegli il tipo di bagaglio.","Specifica quale tipo di bagaglio vuoi."));
         
       
@@ -307,6 +313,8 @@ public class PasseggeriPanel extends JPanel{
         assicurazioni.add(assicurazionipiu);
         ImageIcon immagine2=new ImageIcon("immagini/Air_insurance.png");
         assicurazionibutton.setIcon(immagine2);
+        insurances = new ArrayList();
+        home.setInsurances(insurances);
         assicurazionibutton.addActionListener(NListener(nassicurazioni,"Quale assicurazione vuoi?","Inserisci le assicurazioni per il tuo volo."));
         
         
@@ -400,6 +408,8 @@ public class PasseggeriPanel extends JPanel{
         pasti.add(pastipiu);
         ImageIcon immagine1=new ImageIcon("immagini/Meal.png");
         pastibutton.setIcon(immagine1);
+        meals = new ArrayList();
+        home.setMeals(meals);
         pastibutton.addActionListener(NListener(npasti,"Cosa mangi","Inserisci i pasti per il volo"));
         
        
@@ -447,12 +457,15 @@ public class PasseggeriPanel extends JPanel{
         ActionListener evento = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                meals = home.getMeals();
+                insurances = home.getInsurances();
+                luggages = home.getLuggages();
                if(cognome0.getText().isEmpty() ||  nome0.getText().isEmpty() || id0.getText().isEmpty() || cognome0.getText().equals("Inserisci Cognome") || nome0.getText().equals("Inserisci Nome") || id0.getText().equals("Inserisci id"))
                   JOptionPane.showConfirmDialog(home, "Riempire tutti i campi"+" per poter proseguire.", "Errore", JOptionPane.OK_CANCEL_OPTION);
                        else
                     {
                    try {
-                       home.addPassenger(id0.getText(), nome0.getText(), cognome0.getText(),(int) posto0.getSelectedItem(), cbclasse.getSelectedIndex()+1,home.getCodeflight(),home.getPriceflight()); 
+                       home.addPassenger(id0.getText(), nome0.getText(), cognome0.getText(),(int) posto0.getSelectedItem(), cbclasse.getSelectedIndex()+1,home.getCodeflight(),home.getPriceflight(), meals, insurances, luggages); 
                        
                        if(home.PassengerMeno())
                            home.refreshGUI(new PasseggeriPanel(home,controller));

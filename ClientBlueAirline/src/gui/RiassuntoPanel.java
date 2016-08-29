@@ -134,7 +134,7 @@ public class RiassuntoPanel extends JPanel {
         
         classe.setText("Classe: " );
         infoPasseggero.add(classe);
-        prezzo.setText("Prezzo: " + passengers.get(0).getTotalPrice() +"€");
+        prezzo.setText("Prezzo: " /*+ passengers.get(0).getTotalPrice() +"€"*/);
         infoPasseggero.add(prezzo);
         bagaglio.setText("Bagaglio: ");
         infoPasseggero.add(bagaglio); 
@@ -143,7 +143,7 @@ public class RiassuntoPanel extends JPanel {
         assicurazione.setText("Assicurazione: ");
         infoPasseggero.add(assicurazione);
         
-        info.add(infoPasseggero,BorderLayout.SOUTH);
+        info.add(infoPasseggero,BorderLayout.CENTER);
        
         passeggeri.addActionListener(PassengerListener());
     }
@@ -168,7 +168,7 @@ public class RiassuntoPanel extends JPanel {
                         infoPasseggero.setLayout(new GridLayout(3,2));
                         pasto.setText("Pasto: ");
                         infoPasseggero.add(pasto);
-                        assicurazione.setText("Assicurazione: ");
+                        assicurazione.setText("Assicurazione: " );
                         infoPasseggero.add(assicurazione);
                         numPosto.setText("Posto a sedere: " + passengers.get(j).getNseat());
                         infoPasseggero.add(numPosto);

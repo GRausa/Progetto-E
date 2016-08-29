@@ -28,6 +28,9 @@ public class HomeFrame extends JFrame {
     private int npasseggeri;
     private String codeflight;
     private double priceflight;
+    private ArrayList<Meal> meals;
+    private ArrayList<Insurance> insurances;
+    private ArrayList<HoldLuggage> luggages;
     private ArrayList<TicketPassenger> passengers;
     private Reservation reservation;
     private Flight flighttmp;
@@ -214,6 +217,7 @@ public class HomeFrame extends JFrame {
     }
 
     protected void returnHome() {
+        passengers.clear();
         refreshGUI(homePanel());
 
     }
@@ -367,6 +371,29 @@ public class HomeFrame extends JFrame {
         this.flighttmp = flighttmp;
     }
     
+    public void setMeals(ArrayList<Meal> meals) {
+        this.meals = meals;
+    }
+    
+    public void setInsurances(ArrayList<Insurance> insurances) {
+        this.insurances = insurances;
+    }
+    
+    public void setLuggages(ArrayList<HoldLuggage> luggages) {
+        this.luggages =luggages;
+    }
+    
+    public ArrayList<Meal> getMeals() {
+        return meals;
+    }
+    
+    public ArrayList<Insurance> getInsurances() {
+        return insurances;
+    }
+    
+    public ArrayList<HoldLuggage> getLuggages() {
+        return luggages;
+    }
     
 
 }
