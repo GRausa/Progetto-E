@@ -13,6 +13,7 @@ import java.awt.event.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -125,7 +126,7 @@ public class ReservationPanel extends JPanel{
         
         
         data.setDateFormatString("yyyy-MM-dd"); 
-        
+        //data.setMinSelectableDate(new Date());
         data.setPreferredSize(new java.awt.Dimension(170, 30));
         data.addKeyListener(new KeyAdapter() {
             public void keyTyped(KeyEvent e) {
