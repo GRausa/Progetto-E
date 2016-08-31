@@ -23,7 +23,7 @@ import objects.HoldLuggage;
 import objects.Insurance;
 import objects.Meal;
 import objects.Seat;
-import objects.TicketPassenger;
+import objects.Ticket;
 
 /**
  *
@@ -188,7 +188,7 @@ public class PasseggeriPanel extends JPanel{
             numeri.add(0);
             for(Seat s:getSeatFlight())
         {
-            for(TicketPassenger t:home.getPassengers())
+            for(Ticket t:home.getPassengers())
                 {
                 numeri.add(t.getNseat());
                 }

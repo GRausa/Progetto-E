@@ -24,7 +24,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import objects.Flight;
 import objects.Reservation;
-import objects.TicketPassenger;
+import objects.Ticket;
 
 /**
  *
@@ -35,7 +35,7 @@ public class RiassuntoPanel extends JPanel {
 
     private HomeFrame home;
     private ClientBlueAirline controller;
-    private ArrayList<TicketPassenger> passengers;
+    private ArrayList<Ticket> passengers;
     private Reservation reservation;
     private Flight flight;
     

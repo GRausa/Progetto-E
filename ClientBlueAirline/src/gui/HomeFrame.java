@@ -13,7 +13,7 @@ import objects.HoldLuggage;
 import objects.Insurance;
 import objects.Meal;
 import objects.Reservation;
-import objects.TicketPassenger;
+import objects.Ticket;
 
 /**
  *
@@ -31,7 +31,7 @@ public class HomeFrame extends JFrame {
     private ArrayList<Meal> meals;
     private ArrayList<Insurance> insurances;
     private ArrayList<HoldLuggage> luggages;
-    private ArrayList<TicketPassenger> passengers;
+    private ArrayList<Ticket> passengers;
     private Reservation reservation;
     private Flight flighttmp;
 
@@ -238,17 +238,17 @@ public class HomeFrame extends JFrame {
         return codeflight;
     }
 
-    public ArrayList<TicketPassenger> getPassengers() {
+    public ArrayList<Ticket> getPassengers() {
         return passengers;
     }
 
     public void addPassenger(String ID, String name, String surname, int nseat, int classe,String codflight,double priceticket,ArrayList<Meal> meals,ArrayList<Insurance> insurances,ArrayList<HoldLuggage> holdluggages) {
-        TicketPassenger t = new TicketPassenger(ID, name, surname, nseat, classe,codflight,priceticket,meals,insurances,holdluggages);
+        Ticket t = new Ticket(ID, name, surname, nseat, classe,codflight,priceticket,meals,insurances,holdluggages);
         this.passengers.add(t);
     }
     
      public void addPassenger(String ID, String name, String surname, int nseat, int classe,String codflight,double priceticket) {
-        TicketPassenger t = new TicketPassenger(ID, name, surname, nseat, classe,codflight,priceticket);
+        Ticket t = new Ticket(ID, name, surname, nseat, classe,codflight,priceticket);
         this.passengers.add(t);
     }
 
