@@ -182,8 +182,11 @@ public class AdapterSQL {
         query = "INSERT INTO Prenotazione VALUES ('" + codeReservation + "', '" + reservation.getCodeFlight() + "', '" + reservation.getEmail() + "', '" + reservation.getNumber() + "')";
         SQL.queryWrite(query);
         reservation.setCode(codeReservation);
-            
+        this.addPassengers(reservation);
+        return reservation;
+    }     
         //aggiunta passeggeri
+    public Reservation addPassengers(Reservation reservation) throws SQLException{
         int i = 0;
         String codeTicket="";
         for (TicketPassenger tp : reservation.getPassengers()) {
@@ -192,9 +195,10 @@ public class AdapterSQL {
             //codeTicketreservation.getCodeFlight() +"3"+i;
             tp.setCode(codeTicket);
             tp.setCodeFlight(reservation.getCodeFlight());
-            tp.setCodeReservation(codeReservation);
-            query = "INSERT INTO TicketPasseggero\n"
-                    + "VALUES ('" + tp.getCode() + "', '" + tp.getID() + "', '" + tp.getName() + "', '" + tp.getSurname() + "', '" + reservation.getCode() + "',0)";
+            tp.setCodeReservation(reservation.getCode());
+            String query = 
+                    "INSERT INTO TicketPasseggero\n" +
+                    "VALUES ('" + tp.getCode() + "', '" + tp.getID() + "', '" + tp.getName() + "', '" + tp.getSurname() + "', '" + reservation.getCode() + "',0)";
             SQL.queryWrite(query);
             //aggiunte
             ArrayList<Meal> meals = tp.getMeals();

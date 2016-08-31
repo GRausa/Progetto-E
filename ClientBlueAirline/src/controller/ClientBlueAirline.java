@@ -11,14 +11,14 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
-import object.Flight;
-import object.HoldLuggage;
-import object.Insurance;
-import object.Meal;
-import object.Reservation;
-import object.Route;
-import object.Seat;
-import object.TicketPassenger;
+import objects.Flight;
+import objects.HoldLuggage;
+import objects.Insurance;
+import objects.Meal;
+import objects.Reservation;
+import objects.Route;
+import objects.Seat;
+import objects.TicketPassenger;
 
 /**
  *

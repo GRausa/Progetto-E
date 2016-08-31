@@ -19,7 +19,7 @@ public class TicketPassenger {
     private ArrayList<Meal> meals;
     private ArrayList<HoldLuggage> holdLuggages;
     private ArrayList<Insurance> insurances;
-    boolean checkIn;
+    private boolean checkIn;
 
     public TicketPassenger(String ID, String name, String surname, int nseat, int classe, String codeFlight, double priceFlight) {
         this.ID = ID;

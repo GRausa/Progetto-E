@@ -13,13 +13,13 @@ import java.util.GregorianCalendar;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import object.Flight;
-import object.HoldLuggage;
-import object.Insurance;
-import object.Meal;
-import object.Reservation;
-import object.Route;
-import object.TicketPassenger;
+import objects.Flight;
+import objects.HoldLuggage;
+import objects.Insurance;
+import objects.Meal;
+import objects.Reservation;
+import objects.Route;
+import objects.TicketPassenger;
 
 /**
  *

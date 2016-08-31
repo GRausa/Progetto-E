@@ -201,7 +201,7 @@ class RemoteUser extends Thread {
         );
 
         commands.put(
-                "RICERCAVOLO", new Command() {
+                "RICERCAVOLI", new Command() {
 
                     @Override
                     public void execute(String args) {
