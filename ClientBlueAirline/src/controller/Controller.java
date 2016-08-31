@@ -145,10 +145,12 @@ public class Controller {
         Reservation res1 = gson.fromJson(in.readLine(), Reservation.class);
         return res1;
     }
-
+    
+    /*
     public void scrittura() throws IOException {
         System.out.println("RICEVUTO DAL SERVER: " + in.readLine());
     }
+    */
 
   
 }

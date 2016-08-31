@@ -115,7 +115,7 @@ public class ParserSQL {
                 codeTicket = resultQuery.getString("COD_TICKET");
                 ticketPassengers.add(new Ticket(codeTicket));
             }
-            res.setPassengers(ticketPassengers);
+            res.setTickets(ticketPassengers);
             return res;
         }
         else{

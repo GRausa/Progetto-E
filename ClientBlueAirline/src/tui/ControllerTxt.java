@@ -48,7 +48,7 @@ public class ControllerTxt implements Runnable {
                     break;
                 
                 case "CERCA_TICKETPASSENGER":
-                    MethodsControl.searchTicketPassenger(client);                     
+                    MethodsControl.searchTicket(client);                     
                     break;
                  
                 case "CERCA_PRENOTAZIONE":

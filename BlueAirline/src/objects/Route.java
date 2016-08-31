@@ -35,9 +35,9 @@ public class Route {
     public String getDestinationCity() {
         return destinationCity;
     }
-
+/*
     public String toString() {
         return departureCity + "(" + deparutreAirport + ")" + " - " + destinationCity + "(" + destinationAirport + ")";
     }
-
+*/
 }

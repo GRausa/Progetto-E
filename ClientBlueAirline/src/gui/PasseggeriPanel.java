@@ -192,7 +192,7 @@ public class PasseggeriPanel extends JPanel{
                 {
                 numeri.add(t.getNseat());
                 }
-            if(s.getPassenger()==null && (!numeri.contains((int)s.getNumber())))  
+            if(s.getTicket()==null && (!numeri.contains((int)s.getNumber())))  
             {
                 if(s.getClasse()==1 && cbclasse.getSelectedIndex()==0)
                 {
@@ -560,7 +560,7 @@ public class PasseggeriPanel extends JPanel{
      
     private boolean isSeatFree(int posto)
     {
-    if (getSeatFlight().get(posto-1).getPassenger() == null) 
+    if (getSeatFlight().get(posto-1).getTicket() == null) 
         return true;
     else 
         return false;            

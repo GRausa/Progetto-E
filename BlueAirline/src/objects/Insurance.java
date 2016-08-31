@@ -53,9 +53,11 @@ public class Insurance { //ASSICURAZIONE
      * 
      * @return rappresentazione scritta dell'assicurazione
      */
+    /*
     public String toString(){
         return code+" "+name+" "+price+" €";
     }
+    */
     /**
      * 
      * @return codice dell'assicurazione

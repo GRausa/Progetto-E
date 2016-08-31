@@ -12,7 +12,8 @@ import java.util.ArrayList;
  * @author Giovanni
  */
 public class Reservation {
-    private ArrayList<Ticket> passengers;
+    
+    private ArrayList<Ticket> tickets;
     private int code;
     private String email, number, codeFlight;
 
@@ -29,12 +30,12 @@ public class Reservation {
         this.codeFlight = codeFlight;
     }
     
-    public ArrayList<Ticket> getPassengers() {
-        return passengers;
+    public ArrayList<Ticket> getTickets() {
+        return tickets;
     }
 
-    public void setPassengers(ArrayList<Ticket> passengers) {
-        this.passengers = passengers;
+    public void setTickets(ArrayList<Ticket> passengers) {
+        this.tickets = passengers;
     }
     
     public int getCode() {
@@ -49,22 +50,18 @@ public class Reservation {
         return number;
     }
 
-
     public String getCodeFlight() {
         return codeFlight;
     }
-
-    @Override
-    public String toString() {
-        return "Reservation{" + "passengers=" + passengers.get(0) + ", code=" + code + ", email=" + email + ", number=" + number + ", codeFlight=" + codeFlight + '}';
-    }
     
-    
-
     public void setCode(int code) {
         this.code = code;
     }
     
-    
-    
+/*
+    @Override
+    public String toString() {
+        return "Reservation{" + "passengers=" + tickets.get(0) + ", code=" + code + ", email=" + email + ", number=" + number + ", codeFlight=" + codeFlight + '}';
+    }
+ */  
 }

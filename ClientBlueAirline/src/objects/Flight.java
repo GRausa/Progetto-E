@@ -9,10 +9,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-/**
- *
- * @author riccardo
- */
+
 public class Flight {
     public static double COSTOPRIMACLASSE=30;
     private String code;
@@ -73,7 +70,7 @@ public class Flight {
     public int getSeatFree(){
         int n=0;
         for(Seat s : seats){
-            if(s.getPassenger()==null){
+            if(s.getTicket()==null){
                 n++;
             }
         }
@@ -83,22 +80,22 @@ public class Flight {
     public String printAllSeats(){
         String st="PRIMA CLASSE -> prezzo: "+(this.getPrezzo()+Flight.COSTOPRIMACLASSE)+"€\n";
         for(Seat s : seats){
-            if(s.getPassenger()==null && s.getClasse()==1){
+            if(s.getTicket()==null && s.getClasse()==1){
                 st+=s.getNumber()+" | ";
             }
             else{
-                if(s.getPassenger()!=null && s.getClasse()==1){
+                if(s.getTicket()!=null && s.getClasse()==1){
                     st+="X | ";
                 }
             }
         }
         st+="\nSECONDA CLASSE -> prezzo: "+this.getPrezzo()+"€\n";
         for(Seat s : seats){
-            if(s.getPassenger()==null && s.getClasse()==2){
+            if(s.getTicket()==null && s.getClasse()==2){
                 st+=s.getNumber()+" | ";
             }
             else{
-                if(s.getPassenger()!=null && s.getClasse()==2){
+                if(s.getTicket()!=null && s.getClasse()==2){
                     st+="X | ";
                 }
             }

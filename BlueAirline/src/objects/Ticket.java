@@ -51,12 +51,12 @@ public class Ticket {
     public Ticket(String code){
         this.code = code;
     }
-
+/*
     @Override
     public String toString() {
         return "TicketPassenger{" + "code=" + code + ", ID=" + ID + ", name=" + name + ", surname=" + surname + ", codeFlight=" + codeFlight + ", nseat=" + nseat + ", codeReservation=" + codeReservation + ", totalPrice=" + this.getTotalPrice() + ", meals=" + meals + ", holdLuggages=" + holdLuggages + ", insurances=" + insurances + '}';
     }
-
+*/
     public String getCode() {
         return code;
     }

@@ -58,11 +58,12 @@ public class Flight {
     public double getPrezzo() {
         return prezzo;
     }
-    
+    /*
     public String toString(){
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MMM/yyyy HH:mm");
         return code+" "+r.toString()+"\n"+sdf.format(this.dateDeparture.getTime())+" - "+sdf.format(this.dateDestination.getTime())+"\n"+prezzo+"€";
     }
+    */
 
     public ArrayList<Seat> getSeats() {
         return seats;

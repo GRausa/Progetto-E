@@ -12,7 +12,7 @@ import java.util.ArrayList;
  * @author Giovanni
  */
 public class Reservation {
-    private ArrayList<Ticket> passengers;
+    private ArrayList<Ticket> tickets;
     private int code;
     private String email, number, codeFlight;
 
@@ -27,7 +27,7 @@ public class Reservation {
         this.email = email;
         this.number = number;
         this.codeFlight = codeFlight;
-        this.passengers=p;
+        this.tickets=p;
     }
     
     public Reservation(int code){
@@ -35,11 +35,11 @@ public class Reservation {
     }
 
     public ArrayList<Ticket> getPassengers() {
-        return passengers;
+        return tickets;
     }
 
-    public void setPassengers(ArrayList<Ticket> passengers) {
-        this.passengers = passengers;
+    public void setTickets(ArrayList<Ticket> passengers) {
+        this.tickets = passengers;
     }
     
     public int getCode() {
@@ -61,14 +61,14 @@ public class Reservation {
 
     @Override
     public String toString() {
-        return "Reservation{" + "passengers=" + passengers.get(0) + ", code=" + code + ", email=" + email + ", number=" + number + ", codeFlight=" + codeFlight + '}';
+        return "Reservation{" + "passengers=" + tickets.get(0) + ", code=" + code + ", email=" + email + ", number=" + number + ", codeFlight=" + codeFlight + '}';
     }
     
     public String printReservation(){
         String s="";
         s+="Prenotazione: "+code+" ("+email+" "+number+")\n";
         s+="Volo: "+codeFlight+"\n";
-        s+="Numero passeggeri: "+passengers.size();
+        s+="Numero passeggeri: "+tickets.size();
         return s;
     }
     
@@ -77,9 +77,9 @@ public class Reservation {
         this.code = code;
     }
 
-    public String printPassengers() {
+    public String printTickets() {
         String s="";
-        for(Ticket tp:passengers){
+        for(Ticket tp:tickets){
             s+=tp.printTicketPassenger()+"\n";
         }
         return s;

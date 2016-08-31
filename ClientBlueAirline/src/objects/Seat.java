@@ -12,10 +12,10 @@ package objects;
 public class Seat {
     private int number;
     private int classe;
-    private String passenger;
+    private String ticket;
     
-    public Seat(int numero,int classe, String passeggero){
-        this.passenger=passeggero;
+    public Seat(int numero,int classe, String ticket){
+        this.ticket=ticket;
         this.classe=classe;
         this.number=numero;
     }
@@ -28,19 +28,19 @@ public class Seat {
         return classe;
     }
 
-    public String getPassenger() {
-        return passenger;
+    public String getTicket() {
+        return ticket;
     }
 
-    public void setPassenger(String passenger) {
-        this.passenger = passenger;
+    public void setTicket(String ticket) {
+        this.ticket = ticket;
     }  
     
     
     @Override
     public String toString(){
         
-        return "Posto n°"+this.getNumber()+" classe:"+this.getClasse()+" occupato"+this.getPassenger();
+        return "Posto n°"+this.getNumber()+" classe:"+this.getClasse()+" occupato"+this.getTicket();
     }
     
 }

@@ -143,7 +143,7 @@ class RemoteUser extends Thread {
             public void execute(String args) {
                 try {
                     Ticket tp = gson.fromJson(args, Ticket.class);
-                    tp=company.editTicketPassenger(tp);
+                    tp=company.editTicket(tp);
                     out.println(gson.toJson(tp));
                 } catch (SQLException ex) {
                     Logger.getLogger(RemoteUser.class.getName()).log(Level.SEVERE, null, ex);
@@ -156,7 +156,7 @@ class RemoteUser extends Thread {
             public void execute(String args) {
                 try {
                     Ticket tp = gson.fromJson(args, Ticket.class);
-                    tp=company.editSeatTicketPassenger(tp);
+                    tp=company.editSeatTicket(tp);
                     out.println(gson.toJson(tp));
                 } catch (SQLException ex) {
                     Logger.getLogger(RemoteUser.class.getName()).log(Level.SEVERE, null, ex);
@@ -280,7 +280,7 @@ class RemoteUser extends Thread {
                 try {
                     Ticket tp = gson.fromJson(args, Ticket.class);
                     company.setCheckIn(tp.getCode());
-                    tp = company.getTicketPassenger(tp.getCode());
+                    tp = company.getTicket(tp.getCode());
                     out.println(gson.toJson(tp));
                 } catch (SQLException ex) {
                     Logger.getLogger(RemoteUser.class.getName()).log(Level.SEVERE, null, ex);
@@ -308,7 +308,7 @@ class RemoteUser extends Thread {
             public void execute(String args) {                
                 try {
                     Ticket tp = gson.fromJson(args, Ticket.class);
-                    tp = company.getTicketPassenger(tp.getCode());
+                    tp = company.getTicket(tp.getCode());
                     out.println(gson.toJson(tp));
                 } catch (SQLException ex) {
                     Logger.getLogger(RemoteUser.class.getName()).log(Level.SEVERE, null, ex);

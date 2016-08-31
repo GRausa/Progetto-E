@@ -54,9 +54,11 @@ public class HoldLuggage {
      * 
      * @return descrizione scritta dell'oggetto 
      */
+    /*
     public String toString(){
         return code+" "+kg+"Kg "+price+"€";
     }
+    */
     /**
      * 
      * @return codice del bagaglio 

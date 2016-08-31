@@ -64,8 +64,8 @@ public class Controller {
     }
     
     //modifica una ticket
-    public Ticket editSeatTicketPassenger(Ticket tp) throws SQLException{
-        return adapter.editSeatTicketPassenger(tp);
+    public Ticket editSeatTicket(Ticket tp) throws SQLException{
+        return adapter.editSeatTicket(tp);
     }
     
     //ricerca di tutte le città
@@ -104,47 +104,47 @@ public class Controller {
     }
     
     //ritorna ticketPassenger
-    public Ticket getTicketPassenger(String codeTicket) throws SQLException{
-        Ticket tp = adapter.getTicketPassenger(codeTicket);
+    public Ticket getTicket(String codeTicket) throws SQLException{
+        Ticket tp = adapter.getTicket(codeTicket);
         if(tp!=null){
-            tp.setMeals(this.getMealsTicketPassenger(codeTicket));
-            tp.setHoldLuggages(this.getHoldLuggagesTicketPassenger(codeTicket));
-            tp.setInsurances(this.getInsurancesTicketPassenger(codeTicket)); 
+            tp.setMeals(this.getMealsTicket(codeTicket));
+            tp.setHoldLuggages(this.getHoldLuggagesTicket(codeTicket));
+            tp.setInsurances(this.getInsurancesTicket(codeTicket)); 
         }
         return tp;        
     }
     
     //ritorna i pasti di un ticket
-    public ArrayList<Meal> getMealsTicketPassenger(String codeTicket) throws SQLException{
-        return adapter.getMealsTicketPassenger(codeTicket);
+    public ArrayList<Meal> getMealsTicket(String codeTicket) throws SQLException{
+        return adapter.getMealsTicket(codeTicket);
     }
     
     //ritorna le assicurazioni di un ticket
-    public ArrayList<Insurance> getInsurancesTicketPassenger(String codeTicket) throws SQLException{
-        return adapter.getInsurancesTicketPassenger(codeTicket);
+    public ArrayList<Insurance> getInsurancesTicket(String codeTicket) throws SQLException{
+        return adapter.getInsurancesTicket(codeTicket);
     }
     
     //ritorna i bagagli di un ticket
-    public ArrayList<HoldLuggage> getHoldLuggagesTicketPassenger(String codeTicket) throws SQLException{
-        return adapter.getHoldLuggagesTicketPassenger(codeTicket);
+    public ArrayList<HoldLuggage> getHoldLuggagesTicket(String codeTicket) throws SQLException{
+        return adapter.getHoldLuggagesTicket(codeTicket);
     }
     
     //ritorna tutta la prenotazione
     public Reservation getReservtion(int codeReservation) throws SQLException{
         Reservation res = adapter.getReservation(codeReservation);
         if(res!=null){
-            ArrayList<Ticket> ticketPassengers = new ArrayList<>();
-            for(Ticket tp : res.getPassengers()){
-                ticketPassengers.add(this.getTicketPassenger(tp.getCode()));
+            ArrayList<Ticket> tickets=  new ArrayList<>();
+            for(Ticket tp : res.getTickets()){
+                tickets.add(this.getTicket(tp.getCode()));
             }
-            res.setPassengers(ticketPassengers);;
+            res.setTickets(tickets);;
         }
         return res;        
     }
     
     //modifica il biglietto 
-    public Ticket editTicketPassenger(Ticket tp) throws SQLException {
-        return adapter.editTicketPassenger(tp);
+    public Ticket editTicket(Ticket tp) throws SQLException {
+        return adapter.editTicket(tp);
     }
     
     

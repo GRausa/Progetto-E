@@ -160,7 +160,7 @@ public class AdapterSQL {
         resultQuery.close();
         return citys;
     }
-
+/*
     public double returnPriceFlight(String codflight) throws SQLException {
         String query
                 = "SELECT PREZZO AS PREZZOVOLO\n"
@@ -169,7 +169,7 @@ public class AdapterSQL {
         ResultSet resultQuery = SQL.queryRead(query);
         return ParserSQL.parseFunctionSQL(resultQuery, "PREZZOVOLO");
     }
-
+*/
     public Reservation makeReservation(Reservation reservation) throws SQLException {
         
         //prenotazione
@@ -182,14 +182,14 @@ public class AdapterSQL {
         query = "INSERT INTO Prenotazione VALUES ('" + codeReservation + "', '" + reservation.getCodeFlight() + "', '" + reservation.getEmail() + "', '" + reservation.getNumber() + "')";
         SQL.queryWrite(query);
         reservation.setCode(codeReservation);
-        this.addPassengers(reservation);
+        this.addTickets(reservation);
         return reservation;
     }     
         //aggiunta passeggeri
-    public Reservation addPassengers(Reservation reservation) throws SQLException{
+    public Reservation addTickets(Reservation reservation) throws SQLException{
         int i = 0;
         String codeTicket="";
-        for (Ticket tp : reservation.getPassengers()) {
+        for (Ticket tp : reservation.getTickets()) {
             i++;
             codeTicket = reservation.getCodeFlight() +""+ reservation.getCode()+"" + i;
             //codeTicketreservation.getCodeFlight() +"3"+i;
@@ -203,15 +203,15 @@ public class AdapterSQL {
             //aggiunte
             ArrayList<Meal> meals = tp.getMeals();
             for (Meal s : meals) {
-                this.insertAggiunta(s.getCode(), codeTicket);
+                this.insertSupplement(s.getCode(), codeTicket);
             }
             ArrayList<Insurance> insurances = tp.getInsurances();
             for (Insurance s : insurances) {
-                this.insertAggiunta(s.getCode(), codeTicket);
+                this.insertSupplement(s.getCode(), codeTicket);
             }
             ArrayList<HoldLuggage> holdLuggages = tp.getHoldLuggages();
             for (HoldLuggage s : holdLuggages) {
-                this.insertAggiunta(s.getCode(), codeTicket);
+                this.insertSupplement(s.getCode(), codeTicket);
             }
             if(this.seatIsFree(reservation.getCodeFlight(), tp.getNseat())){
                 this.setSeatBoolean(reservation.getCodeFlight(), tp.getNseat(), tp.getCode(), true); //lo metto a 1 cioè occupato
@@ -237,7 +237,7 @@ public class AdapterSQL {
         SQL.queryWrite(query);
     }
 
-    public void insertAggiunta(String code, String codeTicket) throws SQLException {
+    public void insertSupplement(String code, String codeTicket) throws SQLException {
         String query;
         double price;
         ResultSet resultQuery;
@@ -349,7 +349,7 @@ public class AdapterSQL {
         return insurances;
     }
     
-    public Ticket editSeatTicketPassenger(Ticket tp) throws SQLException{
+    public Ticket editSeatTicket(Ticket tp) throws SQLException{
         if(this.seatIsFree(tp.getCodeFlight(), tp.getNseat())){
             this.setSeatBoolean(tp.getCodeFlight(), tp.getNseat(), tp.getCode(),true);
         }
@@ -386,46 +386,46 @@ public class AdapterSQL {
         }
     }
     
-    public ArrayList<Meal> getMealsTicketPassenger(String codeTicket) throws SQLException{
-        ArrayList<Meal> mealsTicketPassenger;
+    public ArrayList<Meal> getMealsTicket(String codeTicket) throws SQLException{
+        ArrayList<Meal> mealsTicket;
         String query
                 = "SELECT COD_PASTO, NOME, PREZZOPASTO AS PREZZO, TEMPOVIAGGIO\n" 
                 + "FROM `Pasto_Passeggero` , Pasto\n" 
                 + "WHERE PASSEGGERO = '" + codeTicket + "'\n" 
                 + "AND PASTO = COD_PASTO" ;
         ResultSet resultQuery = SQL.queryRead(query);
-        mealsTicketPassenger = ParserSQL.parseMeals(resultQuery);
+        mealsTicket = ParserSQL.parseMeals(resultQuery);
         resultQuery.close();
-        return mealsTicketPassenger;               
+        return mealsTicket;               
     }
     
-    public ArrayList<Insurance> getInsurancesTicketPassenger(String codeTicket) throws SQLException{
-        ArrayList<Insurance> insurancesTicketPassenger;
+    public ArrayList<Insurance> getInsurancesTicket(String codeTicket) throws SQLException{
+        ArrayList<Insurance> insurancesTicket;
         String query
                 = "SELECT COD_ASSICURAZIONE, NOME, PREZZOASSICURAZIONE AS PREZZO, DESCRIZIONE\n" 
                 + "FROM `Assicurazione_Passeggero` , Assicurazione\n" 
                 + "WHERE PASSEGGERO = '" + codeTicket + "'\n" 
                 + "AND ASSICURAZIONE = COD_ASSICURAZIONE";
         ResultSet resultQuery = SQL.queryRead(query);
-        insurancesTicketPassenger = ParserSQL.parseInsurances(resultQuery);
+        insurancesTicket = ParserSQL.parseInsurances(resultQuery);
         resultQuery.close();
-        return insurancesTicketPassenger;        
+        return insurancesTicket;        
     }
     
-    public ArrayList<HoldLuggage> getHoldLuggagesTicketPassenger(String codeTicket) throws SQLException{
-        ArrayList<HoldLuggage> holdLuggagesTicketPassenger;
+    public ArrayList<HoldLuggage> getHoldLuggagesTicket(String codeTicket) throws SQLException{
+        ArrayList<HoldLuggage> holdLuggagesTicket;
         String query
                 = "SELECT COD_BAGAGLIO, KG, PREZZOBAGAGLIO AS PREZZO, DESCRIZIONE\n" 
                 + "FROM Bagaglio_Passeggero, Bagaglio\n" 
                 + "WHERE PASSEGGERO = '" + codeTicket + "'\n" 
                 + "AND COD_BAGAGLIO = BAGAGLIO";
         ResultSet resultQuery = SQL.queryRead(query);
-        holdLuggagesTicketPassenger = ParserSQL.parseHoldLuggages(resultQuery);
+        holdLuggagesTicket = ParserSQL.parseHoldLuggages(resultQuery);
         resultQuery.close();
-        return holdLuggagesTicketPassenger;
+        return holdLuggagesTicket;
     }
     
-    public Ticket getTicketPassenger(String codeTicket) throws SQLException{
+    public Ticket getTicket(String codeTicket) throws SQLException{
         Ticket tp;
         String query
                 = "SELECT COD_TICKET, PREZZO, COD_PRENOTAZIONE, ID, NOME, COGNOME, Prenotazione.VOLO, Posto.NUMERO AS NPOSTO, Classe AS CLASSE, CHECKIN\n" 
@@ -453,26 +453,25 @@ public class AdapterSQL {
         return res;
     }
 
-    public Ticket editTicketPassenger(Ticket tp) throws SQLException {        
+    public Ticket editTicket(Ticket tp) throws SQLException {        
         if(this.seatIsFree(tp.getCodeFlight(), tp.getNseat())){
-            Ticket tp2 = this.getTicketPassenger(tp.getCode());
+            Ticket tp2 = this.getTicket(tp.getCode());
             this.setSeatBoolean(tp2.getCodeFlight(), tp2.getNseat(), tp2.getCode(), false); //metto null il vecchio posto a sedere
             this.setSeatBoolean(tp.getCodeFlight(), tp.getNseat(), tp.getCode(), true); //limposto il nuovo posto a sedere
             for(Meal m : tp.getMeals()){
-                this.insertAggiunta(m.getCode(), tp.getCode());
+                this.insertSupplement(m.getCode(), tp.getCode());
             }
             for(Insurance i : tp.getInsurances()){
-                this.insertAggiunta(i.getCode(), tp.getCode());
+                this.insertSupplement(i.getCode(), tp.getCode());
             }
             for(HoldLuggage hl : tp.getHoldLuggages()){
-                this.insertAggiunta(hl.getCode(), tp.getCode());
+                this.insertSupplement(hl.getCode(), tp.getCode());
             }
         }
         else{
             tp.setNSeat(-1); //posto -1 non assegnato
         }        
         return tp;
-    }
-    
+    }  
     
 }

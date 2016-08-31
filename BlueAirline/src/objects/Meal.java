@@ -67,7 +67,9 @@ public class Meal {
      * 
      * @return rappresentazione scritta del pasto
      */
+    /*
     public String toString(){
         return code+" "+name+" "+price+" €";
     }
+    */
 }
