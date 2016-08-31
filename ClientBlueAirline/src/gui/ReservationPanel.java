@@ -67,7 +67,7 @@ public class ReservationPanel extends JPanel{
     
     
     private void initComponents() throws IOException {
-         final String[] city=  controller.listOfCity();
+         final String[] city=  controller.getAllCitys();
                  
         andata.setFont(new java.awt.Font("Helvetica", 0, 14)); 
         andata.setEditable(true);

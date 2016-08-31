@@ -87,7 +87,7 @@ class RemoteUser extends Thread {
             }
         });
 
-        commands.put("GETALLCITY", new Command() {
+        commands.put("CITYS", new Command() {
             @Override
             public void execute(String args) {
                 ArrayList<String> cities;
@@ -112,7 +112,7 @@ class RemoteUser extends Thread {
             }
         });
 
-        commands.put("RESERVATION", new Command() {
+        commands.put("PRENOTAZIONE", new Command() {
             @Override
             public void execute(String args) {
                 try {
@@ -138,7 +138,7 @@ class RemoteUser extends Thread {
             }
         });
 
-        commands.put("EDITSEATTICKETPASSENGER", new Command() {
+        commands.put("EDITTICKET", new Command() {
             @Override
             public void execute(String args) {
                 try {
@@ -151,7 +151,7 @@ class RemoteUser extends Thread {
             }
         });
 
-        commands.put("ROTTE", new Command() {
+        commands.put("ROUTES", new Command() {
             @Override
             public void execute(String args) {
                 ArrayList<Route> rottes = null;
@@ -184,8 +184,7 @@ class RemoteUser extends Thread {
         }
         );
 
-        commands.put(
-                "RICERCAVOLI", new Command() {
+        commands.put("SEARCHFLIGHTS", new Command() {
 
             @Override
             public void execute(String args) {
@@ -203,8 +202,7 @@ class RemoteUser extends Thread {
         }
         );
 
-        commands.put(
-                "RICERCAVOLOCODICE", new Command() {
+        commands.put("SEARCHFLIGHTCODE", new Command() {
             @Override
             public void execute(String args) {
                 try {
@@ -218,7 +216,7 @@ class RemoteUser extends Thread {
         }
         );
 
-        commands.put("PASTI", new Command() {
+        commands.put("MEALS", new Command() {
             @Override
             public void execute(String args) {
                 ArrayList<Meal> meals;
@@ -227,7 +225,7 @@ class RemoteUser extends Thread {
             }
         });
 
-        commands.put("BAGAGLI", new Command() {
+        commands.put("HOLDLUGGAGES", new Command() {
             @Override
             public void execute(String args) {
                 ArrayList<HoldLuggage> holdLuggages;
@@ -236,7 +234,7 @@ class RemoteUser extends Thread {
             }
         });
 
-        commands.put("ASSICURAZIONI", new Command() {
+        commands.put("INSURANCES", new Command() {
             @Override
             public void execute(String args) {
                 ArrayList<Insurance> insurances;
@@ -274,7 +272,7 @@ class RemoteUser extends Thread {
             }
         });
 
-        commands.put("PASSEGGERO", new Command() {
+        commands.put("TICKET", new Command() {
             @Override
             public void execute(String args) {
                 try {
@@ -288,7 +286,7 @@ class RemoteUser extends Thread {
             }
         });
 
-        commands.put("PRENOTAZIONE", new Command() {
+        commands.put("RESERVATION", new Command() {
             @Override
             public void execute(String args) {
                 try {

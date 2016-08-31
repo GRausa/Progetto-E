@@ -56,13 +56,13 @@ public class Controller {
     }
 
     public Flight[] searchFlights(Flight flight) throws IOException {
-        out.println("RICERCAVOLI " + gson.toJson(flight));
+        out.println("SEARCHFLIGHTS " + gson.toJson(flight));
         Flight[] flights = gson.fromJson(in.readLine(), Flight[].class);
         return flights;
     }
     
     public Flight searchFlight(Flight flight) throws IOException {
-        out.println("RICERCAVOLOCODICE " + gson.toJson(flight));
+        out.println("SEARCHFLIGHTCODE " + gson.toJson(flight));
         Flight f = gson.fromJson(in.readLine(), Flight.class);
         return f;
     }   
@@ -72,20 +72,20 @@ public class Controller {
         return gson.fromJson(in.readLine(), Reservation.class);
     }
     
-    public Ticket editSeatTicketPassenger(Ticket tp) throws IOException{
-        out.println("EDITSEATTICKETPASSENGER " + gson.toJson(tp));
+    public Ticket editSeatTicket(Ticket tp) throws IOException{
+        out.println("EDITTICKET " + gson.toJson(tp));
         return gson.fromJson(in.readLine(), Ticket.class);
     }
 
-    public Route[] checkRoute(Route rotta) throws IOException {
-        out.println("ROTTE " + gson.toJson(rotta));
+    public Route[] searchRoutes(Route rotta) throws IOException {
+        out.println("ROUTES " + gson.toJson(rotta));
         String serverout = in.readLine();
         Route[] rotte = gson.fromJson(serverout, Route[].class);        
         return rotte;
     }
     
-    public String[] listOfCity() throws IOException{
-        out.println("GETALLCITY");
+    public String[] getAllCitys() throws IOException{
+        out.println("CITYS");
         String[] cities = gson.fromJson(in.readLine(), String[].class);
         return cities;
     }
@@ -97,19 +97,19 @@ public class Controller {
     }
     
     public Meal[] getAllMeals() throws IOException{
-        out.println("PASTI ");
+        out.println("MEALS ");
         Meal[] meals = gson.fromJson(in.readLine(), Meal[].class);
         return meals;
     }
     
     public HoldLuggage[] getAllHoldLuggages() throws IOException{
-        out.println("BAGAGLI ");
+        out.println("HOLDLUGGAGES ");
         HoldLuggage[] holdLuggages = gson.fromJson(in.readLine(), HoldLuggage[].class);
         return holdLuggages;
     }
     
     public Insurance[] getAllInsurances() throws IOException{
-        out.println("ASSICURAZIONI ");
+        out.println("INSURANCES ");
         Insurance[] insurances = gson.fromJson(in.readLine(), Insurance[].class);
         return insurances;
     }
@@ -126,29 +126,21 @@ public class Controller {
         return isCheckIn;
     }
     
-    public Ticket getTicketPassenger(Ticket tp) throws IOException{
-        out.println("PASSEGGERO " + gson.toJson(tp));
+    public Ticket getTicket(Ticket tp) throws IOException{
+        out.println("TICKET " + gson.toJson(tp));
         Ticket tp1 = gson.fromJson(in.readLine(), Ticket.class);
         return tp1;
     }
     
-    public Ticket editTicketPassenger(Ticket ticketPassenger) throws IOException {
+    public Ticket editTicket(Ticket ticketPassenger) throws IOException {
         out.println("EDITTICKET " + gson.toJson(ticketPassenger));
         Ticket tp = gson.fromJson(in.readLine(), Ticket.class);
         return tp;
     }
     
     public Reservation getReservation(Reservation res) throws IOException{
-        out.println("PRENOTAZIONE " + gson.toJson(res));
+        out.println("RESERVATION " + gson.toJson(res));
         Reservation res1 = gson.fromJson(in.readLine(), Reservation.class);
         return res1;
-    }
-    
-    /*
-    public void scrittura() throws IOException {
-        System.out.println("RICEVUTO DAL SERVER: " + in.readLine());
-    }
-    */
-
-  
+    }    
 }

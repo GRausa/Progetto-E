@@ -56,7 +56,7 @@ public class Route {
         return destinationCity;
     }
 
-    public String toString() {
+    public String printRoute() {
         return departureCity + "(" + deparutreAirport + ")" + " - " + destinationCity + "(" + destinationAirport + ")";
     }
 

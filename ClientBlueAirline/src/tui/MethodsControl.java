@@ -7,7 +7,6 @@ package tui;
 
 import controller.Controller;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import static java.util.Arrays.asList;
 import java.util.Calendar;
@@ -108,14 +107,14 @@ public class MethodsControl {
         Route[] rotte = null;
         {
             try {
-                rotte = client.checkRoute(tmproute1);
+                rotte = client.searchRoutes(tmproute1);
             } catch (IOException ex) {
                 Logger.getLogger(ControllerTxt.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         if (rotte.length > 0) {
            for (Route r : rotte) {
-                System.out.println(r);
+                System.out.println(r.printRoute());
             }
         } else {
             System.out.println("Non esiste tratta per queste città");
@@ -289,7 +288,7 @@ public class MethodsControl {
                         int set = Integer.parseInt(input.get(0));
                         if (flight.getSeats().get(set - 1).getTicket() == null) {
                             tp.setNSeat(set);
-                            tp = client.editSeatTicketPassenger(tp);
+                            tp = client.editSeatTicket(tp);
                             if (tp.getNseat() == set) {
                                 System.out.println("Modifica effettuata.");
                                 c = true;
@@ -344,11 +343,11 @@ public class MethodsControl {
                     int classe = flight.getSeats().get(seat-1).getClasse();
                     Ticket p2 = MethodsControl.insertTicketSupplements(vetsplit, seat, classe, flight.getCode(), flight.getPrezzo(), meals, insurances, holdLuggages);
                     p2.setCode(tp.getCode());
-                    if(client.editTicketPassenger(p2).getNseat()==-1){
+                    if(client.editTicket(p2).getNseat()==-1){
                         System.out.println("Il posto è stato occupato. Riprova.");
                     }
                     else{
-                        Ticket tp2 = client.getTicketPassenger(p2);
+                        Ticket tp2 = client.getTicket(p2);
                         System.out.println(tp2.printTicketPassenger());
                         System.out.println("Aggiunta totale di: "+(tp2.getTotalPrice()-tp.getTotalPrice())+" euro");
                         c = true;
@@ -453,7 +452,7 @@ public class MethodsControl {
         Flight f = null;
         {
             try {
-                tp1 = client.getTicketPassenger(tp1);   
+                tp1 = client.getTicket(tp1);   
                 if(tp1!=null)
                     f = client.searchFlight(new Flight(tp1.getCodeFlight()));
             } catch (IOException ex) {
@@ -499,7 +498,7 @@ public class MethodsControl {
     public static void searchCitys(Controller client) {
         String[] citta=null;
         try{
-            citta = client.listOfCity();
+            citta = client.getAllCitys();
             System.out.println("Le città disponibili sono:");
             for (String a :citta)
             {

@@ -36,11 +36,10 @@ public class Seat {
         this.ticket = ticket;
     }  
     
-    
+    /*
     @Override
-    public String toString(){
-        
+    public String toString(){        
         return "Posto n°"+this.getNumber()+" classe:"+this.getClasse()+" occupato"+this.getTicket();
-    }
+    }*/
     
 }
