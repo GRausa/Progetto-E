@@ -10,7 +10,9 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.net.ConnectException;
 import java.net.Socket;
+import java.net.UnknownHostException;
 import objects.Flight;
 import objects.HoldLuggage;
 import objects.Insurance;
@@ -25,17 +27,25 @@ import objects.Ticket;
  */
 public class Controller {
 
-    public Socket clientSocket;
-    int PortNumber = 8888;
-    public PrintWriter out;
-    public BufferedReader in;
-    Gson gson = new Gson();
+    private Socket clientSocket;
+    private int PortNumber = 8888;
+    private PrintWriter out;
+    private BufferedReader in;
+    private Gson gson = new Gson();
 
-    public Controller() throws IOException {
-        clientSocket = new Socket("localhost", PortNumber);
+    public boolean connect(String ipServer) throws IOException{
+        try {
+            clientSocket = new Socket(ipServer, PortNumber);
+        }catch(UnknownHostException a){
+            return false;
+        } 
+        catch (ConnectException ex) {
+            //Logger.getLogger(ClientBlueAirline.class.getName()).log(Level.SEVERE, "ERROR", ex);
+            return false;
+        }
         out = new PrintWriter(clientSocket.getOutputStream(), true);
         in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-
+        return true;
     }
 
     public void hello() throws IOException {
