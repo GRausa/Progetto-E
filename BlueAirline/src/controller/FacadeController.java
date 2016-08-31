@@ -5,7 +5,8 @@
  */
 package controller;
 
-import database.AdapterSQL;
+import database.AdapterDB;
+import database.ConcreteAdapterDB;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import objects.Flight;
@@ -22,10 +23,10 @@ import objects.Ticket;
  */
 public class FacadeController implements InterfaceClient {
 
-    private AdapterSQL adapter;
+    private AdapterDB adapter;
 
     public FacadeController() {
-        adapter = new AdapterSQL();
+        adapter = new ConcreteAdapterDB();
     }
     
     //ricerca tutte le rotte
@@ -52,9 +53,9 @@ public class FacadeController implements InterfaceClient {
         return adapter.searchFlight(codeFlight);
     }
     
-    //ricerca il volo con i posti 
+    //imposta array posti di un volo 
     @Override
-    public Flight setFlightWithSeats(Flight flight) throws SQLException{
+    public Flight setSeatsFlight(Flight flight) throws SQLException{
         return adapter.setSeatsFlight(flight);
     }
     
@@ -66,8 +67,8 @@ public class FacadeController implements InterfaceClient {
     
     //numero posti liberi in un volo
     @Override
-    public int numberSeatFree(String codeFlight) throws SQLException{
-        return adapter.numberSeatFree(codeFlight);
+    public int numberSeatFreeFlight(String codeFlight) throws SQLException{
+        return adapter.numberSeatFreeFlight(codeFlight);
     }
     
     //modifica una ticket

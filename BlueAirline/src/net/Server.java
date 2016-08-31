@@ -41,7 +41,7 @@ public class Server {
                 "Server started");
         while (true) {
             Socket socket = serverSocket.accept();
-            RemoteUser u = new RemoteUser(company, socket);
+            RemoteUser u = new RemoteUser((FacadeController) company, socket);
             Logger.getLogger(Server.class.getName()).log(Level.INFO, "Accepting a new user. Ip guest : " + socket.getInetAddress() + "port guest:" + socket.getPort());
             u.start();
         }

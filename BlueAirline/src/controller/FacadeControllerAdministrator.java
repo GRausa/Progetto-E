@@ -5,7 +5,8 @@
  */
 package controller;
 
-import database.AdapterSQL;
+import database.AdapterDB;
+import database.ConcreteAdapterDB;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import objects.Flight;
@@ -16,10 +17,10 @@ import objects.Flight;
  */
 public class FacadeControllerAdministrator extends FacadeController{
     
-    private AdapterSQL adapter;
+    private AdapterDB adapter;
 
     public FacadeControllerAdministrator() {
-        adapter = new AdapterSQL();
+        adapter = new ConcreteAdapterDB();
     }
     
     //riempie tutti i posti NULL -> usato per riempire il DB
