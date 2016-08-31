@@ -10,7 +10,7 @@ package gui;
 
 
 import TUI.MethodsControl;
-import clientblueairline.ClientBlueAirline;
+import controller.ClientBlueAirline;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.IOException;
@@ -18,12 +18,12 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.*;
-import oggetti.Flight;
-import oggetti.HoldLuggage;
-import oggetti.Insurance;
-import oggetti.Meal;
-import oggetti.Seat;
-import oggetti.TicketPassenger;
+import objects.Flight;
+import objects.HoldLuggage;
+import objects.Insurance;
+import objects.Meal;
+import objects.Seat;
+import objects.TicketPassenger;
 
 /**
  *

@@ -6,7 +6,7 @@
 package gui;
 
 
-import clientblueairline.ClientBlueAirline;
+import controller.ClientBlueAirline;
 import com.toedter.calendar.JDateChooser;
 import java.awt.*;
 import java.awt.event.*;
@@ -19,7 +19,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.swing.*;
-import oggetti.*;
+import objects.*;
 
 
 /**

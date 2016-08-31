@@ -8,7 +8,7 @@ package gui;
 
 
 
-import clientblueairline.ClientBlueAirline;
+import controller.ClientBlueAirline;
 
 import java.awt.*;
 import java.awt.event.ActionListener;
@@ -17,9 +17,9 @@ import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.util.ArrayList;
 import javax.swing.*;
-import oggetti.HoldLuggage;
-import oggetti.Insurance;
-import oggetti.Meal;
+import objects.HoldLuggage;
+import objects.Insurance;
+import objects.Meal;
 
 
 /**

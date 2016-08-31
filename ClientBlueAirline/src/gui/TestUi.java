@@ -7,7 +7,7 @@ package gui;
 
 
 
-import clientblueairline.ClientBlueAirline;
+import controller.ClientBlueAirline;
 import TUI.ControllerTxt;
 import java.awt.Dimension;
 import java.awt.HeadlessException;

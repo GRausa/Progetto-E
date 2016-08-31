@@ -6,7 +6,7 @@
 package gui;
 
 
-import clientblueairline.ClientBlueAirline;
+import controller.ClientBlueAirline;
 import java.awt.Color;
 import java.awt.ComponentOrientation;
 import java.awt.Container;
@@ -29,7 +29,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableCellRenderer;
-import oggetti.Flight;
+import objects.Flight;
 
 
 /**

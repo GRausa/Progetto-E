@@ -1,19 +1,19 @@
 package gui;
 
 
-import clientblueairline.ClientBlueAirline;
+import controller.ClientBlueAirline;
 import java.awt.*;
 import com.toedter.calendar.JDateChooser;
 
 import java.awt.event.*;
 import java.util.ArrayList;
 import javax.swing.*;
-import oggetti.Flight;
-import oggetti.HoldLuggage;
-import oggetti.Insurance;
-import oggetti.Meal;
-import oggetti.Reservation;
-import oggetti.TicketPassenger;
+import objects.Flight;
+import objects.HoldLuggage;
+import objects.Insurance;
+import objects.Meal;
+import objects.Reservation;
+import objects.TicketPassenger;
 
 /**
  *

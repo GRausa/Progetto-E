@@ -7,7 +7,7 @@ package gui;
 
 
 
-import clientblueairline.ClientBlueAirline;
+import controller.ClientBlueAirline;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.IOException;
@@ -15,10 +15,10 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.*;
-import oggetti.HoldLuggage;
-import oggetti.Insurance;
-import oggetti.Meal;
-import oggetti.Reservation;
+import objects.HoldLuggage;
+import objects.Insurance;
+import objects.Meal;
+import objects.Reservation;
 
 /**
  *

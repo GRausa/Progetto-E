@@ -5,7 +5,7 @@
  */
 package gui;
 
-import clientblueairline.ClientBlueAirline;
+import controller.ClientBlueAirline;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Container;
@@ -22,9 +22,9 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import oggetti.Flight;
-import oggetti.Reservation;
-import oggetti.TicketPassenger;
+import objects.Flight;
+import objects.Reservation;
+import objects.TicketPassenger;
 
 /**
  *
