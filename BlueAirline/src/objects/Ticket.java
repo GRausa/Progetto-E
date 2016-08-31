@@ -11,7 +11,7 @@ import java.util.ArrayList;
  *
  * @author cl418377
  */
-public class TicketPassenger {
+public class Ticket {
 
     private String code, ID, name, surname, codeFlight;
     private int nseat, codeReservation, classe;
@@ -21,7 +21,7 @@ public class TicketPassenger {
     private ArrayList<Insurance> insurances;
     private boolean checkIn;
 
-    public TicketPassenger(String ID, String name, String surname, int nseat, int classe, String codeFlight, double priceFlight) {
+    public Ticket(String ID, String name, String surname, int nseat, int classe, String codeFlight, double priceFlight) {
         this.ID = ID;
         this.name = name;
         this.surname = surname;
@@ -35,7 +35,7 @@ public class TicketPassenger {
         this.checkIn=false;
     }
 
-    public TicketPassenger(String code, double priceFlight, String ID, String name, String surname, String codeFlight, int nseat, int codeReservation, int classe, boolean checkIn) {
+    public Ticket(String code, double priceFlight, String ID, String name, String surname, String codeFlight, int nseat, int codeReservation, int classe, boolean checkIn) {
         this.code = code;
         this.priceFlight = priceFlight;
         this.ID = ID;
@@ -48,7 +48,7 @@ public class TicketPassenger {
         this.checkIn = checkIn;
     }
     
-    public TicketPassenger(String code){
+    public Ticket(String code){
         this.code = code;
     }
 

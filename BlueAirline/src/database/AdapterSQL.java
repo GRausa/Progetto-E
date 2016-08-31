@@ -15,7 +15,7 @@ import objects.Meal;
 import objects.Reservation;
 import objects.Route;
 import objects.Seat;
-import objects.TicketPassenger;
+import objects.Ticket;
 
 /**
  *
@@ -189,7 +189,7 @@ public class AdapterSQL {
     public Reservation addPassengers(Reservation reservation) throws SQLException{
         int i = 0;
         String codeTicket="";
-        for (TicketPassenger tp : reservation.getPassengers()) {
+        for (Ticket tp : reservation.getPassengers()) {
             i++;
             codeTicket = reservation.getCodeFlight() +""+ reservation.getCode()+"" + i;
             //codeTicketreservation.getCodeFlight() +"3"+i;
@@ -349,7 +349,7 @@ public class AdapterSQL {
         return insurances;
     }
     
-    public TicketPassenger editSeatTicketPassenger(TicketPassenger tp) throws SQLException{
+    public Ticket editSeatTicketPassenger(Ticket tp) throws SQLException{
         if(this.seatIsFree(tp.getCodeFlight(), tp.getNseat())){
             this.setSeatBoolean(tp.getCodeFlight(), tp.getNseat(), tp.getCode(),true);
         }
@@ -425,8 +425,8 @@ public class AdapterSQL {
         return holdLuggagesTicketPassenger;
     }
     
-    public TicketPassenger getTicketPassenger(String codeTicket) throws SQLException{
-        TicketPassenger tp;
+    public Ticket getTicketPassenger(String codeTicket) throws SQLException{
+        Ticket tp;
         String query
                 = "SELECT COD_TICKET, PREZZO, COD_PRENOTAZIONE, ID, NOME, COGNOME, Prenotazione.VOLO, Posto.NUMERO AS NPOSTO, Classe AS CLASSE, CHECKIN\n" 
                 + "FROM TicketPasseggero, Prenotazione, Posto, Volo\n" 
@@ -453,9 +453,9 @@ public class AdapterSQL {
         return res;
     }
 
-    public TicketPassenger editTicketPassenger(TicketPassenger tp) throws SQLException {        
+    public Ticket editTicketPassenger(Ticket tp) throws SQLException {        
         if(this.seatIsFree(tp.getCodeFlight(), tp.getNseat())){
-            TicketPassenger tp2 = this.getTicketPassenger(tp.getCode());
+            Ticket tp2 = this.getTicketPassenger(tp.getCode());
             this.setSeatBoolean(tp2.getCodeFlight(), tp2.getNseat(), tp2.getCode(), false); //metto null il vecchio posto a sedere
             this.setSeatBoolean(tp.getCodeFlight(), tp.getNseat(), tp.getCode(), true); //limposto il nuovo posto a sedere
             for(Meal m : tp.getMeals()){
