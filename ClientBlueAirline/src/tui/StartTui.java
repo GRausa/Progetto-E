@@ -25,8 +25,9 @@ public class StartTui {
 
             nuovoThread1.start();
         }
-
-        System.out.println("ERRORE CONNESSIONE SERVER NON RIUSCITA");
+        else{
+            System.out.println("ERRORE CONNESSIONE SERVER NON RIUSCITA");
+        }        
     }
 }
 

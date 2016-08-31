@@ -53,7 +53,7 @@ public class MethodsControl {
             +   ">>> CHECK_IN -> Effettua il check-in del tuo biglietto aereo\n"
             +   ">>> CERCA_TICKETPASSENGER -> Ricerca il tuo biglietto aereo\n"
             +   ">>> CERCA_PRENOTAZIONE -> Ricerca la tua prenotazione\n"
-            +   ">>> MODIFICA_BIGLIETTO -> Modifica il tuo posto a sedere o inserisci ulteriori aggiunte"
+            +   ">>> MODIFICA_BIGLIETTO -> Modifica il tuo posto a sedere o inserisci ulteriori aggiunte\n"
             +   ">>> EXIT";
         System.out.println(s);
         String s1 = input.nextLine().toUpperCase();
@@ -203,7 +203,7 @@ public class MethodsControl {
                     MethodsControl.addHoldLuggagePassenger(p, holdLuggages, v);
                     break;
                 case 'I':
-                    MethodsControl.addHoldLuggagePassenger(p, holdLuggages, v);
+                    MethodsControl.addInsurancePassenger(p, insurances, v);
                     break;
                 default:
                     break;
