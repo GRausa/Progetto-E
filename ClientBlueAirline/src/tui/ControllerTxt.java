@@ -3,16 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package TUI;
+package tui;
 
-import controller.ClientBlueAirline;
+import controller.Controller;
 
 public class ControllerTxt implements Runnable {
 
-    private ClientBlueAirline client;
+    private Controller client;
     
 
-    public ControllerTxt(ClientBlueAirline n) {
+    public ControllerTxt(Controller n) {
         this.client = n;
     }
 
@@ -64,7 +64,7 @@ public class ControllerTxt implements Runnable {
                     break;
                  
                 case "MODIFICA_BIGLIETTO":
-                    MethodsControl.editTicketPassenger(client);
+                    MethodsControl.editTicket(client);
                     break;
                    
                 case "EXIT":

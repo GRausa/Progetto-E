@@ -7,7 +7,7 @@ package gui;
 
 
 
-import controller.ClientBlueAirline;
+import controller.Controller;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.IOException;
@@ -29,7 +29,7 @@ public class CustomerPanel extends JPanel{
     
  
     private HomeFrame home;
-    private ClientBlueAirline controller;
+    private Controller controller;
 
    
         JButton conferma = new JButton("Conferma");
@@ -39,7 +39,7 @@ public class CustomerPanel extends JPanel{
         JTextField email0 =new JTextField("Inserisci Email");
         JLabel email=new JLabel("Email");
            
-    public CustomerPanel(HomeFrame home, ClientBlueAirline controller) {
+    public CustomerPanel(HomeFrame home, Controller controller) {
         this.home = home;
         this.controller = controller;
         this.setOpaque(false);

@@ -5,18 +5,8 @@
  */
 package gui;
 
-import controller.ClientBlueAirline;
-import TUI.ControllerTxt;
-import java.awt.Dimension;
-import java.awt.HeadlessException;
-import java.io.FileNotFoundException;
+import controller.Controller;
 import java.io.IOException;
-import static java.lang.Thread.sleep;
-import java.text.ParseException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import static javafx.application.Platform.exit;
-import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -30,7 +20,7 @@ import javax.swing.JTextField;
 public class TestUi {
 
     public static void main(String[] args) throws IOException, InterruptedException {
-        ClientBlueAirline clientBlueAirline = new ClientBlueAirline();
+        Controller clientBlueAirline = new Controller();
         JFrame frame1 = new JFrame();
 
         //String s = (String) JOptionPane.showInputDialog(frame1, "Complete the sentence:\n" + "\"Green eggs and...\"", "Customized Dialog", JOptionPane.PLAIN_MESSAGE, null, null, "ham");

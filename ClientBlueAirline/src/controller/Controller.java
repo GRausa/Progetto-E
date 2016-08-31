@@ -13,33 +13,26 @@ import java.io.PrintWriter;
 import java.net.ConnectException;
 import java.net.Socket;
 import java.net.UnknownHostException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import objects.Flight;
 import objects.HoldLuggage;
 import objects.Insurance;
 import objects.Meal;
 import objects.Reservation;
 import objects.Route;
-import objects.Seat;
 import objects.Ticket;
 
 /**
  *
- * @author cl418377
+ * @author Giovanni
  */
-public class ClientBlueAirline {
+public class Controller {
 
-    public Socket clientSocket;
-    int PortNumber = 8888;
-    public PrintWriter out;
-    public BufferedReader in;
-    Gson gson = new Gson();
+    private Socket clientSocket;
+    private int PortNumber = 8888;
+    private PrintWriter out;
+    private BufferedReader in;
+    private Gson gson = new Gson();
 
-    public ClientBlueAirline() throws IOException {
-        
-    }
-    
     public boolean connect(String ipServer) throws IOException{
         try {
             clientSocket = new Socket(ipServer, PortNumber);
@@ -53,7 +46,6 @@ public class ClientBlueAirline {
         out = new PrintWriter(clientSocket.getOutputStream(), true);
         in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
         return true;
-
     }
 
     public void hello() throws IOException {

@@ -5,7 +5,7 @@
  */
 package net;
 
-import clients.ControllerClient;
+import controller.Controller;
 import com.google.gson.Gson;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -35,7 +35,7 @@ import static jdk.nashorn.internal.objects.NativeMath.log;
  */
 class RemoteUser extends Thread {
 
-    ControllerClient company;
+    Controller company;
     Socket socket;
     PrintWriter out;
     BufferedReader in;
@@ -56,7 +56,7 @@ class RemoteUser extends Thread {
         return counter++;
     }
 
-    RemoteUser(ControllerClient company, Socket socket) throws IOException {
+    RemoteUser(Controller company, Socket socket) throws IOException {
 
         this.company = company;
         this.socket = socket;

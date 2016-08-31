@@ -8,7 +8,7 @@ package gui;
 
 
 
-import controller.ClientBlueAirline;
+import controller.Controller;
 
 import java.awt.*;
 import java.awt.event.ActionListener;
@@ -32,14 +32,14 @@ public class NFrame extends JFrame{
     private final int WEIGHT= 200;
     private final int HEIGHT= 100;
     private int n;
-    private ClientBlueAirline controller;
+    private Controller controller;
     private boolean opened;
     private HomeFrame home;
     ArrayList<JComboBox> combo;
     JLabel tit ;    
     String notifica;
     
-    public NFrame(HomeFrame home,ClientBlueAirline controller,int n,String notifica)
+    public NFrame(HomeFrame home,Controller controller,int n,String notifica)
     {
         this.controller = controller;
         this.opened = true;

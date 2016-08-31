@@ -1,7 +1,7 @@
 package gui;
 
 
-import controller.ClientBlueAirline;
+import controller.Controller;
 import java.awt.*;
 import com.toedter.calendar.JDateChooser;
 
@@ -24,7 +24,7 @@ public class HomeFrame extends JFrame {
     private final int WEIGHT = 800;
     private final int HEIGHT = 600;
 
-    private ClientBlueAirline controller;
+    private Controller controller;
     private int npasseggeri;
     private String codeflight;
     private double priceflight;
@@ -57,7 +57,7 @@ public class HomeFrame extends JFrame {
 
     JLabel scritta = new JLabel("BENVENUTO IN BLUE AIRLINE");
 
-    public HomeFrame(String title, ClientBlueAirline c) throws HeadlessException {
+    public HomeFrame(String title, Controller c) throws HeadlessException {
         this.frame = this;
         this.controller = c;
         setTitle(title);

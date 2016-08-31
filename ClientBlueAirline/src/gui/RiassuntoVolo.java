@@ -6,7 +6,7 @@
 package gui;
 
 
-import controller.ClientBlueAirline;
+import controller.Controller;
 import java.awt.BorderLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -24,7 +24,7 @@ import objects.Flight;
 public class RiassuntoVolo extends JPanel{
      
      
-      ClientBlueAirline controller;
+      Controller controller;
       HomeFrame home;
       Flight f;
     
@@ -44,7 +44,7 @@ JButton stampa =new JButton("Stampa");
  JButton indietro =new JButton ("Indietro");
  
 
-    public RiassuntoVolo(HomeFrame home,ClientBlueAirline company)
+    public RiassuntoVolo(HomeFrame home,Controller company)
     {
         this.home = home;
         this.controller=company;

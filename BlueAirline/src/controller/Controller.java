@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package clients;
+package controller;
 
 import database.AdapterSQL;
 import java.sql.SQLException;
@@ -20,24 +20,19 @@ import objects.Ticket;
  *
  * @author Giovanni
  */
-public class ControllerClient {
+public class Controller {
 
     private AdapterSQL adapter;
 
-    public ControllerClient() {
+    public Controller() {
         adapter = new AdapterSQL();
     }
     
     //ricerca tutte le rotte
     public ArrayList<Route> searchRoutes() throws SQLException {
         return adapter.searchRoutes();
-    }
-    
-    //riempie tutti i posti NULL
-    public ArrayList<Flight> setAllSeatFlights() throws SQLException{
-        return adapter.setAllSeatFlights();
-    }
-    
+    }    
+   
     //ricerca voli da città partenza e città arrivo e data
     public ArrayList<Flight> searchFlights(String departure, String destination, String date) throws SQLException {       
         return adapter.searchFlights(departure, destination, date);
@@ -68,6 +63,7 @@ public class ControllerClient {
         return adapter.numberSeatFree(codeFlight);
     }
     
+    //modifica una ticket
     public Ticket editSeatTicketPassenger(Ticket tp) throws SQLException{
         return adapter.editSeatTicketPassenger(tp);
     }

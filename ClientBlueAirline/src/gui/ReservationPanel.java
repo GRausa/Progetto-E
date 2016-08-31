@@ -6,7 +6,7 @@
 package gui;
 
 
-import controller.ClientBlueAirline;
+import controller.Controller;
 import com.toedter.calendar.JDateChooser;
 import java.awt.*;
 import java.awt.event.*;
@@ -28,7 +28,7 @@ import objects.*;
  */
 public class ReservationPanel extends JPanel{
     
-    ClientBlueAirline controller;
+    Controller controller;
     HomeFrame home;
     
     JComboBox andata = new JComboBox();
@@ -48,7 +48,7 @@ public class ReservationPanel extends JPanel{
     JButton ricerca = new JButton("Ricerca");
     JDateChooser data = new JDateChooser();
     
-    public ReservationPanel(ClientBlueAirline company, HomeFrame home)  
+    public ReservationPanel(Controller company, HomeFrame home)  
     {
         try {
             this.home = home;
