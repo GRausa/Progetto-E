@@ -23,9 +23,9 @@ public class FacadeControllerAdministrator extends FacadeController{
     }
     
     //riempie tutti i posti NULL -> usato per riempire il DB
-    /*
+    
     public ArrayList<Flight> setAllSeatFlights() throws SQLException{
         return adapter.setAllSeatFlights();
-    }*/   
+    }   
 
 }

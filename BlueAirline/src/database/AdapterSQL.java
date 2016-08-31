@@ -8,6 +8,8 @@ package database;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import objects.Flight;
 import objects.HoldLuggage;
 import objects.Insurance;
@@ -79,35 +81,45 @@ public class AdapterSQL {
     }
     
     /* USATO NELL'INIZIALIZZAZIONE DEI POSTI*/
-    public ArrayList<Flight> setAllSeatFlights() throws SQLException {
-        ArrayList<Flight> flights;
-        String query
-                = "SELECT V.COD_VOLO, A1.CITTA \"CITTAPARTENZA\", A1.NOME \"AEROPORTOPARTENZA\", A2.CITTA \"CITTAARRIVO\", A2.NOME \"AEROPORTOARRIVO\", V.DATAPARTENZA, V.ORAPARTENZA, V.DATAARRIVO, V.ORAARRIVO, V.PREZZO "
-                + "FROM Rotta R, Aeroporto A1, Aeroporto A2, Volo V "
-                + "WHERE R.AEROPORTOPARTENZA = A1.COD_AEROPORTO AND R.AEROPORTOARRIVO=A2.COD_AEROPORTO AND R.COD_ROTTA=V.ROTTA";
-        ResultSet resultQuery = SQL.queryRead(query);
-        flights = ParserSQL.parseFlights(resultQuery);
-
-        for (Flight fli : flights) {
-            System.out.println(fli);
-            AdapterSQL.this.setAllSeatFlight(fli);
+    public ArrayList<Flight> setAllSeatFlights() {
+        try {
+            ArrayList<Flight> flights;
+            String query
+                    = "SELECT V.COD_VOLO, A1.CITTA \"CITTAPARTENZA\", A1.NOME \"AEROPORTOPARTENZA\", A2.CITTA \"CITTAARRIVO\", A2.NOME \"AEROPORTOARRIVO\", V.DATAPARTENZA, V.ORAPARTENZA, V.DATAARRIVO, V.ORAARRIVO, V.PREZZO "
+                    + "FROM Rotta R, Aeroporto A1, Aeroporto A2, Volo V "
+                    + "WHERE R.AEROPORTOPARTENZA = A1.COD_AEROPORTO AND R.AEROPORTOARRIVO=A2.COD_AEROPORTO AND R.COD_ROTTA=V.ROTTA";
+            ResultSet resultQuery = SQL.queryRead(query);
+            flights = ParserSQL.parseFlights(resultQuery);
+            
+            for (Flight fli : flights) {
+                System.out.println(fli);
+                AdapterSQL.this.setAllSeatFlight(fli);
+            }
+            
+            resultQuery.close();
+            return flights;
+        } catch (SQLException ex) {
+            Logger.getLogger(AdapterSQL.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
         }
-
-        resultQuery.close();
-        return flights;
 
     }
 
-    public ArrayList<Route> searchRoutes() throws SQLException {
-        ArrayList<Route> routes;
-        String query
-                = "SELECT A1.CITTA \"CITTAPARTENZA\", A1.NOME \"AEROPORTOPARTENZA\", A2.CITTA \"CITTAARRIVO\", A2.NOME \"AEROPORTOARRIVO\"\n"
-                + "FROM Rotta R, Aeroporto A1, Aeroporto A2\n"
-                + "WHERE R.AEROPORTOPARTENZA = A1.COD_AEROPORTO AND R.AEROPORTOARRIVO=A2.COD_AEROPORTO";
-        ResultSet resultQuery = SQL.queryRead(query);
-        routes = ParserSQL.parseRoutes(resultQuery);
-        resultQuery.close();
-        return routes;
+    public ArrayList<Route> searchRoutes() {
+        try {
+            ArrayList<Route> routes;
+            String query
+                    = "SELECT A1.CITTA \"CITTAPARTENZA\", A1.NOME \"AEROPORTOPARTENZA\", A2.CITTA \"CITTAARRIVO\", A2.NOME \"AEROPORTOARRIVO\"\n"
+                    + "FROM Rotta R, Aeroporto A1, Aeroporto A2\n"
+                    + "WHERE R.AEROPORTOPARTENZA = A1.COD_AEROPORTO AND R.AEROPORTOARRIVO=A2.COD_AEROPORTO";
+            ResultSet resultQuery = SQL.queryRead(query);
+            routes = ParserSQL.parseRoutes(resultQuery);
+            resultQuery.close();
+            return routes;
+        } catch (SQLException ex) {
+            Logger.getLogger(AdapterSQL.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
     }
 
     public ArrayList<Flight> searchFlights(String departure, String destination, String date) throws SQLException {
@@ -150,14 +162,21 @@ public class AdapterSQL {
         return flight;
     }
     
-    public ArrayList<String> searchAllCitys() throws SQLException {
-        ArrayList<String> citys;
+    public ArrayList<String> searchAllCitys() {
+        ArrayList<String> citys=null;
         String query
                 = "SELECT NOME\n"
                 + "FROM Citta ";
-        ResultSet resultQuery = SQL.queryRead(query);
-        citys = ParserSQL.parseCitis(resultQuery);
-        resultQuery.close();
+        ResultSet resultQuery;
+        try {
+            resultQuery = SQL.queryRead(query);
+            citys = ParserSQL.parseCitis(resultQuery);
+            resultQuery.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(AdapterSQL.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+        
         return citys;
     }
 /*
@@ -316,37 +335,52 @@ public class AdapterSQL {
         }
     }
     
-    public ArrayList<Meal> getAllMeals() throws SQLException{
-        ArrayList<Meal> meals;
-        String query
-                = "SELECT *\n"
-                + "FROM Pasto ";
-        ResultSet resultQuery = SQL.queryRead(query);
-        meals = ParserSQL.parseMeals(resultQuery);
-        resultQuery.close();
-        return meals;
+    public ArrayList<Meal> getAllMeals() {
+        try {
+            ArrayList<Meal> meals;
+            String query
+                    = "SELECT *\n"
+                    + "FROM Pasto ";
+            ResultSet resultQuery = SQL.queryRead(query);
+            meals = ParserSQL.parseMeals(resultQuery);
+            resultQuery.close();
+            return meals;
+        } catch (SQLException ex) {
+            Logger.getLogger(AdapterSQL.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
     }
     
-    public ArrayList<HoldLuggage> getAllHoldLuggages() throws SQLException{
-        ArrayList<HoldLuggage> holdLuggages;
-        String query
-                = "SELECT *\n"
-                + "FROM Bagaglio ";
-        ResultSet resultQuery = SQL.queryRead(query);
-        holdLuggages = ParserSQL.parseHoldLuggages(resultQuery);
-        resultQuery.close();
-        return holdLuggages;
+    public ArrayList<HoldLuggage> getAllHoldLuggages() {
+        try {
+            ArrayList<HoldLuggage> holdLuggages;
+            String query
+                    = "SELECT *\n"
+                    + "FROM Bagaglio ";
+            ResultSet resultQuery = SQL.queryRead(query);
+            holdLuggages = ParserSQL.parseHoldLuggages(resultQuery);
+            resultQuery.close();
+            return holdLuggages;
+        } catch (SQLException ex) {
+            Logger.getLogger(AdapterSQL.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
     }
     
-    public ArrayList<Insurance> getAllInsurances() throws SQLException{
-        ArrayList<Insurance> insurances;
-        String query
-                = "SELECT *\n"
-                + "FROM Assicurazione ";
-        ResultSet resultQuery = SQL.queryRead(query);
-        insurances = ParserSQL.parseInsurances(resultQuery);
-        resultQuery.close();
-        return insurances;
+    public ArrayList<Insurance> getAllInsurances(){
+        try {
+            ArrayList<Insurance> insurances;
+            String query
+                    = "SELECT *\n"
+                    + "FROM Assicurazione ";
+            ResultSet resultQuery = SQL.queryRead(query);
+            insurances = ParserSQL.parseInsurances(resultQuery);
+            resultQuery.close();
+            return insurances;
+        } catch (SQLException ex) {
+            Logger.getLogger(AdapterSQL.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
     }
     
     public Ticket editSeatTicket(Ticket tp) throws SQLException{

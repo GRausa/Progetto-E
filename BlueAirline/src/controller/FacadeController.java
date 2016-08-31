@@ -30,7 +30,7 @@ public class FacadeController implements InterfaceClient {
     
     //ricerca tutte le rotte
     @Override
-    public ArrayList<Route> searchRoutes() throws SQLException {
+    public ArrayList<Route> searchRoutes() {
         return adapter.searchRoutes();
     }    
    
@@ -78,7 +78,7 @@ public class FacadeController implements InterfaceClient {
     
     //ricerca di tutte le città
     @Override
-    public ArrayList<String> searchAllCitys() throws SQLException{
+    public ArrayList<String> searchAllCitys() {
         return adapter.searchAllCitys();
     }
     
@@ -90,19 +90,19 @@ public class FacadeController implements InterfaceClient {
     
     //ritorna tutti i meal
     @Override
-    public ArrayList<Meal> getAllMeals() throws SQLException{
+    public ArrayList<Meal> getAllMeals(){
         return adapter.getAllMeals();
     }
     
     //ritorna tutti i bagagli
     @Override
-    public ArrayList<HoldLuggage> getAllHoldLuggages() throws SQLException{
+    public ArrayList<HoldLuggage> getAllHoldLuggages(){
         return adapter.getAllHoldLuggages();
     }
     
     //ritorna tutte le assicurazioni
     @Override
-    public ArrayList<Insurance> getAllInsurances() throws SQLException{
+    public ArrayList<Insurance> getAllInsurances() {
         return adapter.getAllInsurances();
     }
     

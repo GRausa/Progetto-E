@@ -54,7 +54,7 @@ public class Server {
      */
     public static void main(String[] args) {
         final int PORT = 8888;
-        final FacadeController c = new FacadeController();
+        final InterfaceClient c = new FacadeController();
         Server server = new Server(c, PORT);
         try {
             server.startServer();

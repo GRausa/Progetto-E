@@ -28,13 +28,13 @@ public interface InterfaceClient {
     Ticket editTicket(Ticket tp) throws SQLException;
 
     //ritorna tutti i bagagli
-    ArrayList<HoldLuggage> getAllHoldLuggages() throws SQLException;
+    ArrayList<HoldLuggage> getAllHoldLuggages();
 
     //ritorna tutte le assicurazioni
-    ArrayList<Insurance> getAllInsurances() throws SQLException;
+    ArrayList<Insurance> getAllInsurances();
 
     //ritorna tutti i meal
-    ArrayList<Meal> getAllMeals() throws SQLException;
+    ArrayList<Meal> getAllMeals() ;
 
     //ritorna i bagagli di un ticket
     ArrayList<HoldLuggage> getHoldLuggagesTicket(String codeTicket) throws SQLException;
@@ -61,7 +61,7 @@ public interface InterfaceClient {
     int numberSeatFree(String codeFlight) throws SQLException;
 
     //ricerca di tutte le città
-    ArrayList<String> searchAllCitys() throws SQLException;
+    ArrayList<String> searchAllCitys() ;
 
     //ricerca volo in base al codice -> restituisce tutto il volo con i posti
     Flight searchFlight(String codeFlight) throws SQLException;
@@ -73,7 +73,7 @@ public interface InterfaceClient {
     ArrayList<Flight> searchFlights(Route route) throws SQLException;
 
     //ricerca tutte le rotte
-    ArrayList<Route> searchRoutes() throws SQLException;
+    ArrayList<Route> searchRoutes();
 
     //dato volo e posto vedere se è libero
     boolean seatIsFree(String codeFlight, int nseat) throws SQLException;
