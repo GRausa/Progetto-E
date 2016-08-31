@@ -21,16 +21,17 @@ import objects.Ticket;
  *
  * @author Giovanni
  */
-public class AdapterSQL {
+public class ConcreteAdapterDB implements AdapterDB {
 
-    ConnectionSQL SQL;
+    private ConnectionSQL SQL;
 
-    public AdapterSQL() {
+    public ConcreteAdapterDB() {
         SQL = new ConnectionSQL();
         SQL.startConnection();
 
     }
 
+    @Override
     public int numberSeatFlight(String codeFlight) throws SQLException {
         String query
                 = "SELECT POSTI\n"
@@ -40,7 +41,8 @@ public class AdapterSQL {
         return (int) ParserSQL.parseFunctionSQL(resultQuery, "POSTI");
     }
 
-    public int numberSeatFree(String codeFlight) throws SQLException {
+    @Override
+    public int numberSeatFreeFlight(String codeFlight) throws SQLException {
         String query
                 = "SELECT COUNT(*) AS NUM\n"
                 + "FROM Posto\n"
@@ -49,6 +51,7 @@ public class AdapterSQL {
         return (int) ParserSQL.parseFunctionSQL(resultQuery, "NUM");
     }
 
+    @Override
     public int numberSeatFirstClassFlight(String cod) throws SQLException {
 
         String query
@@ -60,6 +63,7 @@ public class AdapterSQL {
 
     }
 
+    @Override
     public void setAllSeatFlight(Flight volo) throws SQLException {
         int numeroseat = numberSeatFlight(volo.getCode());
         int prima = numberSeatFirstClassFlight(volo.getCode());
@@ -72,6 +76,7 @@ public class AdapterSQL {
         }
     }
 
+    @Override
     public void setSeat(String volo, int num, int classe) throws SQLException {
         String query = "INSERT INTO Posto VALUES ('" + num + "', '" + volo + "', '" + classe + "', null)";
         SQL.queryWrite(query);
@@ -79,6 +84,7 @@ public class AdapterSQL {
     }
     
     /* USATO NELL'INIZIALIZZAZIONE DEI POSTI*/
+    @Override
     public ArrayList<Flight> setAllSeatFlights() throws SQLException {
         ArrayList<Flight> flights;
         String query
@@ -90,7 +96,7 @@ public class AdapterSQL {
 
         for (Flight fli : flights) {
             System.out.println(fli);
-            AdapterSQL.this.setAllSeatFlight(fli);
+            ConcreteAdapterDB.this.setAllSeatFlight(fli);
         }
 
         resultQuery.close();
@@ -98,6 +104,7 @@ public class AdapterSQL {
 
     }
 
+    @Override
     public ArrayList<Route> searchRoutes() throws SQLException {
         ArrayList<Route> routes;
         String query
@@ -110,6 +117,7 @@ public class AdapterSQL {
         return routes;
     }
 
+    @Override
     public ArrayList<Flight> searchFlights(String departure, String destination, String date) throws SQLException {
         ArrayList<Flight> flights;
         String query
@@ -125,6 +133,7 @@ public class AdapterSQL {
         return flights;
     }
     
+    @Override
     public ArrayList<Flight> searchFlights(Route route) throws SQLException {
         
         ArrayList<Flight> flights;
@@ -138,6 +147,7 @@ public class AdapterSQL {
         return flights;
     }
     
+    @Override
     public Flight searchFlight(String codeFlight) throws SQLException{
         Flight flight;
         String query
@@ -150,6 +160,7 @@ public class AdapterSQL {
         return flight;
     }
     
+    @Override
     public ArrayList<String> searchAllCitys() throws SQLException {
         ArrayList<String> citys;
         String query
@@ -170,6 +181,7 @@ public class AdapterSQL {
         return ParserSQL.parseFunctionSQL(resultQuery, "PREZZOVOLO");
     }
 */
+    @Override
     public Reservation makeReservation(Reservation reservation) throws SQLException {
         
         //prenotazione
@@ -185,44 +197,46 @@ public class AdapterSQL {
         this.addTickets(reservation);
         return reservation;
     }     
-        //aggiunta passeggeri
+
+    @Override
     public Reservation addTickets(Reservation reservation) throws SQLException{
         int i = 0;
         String codeTicket="";
-        for (Ticket tp : reservation.getTickets()) {
+        for (Ticket t : reservation.getTickets()) {
             i++;
             codeTicket = reservation.getCodeFlight() +""+ reservation.getCode()+"" + i;
             //codeTicketreservation.getCodeFlight() +"3"+i;
-            tp.setCode(codeTicket);
-            tp.setCodeFlight(reservation.getCodeFlight());
-            tp.setCodeReservation(reservation.getCode());
+            t.setCode(codeTicket);
+            t.setCodeFlight(reservation.getCodeFlight());
+            t.setCodeReservation(reservation.getCode());
             String query = 
                     "INSERT INTO TicketPasseggero\n" +
-                    "VALUES ('" + tp.getCode() + "', '" + tp.getID() + "', '" + tp.getName() + "', '" + tp.getSurname() + "', '" + reservation.getCode() + "',0)";
+                    "VALUES ('" + t.getCode() + "', '" + t.getID() + "', '" + t.getName() + "', '" + t.getSurname() + "', '" + reservation.getCode() + "',0)";
             SQL.queryWrite(query);
             //aggiunte
-            ArrayList<Meal> meals = tp.getMeals();
+            ArrayList<Meal> meals = t.getMeals();
             for (Meal s : meals) {
                 this.insertSupplement(s.getCode(), codeTicket);
             }
-            ArrayList<Insurance> insurances = tp.getInsurances();
+            ArrayList<Insurance> insurances = t.getInsurances();
             for (Insurance s : insurances) {
                 this.insertSupplement(s.getCode(), codeTicket);
             }
-            ArrayList<HoldLuggage> holdLuggages = tp.getHoldLuggages();
+            ArrayList<HoldLuggage> holdLuggages = t.getHoldLuggages();
             for (HoldLuggage s : holdLuggages) {
                 this.insertSupplement(s.getCode(), codeTicket);
             }
-            if(this.seatIsFree(reservation.getCodeFlight(), tp.getNseat())){
-                this.setSeatBoolean(reservation.getCodeFlight(), tp.getNseat(), tp.getCode(), true); //lo metto a 1 cioè occupato
+            if(this.seatIsFree(reservation.getCodeFlight(), t.getNseat())){
+                this.setSeatBoolean(reservation.getCodeFlight(), t.getNseat(), t.getCode(), true); //lo metto a 1 cioè occupato
             }
             else{
-                tp.setNSeat(-1); //posto -1 non assegnato
+                t.setNSeat(-1); //posto -1 non assegnato
             }
         }
         return reservation;
     }
 
+    @Override
     public void setSeatBoolean(String codeFlight, int nSeat, String ticketPassenger, boolean b) throws SQLException {
         String query;
         if(b){ //IMPOSTA IL POSTO A SEDERE
@@ -236,59 +250,74 @@ public class AdapterSQL {
         }        
         SQL.queryWrite(query);
     }
-
-    public void insertSupplement(String code, String codeTicket) throws SQLException {
-        String query;
-        double price;
+    
+    @Override
+    public void insertSupplementMeal(String code, String codeTicket) throws SQLException{
         ResultSet resultQuery;
+        String query   
+                    = "SELECT PREZZO\n"
+                    + "FROM Pasto\n"
+                    + "WHERE COD_PASTO='" + code + "'";
+        resultQuery = SQL.queryRead(query);
+        double price = ParserSQL.parseFunctionSQL(resultQuery, "PREZZO");
+        query = "INSERT INTO Pasto_Passeggero\n"
+                + "VALUES (NULL,'" + code + "', '" + codeTicket + "','" + price + "')";
+        SQL.queryWrite(query);
+    }
+    
+    @Override
+    public void insertSupplementHoldLuggage(String code, String codeTicket) throws SQLException{
+        ResultSet resultQuery;
+        String query
+                = "SELECT PREZZO\n"
+                + "FROM Bagaglio\n"
+                + "WHERE COD_BAGAGLIO='" + code + "'";                
+        resultQuery = SQL.queryRead(query);
+        double price = ParserSQL.parseFunctionSQL(resultQuery, "PREZZO");
+        query = "INSERT INTO Bagaglio_Passeggero\n"
+                + "VALUES (NULL,'" + code + "', '" + codeTicket + "','" + price + "')";
+        SQL.queryWrite(query);
+    }
+    
+    @Override
+    public void insertSupplementInsurance(String code, String codeTicket) throws SQLException{
+        ResultSet resultQuery;
+        String query
+                = "SELECT PREZZO\n"
+                + "FROM Assicurazione\n"
+                + "WHERE COD_ASSICURAZIONE='" + code + "'";
+
+        resultQuery = SQL.queryRead(query);
+        double price = ParserSQL.parseFunctionSQL(resultQuery, "PREZZO");
+        query = "INSERT INTO Assicurazione_Passeggero\n"
+                + "VALUES (NULL,'" + code + "', '" + codeTicket + "','" + price + "')";
+        SQL.queryWrite(query);    
+    }
+    
+    @Override
+    public void insertSupplement(String code, String codeTicket) throws SQLException {        
         switch (code.charAt(0)) {
             case 'M':
-                query
-                        = "SELECT PREZZO\n"
-                        + "FROM Pasto\n"
-                        + "WHERE COD_PASTO='" + code + "'";
-
-                resultQuery = SQL.queryRead(query);
-                price = ParserSQL.parseFunctionSQL(resultQuery, "PREZZO");
-                query = "INSERT INTO Pasto_Passeggero\n"
-                        + "VALUES (NULL,'" + code + "', '" + codeTicket + "','" + price + "')";
-                SQL.queryWrite(query);
+                this.insertSupplementMeal(code, codeTicket);
                 break;
             case 'H':
-                query
-                        = "SELECT PREZZO\n"
-                        + "FROM Bagaglio\n"
-                        + "WHERE COD_BAGAGLIO='" + code + "'";
-                ;
-
-                resultQuery = SQL.queryRead(query);
-                price = ParserSQL.parseFunctionSQL(resultQuery, "PREZZO");
-                query = "INSERT INTO Bagaglio_Passeggero\n"
-                        + "VALUES (NULL,'" + code + "', '" + codeTicket + "','" + price + "')";
-                SQL.queryWrite(query);
+                this.insertSupplementHoldLuggage(code, codeTicket);
                 break;
             case 'I':
-                query
-                        = "SELECT PREZZO\n"
-                        + "FROM Assicurazione\n"
-                        + "WHERE COD_ASSICURAZIONE='" + code + "'";
-
-                resultQuery = SQL.queryRead(query);
-                price = ParserSQL.parseFunctionSQL(resultQuery, "PREZZO");
-                query = "INSERT INTO Assicurazione_Passeggero\n"
-                        + "VALUES (NULL,'" + code + "', '" + codeTicket + "','" + price + "')";
-                SQL.queryWrite(query);
+                this.insertSupplementInsurance(code, codeTicket);
                 break;
             default:
                 break;
         }
     }
 
+    @Override
     public Flight setSeatsFlight(Flight flight) throws SQLException {
         flight.setSeats(this.getSeatsFlight(flight.getCode()));
         return flight;
     }
     
+    @Override
     public ArrayList<Seat> getSeatsFlight(String codeFlight) throws SQLException{
         ArrayList<Seat> seats;
         String query
@@ -301,6 +330,7 @@ public class AdapterSQL {
         return seats;
     }
     
+    @Override
     public boolean seatIsFree(String codeFlight, int nseat) throws SQLException{
         String query
                 = "SELECT COUNT(*) AS C\n"
@@ -316,6 +346,7 @@ public class AdapterSQL {
         }
     }
     
+    @Override
     public ArrayList<Meal> getAllMeals() throws SQLException{
         ArrayList<Meal> meals;
         String query
@@ -327,6 +358,7 @@ public class AdapterSQL {
         return meals;
     }
     
+    @Override
     public ArrayList<HoldLuggage> getAllHoldLuggages() throws SQLException{
         ArrayList<HoldLuggage> holdLuggages;
         String query
@@ -338,6 +370,7 @@ public class AdapterSQL {
         return holdLuggages;
     }
     
+    @Override
     public ArrayList<Insurance> getAllInsurances() throws SQLException{
         ArrayList<Insurance> insurances;
         String query
@@ -349,6 +382,7 @@ public class AdapterSQL {
         return insurances;
     }
     
+    @Override
     public Ticket editSeatTicket(Ticket tp) throws SQLException{
         if(this.seatIsFree(tp.getCodeFlight(), tp.getNseat())){
             this.setSeatBoolean(tp.getCodeFlight(), tp.getNseat(), tp.getCode(),true);
@@ -360,6 +394,7 @@ public class AdapterSQL {
     }
     
     //verifico se è stato fatto il checkIn
+    @Override
     public boolean isCheckIn(String codeTicket) throws SQLException{
         String query
                 = "SELECT CHECKIN\n" 
@@ -375,6 +410,7 @@ public class AdapterSQL {
         }
     }
 
+    @Override
     public void setCheckIn(String codeTicket) throws SQLException{
         //verificare se è stato fatto altrimenti fallo
         if(!this.isCheckIn(codeTicket)){
@@ -386,6 +422,7 @@ public class AdapterSQL {
         }
     }
     
+    @Override
     public ArrayList<Meal> getMealsTicket(String codeTicket) throws SQLException{
         ArrayList<Meal> mealsTicket;
         String query
@@ -399,6 +436,7 @@ public class AdapterSQL {
         return mealsTicket;               
     }
     
+    @Override
     public ArrayList<Insurance> getInsurancesTicket(String codeTicket) throws SQLException{
         ArrayList<Insurance> insurancesTicket;
         String query
@@ -412,6 +450,7 @@ public class AdapterSQL {
         return insurancesTicket;        
     }
     
+    @Override
     public ArrayList<HoldLuggage> getHoldLuggagesTicket(String codeTicket) throws SQLException{
         ArrayList<HoldLuggage> holdLuggagesTicket;
         String query
@@ -425,6 +464,7 @@ public class AdapterSQL {
         return holdLuggagesTicket;
     }
     
+    @Override
     public Ticket getTicket(String codeTicket) throws SQLException{
         Ticket tp;
         String query
@@ -440,6 +480,7 @@ public class AdapterSQL {
         return tp;
     }
     
+    @Override
     public Reservation getReservation(int codeReservation) throws SQLException{
         Reservation res;
         String query
@@ -453,6 +494,7 @@ public class AdapterSQL {
         return res;
     }
 
+    @Override
     public Ticket editTicket(Ticket tp) throws SQLException {        
         if(this.seatIsFree(tp.getCodeFlight(), tp.getNseat())){
             Ticket tp2 = this.getTicket(tp.getCode());

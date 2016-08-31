@@ -5,8 +5,8 @@
  */
 package net;
 
-import controller.FacadeController;
 import com.google.gson.Gson;
+import controller.FacadeController;
 import controller.InterfaceClient;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -35,16 +35,15 @@ import static jdk.nashorn.internal.objects.NativeMath.log;
  */
 class RemoteUser extends Thread {
 
-    InterfaceClient company;
-    Socket socket;
-    PrintWriter out;
-    BufferedReader in;
+    private InterfaceClient company;
+    private Socket socket;
+    private PrintWriter out;
+    private BufferedReader in;
     private static int counter = 0;
     private int progressiven;
-    Gson gson = new Gson();
-
-    boolean stop;
-    Map<String, Command> commands;
+    private Gson gson = new Gson();
+    private boolean stop;
+    private Map<String, Command> commands;
 
     /**
      * Create a user connected with a socket.
@@ -57,7 +56,6 @@ class RemoteUser extends Thread {
     }
 
     RemoteUser(InterfaceClient company, Socket socket) throws IOException {
-
         this.company = company;
         this.socket = socket;
         out = new PrintWriter(socket.getOutputStream(), true);
@@ -71,12 +69,6 @@ class RemoteUser extends Thread {
     private void error(String message) {
         log(Level.WARNING, "Sent error: " + message);
         out.println("ERR " + message);
-    }
-
-    // Send an ok maesage to the remote user.
-    private void ok() {
-        log(Level.INFO, "'OK' sent");
-        out.println("OK");
     }
 
     // Create the dispatch table mapping commands to actions.
