@@ -7,8 +7,10 @@ package tui;
 
 import controller.Controller;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import static java.util.Arrays.asList;
+import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Scanner;
 import java.util.logging.Level;
@@ -44,8 +46,8 @@ public class MethodsControl {
             +   "\n>>> HI -> Test server\n"
             +   "\nAREA RICERCA:\n\n>>> CERCA_VOLO -> Ricerca il volo tra 2 città in una precisa data ( + mappa posti )\n"
             +   ">>> CERCA_VOLO_CODICE -> Ricerca il volo in base al codice\n"
-            +   ">>> CERCA_VOLO_AEROPORTI -> Ricerca i voli disponibili tra 2 aeroporti\n"
-            +   ">>> VERIFICA_TRATTA -> Controlla se esiste una tratta tra 2 città\n"
+            +   ">>> CALENDARIO_AEROPORTI -> Ricerca tutti i voli disponibili tra 2 aeroporti\n"
+            +   ">>> VERIFICA_TRATTA -> Controlla se esiste una tratta tra 2 città (lasciando uno o entrambi i campi vuoti ricerca tutte le tratte disponibili)\n"
             +   ">>> CITTA_DISPONIBILI -> Controlla in quali città puoi viaggiare\n"
             +   "\nAREA CLIENTE:\n\n>>> PRENOTA -> Effettua una prenotazione di un posto a sedere\n"
             +   ">>> CHECK_IN -> Effettua il check-in del tuo biglietto aereo\n"
@@ -126,12 +128,14 @@ public class MethodsControl {
     /*METODI PER PRENOTAZIONE*/
     
     public static Flight searchFlight(Controller client, String cod){
-        Flight flight = new Flight(cod);
-         {
+        Flight flight = new Flight(cod);        
+        Calendar cal = Calendar.getInstance();                
+        {
             try {
-                flight = client.searchFlight(flight);
-                if (flight == null) {
-                    System.out.println("Volo non trovato");
+                flight = client.searchFlight(flight); //SISTEMARE
+                System.out.println(flight.getDateDeparture().before(cal.getTime()));
+                if (flight == null || flight.getDateDeparture().before(cal.getTime())) { 
+                    System.out.println("Volo non trovato o risulta antecedente alla data odierna");
                     return null;
                 }
             } catch (IOException ex) {

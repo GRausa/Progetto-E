@@ -5,7 +5,8 @@
  */
 package net;
 
-import controller.Controller;
+import controller.FacadeController;
+import controller.InterfaceClient;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -13,7 +14,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class Server {
-    Controller company;
+    InterfaceClient company;
     int port;
     ServerSocket serverSocket = null;
 
@@ -23,7 +24,7 @@ public class Server {
      * @param company
      * @param port
      */
-    public Server(Controller company, int port) {
+    public Server(InterfaceClient company, int port) {
         this.company = company;
         this.port = port;
     }
@@ -53,7 +54,7 @@ public class Server {
      */
     public static void main(String[] args) {
         final int PORT = 8888;
-        final Controller c = new Controller();
+        final FacadeController c = new FacadeController();
         Server server = new Server(c, PORT);
         try {
             server.startServer();

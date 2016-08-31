@@ -14,11 +14,11 @@ import objects.Flight;
  *
  * @author Giovanni
  */
-public class ControllerAdministrator extends Controller{
+public class FacadeControllerAdministrator extends FacadeController{
     
     private AdapterSQL adapter;
 
-    public ControllerAdministrator() {
+    public FacadeControllerAdministrator() {
         adapter = new AdapterSQL();
     }
     

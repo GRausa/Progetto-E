@@ -5,8 +5,9 @@
  */
 package net;
 
-import controller.Controller;
+import controller.FacadeController;
 import com.google.gson.Gson;
+import controller.InterfaceClient;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -19,7 +20,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import static jdk.nashorn.internal.objects.NativeMath.log;
 import objects.Flight;
 import objects.HoldLuggage;
 import objects.Insurance;
@@ -35,7 +35,7 @@ import static jdk.nashorn.internal.objects.NativeMath.log;
  */
 class RemoteUser extends Thread {
 
-    Controller company;
+    InterfaceClient company;
     Socket socket;
     PrintWriter out;
     BufferedReader in;
@@ -56,7 +56,7 @@ class RemoteUser extends Thread {
         return counter++;
     }
 
-    RemoteUser(Controller company, Socket socket) throws IOException {
+    RemoteUser(InterfaceClient company, Socket socket) throws IOException {
 
         this.company = company;
         this.socket = socket;
@@ -95,20 +95,19 @@ class RemoteUser extends Thread {
             }
         });
 
-        
-        commands.put("GETALLCITY",new Command() {
+        commands.put("GETALLCITY", new Command() {
             @Override
             public void execute(String args) {
-                    ArrayList<String> cities;
+                ArrayList<String> cities;
                 try {
                     cities = company.searchAllCitys();
                     out.println(gson.toJson(cities));
                 } catch (SQLException ex) {
                     Logger.getLogger(RemoteUser.class.getName()).log(Level.SEVERE, null, ex);
-                }                                        
+                }
             }
-            
-        } 
+
+        }
         );
         commands.put("CALENDAR", new Command() {
             @Override
@@ -130,33 +129,33 @@ class RemoteUser extends Thread {
             public void execute(String args) {
                 try {
                     Reservation res = gson.fromJson(args, Reservation.class);
-                    res=company.makeReservation(res);
+                    res = company.makeReservation(res);
                     out.println(gson.toJson(res));
                 } catch (SQLException ex) {
                     Logger.getLogger(RemoteUser.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         });
-        
+
         commands.put("EDITTICKET", new Command() {
             @Override
             public void execute(String args) {
                 try {
                     Ticket tp = gson.fromJson(args, Ticket.class);
-                    tp=company.editTicket(tp);
+                    tp = company.editTicket(tp);
                     out.println(gson.toJson(tp));
                 } catch (SQLException ex) {
                     Logger.getLogger(RemoteUser.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         });
-        
+
         commands.put("EDITSEATTICKETPASSENGER", new Command() {
             @Override
             public void execute(String args) {
                 try {
                     Ticket tp = gson.fromJson(args, Ticket.class);
-                    tp=company.editSeatTicket(tp);
+                    tp = company.editSeatTicket(tp);
                     out.println(gson.toJson(tp));
                 } catch (SQLException ex) {
                     Logger.getLogger(RemoteUser.class.getName()).log(Level.SEVERE, null, ex);
@@ -219,7 +218,7 @@ class RemoteUser extends Thread {
                     }
                 }
         );
-        
+
         commands.put(
                 "RICERCAVOLOCODICE", new Command() {
                     @Override
@@ -233,50 +232,50 @@ class RemoteUser extends Thread {
                         }
                     }
                 }
-        ); 
-        
+        );
+
         commands.put("PASTI", new Command() {
             @Override
             public void execute(String args) {
                 ArrayList<Meal> meals;
                 try {
-                    meals=company.getAllMeals();
+                    meals = company.getAllMeals();
                     out.println(gson.toJson(meals));
                 } catch (SQLException ex) {
                     Logger.getLogger(RemoteUser.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         });
-        
+
         commands.put("BAGAGLI", new Command() {
             @Override
             public void execute(String args) {
                 ArrayList<HoldLuggage> holdLuggages;
                 try {
-                    holdLuggages=company.getAllHoldLuggages();
+                    holdLuggages = company.getAllHoldLuggages();
                     out.println(gson.toJson(holdLuggages));
                 } catch (SQLException ex) {
                     Logger.getLogger(RemoteUser.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         });
-        
+
         commands.put("ASSICURAZIONI", new Command() {
             @Override
             public void execute(String args) {
                 ArrayList<Insurance> insurances;
                 try {
-                    insurances=company.getAllInsurances();
+                    insurances = company.getAllInsurances();
                     out.println(gson.toJson(insurances));
                 } catch (SQLException ex) {
                     Logger.getLogger(RemoteUser.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         });
-        
+
         commands.put("CHECKIN", new Command() {
             @Override
-            public void execute(String args) {                
+            public void execute(String args) {
                 try {
                     Ticket tp = gson.fromJson(args, Ticket.class);
                     company.setCheckIn(tp.getCode());
@@ -285,13 +284,13 @@ class RemoteUser extends Thread {
                 } catch (SQLException ex) {
                     Logger.getLogger(RemoteUser.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                
+
             }
         });
-        
+
         commands.put("ISCHECKIN", new Command() {
             @Override
-            public void execute(String args) {                
+            public void execute(String args) {
                 try {
                     Ticket tp = gson.fromJson(args, Ticket.class);
                     Boolean checkIn = company.isCheckIn(tp.getCode());
@@ -299,13 +298,13 @@ class RemoteUser extends Thread {
                 } catch (SQLException ex) {
                     Logger.getLogger(RemoteUser.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                
+
             }
         });
-        
+
         commands.put("PASSEGGERO", new Command() {
             @Override
-            public void execute(String args) {                
+            public void execute(String args) {
                 try {
                     Ticket tp = gson.fromJson(args, Ticket.class);
                     tp = company.getTicket(tp.getCode());
@@ -313,13 +312,13 @@ class RemoteUser extends Thread {
                 } catch (SQLException ex) {
                     Logger.getLogger(RemoteUser.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                
+
             }
         });
-        
+
         commands.put("PRENOTAZIONE", new Command() {
             @Override
-            public void execute(String args) {                
+            public void execute(String args) {
                 try {
                     Reservation res = gson.fromJson(args, Reservation.class);
                     res = company.getReservtion(res.getCode());
@@ -327,10 +326,10 @@ class RemoteUser extends Thread {
                 } catch (SQLException ex) {
                     Logger.getLogger(RemoteUser.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                
+
             }
         });
-        
+
     }
 
     private void executeCommand(String command, String args) {
@@ -393,5 +392,6 @@ class RemoteUser extends Thread {
  * @author Andrea Cavagna
  */
 interface Command {
+
     void execute(String args);
 }

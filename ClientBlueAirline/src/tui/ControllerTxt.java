@@ -39,7 +39,7 @@ public class ControllerTxt implements Runnable {
                     MethodsControl.makeReservation(client);
                     break;
                     
-                case "CERCA_VOLO_AEROPORTI":
+                case "CALENDARIO_AEROPORTI":
                     MethodsControl.searchFlightAirport(client);                    
                     break;
                 
