@@ -13,12 +13,14 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class Server {
+
     ControllerClient company;
     int port;
     ServerSocket serverSocket = null;
-    
+
     /**
      * Server initialization.
+     *
      * @param company
      * @param port
      */
@@ -26,31 +28,28 @@ public class Server {
         this.company = company;
         this.port = port;
     }
-    
-    
+
     /**
      * Start the server.
-     * 
-     * @throws IOException 
+     *
+     * @throws IOException
      */
     public void startServer() throws IOException {
         serverSocket = new ServerSocket(port);
-        
+
         Logger.getLogger(Server.class.getName()).log(Level.INFO,
-                        "Server started");
+                "Server started");
         while (true) {
             Socket socket = serverSocket.accept();
             RemoteUser u = new RemoteUser(company, socket);
-            Logger.getLogger(Server.class.getName()).log(Level.INFO,
-                        "Accepting a new user");
+            Logger.getLogger(Server.class.getName()).log(Level.INFO, "Accepting a new user. Ip guest : " + socket.getInetAddress() + "port guest:" + socket.getPort());
             u.start();
         }
     }
-    
-    
+
     /**
      * Start the application.
-     * 
+     *
      * @param args not used
      */
     public static void main(String[] args) {
