@@ -1,12 +1,14 @@
 package gui;
 
-
 import controller.Controller;
 import java.awt.*;
 import com.toedter.calendar.JDateChooser;
 
 import java.awt.event.*;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.*;
 import objects.Flight;
 import objects.HoldLuggage;
@@ -32,6 +34,9 @@ public class HomeFrame extends JFrame {
     private ArrayList<Insurance> insurances;
     private ArrayList<HoldLuggage> luggages;
     private ArrayList<Ticket> passengers;
+    private Meal[] allmeals;
+    private Insurance[] allinsurances;
+    private HoldLuggage[] allholdluggages;
     private Reservation reservation;
     private Flight flighttmp;
 
@@ -58,26 +63,33 @@ public class HomeFrame extends JFrame {
     JLabel scritta = new JLabel("BENVENUTO IN BLUE AIRLINE");
 
     public HomeFrame(String title, Controller c) throws HeadlessException {
-        this.frame = this;
-        this.controller = c;
-        setTitle(title);
-        setSize(WEIGHT, HEIGHT);
-        setMinimumSize(new Dimension(WEIGHT, HEIGHT));
-        this.setResizable(false);
-        initComponents();
-        this.setVisible(true);
-        this.passengers = new ArrayList<>();
-        
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setContentPane(sfondo);
-        notifiche.setFont(new Font("Helvetica", Font.BOLD, 15));
-        notifiche.setForeground(Color.white);
+        try {
+            this.frame = this;
+            this.controller = c;
+            setTitle(title);
+            setSize(WEIGHT, HEIGHT);
+            setMinimumSize(new Dimension(WEIGHT, HEIGHT));
+            this.setResizable(false);
+            initComponents();
+            this.setVisible(true);
+            this.passengers = new ArrayList<>();
+            this.allmeals = this.controller.getAllMeals();
+            this.allholdluggages = this.controller.getAllHoldLuggages();
+            this.allinsurances = this.controller.getAllInsurances();
 
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        Dimension frameSize = this.getSize();
+            this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            this.setContentPane(sfondo);
+            notifiche.setFont(new Font("Helvetica", Font.BOLD, 15));
+            notifiche.setForeground(Color.white);
 
-        this.setLocation((screenSize.width - frameSize.width) / 2,
-                (screenSize.height - frameSize.height) / 2);
+            Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+            Dimension frameSize = this.getSize();
+
+            this.setLocation((screenSize.width - frameSize.width) / 2,
+                    (screenSize.height - frameSize.height) / 2);
+        } catch (IOException ex) {
+            Logger.getLogger(HomeFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
     }
 
@@ -242,16 +254,12 @@ public class HomeFrame extends JFrame {
         return passengers;
     }
 
-    public void addPassenger(String ID, String name, String surname, int nseat, int classe,String codflight,double priceticket,ArrayList<Meal> meals,ArrayList<Insurance> insurances,ArrayList<HoldLuggage> holdluggages) {
-        Ticket t = new Ticket(ID, name, surname, nseat, classe,codflight,priceticket,meals,insurances,holdluggages);
-        this.passengers.add(t);
-    }
-    
-     public void addPassenger(String ID, String name, String surname, int nseat, int classe,String codflight,double priceticket) {
-        Ticket t = new Ticket(ID, name, surname, nseat, classe,codflight,priceticket);
+    public void addPassenger(String ID, String name, String surname, int nseat, int classe, String codflight, double priceticket) {
+        Ticket t = new Ticket(ID, name, surname, nseat, classe, codflight, priceticket, meals, insurances, luggages);
         this.passengers.add(t);
     }
 
+   
     public Reservation getReservation() {
         return reservation;
     }
@@ -319,20 +327,19 @@ public class HomeFrame extends JFrame {
         t.setOpaque(false);
     }
 
-     public void trasparentJDateChooser(final JDateChooser d) {
+    public void trasparentJDateChooser(final JDateChooser d) {
         d.setBackground(new Color(0, 0, 0, 0));
         d.setOpaque(false);
     }
-    
+
     public void setallFont(final JComponent c) {
         if (c.getComponentCount() == 0) {
-            if(!(c instanceof JComboBox))
-            {
-            if (c instanceof JLabel || c instanceof JButton) {
-                c.setFont(new Font("Helvetica", Font.BOLD, 25));
-            } else {
-                c.setFont(new Font("Helvetica", Font.BOLD, 15));
-            }
+            if (!(c instanceof JComboBox)) {
+                if (c instanceof JLabel || c instanceof JButton) {
+                    c.setFont(new Font("Helvetica", Font.BOLD, 25));
+                } else {
+                    c.setFont(new Font("Helvetica", Font.BOLD, 15));
+                }
             }
         }
 
@@ -350,8 +357,8 @@ public class HomeFrame extends JFrame {
         c.setForeground(Color.white);
     }
 
-    public boolean PassengerMeno() {  
-            this.npasseggeri--;
+    public boolean PassengerMeno() {
+        this.npasseggeri--;
         return npasseggeri != 0;
     }
 
@@ -370,30 +377,68 @@ public class HomeFrame extends JFrame {
     public void setFlighttmp(Flight flighttmp) {
         this.flighttmp = flighttmp;
     }
-    
+
     public void setMeals(ArrayList<Meal> meals) {
         this.meals = meals;
     }
-    
+
     public void setInsurances(ArrayList<Insurance> insurances) {
         this.insurances = insurances;
     }
-    
+
     public void setLuggages(ArrayList<HoldLuggage> luggages) {
-        this.luggages =luggages;
+        this.luggages = luggages;
     }
-    
+
     public ArrayList<Meal> getMeals() {
         return meals;
     }
-    
+
     public ArrayList<Insurance> getInsurances() {
         return insurances;
     }
-    
+
     public ArrayList<HoldLuggage> getLuggages() {
         return luggages;
     }
-    
+
+    public Meal[] getAllmeals() {
+        return allmeals;
+    }
+
+    public Insurance[] getAllinsurances() {
+        return allinsurances;
+    }
+
+    public HoldLuggage[] getAllholdluggages() {
+        return allholdluggages;
+    }
+
+    public void addMeal(String v) {
+        for (Meal m : allmeals) {
+            if (m.getCode().equals(v)) {
+                meals.add(m);
+                break;
+            }
+        }
+    }
+
+    public void addInsurance(String v) {
+        for (Insurance i : allinsurances) {
+            if (i.getCode().equals(v)) {
+                insurances.add(i);
+                break;
+            }
+        }
+    }
+
+    public void addHoldLuggage(String v) {
+        for (HoldLuggage h : allholdluggages) {
+            if (h.getCode().equals(v)) {
+                luggages.add(h);
+                break;
+            }
+        }
+    }
 
 }
