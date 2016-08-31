@@ -53,6 +53,14 @@ public class Reservation {
     public String getNumber() {
         return number;
     }
+    
+    public double getTotalPrice(){
+        double tot=0;
+        for(Ticket t:tickets)
+            tot=tot+t.getTotalPrice();
+        return tot;    
+    }
+            
 
 
     public String getCodeFlight() {

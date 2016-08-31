@@ -153,6 +153,7 @@ public class CustomerPanel extends JPanel{
     {
         //tutti i Button e i TextField diventano trasparenti
     home.trasparentButton(conferma);
+  
       
   
     home.trasparentTextField(this.email0);

@@ -46,9 +46,10 @@ public class RiassuntoPanel extends JPanel {
     JLabel ritorno = new JLabel();
     JLabel data = new JLabel();
     JLabel orario = new JLabel();
+    JLabel prezzototale = new JLabel();
 
     JPanel info = new JPanel();
-    JPanel infoPasseggero = new JPanel();
+    
 
     JLabel classe = new JLabel();
 
@@ -56,21 +57,23 @@ public class RiassuntoPanel extends JPanel {
     JLabel numPosto = new JLabel();
     JComboBox passeggeri = new JComboBox();
     JTextArea riassunto = new JTextArea(30, 10);
+    JScrollPane riassuntoS=new JScrollPane(riassunto);
 
     JButton conferma = new JButton("Conferma");
 
     public RiassuntoPanel(HomeFrame home, Controller controller) throws IOException {
         this.home = home;
         passengers = home.getPassengers();
+        home.getReservation().setTickets(passengers);
         reservation = home.getReservation();
         this.controller = controller;
         flight = controller.searchFlight(new Flight(home.getCodeflight()));
         this.setVisible(true);
         setOpaque(false);
         addComponents(this);
-        home.setallFont(infoGenerali);
-        home.setallFont(this.info);
-        home.setallFont(this.infoPasseggero);
+        
+        
+        
         this.makeComponentsTrasparent();
         passeggeri.setForeground(Color.black);
 
@@ -85,11 +88,14 @@ public class RiassuntoPanel extends JPanel {
         pane.add(info, BorderLayout.CENTER);
 
         pane.add(conferma, BorderLayout.SOUTH);
+        
+        //LISTENER CONFERMA!
         conferma.addActionListener(new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
+                    
                     controller.makeReservation(home.getReservation());
                     JOptionPane.showMessageDialog(home, "Congratulazioni!\n" + "Prenotazione Effettuata\n");
                     home.returnHome();
@@ -102,7 +108,7 @@ public class RiassuntoPanel extends JPanel {
     }
 
     private void initInfoGenerali() {
-        infoGenerali.setLayout(new GridLayout(3, 2));
+        infoGenerali.setLayout(new GridLayout(3, 3));
         infoGenerali.setOpaque(false);
         codice.setText(reservation.getCodeFlight());
         infoGenerali.add(codice);
@@ -120,6 +126,8 @@ public class RiassuntoPanel extends JPanel {
         String d2 = format2.format(flight.getDateDeparture().getTime());
         orario.setText(d2);
         infoGenerali.add(orario);
+        prezzototale.setText("Prezzo totale: "+reservation.getTotalPrice()+ "€");
+        infoGenerali.add(prezzototale);
 
     }
 
@@ -131,51 +139,24 @@ public class RiassuntoPanel extends JPanel {
         for (int i = 0; i < passengers.size(); i++) {
             passeggeri.addItem(passengers.get(i).getName() + " " + passengers.get(i).getSurname());
         }
-        infoPasseggero.setLayout(new GridLayout(3, 2));
-        infoPasseggero.setOpaque(false);
-
-        numPosto.setText("Posto a sedere: " + passengers.get(0).getNseat());
-        infoPasseggero.add(numPosto);
-
-        int cl = home.getFlighttmp().getSeats().get(passengers.get(0).getNseat() - 1).getClasse();
-        classe.setText("Classe: " + cl);
-        infoPasseggero.add(classe);
-        prezzo.setText("Prezzo passeggero: " + passengers.get(0).getTotalPrice() + "€");
-        infoPasseggero.add(prezzo);
-       
-            for (Meal m : passengers.get(0).getMeals()) {
-                riassunto.append(m.toString()+"\n");
-            }
-       
-
-        riassunto.append("\n|___________________________|\n");
-
-       
-            for (Insurance i : passengers.get(0).getInsurances()) {
-                riassunto.append(i.toString() +"\n");
-            }
-
-        riassunto.append("\n|___________________________|\n");
-
-       
-            for (HoldLuggage h : passengers.get(0).getHoldLuggages()) {
-                riassunto.append(h.toString()+"\n");
-            }
-
-     
-
-        JScrollPane pane = new JScrollPane(riassunto);
-        infoPasseggero.add(pane);
-        info.add(infoPasseggero, BorderLayout.CENTER);
-
-        passeggeri.addActionListener(PassengerListener());
-
+      passeggeri.addActionListener(PassengerListener());
+        
+        riassunto.setText("");
+        riassunto.append(passengers.get(0).printTicketPassenger());
+        riassunto.append("ATTENZIONE: codice biglietto verrà erogato solo al momento del check-in!");
+        info.add(riassunto,BorderLayout.CENTER);
+        riassunto.setEditable(false);
     }
 
     private void makeComponentsTrasparent() {
         home.trasparentButton(conferma);
         home.setallFont(conferma);
-
+        riassuntoS.getViewport().setOpaque(false);
+        home.setallFont(riassuntoS.getViewport());
+        home.setallFont(infoGenerali);
+        home.setallFont(info);
+        riassunto.setOpaque(false);
+        riassunto.setFont(new Font("Helvetica", Font.BOLD, 20));
     }
 
     private ActionListener PassengerListener() {
@@ -183,44 +164,13 @@ public class RiassuntoPanel extends JPanel {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-
-                infoPasseggero.removeAll();
-                infoPasseggero.setOpaque(false);
-                infoPasseggero.setLayout(new GridLayout(3, 2));
-                riassunto.setText("");
-                numPosto.setText("Posto a sedere: " + passengers.get(passeggeri.getSelectedIndex()).getNseat());
-                infoPasseggero.add(numPosto);
-                int cl = home.getFlighttmp().getSeats().get(passengers.get(passeggeri.getSelectedIndex()).getNseat() - 1).getClasse();
-                classe.setText("Classe: " + cl);
-                infoPasseggero.add(classe);
-                prezzo.setText("Prezzo passeggero: " + passengers.get(passeggeri.getSelectedIndex()).getTotalPrice() + "€");
-                infoPasseggero.add(prezzo);
-
-               
-                    for (Meal m : passengers.get(passeggeri.getSelectedIndex()).getMeals()) {
-                        riassunto.append(m.toString() +"\n");
-                        
-                    }
-                
-                riassunto.append("\n|___________________________|\n");
-                
-                    for (Insurance i : passengers.get(passeggeri.getSelectedIndex()).getInsurances()) {
-                        riassunto.append(i.toString() +"\n");
-                    }
-              
-
-                riassunto.append("\n|___________________________|\n");
-               
-                    for (HoldLuggage h : passengers.get(passeggeri.getSelectedIndex()).getHoldLuggages()) {
-                        riassunto.append(h.toString()+"\n");
-                    }
-
-                JScrollPane pane1 = new JScrollPane(riassunto);
-                infoPasseggero.add(pane1);
-                infoPasseggero.repaint();
+                riassunto.setText(passengers.get(passeggeri.getSelectedIndex()).printTicketPassenger());
+                riassunto.append("ATTENZIONE: codice biglietto verrà erogato solo al momento del check-in!");
             }
         };
         return evento;
     }
 
+      
+  
 }
