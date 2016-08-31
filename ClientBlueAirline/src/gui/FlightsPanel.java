@@ -6,7 +6,7 @@
 package gui;
 
 
-import controller.ClientBlueAirline;
+import controller.Controller;
 import java.awt.Color;
 import java.awt.ComponentOrientation;
 import java.awt.Container;
@@ -38,7 +38,7 @@ import objects.Flight;
  */
 public class FlightsPanel  extends JPanel {
     
-    ClientBlueAirline controller;
+    Controller controller;
     HomeFrame home;
     private ArrayList<Flight> flights;
     
@@ -52,7 +52,7 @@ public class FlightsPanel  extends JPanel {
     
     JTable voli;
   
-        public FlightsPanel (ClientBlueAirline company, HomeFrame home, ArrayList<Flight> flight) 
+        public FlightsPanel (Controller company, HomeFrame home, ArrayList<Flight> flight) 
     {   
         this.home = home;
         this.controller=company;

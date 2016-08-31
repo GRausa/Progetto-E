@@ -7,8 +7,8 @@ package gui;
 
 
 
-import controller.ClientBlueAirline;
-import TUI.ControllerTxt;
+import controller.Controller;
+import tui.ControllerTxt;
 import java.awt.Dimension;
 import java.awt.HeadlessException;
 import java.io.FileNotFoundException;
@@ -25,7 +25,7 @@ import javax.swing.JFrame;
 public class TestUi {
   
     public static void main(String[] args) throws IOException {
-            ClientBlueAirline clientBlueAirline=new ClientBlueAirline();
+            Controller clientBlueAirline=new Controller();
              HomeFrame frame = new HomeFrame("BLUE AIRLINES",clientBlueAirline);
         
             

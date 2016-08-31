@@ -9,8 +9,8 @@ package gui;
 
 
 
-import TUI.MethodsControl;
-import controller.ClientBlueAirline;
+import tui.MethodsControl;
+import controller.Controller;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.IOException;
@@ -33,7 +33,7 @@ public class PasseggeriPanel extends JPanel{
     
  
     private HomeFrame home;
-    private ClientBlueAirline controller;
+    private Controller controller;
     protected ArrayList<JComboBox> meal;
     protected ArrayList<JComboBox> insurance;
     protected ArrayList<JComboBox> holdluggage;
@@ -83,7 +83,7 @@ public class PasseggeriPanel extends JPanel{
     JTextField id0 =new JTextField("Inserisci id");
     JLabel id = new JLabel("ID");
         
-    public PasseggeriPanel(HomeFrame home, ClientBlueAirline controller) {
+    public PasseggeriPanel(HomeFrame home, Controller controller) {
         this.home = home;
         this.controller = controller;
         this.setOpaque(false);

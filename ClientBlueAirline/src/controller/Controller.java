@@ -17,14 +17,13 @@ import objects.Insurance;
 import objects.Meal;
 import objects.Reservation;
 import objects.Route;
-import objects.Seat;
 import objects.Ticket;
 
 /**
  *
- * @author cl418377
+ * @author Giovanni
  */
-public class ClientBlueAirline {
+public class Controller {
 
     public Socket clientSocket;
     int PortNumber = 8888;
@@ -32,7 +31,7 @@ public class ClientBlueAirline {
     public BufferedReader in;
     Gson gson = new Gson();
 
-    public ClientBlueAirline() throws IOException {
+    public Controller() throws IOException {
         clientSocket = new Socket("localhost", PortNumber);
         out = new PrintWriter(clientSocket.getOutputStream(), true);
         in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
