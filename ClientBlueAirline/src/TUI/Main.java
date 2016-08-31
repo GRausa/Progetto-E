@@ -7,23 +7,25 @@ package TUI;
 
 import controller.ClientBlueAirline;
 import java.io.IOException;
+import java.util.ArrayList;
+import static java.util.Arrays.asList;
 
 /**
  *
  * @author cl418377
  */
 public class Main {
+
     public static void main(String[] args) throws IOException {
-            ClientBlueAirline clientBlueAirline=new ClientBlueAirline();
-          
-            
+        ClientBlueAirline clientBlueAirline = new ClientBlueAirline();
+        if (clientBlueAirline.connect(MethodsControl.lettura(new ArrayList<>(asList("PUT IP SERVER"))).get(0))) {
             ControllerTxt r1 = new ControllerTxt(clientBlueAirline);
-            //scrittura r2 = new scrittura(ciao);
-		
+
             Thread nuovoThread1 = new Thread(r1);
-            //Thread nuovoThread2 = new Thread(r2);
 
             nuovoThread1.start();
-            //nuovoThread2.start();
+        }
+
+        System.out.println("ERRORE CONNESSIONE SERVER NON RIUSCITA");
     }
 }
