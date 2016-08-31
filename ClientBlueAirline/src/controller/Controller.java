@@ -65,8 +65,7 @@ public class Controller {
         out.println("RICERCAVOLOCODICE " + gson.toJson(flight));
         Flight f = gson.fromJson(in.readLine(), Flight.class);
         return f;
-    }
-   
+    }   
 
     public Reservation makeReservation(Reservation res) throws IOException {
         out.println("RESERVATION " + gson.toJson(res));
@@ -79,7 +78,6 @@ public class Controller {
     }
 
     public Route[] checkRoute(Route rotta) throws IOException {
-
         out.println("ROTTE " + gson.toJson(rotta));
         String serverout = in.readLine();
         Route[] rotte = gson.fromJson(serverout, Route[].class);        

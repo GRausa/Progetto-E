@@ -82,14 +82,14 @@ public class ParserSQL {
             ArrayList<Seat> seats = new ArrayList<>();
             int numberSeat = resultQuery.getInt("NUMERO");
             int classSeat = resultQuery.getInt("Classe");
-            String passenger = resultQuery.getString("PASSEGGERO"); //è null se il ticket nel db è NULL 
-            seats.add(new Seat(numberSeat,classSeat,passenger));
+            String ticket = resultQuery.getString("PASSEGGERO"); //è null se il ticket nel db è NULL 
+            seats.add(new Seat(numberSeat,classSeat,ticket));
       
             while (resultQuery.next()) {
                 numberSeat = resultQuery.getInt("NUMERO");
                 classSeat = resultQuery.getInt("Classe");
-                passenger = resultQuery.getString("PASSEGGERO");
-                seats.add(new Seat(numberSeat,classSeat,passenger));
+                ticket = resultQuery.getString("PASSEGGERO");
+                seats.add(new Seat(numberSeat,classSeat,ticket));
             }            
             flight.setSeats(seats);        
             return flight;
@@ -107,15 +107,15 @@ public class ParserSQL {
             String number = resultQuery.getString("NUMERO");
             Reservation res = new Reservation(codeReservation, email, number, codeFlight);
             
-            ArrayList<Ticket> ticketPassengers = new ArrayList<>();
+            ArrayList<Ticket> ticket = new ArrayList<>();
             String codeTicket = resultQuery.getString("COD_TICKET");
-            ticketPassengers.add(new Ticket(codeTicket));
+            ticket.add(new Ticket(codeTicket));
             
             while (resultQuery.next()){
                 codeTicket = resultQuery.getString("COD_TICKET");
-                ticketPassengers.add(new Ticket(codeTicket));
+                ticket.add(new Ticket(codeTicket));
             }
-            res.setTickets(ticketPassengers);
+            res.setTickets(ticket);
             return res;
         }
         else{
@@ -141,8 +141,8 @@ public class ParserSQL {
         while (resultQuery.next()) {
             int num = Integer.parseInt(resultQuery.getString("NUMERO"));
             int classe = Integer.parseInt(resultQuery.getString("Classe"));
-            String passenger = resultQuery.getString("PASSEGGERO");
-            seats.add(new Seat(num, classe, passenger));
+            String ticket = resultQuery.getString("PASSEGGERO");
+            seats.add(new Seat(num, classe, ticket));
         }
         return seats;    
     }
