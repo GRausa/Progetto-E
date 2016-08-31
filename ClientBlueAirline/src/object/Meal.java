@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package oggetti;
+package object;
 
 /**
  * La classe Meal indica la presenza del pasto. Non in tutti i voli si ha la possibilità di scegliere il pasto.

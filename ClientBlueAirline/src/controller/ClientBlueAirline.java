@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package clientblueairline;
+package controller;
 
 import com.google.gson.Gson;
 import java.io.BufferedReader;
@@ -11,14 +11,14 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
-import oggetti.Flight;
-import oggetti.HoldLuggage;
-import oggetti.Insurance;
-import oggetti.Meal;
-import oggetti.Reservation;
-import oggetti.Route;
-import oggetti.Seat;
-import oggetti.TicketPassenger;
+import object.Flight;
+import object.HoldLuggage;
+import object.Insurance;
+import object.Meal;
+import object.Reservation;
+import object.Route;
+import object.Seat;
+import object.TicketPassenger;
 
 /**
  *
@@ -47,7 +47,7 @@ public class ClientBlueAirline {
     }
 
     public Flight[] searchFlights(Flight flight) throws IOException {
-        out.println("RICERCAVOLO " + gson.toJson(flight));
+        out.println("RICERCAVOLI " + gson.toJson(flight));
         Flight[] flights = gson.fromJson(in.readLine(), Flight[].class);
         return flights;
     }

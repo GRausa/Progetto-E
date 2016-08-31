@@ -5,7 +5,7 @@
  */
 package TUI;
 
-import clientblueairline.ClientBlueAirline;
+import controller.ClientBlueAirline;
 import java.io.IOException;
 import java.util.ArrayList;
 import static java.util.Arrays.asList;
@@ -13,13 +13,13 @@ import java.util.GregorianCalendar;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import oggetti.Flight;
-import oggetti.HoldLuggage;
-import oggetti.Insurance;
-import oggetti.Meal;
-import oggetti.Reservation;
-import oggetti.Route;
-import oggetti.TicketPassenger;
+import object.Flight;
+import object.HoldLuggage;
+import object.Insurance;
+import object.Meal;
+import object.Reservation;
+import object.Route;
+import object.TicketPassenger;
 
 /**
  *

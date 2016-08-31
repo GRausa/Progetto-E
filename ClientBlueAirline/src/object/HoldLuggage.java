@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package oggetti;
+package object;
 
 /**
  *La classe HoldLuggage indica la presenza del bagaglio da stiva. A differenza del bagaglio a mano richiede

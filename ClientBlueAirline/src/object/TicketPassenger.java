@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package oggetti;
+package object;
 
 import java.util.ArrayList;
 
 /**
  *
- * @author cl418377
+ * @author Giovanni
  */
 public class TicketPassenger {
 
@@ -19,7 +19,7 @@ public class TicketPassenger {
     private ArrayList<Meal> meals;
     private ArrayList<HoldLuggage> holdLuggages;
     private ArrayList<Insurance> insurances;
-    boolean checkIn;
+    private boolean checkIn;
 
     public TicketPassenger(String ID, String name, String surname, int nseat, int classe, String codeFlight, double priceFlight) {
         this.ID = ID;

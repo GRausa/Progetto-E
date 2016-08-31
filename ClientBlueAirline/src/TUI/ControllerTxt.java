@@ -5,7 +5,7 @@
  */
 package TUI;
 
-import clientblueairline.ClientBlueAirline;
+import controller.ClientBlueAirline;
 
 public class ControllerTxt implements Runnable {
 
