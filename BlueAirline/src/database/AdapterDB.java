@@ -56,17 +56,7 @@ public interface AdapterDB {
 
     //verifico se è stato fatto il checkIn
     boolean isCheckIn(String codeTicket) throws SQLException;
-
-    /*
-    public double returnPriceFlight(String codflight) throws SQLException {
-    String query
-    = "SELECT PREZZO AS PREZZOVOLO\n"
-    + "FROM Volo\n"
-    + "WHERE COD_VOLO='" + codflight + "'";
-    ResultSet resultQuery = SQL.queryRead(query);
-    return ParserSQL.parseFunctionSQL(resultQuery, "PREZZOVOLO");
-    }
-     */
+    
     Reservation makeReservation(Reservation reservation) throws SQLException;
 
     int numberSeatFirstClassFlight(String cod) throws SQLException;
