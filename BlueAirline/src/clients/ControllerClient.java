@@ -14,7 +14,7 @@ import objects.Insurance;
 import objects.Meal;
 import objects.Reservation;
 import objects.Route;
-import objects.TicketPassenger;
+import objects.Ticket;
 
 /**
  *
@@ -68,7 +68,7 @@ public class ControllerClient {
         return adapter.numberSeatFree(codeFlight);
     }
     
-    public TicketPassenger editSeatTicketPassenger(TicketPassenger tp) throws SQLException{
+    public Ticket editSeatTicketPassenger(Ticket tp) throws SQLException{
         return adapter.editSeatTicketPassenger(tp);
     }
     
@@ -108,8 +108,8 @@ public class ControllerClient {
     }
     
     //ritorna ticketPassenger
-    public TicketPassenger getTicketPassenger(String codeTicket) throws SQLException{
-        TicketPassenger tp = adapter.getTicketPassenger(codeTicket);
+    public Ticket getTicketPassenger(String codeTicket) throws SQLException{
+        Ticket tp = adapter.getTicketPassenger(codeTicket);
         if(tp!=null){
             tp.setMeals(this.getMealsTicketPassenger(codeTicket));
             tp.setHoldLuggages(this.getHoldLuggagesTicketPassenger(codeTicket));
@@ -137,8 +137,8 @@ public class ControllerClient {
     public Reservation getReservtion(int codeReservation) throws SQLException{
         Reservation res = adapter.getReservation(codeReservation);
         if(res!=null){
-            ArrayList<TicketPassenger> ticketPassengers = new ArrayList<>();
-            for(TicketPassenger tp : res.getPassengers()){
+            ArrayList<Ticket> ticketPassengers = new ArrayList<>();
+            for(Ticket tp : res.getPassengers()){
                 ticketPassengers.add(this.getTicketPassenger(tp.getCode()));
             }
             res.setPassengers(ticketPassengers);;
@@ -147,7 +147,7 @@ public class ControllerClient {
     }
     
     //modifica il biglietto 
-    public TicketPassenger editTicketPassenger(TicketPassenger tp) throws SQLException {
+    public Ticket editTicketPassenger(Ticket tp) throws SQLException {
         return adapter.editTicketPassenger(tp);
     }
     

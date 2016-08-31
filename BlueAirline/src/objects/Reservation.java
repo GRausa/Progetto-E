@@ -12,7 +12,7 @@ import java.util.ArrayList;
  * @author Giovanni
  */
 public class Reservation {
-    private ArrayList<TicketPassenger> passengers;
+    private ArrayList<Ticket> passengers;
     private int code;
     private String email, number, codeFlight;
 
@@ -29,11 +29,11 @@ public class Reservation {
         this.codeFlight = codeFlight;
     }
     
-    public ArrayList<TicketPassenger> getPassengers() {
+    public ArrayList<Ticket> getPassengers() {
         return passengers;
     }
 
-    public void setPassengers(ArrayList<TicketPassenger> passengers) {
+    public void setPassengers(ArrayList<Ticket> passengers) {
         this.passengers = passengers;
     }
     

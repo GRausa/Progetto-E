@@ -19,7 +19,7 @@ import objects.Insurance;
 import objects.Meal;
 import objects.Reservation;
 import objects.Route;
-import objects.TicketPassenger;
+import objects.Ticket;
 
 /**
  *
@@ -167,7 +167,7 @@ public class MethodsControl {
         }        
     }
     
-    public static void addMealPassenger(TicketPassenger p, Meal[] meals, String v){
+    public static void addMealPassenger(Ticket p, Meal[] meals, String v){
         for (Meal m : meals) {
             if (m.getCode().equals(v)) {
                 p.addMeals(m);
@@ -176,7 +176,7 @@ public class MethodsControl {
         }
     }
     
-    public static void addHoldLuggagePassenger(TicketPassenger p, HoldLuggage[] holdLuggages, String v){
+    public static void addHoldLuggagePassenger(Ticket p, HoldLuggage[] holdLuggages, String v){
         for (HoldLuggage hl : holdLuggages) {
             if (hl.getCode().equals(v)) {
                 p.addHoldLuggage(hl);
@@ -185,7 +185,7 @@ public class MethodsControl {
         }
     }
     
-    public static void addInsurancePassenger(TicketPassenger p, Insurance[] insurances, String v){
+    public static void addInsurancePassenger(Ticket p, Insurance[] insurances, String v){
         for (Insurance in : insurances) {
             if (in.getCode().equals(v)) {
                 p.addInsurance(in);
@@ -194,8 +194,8 @@ public class MethodsControl {
         }
     }
     
-    public static TicketPassenger insertAggiuntePassenger(String[] vetsplit, int seat, int classe, String codeFlight, double price, Meal[] meals,Insurance[] insurances,HoldLuggage[] holdLuggages){
-        TicketPassenger p = new TicketPassenger(vetsplit[0], vetsplit[1], vetsplit[2], seat, classe, codeFlight, price);
+    public static Ticket insertAggiuntePassenger(String[] vetsplit, int seat, int classe, String codeFlight, double price, Meal[] meals,Insurance[] insurances,HoldLuggage[] holdLuggages){
+        Ticket p = new Ticket(vetsplit[0], vetsplit[1], vetsplit[2], seat, classe, codeFlight, price);
         for (int j = 4; j < vetsplit.length; j++) {
             String v = vetsplit[j];
             switch (vetsplit[j].charAt(0)) {
@@ -215,9 +215,9 @@ public class MethodsControl {
         return p;
     }
     
-    public static ArrayList<TicketPassenger> insertPassengers(int num, Flight flight,Meal[] meals,Insurance[] insurances,HoldLuggage[] holdLuggages){
+    public static ArrayList<Ticket> insertPassengers(int num, Flight flight,Meal[] meals,Insurance[] insurances,HoldLuggage[] holdLuggages){
         Scanner input = new Scanner(System.in);
-        ArrayList<TicketPassenger> passengers = new ArrayList<TicketPassenger>();
+        ArrayList<Ticket> passengers = new ArrayList<Ticket>();
         for (int k = 0; k < num; k++) {
             boolean c = false;
             do {
@@ -229,7 +229,7 @@ public class MethodsControl {
                     if (flight.getSeats().get(seat-1).getPassenger() == null) {
                         flight.getSeats().get(seat-1).setPassenger(vetsplit[0]);
                         int classe = flight.getSeats().get(seat-1).getClasse();
-                        TicketPassenger p = MethodsControl.insertAggiuntePassenger(vetsplit, seat, classe, flight.getCode(), flight.getPrezzo(), meals, insurances, holdLuggages);
+                        Ticket p = MethodsControl.insertAggiuntePassenger(vetsplit, seat, classe, flight.getCode(), flight.getPrezzo(), meals, insurances, holdLuggages);
                         c = true;
                         passengers.add(p);
                     } else {
@@ -267,7 +267,7 @@ public class MethodsControl {
             }
         }
         MethodsControl.toStringAggiunte(meals,insurances,holdLuggages);
-        ArrayList<TicketPassenger> passengers = MethodsControl.insertPassengers(num,flight,meals,insurances,holdLuggages); 
+        ArrayList<Ticket> passengers = MethodsControl.insertPassengers(num,flight,meals,insurances,holdLuggages); 
         System.out.println("INSERISCI NUMERO");
         String numero = input.nextLine();
         System.out.println("INSERISCI MAIL");
@@ -281,7 +281,7 @@ public class MethodsControl {
         try {
             res = client.makeReservation(res);
             flight = client.searchFlight(flight); //aggiorno il flight dopo la prenotazione
-            for (TicketPassenger tp : res.getPassengers()) { //controllo assegnamento posti
+            for (Ticket tp : res.getPassengers()) { //controllo assegnamento posti
                 if (tp.getNseat() == -1) {
                     System.out.println("Passeggero: " + tp.getName() + " " + tp.getSurname() + " (" + tp.getID() + ") non inserito, il posto è stato occupato.\nPosti disponibili:");
                     System.out.println(flight.printAllSeats());
@@ -332,7 +332,7 @@ public class MethodsControl {
     
     public static void editTicketPassenger(ClientBlueAirline client){
         Scanner input = new Scanner(System.in);
-        TicketPassenger tp = MethodsControl.searchTicketPassenger(client);
+        Ticket tp = MethodsControl.searchTicketPassenger(client);
         if(tp!=null){
             Flight flight = MethodsControl.searchFlight(client, tp.getCodeFlight());
             Meal[] meals = null;
@@ -359,14 +359,14 @@ public class MethodsControl {
                             if (flight.getSeats().get(seat-1).getPassenger() == null) { //OSS -> -1
                                 flight.getSeats().get(seat-1).setPassenger(tp.getCode()); //forse da eliminare
                                 int classe = flight.getSeats().get(seat-1).getClasse();
-                                TicketPassenger p2 = MethodsControl.insertAggiuntePassenger(vetsplit, seat, classe, flight.getCode(), flight.getPrezzo(), meals, insurances, holdLuggages);
+                                Ticket p2 = MethodsControl.insertAggiuntePassenger(vetsplit, seat, classe, flight.getCode(), flight.getPrezzo(), meals, insurances, holdLuggages);
                                 p2.setCode(tp.getCode());
                                 //metodo modifica
                                 if(client.editTicketPassenger(p2).getNseat()==-1){
                                     System.out.println("Il posto è stato occupato. Riprova.");
                                 }
                                 else{
-                                    TicketPassenger tp2 = client.getTicketPassenger(p2);
+                                    Ticket tp2 = client.getTicketPassenger(p2);
                                     System.out.println(tp2.printTicketPassenger());
                                     System.out.println("Aggiunta totale di: "+(tp2.getTotalPrice()-tp.getTotalPrice())+" euro");
                                     c = true;
@@ -411,7 +411,7 @@ public class MethodsControl {
         }
     }
     
-    public static boolean isCheckIn(ClientBlueAirline client, TicketPassenger tp) throws IOException{
+    public static boolean isCheckIn(ClientBlueAirline client, Ticket tp) throws IOException{
         if(client.isCheckIn(tp)){
             return true;                    
         }
@@ -424,7 +424,7 @@ public class MethodsControl {
         Scanner input = new Scanner(System.in);
         System.out.println("Inserisci il codice ticket per effettuare il check-in:");
         String codeTicket = input.nextLine();
-        TicketPassenger tp = new TicketPassenger(codeTicket);
+        Ticket tp = new Ticket(codeTicket);
         try {
             if(MethodsControl.isCheckIn(client, tp)){
                 System.out.println("Il check-in è stato già effettuato.");
@@ -438,11 +438,11 @@ public class MethodsControl {
         }
     }
     
-    public static TicketPassenger searchTicketPassenger(ClientBlueAirline client){
+    public static Ticket searchTicketPassenger(ClientBlueAirline client){
         Scanner input = new Scanner(System.in);
         System.out.println("Inserisci il codice del biglietto: ");
         String codeT = input.nextLine();
-        TicketPassenger tp1 = new TicketPassenger(codeT);
+        Ticket tp1 = new Ticket(codeT);
         Flight f = null;
         {
             try {

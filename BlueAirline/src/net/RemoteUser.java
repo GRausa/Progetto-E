@@ -26,7 +26,8 @@ import objects.Insurance;
 import objects.Meal;
 import objects.Route;
 import objects.Reservation;
-import objects.TicketPassenger;
+import objects.Ticket;
+import static jdk.nashorn.internal.objects.NativeMath.log;
 
 /**
  *
@@ -137,11 +138,11 @@ class RemoteUser extends Thread {
             }
         });
         
-        commands.put("EDITTICKETPASSENGER", new Command() {
+        commands.put("EDITTICKET", new Command() {
             @Override
             public void execute(String args) {
                 try {
-                    TicketPassenger tp = gson.fromJson(args, TicketPassenger.class);
+                    Ticket tp = gson.fromJson(args, Ticket.class);
                     tp=company.editTicketPassenger(tp);
                     out.println(gson.toJson(tp));
                 } catch (SQLException ex) {
@@ -154,7 +155,7 @@ class RemoteUser extends Thread {
             @Override
             public void execute(String args) {
                 try {
-                    TicketPassenger tp = gson.fromJson(args, TicketPassenger.class);
+                    Ticket tp = gson.fromJson(args, Ticket.class);
                     tp=company.editSeatTicketPassenger(tp);
                     out.println(gson.toJson(tp));
                 } catch (SQLException ex) {
@@ -277,7 +278,7 @@ class RemoteUser extends Thread {
             @Override
             public void execute(String args) {                
                 try {
-                    TicketPassenger tp = gson.fromJson(args, TicketPassenger.class);
+                    Ticket tp = gson.fromJson(args, Ticket.class);
                     company.setCheckIn(tp.getCode());
                     tp = company.getTicketPassenger(tp.getCode());
                     out.println(gson.toJson(tp));
@@ -292,7 +293,7 @@ class RemoteUser extends Thread {
             @Override
             public void execute(String args) {                
                 try {
-                    TicketPassenger tp = gson.fromJson(args, TicketPassenger.class);
+                    Ticket tp = gson.fromJson(args, Ticket.class);
                     Boolean checkIn = company.isCheckIn(tp.getCode());
                     out.println(gson.toJson(checkIn));
                 } catch (SQLException ex) {
@@ -306,7 +307,7 @@ class RemoteUser extends Thread {
             @Override
             public void execute(String args) {                
                 try {
-                    TicketPassenger tp = gson.fromJson(args, TicketPassenger.class);
+                    Ticket tp = gson.fromJson(args, Ticket.class);
                     tp = company.getTicketPassenger(tp.getCode());
                     out.println(gson.toJson(tp));
                 } catch (SQLException ex) {

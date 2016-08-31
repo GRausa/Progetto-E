@@ -18,7 +18,7 @@ import objects.Meal;
 import objects.Reservation;
 import objects.Route;
 import objects.Seat;
-import objects.TicketPassenger;
+import objects.Ticket;
 
 /**
  *
@@ -64,9 +64,9 @@ public class ClientBlueAirline {
         return gson.fromJson(in.readLine(), Reservation.class);
     }
     
-    public TicketPassenger editSeatTicketPassenger(TicketPassenger tp) throws IOException{
+    public Ticket editSeatTicketPassenger(Ticket tp) throws IOException{
         out.println("EDITSEATTICKETPASSENGER " + gson.toJson(tp));
-        return gson.fromJson(in.readLine(), TicketPassenger.class);
+        return gson.fromJson(in.readLine(), Ticket.class);
     }
 
     public Route[] checkRoute(Route rotta) throws IOException {
@@ -107,27 +107,27 @@ public class ClientBlueAirline {
         return insurances;
     }
     
-    public TicketPassenger checkIn(TicketPassenger tp) throws IOException{
+    public Ticket checkIn(Ticket tp) throws IOException{
         out.println("CHECKIN " + gson.toJson(tp));
-        TicketPassenger tp1 = gson.fromJson(in.readLine(), TicketPassenger.class);
+        Ticket tp1 = gson.fromJson(in.readLine(), Ticket.class);
         return tp1;
     }
     
-    public boolean isCheckIn(TicketPassenger tp) throws IOException{
+    public boolean isCheckIn(Ticket tp) throws IOException{
         out.println("ISCHECKIN " + gson.toJson(tp));
         Boolean isCheckIn = gson.fromJson(in.readLine(), Boolean.class);
         return isCheckIn;
     }
     
-    public TicketPassenger getTicketPassenger(TicketPassenger tp) throws IOException{
+    public Ticket getTicketPassenger(Ticket tp) throws IOException{
         out.println("PASSEGGERO " + gson.toJson(tp));
-        TicketPassenger tp1 = gson.fromJson(in.readLine(), TicketPassenger.class);
+        Ticket tp1 = gson.fromJson(in.readLine(), Ticket.class);
         return tp1;
     }
     
-    public TicketPassenger editTicketPassenger(TicketPassenger ticketPassenger) throws IOException {
-        out.println("EDITTICKETPASSENGER " + gson.toJson(ticketPassenger));
-        TicketPassenger tp = gson.fromJson(in.readLine(), TicketPassenger.class);
+    public Ticket editTicketPassenger(Ticket ticketPassenger) throws IOException {
+        out.println("EDITTICKET " + gson.toJson(ticketPassenger));
+        Ticket tp = gson.fromJson(in.readLine(), Ticket.class);
         return tp;
     }
     

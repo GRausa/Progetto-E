@@ -18,7 +18,7 @@ import objects.Meal;
 import objects.Reservation;
 import objects.Route;
 import objects.Seat;
-import objects.TicketPassenger;
+import objects.Ticket;
 
 /**
  *
@@ -107,13 +107,13 @@ public class ParserSQL {
             String number = resultQuery.getString("NUMERO");
             Reservation res = new Reservation(codeReservation, email, number, codeFlight);
             
-            ArrayList<TicketPassenger> ticketPassengers = new ArrayList<>();
+            ArrayList<Ticket> ticketPassengers = new ArrayList<>();
             String codeTicket = resultQuery.getString("COD_TICKET");
-            ticketPassengers.add(new TicketPassenger(codeTicket));
+            ticketPassengers.add(new Ticket(codeTicket));
             
             while (resultQuery.next()){
                 codeTicket = resultQuery.getString("COD_TICKET");
-                ticketPassengers.add(new TicketPassenger(codeTicket));
+                ticketPassengers.add(new Ticket(codeTicket));
             }
             res.setPassengers(ticketPassengers);
             return res;
@@ -183,7 +183,7 @@ public class ParserSQL {
         return insurances; 
     }
     
-    public static TicketPassenger parseTicketPassenger(ResultSet resultQuery) throws SQLException{
+    public static Ticket parseTicketPassenger(ResultSet resultQuery) throws SQLException{
         if(resultQuery.next()){
             String codeTicket = resultQuery.getString("COD_TICKET");
             double priceFlight = resultQuery.getDouble("PREZZO");
@@ -196,7 +196,7 @@ public class ParserSQL {
             int classe = resultQuery.getInt("CLASSE");
             boolean cheakIn  = resultQuery.getBoolean("CHECKIN");
             //TicketPassenger(String code, String name, String surname, String codeFlight, int nseat, int codeReservation, int classe, boolean checkIn) {
-            TicketPassenger tp = new TicketPassenger(codeTicket, priceFlight, ID, name, surname, codeFlight, nseat, codeReservation, classe, cheakIn);
+            Ticket tp = new Ticket(codeTicket, priceFlight, ID, name, surname, codeFlight, nseat, codeReservation, classe, cheakIn);
             return tp;
         }
         else{
