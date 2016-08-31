@@ -18,7 +18,7 @@ public class StartTui {
 
     public static void main(String[] args) throws IOException {
         Controller clientBlueAirline = new Controller();
-        if (clientBlueAirline.connect(MethodsControl.lettura(new ArrayList<>(asList("PUT IP SERVER"))).get(0))) {
+        if (clientBlueAirline.connect(MethodsControl.scannerInput(new ArrayList<>(asList("PUT IP SERVER"))).get(0))) {
             ControllerTxt r1 = new ControllerTxt(clientBlueAirline);
 
             Thread nuovoThread1 = new Thread(r1);
