@@ -20,7 +20,7 @@ import javax.mail.internet.MimeMessage;
 public class Email {
 
     String destinatario; // questa variabile contiene l'indirizzo del destinatario
-    private static final String mittente = "thetablueairline@gmail.com"; // questa variabile contiene l'indirizzo del mittente
+    private static final String mittente = "thetablueairlines@gmail.com"; // questa variabile contiene l'indirizzo del mittente
     private static final String host = "smtp.gmail.com";                  // questa variabile contiene l'indirizzo dell'host per l'invio email del nostro.. 
     private static final String pass = "ipuffivolanti";
     //..gestore dell'alds , è da cambiare a seconda del gestore che si ha
