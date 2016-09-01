@@ -36,15 +36,6 @@ public interface InterfaceServer {
     //ritorna tutti i meal
     ArrayList<Meal> getAllMeals() ;
 
-    //ritorna i bagagli di un ticket
-    ArrayList<HoldLuggage> getHoldLuggagesTicket(String codeTicket) throws SQLException;
-
-    //ritorna le assicurazioni di un ticket
-    ArrayList<Insurance> getInsurancesTicket(String codeTicket) throws SQLException;
-
-    //ritorna i pasti di un ticket
-    ArrayList<Meal> getMealsTicket(String codeTicket) throws SQLException;
-
     //ritorna tutta la prenotazione
     Reservation getReservtion(int codeReservation) throws SQLException;
 
@@ -56,9 +47,6 @@ public interface InterfaceServer {
 
     //effettua prenotazione
     Reservation makeReservation(Reservation reservation) throws SQLException;
-
-    //numero posti liberi in un volo
-    int numberSeatFreeFlight(String codeFlight) throws SQLException;
 
     //ricerca di tutte le città
     ArrayList<String> searchAllCitys() ;
@@ -75,13 +63,25 @@ public interface InterfaceServer {
     //ricerca tutte le rotte
     ArrayList<Route> searchRoutes();
 
-    //dato volo e posto vedere se è libero
-    boolean seatIsFree(String codeFlight, int nseat) throws SQLException;
-
     //effettua checkin
     void setCheckIn(String codeTicket) throws SQLException;
 
+    //numero posti liberi in un volo
+    //int numberSeatFreeFlight(String codeFlight) throws SQLException;
+    
+    //dato volo e posto vedere se è libero
+    //boolean seatIsFree(String codeFlight, int nseat) throws SQLException;
+    
     //imposta array posti di un volo
-    Flight setSeatsFlight(Flight flight) throws SQLException;
+    //Flight setSeatsFlight(Flight flight) throws SQLException;    
+
+    //ritorna i bagagli di un ticket
+    //ArrayList<HoldLuggage> getHoldLuggagesTicket(String codeTicket) throws SQLException;
+
+    //ritorna le assicurazioni di un ticket
+    //ArrayList<Insurance> getInsurancesTicket(String codeTicket) throws SQLException;
+
+    //ritorna i pasti di un ticket
+    //ArrayList<Meal> getMealsTicket(String codeTicket) throws SQLException;
     
 }

@@ -54,7 +54,7 @@ public class FacadeControllerServer implements InterfaceServer {
     }
     
     //imposta array posti di un volo 
-    @Override
+    
     public Flight setSeatsFlight(Flight flight) throws SQLException{
         return adapter.setSeatsFlight(flight);
     }
@@ -66,7 +66,6 @@ public class FacadeControllerServer implements InterfaceServer {
     }
     
     //numero posti liberi in un volo
-    @Override
     public int numberSeatFreeFlight(String codeFlight) throws SQLException{
         return adapter.numberSeatFreeFlight(codeFlight);
     }
@@ -84,7 +83,6 @@ public class FacadeControllerServer implements InterfaceServer {
     }
     
     //dato volo e posto vedere se è libero
-    @Override
     public boolean seatIsFree(String codeFlight, int nseat) throws SQLException{
         return adapter.seatIsFree(codeFlight, nseat);
     }
@@ -132,19 +130,16 @@ public class FacadeControllerServer implements InterfaceServer {
     }
     
     //ritorna i pasti di un ticket
-    @Override
     public ArrayList<Meal> getMealsTicket(String codeTicket) throws SQLException{
         return adapter.getMealsTicket(codeTicket);
     }
     
     //ritorna le assicurazioni di un ticket
-    @Override
     public ArrayList<Insurance> getInsurancesTicket(String codeTicket) throws SQLException{
         return adapter.getInsurancesTicket(codeTicket);
     }
     
     //ritorna i bagagli di un ticket
-    @Override
     public ArrayList<HoldLuggage> getHoldLuggagesTicket(String codeTicket) throws SQLException{
         return adapter.getHoldLuggagesTicket(codeTicket);
     }
