@@ -210,10 +210,15 @@ public class PasseggeriPanel extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 int a = Integer.parseInt(nbagagli.getText());
-
                 a--;
-                nbagagli.setText("" + a);
-                home.notifiche.setText("Rimosso un bagaglio da stiva.");
+                if(a<0){
+                    bagaglimeno.setEnabled(false);
+                    a=0;
+                }
+                else{
+                    nbagagli.setText("" + a);
+                    home.notifiche.setText("Rimosso un bagaglio da stiva.");
+                }                               
             }
 
         });
@@ -232,8 +237,11 @@ public class PasseggeriPanel extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 int a = Integer.parseInt(nbagagli.getText());
                 a++;
-                nbagagli.setText("" + a);
-                home.notifiche.setText("Aggiunto un bagaglio da stiva");
+                if(a>=0){
+                    nbagagli.setText("" + a);
+                    home.notifiche.setText("Aggiunto un bagaglio da stiva");
+                    bagaglimeno.setEnabled(true);
+                }
             }
 
         });
@@ -273,8 +281,14 @@ public class PasseggeriPanel extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 int a = Integer.parseInt(nassicurazioni.getText());
                 a--;
-                nassicurazioni.setText("" + a);
-                home.notifiche.setText("Rimossa un'assicurazione");
+                if(a<0){
+                    assicurazionimeno.setEnabled(false);
+                    a=0;
+                }
+                else{
+                    nassicurazioni.setText("" + a);
+                    home.notifiche.setText("Rimosso un'assicurazione.");
+                }
             }
 
         });
@@ -293,8 +307,11 @@ public class PasseggeriPanel extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 int a = Integer.parseInt(nassicurazioni.getText());
                 a++;
-                nassicurazioni.setText("" + a);
-                home.notifiche.setText("Aggiunta un'assicurazione.");
+                if(a>=0){
+                    nassicurazioni.setText("" + a);
+                    home.notifiche.setText("Aggiunta un'assicurazione.");
+                    assicurazionimeno.setEnabled(true);
+                }
             }
 
         });
@@ -358,8 +375,14 @@ public class PasseggeriPanel extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 int a = Integer.parseInt(npasti.getText());
                 a--;
-                npasti.setText("" + a);
-                home.notifiche.setText("Rimosso un pasto.");
+                if(a<0){
+                    pastimeno.setEnabled(false);
+                    a=0;
+                }
+                else{
+                    npasti.setText("" + a);
+                    home.notifiche.setText("Rimosso un pasto");
+                }   
             }
 
         });
@@ -378,8 +401,11 @@ public class PasseggeriPanel extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 int a = Integer.parseInt(npasti.getText());
                 a++;
-                npasti.setText("" + a);
-                home.notifiche.setText("Aggiunto un pasto");
+                if(a>=0){
+                    npasti.setText("" + a);
+                    home.notifiche.setText("Aggiunto un pasto");
+                    pastimeno.setEnabled(true);
+                }
             }
 
         });

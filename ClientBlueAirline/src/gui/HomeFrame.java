@@ -10,8 +10,6 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.*;
-import javax.swing.event.AncestorEvent;
-import javax.swing.event.AncestorListener;
 import objects.Flight;
 import objects.HoldLuggage;
 import objects.Insurance;
