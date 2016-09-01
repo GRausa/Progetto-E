@@ -83,19 +83,20 @@ public class FlightsPanel extends JPanel {
         if (!flights.isEmpty()) {
             int i = 0;
             for (Flight f : flights) {
-                data[i][0] = f.getCode();
-                data[i][1] = f.getRoute().getDeparutreAirport();
-                data[i][2] = f.getRoute().getDestinationAirport();
-                SimpleDateFormat format1 = new SimpleDateFormat("dd-MM-yyyy");
-                String d = format1.format(f.getDateDeparture().getTime());
-                SimpleDateFormat format2 = new SimpleDateFormat("hh:mm a");
-                String d2 = format2.format(f.getDateDeparture().getTime());
-                data[i][3] = d;
-                data[i][4] = d2;
-                data[i][5] = f.getPrezzo();
-                data[i][6] = false;
-                i++;
-            }
+                 if (!(home.getNpasseggeri() > f.getSeatFree())) {   
+                    data[i][0] = f.getCode();
+                    data[i][1] = f.getRoute().getDeparutreAirport();
+                    data[i][2] = f.getRoute().getDestinationAirport();
+                    SimpleDateFormat format1 = new SimpleDateFormat("dd-MM-yyyy");
+                    String d = format1.format(f.getDateDeparture().getTime());
+                    SimpleDateFormat format2 = new SimpleDateFormat("hh:mm a");
+                    String d2 = format2.format(f.getDateDeparture().getTime());
+                    data[i][3] = d;
+                    data[i][4] = d2;
+                    data[i][5] = f.getPrezzo();
+                    data[i][6] = false;
+                    i++;
+            }}
         }
         model.setData(data);
         voli = new JTable(model);

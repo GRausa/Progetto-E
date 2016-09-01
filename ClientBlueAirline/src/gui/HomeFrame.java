@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.*;
+import javax.swing.event.AncestorEvent;
+import javax.swing.event.AncestorListener;
 import objects.Flight;
 import objects.HoldLuggage;
 import objects.Insurance;
@@ -199,7 +201,6 @@ public class HomeFrame extends JFrame {
                 } else {
                     notifiche.setText("Operazione cancellata dall'utente");
                 }
-
             }
 
         });
@@ -259,7 +260,6 @@ public class HomeFrame extends JFrame {
         this.passengers.add(t);
     }
 
-   
     public Reservation getReservation() {
         return reservation;
     }
@@ -333,17 +333,25 @@ public class HomeFrame extends JFrame {
     }
 
     public void setallFont(final JComponent c) {
+
+        if (c instanceof JTextField) {
+            JTextFieldSelected((JTextField) c);
+        }
         if (c.getComponentCount() == 0) {
             if (!(c instanceof JComboBox)) {
                 if (c instanceof JLabel || c instanceof JButton) {
                     c.setFont(new Font("Helvetica", Font.BOLD, 25));
                 } else {
                     c.setFont(new Font("Helvetica", Font.BOLD, 15));
+
                 }
             }
         }
 
         for (Component tmp : c.getComponents()) {
+            if (tmp instanceof JTextField) {
+            JTextFieldSelected((JTextField) tmp);
+        }
             if (tmp instanceof JLabel || tmp instanceof JButton) {
                 tmp.setFont(new Font("Helvetica", Font.BOLD, 25));
             } else {
@@ -439,6 +447,19 @@ public class HomeFrame extends JFrame {
                 break;
             }
         }
+    }
+
+    public void JTextFieldSelected(final JTextField f) {
+        f.addFocusListener(new FocusAdapter() {
+
+            @Override
+            public void focusGained(FocusEvent e) {
+                f.setSelectionStart(0);
+                f.setSelectionEnd(f.getText().length());
+            }
+
+        });
+
     }
 
 }
