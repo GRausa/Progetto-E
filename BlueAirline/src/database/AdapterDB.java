@@ -21,17 +21,15 @@ import objects.Ticket;
  */
 public interface AdapterDB {
 
-    //Reservation addTickets(Reservation reservation) throws SQLException;
-
     Ticket editSeatTicket(Ticket tp) throws SQLException;
 
     Ticket editTicket(Ticket tp) throws SQLException;
 
-    ArrayList<HoldLuggage> getAllHoldLuggages() ;
+    ArrayList<HoldLuggage> getAllHoldLuggages();
 
-    ArrayList<Insurance> getAllInsurances() ;
+    ArrayList<Insurance> getAllInsurances();
 
-    ArrayList<Meal> getAllMeals() ;
+    ArrayList<Meal> getAllMeals();
 
     ArrayList<HoldLuggage> getHoldLuggagesTicket(String codeTicket) throws SQLException;
 
@@ -41,30 +39,15 @@ public interface AdapterDB {
 
     Reservation getReservation(int codeReservation) throws SQLException;
 
-    //ArrayList<Seat> getSeatsFlight(String codeFlight) throws SQLException;
-
     Ticket getTicket(String codeTicket) throws SQLException;
 
-    //void insertSupplement(String code, String codeTicket) throws SQLException;
-
-    //void insertSupplementHoldLuggage(String code, String codeTicket) throws SQLException;
-
-    //void insertSupplementInsurance(String code, String codeTicket) throws SQLException;
-
-    //void insertSupplementMeal(String code, String codeTicket) throws SQLException;
-
-    //verifico se è stato fatto il checkIn
     boolean isCheckIn(String codeTicket) throws SQLException;
-    
+
     Reservation makeReservation(Reservation reservation) throws SQLException;
-
-    //int numberSeatFirstClassFlight(String cod) throws SQLException;
-
-    //int numberSeatFlight(String codeFlight) throws SQLException;
 
     int numberSeatFreeFlight(String codeFlight) throws SQLException;
 
-    ArrayList<String> searchAllCitys() ;
+    ArrayList<String> searchAllCitys();
 
     Flight searchFlight(String codeFlight) throws SQLException;
 
@@ -72,20 +55,37 @@ public interface AdapterDB {
 
     ArrayList<Flight> searchFlights(Route route) throws SQLException;
 
-    ArrayList<Route> searchRoutes() ;
+    ArrayList<Route> searchRoutes();
 
     boolean seatIsFree(String codeFlight, int nseat) throws SQLException;
 
-    //void setAllSeatFlight(Flight volo) throws SQLException;
-
-    ArrayList<Flight> setAllSeatFlights() ;
+    ArrayList<Flight> setAllSeatFlights();
 
     void setCheckIn(String codeTicket) throws SQLException;
 
-    //void setSeat(String volo, int num, int classe) throws SQLException;
-
-    //void setSeatBoolean(String codeFlight, int nSeat, String ticketPassenger, boolean b) throws SQLException;
-
     Flight setSeatsFlight(Flight flight) throws SQLException;
     
+//void setSeat(String volo, int num, int classe) throws SQLException;
+    
+    //int numberSeatFirstClassFlight(String cod) throws SQLException;
+    
+    //void insertSupplement(String code, String codeTicket) throws SQLException;
+
+    //void insertSupplementHoldLuggage(String code, String codeTicket) throws SQLException;
+    
+    //void insertSupplementInsurance(String code, String codeTicket) throws SQLException;
+    
+    //void insertSupplementMeal(String code, String codeTicket) throws SQLException;
+    
+    //ArrayList<Seat> getSeatsFlight(String codeFlight) throws SQLException;
+    
+    //verifico se è stato fatto il checkIn
+    
+    //int numberSeatFlight(String codeFlight) throws SQLException;
+    
+    //void setSeatBoolean(String codeFlight, int nSeat, String ticketPassenger, boolean b) throws SQLException;
+    
+    //void setAllSeatFlight(Flight volo) throws SQLException;
+    
+    //Reservation addTickets(Reservation reservation) throws SQLException;
 }
