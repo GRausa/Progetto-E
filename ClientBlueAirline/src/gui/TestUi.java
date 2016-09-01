@@ -53,20 +53,20 @@ public class TestUi {
 //If a string was returned, say so.
 
         /*
-            int input = JOptionPane.showOptionDialog(null, "CONNESSIONE CON IL SERVER NON RIUSCITA", "ERRORE CONNESSIONE", JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null, null, null);
+         int input = JOptionPane.showOptionDialog(null, "CONNESSIONE CON IL SERVER NON RIUSCITA", "ERRORE CONNESSIONE", JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null, null, null);
 
-            if (input == JOptionPane.OK_OPTION) {
-                System.exit(1);
-            }
+         if (input == JOptionPane.OK_OPTION) {
+         System.exit(1);
+         }
          */
     }
     /*
-            ControllerTxt r1 = new ControllerTxt(clientBlueAirline);
-            //scrittura r2 = new scrittura(ciao);
+     ControllerTxt r1 = new ControllerTxt(clientBlueAirline);
+     //scrittura r2 = new scrittura(ciao);
 		
-            Thread nuovoThread1 = new Thread(r1);
-            //Thread nuovoThread2 = new Thread(r2);
+     Thread nuovoThread1 = new Thread(r1);
+     //Thread nuovoThread2 = new Thread(r2);
 
-            nuovoThread1.start();
-            //nuovoThread2.start();*/
+     nuovoThread1.start();
+     //nuovoThread2.start();*/
 }

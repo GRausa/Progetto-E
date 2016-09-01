@@ -62,6 +62,11 @@ public class Flight {
         return seats;
     }
     
+    public String toString(){
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MMM/yyyy HH:mm");
+        return code+" "+r.printRoute()+"\n"+sdf.format(this.dateDeparture.getTime())+" - "+sdf.format(this.dateDestination.getTime())+"\n"+prezzo+"€";
+    }
+    
     public int getSeatFree(){
         int n=0;
         for(Seat s : seats){

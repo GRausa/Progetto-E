@@ -128,12 +128,10 @@ public class MethodsControl {
     
     public static Flight searchFlight(Controller client, String cod){
         Flight flight = new Flight(cod);        
-        Calendar cal = Calendar.getInstance();                
         {
             try {
-                flight = client.searchFlight(flight); //SISTEMARE
-                System.out.println(flight.getDateDeparture().before(cal.getTime()));
-                if (flight == null || flight.getDateDeparture().before(cal.getTime())) { 
+                flight = client.searchFlight(flight); 
+                if (flight == null) { 
                     System.out.println("Volo non trovato o risulta antecedente alla data odierna");
                     return null;
                 }
@@ -144,9 +142,6 @@ public class MethodsControl {
         System.out.println(flight.toString());
         System.out.println("Posti disponibili: " + flight.getSeatFree() + "/" + flight.getSeats().size());
         System.out.println(flight.printAllSeats());
-        if (flight.getSeatFree() == 0) {
-            System.out.println("Posti esauriti.");            
-        }
         return flight;
     }
     
@@ -241,7 +236,7 @@ public class MethodsControl {
         return passengers;
     }
     
-    public static Reservation makeReservation(Controller client, String cod, Flight flight){
+    public static Reservation makeReservation(Controller client, String cod, Flight flight) throws IOException{
         //Scanner input = new Scanner(System.in);
         int num;
         do {
@@ -250,8 +245,7 @@ public class MethodsControl {
             if (num > flight.getSeatFree()) {
                 System.out.println("Il numero dei passeggeri inseriti supera la disponibilità di posti.");
             }
-        } while (num > flight.getSeatFree());
-        
+        } while (num > flight.getSeatFree());        
         Meal[] meals = null;
         Insurance[] insurances = null;
         HoldLuggage[] holdLuggages = null;
@@ -270,13 +264,13 @@ public class MethodsControl {
         String numero = input.get(0);
         String mail = input.get(1);
         Reservation res = new Reservation(cod, numero, mail, passengers);
+        res = client.makeReservation(res);
         return res;
     }
     
     public static void checkReservation(Controller client, Reservation res, Flight flight){
         //Scanner input = new Scanner(System.in);
-        try {
-            res = client.makeReservation(res);
+        try {            
             flight = client.searchFlight(flight); //aggiorno il flight dopo la prenotazione
             for (Ticket tp : res.getPassengers()) { //controllo assegnamento posti
                 if (tp.getNseat() == -1) {
@@ -316,9 +310,19 @@ public class MethodsControl {
     public static void makeReservation(Controller client){
         String cod=MethodsControl.scannerInput(new ArrayList<>(asList("Inserisci codice Volo"))).get(0);        
         Flight flight = MethodsControl.searchFlight(client, cod);
-        if(flight!=null){             
-            Reservation res = MethodsControl.makeReservation(client, cod, flight);          
-            MethodsControl.checkReservation(client, res, flight);        
+        if(flight!=null){     
+            if(flight.getSeatFree()>0){
+                try {
+                    Reservation res = MethodsControl.makeReservation(client, cod, flight);        
+                    MethodsControl.checkReservation(client, res, flight);
+                } catch (IOException ex) {
+                    Logger.getLogger(MethodsControl.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            else{
+                System.out.println("Posti non disponibili");
+            }
+                        
         }
     }
     
@@ -362,7 +366,8 @@ public class MethodsControl {
     }
     
     public static void editTicket(Controller client, Ticket tp){
-        Flight flight = MethodsControl.searchFlight(client, tp.getCodeFlight());
+        System.out.println("\nAREA MODIFICA:");
+        Flight flight = null;
         Meal[] meals = null;
         Insurance[] insurances = null;
         HoldLuggage[] holdLuggages = null;
@@ -375,6 +380,7 @@ public class MethodsControl {
         }
         try {
             if(!MethodsControl.isCheckIn(client, tp)){
+                flight = MethodsControl.searchFlight(client, tp.getCodeFlight());
                 MethodsControl.editTicket(client, tp, flight, meals, insurances, holdLuggages);
             }
             else{
@@ -389,8 +395,7 @@ public class MethodsControl {
     public static void editTicket(Controller client){
         Ticket tp = MethodsControl.searchTicket(client);
         if(tp!=null){
-            MethodsControl.editTicket(client, tp);
-            
+            MethodsControl.editTicket(client, tp);            
         }        
     }
     //FINE MODIFICA//
@@ -432,13 +437,20 @@ public class MethodsControl {
         String codeTicket = input.get(0);
         Ticket tp = new Ticket(codeTicket);
         try {
-            if(MethodsControl.isCheckIn(client, tp)){
-                System.out.println("Il check-in è stato già effettuato.");
+            tp = client.getTicket(tp);
+            if(tp!=null){
+                if(MethodsControl.isCheckIn(client, tp)){
+                    System.out.println("Il check-in è stato già effettuato.");
+                }
+                else{
+                    tp = client.checkIn(tp);
+                    System.out.println("Check-in effettuato.\n"+tp.printTicketPassenger());                
+                }
             }
             else{
-                tp = client.checkIn(tp);
-                System.out.println("Check-in effettuato.\n"+tp.printTicketPassenger());                
+                System.out.println("Errore inserimento codice biglietto");
             }
+            
         } catch (IOException ex) {
             Logger.getLogger(MethodsControl.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -448,21 +460,21 @@ public class MethodsControl {
         //Scanner input = new Scanner(System.in);
         ArrayList<String> input=MethodsControl.scannerInput(new ArrayList<>(asList("Inserisci il codice del biglietto: ")));
         String codeT = input.get(0);
-        Ticket tp1 = new Ticket(codeT);
+        Ticket t = new Ticket(codeT);
         Flight f = null;
         {
             try {
-                tp1 = client.getTicket(tp1);   
-                if(tp1!=null)
-                    f = client.searchFlight(new Flight(tp1.getCodeFlight()));
+                t = client.getTicket(t);   
+                if(t!=null)
+                    f = client.searchFlight(new Flight(t.getCodeFlight()));
             } catch (IOException ex) {
                 Logger.getLogger(ControllerTxt.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        if(tp1!=null){
+        if(t!=null){
             System.out.println(f.toString());
-            System.out.println(tp1.printTicketPassenger());
-            return tp1;
+            System.out.println(t.printTicketPassenger());
+            return t;
         }
         else{
             System.out.println("Biglietto non trovato");

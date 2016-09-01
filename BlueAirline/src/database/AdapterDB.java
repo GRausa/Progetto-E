@@ -28,11 +28,11 @@ public interface AdapterDB {
 
     Ticket editTicket(Ticket tp) throws SQLException;
 
-    ArrayList<HoldLuggage> getAllHoldLuggages() throws SQLException;
+    ArrayList<HoldLuggage> getAllHoldLuggages() ;
 
-    ArrayList<Insurance> getAllInsurances() throws SQLException;
+    ArrayList<Insurance> getAllInsurances() ;
 
-    ArrayList<Meal> getAllMeals() throws SQLException;
+    ArrayList<Meal> getAllMeals() ;
 
     ArrayList<HoldLuggage> getHoldLuggagesTicket(String codeTicket) throws SQLException;
 
@@ -65,7 +65,7 @@ public interface AdapterDB {
 
     int numberSeatFreeFlight(String codeFlight) throws SQLException;
 
-    ArrayList<String> searchAllCitys() throws SQLException;
+    ArrayList<String> searchAllCitys() ;
 
     Flight searchFlight(String codeFlight) throws SQLException;
 
@@ -73,14 +73,14 @@ public interface AdapterDB {
 
     ArrayList<Flight> searchFlights(Route route) throws SQLException;
 
-    ArrayList<Route> searchRoutes() throws SQLException;
+    ArrayList<Route> searchRoutes() ;
 
     boolean seatIsFree(String codeFlight, int nseat) throws SQLException;
 
     void setAllSeatFlight(Flight volo) throws SQLException;
 
     /* USATO NELL'INIZIALIZZAZIONE DEI POSTI*/
-    ArrayList<Flight> setAllSeatFlights() throws SQLException;
+    ArrayList<Flight> setAllSeatFlights() ;
 
     void setCheckIn(String codeTicket) throws SQLException;
 

@@ -112,7 +112,7 @@ class RemoteUser extends Thread {
             }
         });
 
-        commands.put("PRENOTAZIONE", new Command() {
+        commands.put("RESERVATION", new Command() {
             @Override
             public void execute(String args) {
                 try {
@@ -129,16 +129,16 @@ class RemoteUser extends Thread {
             @Override
             public void execute(String args) {
                 try {
-                    Ticket tp = gson.fromJson(args, Ticket.class);
-                    tp = company.editTicket(tp);
-                    out.println(gson.toJson(tp));
+                    Ticket t = gson.fromJson(args, Ticket.class);
+                    t = company.editTicket(t);
+                    out.println(gson.toJson(t));
                 } catch (SQLException ex) {
                     Logger.getLogger(RemoteUser.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         });
 
-        commands.put("EDITTICKET", new Command() {
+        commands.put("EDITSEATTICKET", new Command() {
             @Override
             public void execute(String args) {
                 try {
@@ -286,7 +286,7 @@ class RemoteUser extends Thread {
             }
         });
 
-        commands.put("RESERVATION", new Command() {
+        commands.put("GETRESERVATION", new Command() {
             @Override
             public void execute(String args) {
                 try {

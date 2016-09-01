@@ -73,7 +73,7 @@ public class Controller {
     }
     
     public Ticket editSeatTicket(Ticket tp) throws IOException{
-        out.println("EDITTICKET " + gson.toJson(tp));
+        out.println("EDITSEATTICKET " + gson.toJson(tp));
         return gson.fromJson(in.readLine(), Ticket.class);
     }
 
@@ -139,7 +139,7 @@ public class Controller {
     }
     
     public Reservation getReservation(Reservation res) throws IOException{
-        out.println("RESERVATION " + gson.toJson(res));
+        out.println("GETRESERVATION " + gson.toJson(res));
         Reservation res1 = gson.fromJson(in.readLine(), Reservation.class);
         return res1;
     }    
