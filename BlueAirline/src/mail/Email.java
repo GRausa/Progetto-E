@@ -23,7 +23,6 @@ public class Email {
     private static final String sender = "thetablueairline@gmail.com"; // questa variabile contiene l'indirizzo del mittente
     private static final String host = "smtp.gmail.com";                  // questa variabile contiene l'indirizzo dell'host per l'invio email del nostro.. 
     private static final String pass = "ipuffivolanti";
-    //..gestore dell'alds , è da cambiare a seconda del gestore che si ha
 
     private String object;          // questa variabile contiene l'oggetto dell'email    
     private String textemail;     // questa variabile contiene il testo dell'email
