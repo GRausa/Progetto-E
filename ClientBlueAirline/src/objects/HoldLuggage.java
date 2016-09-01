@@ -31,34 +31,26 @@ public class HoldLuggage {
         this.description=description;
     }
     
+    /**
+     * Istanzia un nuovo bagaglio da stiva a partire dal codice.
+     * @param code 
+     */
     public HoldLuggage(String code){
         this.code=code;
     }
-    /**
-     * 
-     * @return peso del bagaglio in kili 
-     */
+    
     public Double getKg() {
         return kg;
     }
-    /**
-     * 
-     * @return prezzo in euro 
-     */
+    
     public Double getPrice() {
         return price;
     }
-    /**
-     * 
-     * @return descrizione scritta dell'oggetto 
-     */
+
     public String toString(){
         return code+" "+description+" "+kg+"Kg "+price+"€";
     }
-    /**
-     * 
-     * @return codice del bagaglio 
-     */
+
     public String getCode() {
         return code;
     }
@@ -66,8 +58,5 @@ public class HoldLuggage {
     public String getDescription() {
         return description;
     }
-    
-    
-    
-    
+       
 }

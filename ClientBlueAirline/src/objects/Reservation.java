@@ -8,7 +8,8 @@ package objects;
 import java.util.ArrayList;
 
 /**
- *
+ * La classe Reservation indica una prenotazione di uno o più Ticket.
+ * 
  * @author Giovanni
  */
 public class Reservation {
@@ -16,20 +17,39 @@ public class Reservation {
     private int code;
     private String email, number, codeFlight;
 
+    /**
+     * Crea una nuova prenotazione su un volo della compagnia.
+     * 
+     * @param codeFlight codice del volo del quale si vuole effettuare una prenotazione
+     * @param email email del cliente che effettua la prenotazione
+     * @param number recapito telefonico del cliente che effettua la prenotazione
+     */
     public Reservation(String codeFlight, String email, String number) {
         this.email = email;
         this.number = number;
         this.codeFlight = codeFlight;
     }
     
-    public Reservation(String codeFlight, String number, String email,ArrayList<Ticket> p) {
+    /**
+     * Crea una nuova prenotazione su un volo della compagnia
+     * 
+     * @param codeFlight codice del volo del quale si vuole effettuare una prenotazione
+     * @param number recapito telefonico del cliente che effettua la prenotazione
+     * @param email email del cliente che effettua la prenotazione
+     * @param p lista dei biglietti della prenotazione
+     */
+    public Reservation(String codeFlight, String number, String email, ArrayList<Ticket> p) {
         
         this.email = email;
         this.number = number;
         this.codeFlight = codeFlight;
         this.tickets=p;
     }
-    
+    /**
+     * Crea una nuova prenotazione su un volo della compagnia a partire dal suo codice
+     * 
+     * @param code codice del volo del quale si vuole effettuare una prenotazione
+     */
     public Reservation(int code){
         this.code=code;
     }
@@ -66,7 +86,10 @@ public class Reservation {
     public String getCodeFlight() {
         return codeFlight;
     }
-    
+    /**
+     * 
+     * @return rappresentazione scritta della prenotazione 
+     */
     public String printReservation(){
         String s="";
         s+="Prenotazione: "+code+" ("+email+" "+number+")\n";
@@ -79,6 +102,10 @@ public class Reservation {
         this.code = code;
     }
 
+    /**
+     * 
+     * @return lista dei passeggeri della prenotazione
+     */
     public String printTickets() {
         String s="";
         for(Ticket tp:tickets){
