@@ -100,15 +100,16 @@ public class RiassuntoPanel extends JPanel {
                     for(Ticket tick:reservation.getPassengers())
                     {
                        if( tick.getNseat()==-1)
-                       {
-                       FinalControlFrame finale=new FinalControlFrame(home,controller,reservation,tick,flight);
-                       }
+                        {
+                            //FinalControlFrame finale=new FinalControlFrame(home,controller,reservation,tick,flight);
+                            //APPLICARE JDIALOG
+                        }
                     }
                     reservation=controller.getReservation(reservation);
                     String s = "Codice prenotazione:\n " + reservation.getCode();
                     for(Ticket t : reservation.getPassengers())
                     {
-                    s+=t.getName()+ " " + t.getSurname()+" "+ t.getCode()+"\n";
+                        s+=t.getName()+ " " + t.getSurname()+" "+ t.getCode()+"\n";
                     }
                     JOptionPane.showMessageDialog(home, "Congratulazioni!\n" + "Prenotazione Effettuata\n"+s+"\nLe è stata inviata un'email di recupero.");
                     home.returnHome();

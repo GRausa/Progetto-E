@@ -29,6 +29,7 @@ import objects.Ticket;
  */
 public class FinalControlFrame extends JFrame{
     
+    boolean c = false;
     HomeFrame home;
     FacadeControllerClient controller;
     Reservation res;
@@ -38,7 +39,7 @@ public class FinalControlFrame extends JFrame{
     JComboBox cbclasse = new JComboBox();
     JComboBox posto0 = new JComboBox();
     JButton ok =new JButton("OK");
-    boolean c = false;
+   
     
     
     public FinalControlFrame(HomeFrame home, FacadeControllerClient controller,Reservation res, Ticket t,Flight f)
@@ -108,18 +109,24 @@ public class FinalControlFrame extends JFrame{
                
                     int set= Integer.parseInt((String)posto0.getSelectedItem());
                     if(f.getSeats().get(set-1).getTicket()==null)
-                        {
+                    {
+                        System.out.println("Sono entrato");
                         try {
                             t.setNSeat(set);
                             t = controller.editSeatTicket(t);
-                            if(!(t.getNseat()==set))
+                            if(!(t.getNseat()==set)){
+                                System.out.println("Sono entrato 2");
                                 JOptionPane.showMessageDialog(home, "Il posto è gia stato assegnato\n");
-                            else
+                            }
+                            else{
+                                System.out.println("Sono entrato 3");
+                                c=true;
                                 closeWindow();
+                            }
                         } catch (IOException ex) {
                             Logger.getLogger(FinalControlFrame.class.getName()).log(Level.SEVERE, null, ex);
                         }
-                        }
+                    }
                 }
             
         });  
@@ -129,4 +136,8 @@ public class FinalControlFrame extends JFrame{
         {
         this.closeWindow();
         }
+    
+    public boolean esci(){
+         return c;
+    }
 }
