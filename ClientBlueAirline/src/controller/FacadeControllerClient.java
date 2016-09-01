@@ -13,6 +13,8 @@ import java.io.PrintWriter;
 import java.net.ConnectException;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import objects.Flight;
 import objects.HoldLuggage;
 import objects.Insurance;
@@ -34,24 +36,39 @@ public class FacadeControllerClient implements InterfaceClient {
     private Gson gson = new Gson();
 
     @Override
-    public boolean connect(String ipServer) throws IOException{
+    public boolean connect(String ipServer){
         try {
-            clientSocket = new Socket(ipServer, PortNumber);
-        }catch(UnknownHostException | ConnectException a){
-            return false;            
-        //Logger.getLogger(ClientBlueAirline.class.getName()).log(Level.SEVERE, "ERROR", ex);
+            try {
+                clientSocket = new Socket(ipServer, PortNumber);
+            }catch(UnknownHostException | ConnectException a){
+                return false;
+                //Logger.getLogger(ClientBlueAirline.class.getName()).log(Level.SEVERE, "ERROR", ex);
+            } catch (IOException ex) {
+                Logger.getLogger(FacadeControllerClient.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            out = new PrintWriter(clientSocket.getOutputStream(), true);
+            in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+            
+        }catch(IOException ex){
+            Logger.getLogger(FacadeControllerClient.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
         }
-        out = new PrintWriter(clientSocket.getOutputStream(), true);
-        in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
         return true;
     }
 
     @Override
-    public void hello() throws IOException {
-        out.println("HI!");
-        if (in.readLine().equals("HI!")) {
-            System.out.println("RICEVUTA RISPOSTA DAL SERVER, IL SERVER E' ATTIVO");
+    public boolean hello() {
+        try {
+            out.println("HI!");
+            if (in.readLine().equals("HI!")) {
+                System.out.println("RICEVUTA RISPOSTA DAL SERVER, IL SERVER E' ATTIVO");
+                
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(FacadeControllerClient.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
         }
+        return true;
     }
 
     @Override

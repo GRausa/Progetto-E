@@ -72,6 +72,22 @@ public class Reservation {
         this.code = code;
     }
     
+    public String printReservation(){
+        String s="";
+        s+="Prenotazione: "+code+" ("+email+" "+number+")\n";
+        s+="Volo: "+codeFlight+"\n";
+        s+="Numero passeggeri: "+tickets.size();
+        return s;
+    }   
+    
+    public String printTickets() {
+        String s="";
+        for(Ticket tp:tickets){
+            s+=tp.printTicketPassenger()+"\n";
+        }
+        return s;
+    }
+    
 /*
     @Override
     public String toString() {

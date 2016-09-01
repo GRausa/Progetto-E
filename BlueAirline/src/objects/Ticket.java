@@ -192,6 +192,53 @@ public class Ticket {
     public boolean isCheckIn() {
         return checkIn;
     }    
+    /**
+     * 
+     * @return descrizione scritta del biglietto
+     */
+    public String printTicketPassenger(){
+        String s = "Codice Biglietto"+code+" "+name+" "+surname+" "+this.printTicketWithoutCode();
+        return s;
+    }
+    public String printTicketWithoutCode(){
+        double priceAggiunte=0;
+        String s = ID+"\nVolo: "+codeFlight+" Posto: "+nseat+" ("+classe+" classe)\nAggiunte:\n";
+        boolean c=false;
+        for(Meal m:meals){
+            s+=m.toString()+" ";
+            priceAggiunte += m.getPrice();
+            s+="\n";
+            c=true;
+        }
+        for(HoldLuggage hl:holdLuggages){
+            s+=hl.toString()+" ";
+            priceAggiunte += hl.getPrice();
+            s+="\n";
+            c=true;
+        }
+        for(Insurance in:insurances){
+            s+=in.toString()+" ";
+            priceAggiunte += in.getPrice();
+            s+="\n";
+            c=true;
+        }
+        if(!c){
+            s+="0";
+        }
+        if(classe==1){
+            s+="\nPrezzo biglietto: "+(priceFlight+priceAggiunte+Flight.COSTOPRIMACLASSE)+"€ (Volo: "+priceFlight+"€ + Prima Classe: "+Flight.COSTOPRIMACLASSE+"€ + Aggiunte: "+priceAggiunte+"€)";
+        }
+        else{
+            s+="\nPrezzo biglietto: "+(priceFlight+priceAggiunte)+"€ (Volo "+priceFlight+"€ + Aggiunte: "+priceAggiunte+"€)";
+        }
+        
+        if(checkIn)
+            s+="\nCheck-In: Effettuato";
+        else
+            s+="\nCheck-In: Non effettuato";
+        return s;
+    }   
+
     
     
 }

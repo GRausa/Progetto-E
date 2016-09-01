@@ -20,11 +20,13 @@ import objects.Ticket;
  */
 public interface InterfaceClient {
 
+    boolean hello();
+    
+    boolean connect(String ipServer);
+    
     Flight[] calendar(Route rotta) throws IOException;
 
     Ticket checkIn(Ticket tp) throws IOException;
-
-    boolean connect(String ipServer) throws IOException;
 
     Ticket editSeatTicket(Ticket tp) throws IOException;
 
@@ -41,8 +43,6 @@ public interface InterfaceClient {
     Reservation getReservation(Reservation res) throws IOException;
 
     Ticket getTicket(Ticket tp) throws IOException;
-
-    void hello() throws IOException;
 
     boolean isCheckIn(Ticket tp) throws IOException;
 
