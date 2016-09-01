@@ -6,13 +6,22 @@
 package objects;
 
 /**
- *
+ * La classe Route indica una rotta su cui la compagnia effettua dei voli.
+ * 
  * @author Giovanni
  */
 public class Route {
 
     private String deparutreAirport, destinationAirport, departureCity, destinationCity;
 
+    /**
+     * Crea una nuova rotta sulla quali verranno effettuati dei voli.
+     * 
+     * @param deparutreAirport aeroporto di partenza
+     * @param destinationAirport aeroporto di arrivo
+     * @param departureCity città di partenza 
+     * @param destinationCity città di arrivo
+     */
     public Route(String deparutreAirport, String destinationAirport, String departureCity, String destinationCity) {
         this.deparutreAirport = deparutreAirport;
         this.destinationAirport = destinationAirport;

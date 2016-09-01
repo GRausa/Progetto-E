@@ -16,8 +16,9 @@ public class Insurance { //ASSICURAZIONE
     private String name;
     private double price;
     private String description;
+    
     /**
-     * Crea una assicurazione associata ad un biglietto.
+     * Istanzia una nuova assicurazione.
      * 
      * @param code codice dell'assicurazione
      * @param name nome dell'assicurazione
@@ -30,34 +31,27 @@ public class Insurance { //ASSICURAZIONE
         this.description=description;
     }
     
+    /**
+     * Istanzia una nuova assicurazione a partire dal suo codice.
+     * 
+     * @param code codice dell'assicurazione
+     */
     public Insurance (String code){
         this.code=code;
     }
-    /**
-     * 
-     * @return nome dell'assicurazione
-     */
+   
     public String getName() {
         return name;
     }
-    /**
-     * 
-     * @return prezzo dell'assicurazione
-     */
+   
     public double getPrice() {
         return price;
     }
-    /**
-     * 
-     * @return rappresentazione scritta dell'assicurazione
-     */
+    
     public String toString(){
         return code+" "+name+" "+price+" €";
     }
-    /**
-     * 
-     * @return codice dell'assicurazione
-     */
+    
     public String getCode(){
         return code;
     }

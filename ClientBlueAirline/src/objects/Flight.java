@@ -9,7 +9,11 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-
+/**
+ * La classe Flight indica un volo che effettua la compagnia.
+ * 
+ * @author Giovanni
+ */
 public class Flight {
     public static double COSTOPRIMACLASSE=30;
     private String code;
@@ -19,6 +23,15 @@ public class Flight {
     private double prezzo;
     private ArrayList<Seat> seats;
     
+    /**
+     * Istanzia un nuovo volo
+     * 
+     * @param code codice del volo
+     * @param r rotta del volo
+     * @param dateDeparture data di partenza 
+     * @param dateDestination data di arrivo
+     * @param prezzo prezzo del volo
+     */
     public Flight(String code, Route r, Calendar dateDeparture, Calendar dateDestination, double prezzo) {
         this.code = code;
         this.r = r;
@@ -26,6 +39,12 @@ public class Flight {
         this.dateDestination = dateDestination;
         this.prezzo = prezzo;
     }
+    /**
+     * Istanzia un nuovo volo
+     * 
+     * @param r rotta del volo
+     * @param dateDeparture data di partenza
+     */
     public Flight(Route r, Calendar dateDeparture) {
         this.code = null;
         this.r = r;
@@ -34,6 +53,11 @@ public class Flight {
         this.prezzo = 0;
     }
     
+    /**
+     * Istanzia un nuovo volo
+     * 
+     * @param code codice del volo
+     */
     public Flight(String code){
         this.code=code;
     }
@@ -62,11 +86,19 @@ public class Flight {
         return seats;
     }
     
+    /**
+     * 
+     * @return descrizione scritta del volo
+     */
     public String toString(){
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MMM/yyyy HH:mm");
         return code+" "+r.printRoute()+"\n"+sdf.format(this.dateDeparture.getTime())+" - "+sdf.format(this.dateDestination.getTime())+"\n"+prezzo+"€";
     }
     
+    /**
+     * 
+     * @return numero di posti liberi del volo
+     */
     public int getSeatFree(){
         int n=0;
         for(Seat s : seats){
@@ -77,6 +109,10 @@ public class Flight {
         return n;
     }
     
+    /**
+     * 
+     * @return tutti i posti liberi ed occupati del volo
+     */
     public String printAllSeats(){
         String st="PRIMA CLASSE -> prezzo: "+(this.getPrezzo()+Flight.COSTOPRIMACLASSE)+"€\n";
         for(Seat s : seats){
