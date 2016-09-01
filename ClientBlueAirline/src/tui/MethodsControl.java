@@ -5,7 +5,7 @@
  */
 package tui;
 
-import controller.Controller;
+import controller.FacadeControllerClient;
 import java.io.IOException;
 import java.util.ArrayList;
 import static java.util.Arrays.asList;
@@ -59,7 +59,7 @@ public class MethodsControl {
         return s1;
     }
     
-    public static void hi(Controller client){
+    public static void hi(FacadeControllerClient client){
         try {
             client.hello();
         } catch (IOException ex) {
@@ -67,7 +67,7 @@ public class MethodsControl {
         }
     }
     
-    public static void searchFlight(Controller client){
+    public static void searchFlight(FacadeControllerClient client){
         //Scanner input = new Scanner(System.in);
         ArrayList<String> inputtxt=MethodsControl.scannerInput(new ArrayList<>(asList("Inserisci città partenza", "Inserisci città destinazione")));
         Route tmproute = new Route(inputtxt.get(0), inputtxt.get(1));
@@ -101,7 +101,7 @@ public class MethodsControl {
         }
     }
     
-    public static void searchRoute(Controller client){
+    public static void searchRoute(FacadeControllerClient client){
         ArrayList<String> input=MethodsControl.scannerInput(new ArrayList<>(asList("Inserisci città partenza", "Inserisci città destinazione")));
         Route tmproute1 = new Route(input.get(0), input.get(1));
         Route[] rotte = null;
@@ -126,7 +126,7 @@ public class MethodsControl {
     
     /*METODI PER PRENOTAZIONE*/
     
-    public static Flight searchFlight(Controller client, String cod){
+    public static Flight searchFlight(FacadeControllerClient client, String cod){
         Flight flight = new Flight(cod);        
         {
             try {
@@ -236,7 +236,7 @@ public class MethodsControl {
         return passengers;
     }
     
-    public static Reservation makeReservation(Controller client, String cod, Flight flight) throws IOException{
+    public static Reservation makeReservation(FacadeControllerClient client, String cod, Flight flight) throws IOException{
         //Scanner input = new Scanner(System.in);
         int num;
         do {
@@ -268,7 +268,7 @@ public class MethodsControl {
         return res;
     }
     
-    public static void checkReservation(Controller client, Reservation res, Flight flight){
+    public static void checkReservation(FacadeControllerClient client, Reservation res, Flight flight){
         //Scanner input = new Scanner(System.in);
         try {            
             flight = client.searchFlight(flight); //aggiorno il flight dopo la prenotazione
@@ -307,7 +307,7 @@ public class MethodsControl {
     }
     
     //prenotazione
-    public static void makeReservation(Controller client){
+    public static void makeReservation(FacadeControllerClient client){
         String cod=MethodsControl.scannerInput(new ArrayList<>(asList("Inserisci codice Volo"))).get(0);        
         Flight flight = MethodsControl.searchFlight(client, cod);
         if(flight!=null){     
@@ -331,7 +331,7 @@ public class MethodsControl {
     
     /*MODIFICA BIGLIETTO*/
     
-    public static void editTicket(Controller client, Ticket tp, Flight flight, Meal[] meals, Insurance[] insurances, HoldLuggage[] holdLuggages) throws IOException{
+    public static void editTicket(FacadeControllerClient client, Ticket tp, Flight flight, Meal[] meals, Insurance[] insurances, HoldLuggage[] holdLuggages) throws IOException{
         //Scanner input = new Scanner(System.in);
         boolean c = false;
         do {
@@ -365,7 +365,7 @@ public class MethodsControl {
         } while (!c);
     }
     
-    public static void editTicket(Controller client, Ticket tp){
+    public static void editTicket(FacadeControllerClient client, Ticket tp){
         System.out.println("\nAREA MODIFICA:");
         Flight flight = null;
         Meal[] meals = null;
@@ -392,7 +392,7 @@ public class MethodsControl {
     }
     
     
-    public static void editTicket(Controller client){
+    public static void editTicket(FacadeControllerClient client){
         Ticket tp = MethodsControl.searchTicket(client);
         if(tp!=null){
             MethodsControl.editTicket(client, tp);            
@@ -402,7 +402,7 @@ public class MethodsControl {
     
     
     
-    public static void searchFlightAirport(Controller client){
+    public static void searchFlightAirport(FacadeControllerClient client){
         ArrayList<String> inputtxt2=MethodsControl.scannerInput(new ArrayList<>(asList("Inserisci Aeroporto partenza", "Inserisci Aeroporto destinazione")));
         Route tmproute2 = new Route();
         tmproute2.setDeparutreAirport(inputtxt2.get(0));
@@ -422,7 +422,7 @@ public class MethodsControl {
         }
     }
     
-    public static boolean isCheckIn(Controller client, Ticket tp) throws IOException{
+    public static boolean isCheckIn(FacadeControllerClient client, Ticket tp) throws IOException{
         if(client.isCheckIn(tp)){
             return true;                    
         }
@@ -431,7 +431,7 @@ public class MethodsControl {
         }            
     }
     
-    public static void checkIn(Controller client){
+    public static void checkIn(FacadeControllerClient client){
         //Scanner input = new Scanner(System.in);
         ArrayList<String> input=MethodsControl.scannerInput(new ArrayList<>(asList("Inserisci il codice ticket per effettuare il check-in:")));
         String codeTicket = input.get(0);
@@ -456,7 +456,7 @@ public class MethodsControl {
         }
     }
     
-    public static Ticket searchTicket(Controller client){
+    public static Ticket searchTicket(FacadeControllerClient client){
         //Scanner input = new Scanner(System.in);
         ArrayList<String> input=MethodsControl.scannerInput(new ArrayList<>(asList("Inserisci il codice del biglietto: ")));
         String codeT = input.get(0);
@@ -482,7 +482,7 @@ public class MethodsControl {
         }
     }
     
-    public static void searchReservation(Controller client){
+    public static void searchReservation(FacadeControllerClient client){
         //Scanner input = new Scanner(System.in);
         ArrayList<String> input=MethodsControl.scannerInput(new ArrayList<>(asList("Inserisci il codice della prenotazione: ")));
         int codeReservation = Integer.parseInt(input.get(0));
@@ -507,7 +507,7 @@ public class MethodsControl {
         }  
     }
 
-    public static void searchCitys(Controller client) {
+    public static void searchCitys(FacadeControllerClient client) {
         String[] citta=null;
         try{
             citta = client.getAllCitys();
@@ -523,7 +523,7 @@ public class MethodsControl {
         }
     }
 
-    static void searchFlightCode(Controller client) {
+    static void searchFlightCode(FacadeControllerClient client) {
         //Scanner input = new Scanner(System.in);
         ArrayList<String> input=MethodsControl.scannerInput(new ArrayList<>(asList("Inserisci il codice del volo: ")));
         MethodsControl.searchFlight(client, input.get(0));

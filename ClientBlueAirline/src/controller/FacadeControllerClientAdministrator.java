@@ -9,6 +9,6 @@ package controller;
  *
  * @author Giovanni
  */
-public class ControllerAdministrator {
+public class FacadeControllerClientAdministrator {
     
 }

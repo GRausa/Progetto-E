@@ -5,7 +5,7 @@
  */
 package gui;
 
-import controller.Controller;
+import controller.FacadeControllerClient;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Container;
@@ -34,7 +34,7 @@ import objects.*;
 public class RiassuntoPanel extends JPanel {
 
     private HomeFrame home;
-    private Controller controller;
+    private FacadeControllerClient controller;
     private ArrayList<Ticket> passengers;
     private Reservation reservation;
     private Flight flight;
@@ -61,7 +61,7 @@ public class RiassuntoPanel extends JPanel {
 
     JButton conferma = new JButton("Conferma");
 
-    public RiassuntoPanel(HomeFrame home, Controller controller) throws IOException {
+    public RiassuntoPanel(HomeFrame home, FacadeControllerClient controller) throws IOException {
         this.home = home;
         passengers = home.getPassengers();
         home.getReservation().setTickets(passengers);

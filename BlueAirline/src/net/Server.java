@@ -5,8 +5,8 @@
  */
 package net;
 
-import controller.FacadeController;
-import controller.InterfaceClient;
+import controller.FacadeControllerServer;
+import controller.InterfaceServer;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -14,7 +14,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class Server {
-    InterfaceClient company;
+    InterfaceServer company;
     int port;
     ServerSocket serverSocket = null;
 
@@ -24,7 +24,7 @@ public class Server {
      * @param company
      * @param port
      */
-    public Server(InterfaceClient company, int port) {
+    public Server(InterfaceServer company, int port) {
         this.company = company;
         this.port = port;
     }
@@ -41,7 +41,7 @@ public class Server {
                 "Server started");
         while (true) {
             Socket socket = serverSocket.accept();
-            RemoteUser u = new RemoteUser((FacadeController) company, socket);
+            RemoteUser u = new RemoteUser((FacadeControllerServer) company, socket);
             Logger.getLogger(Server.class.getName()).log(Level.INFO, "Accepting a new user. Ip guest : " + socket.getInetAddress() + "port guest:" + socket.getPort());
             u.start();
         }
@@ -54,7 +54,7 @@ public class Server {
      */
     public static void main(String[] args) {
         final int PORT = 8888;
-        final InterfaceClient c = new FacadeController();
+        final InterfaceServer c = new FacadeControllerServer();
         Server server = new Server(c, PORT);
         try {
             server.startServer();

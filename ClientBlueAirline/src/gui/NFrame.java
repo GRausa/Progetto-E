@@ -5,7 +5,7 @@
  */
 package gui;
 
-import controller.Controller;
+import controller.FacadeControllerClient;
 
 import java.awt.*;
 import java.awt.event.WindowAdapter;
@@ -27,14 +27,14 @@ public class NFrame extends JFrame {
     private final int HEIGHT = 100;
     private int n;
     private char k;
-    private Controller controller;
+    private FacadeControllerClient controller;
     private boolean opened;
     private HomeFrame home;
     ArrayList<JComboBox> combo;
     JLabel tit;
     String notifica;
 
-    public NFrame(HomeFrame home, Controller controller, int n, String notifica, char k) throws IOException {
+    public NFrame(HomeFrame home, FacadeControllerClient controller, int n, String notifica, char k) throws IOException {
         this.controller = controller;
         this.opened = true;
         this.n = n;

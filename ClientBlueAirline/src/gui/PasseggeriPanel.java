@@ -5,7 +5,7 @@
  */
 package gui;
 
-import controller.Controller;
+import controller.FacadeControllerClient;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.IOException;
@@ -27,7 +27,7 @@ import objects.Ticket;
 public class PasseggeriPanel extends JPanel {
 
     private HomeFrame home;
-    private Controller controller;
+    private FacadeControllerClient controller;
     protected ArrayList<JComboBox> meal;
     protected ArrayList<JComboBox> insurance;
     protected ArrayList<JComboBox> holdluggage;
@@ -76,7 +76,7 @@ public class PasseggeriPanel extends JPanel {
     JTextField id0 = new JTextField("Inserisci id");
     JLabel id = new JLabel("ID");
 
-    public PasseggeriPanel(HomeFrame home, Controller controller) {
+    public PasseggeriPanel(HomeFrame home, FacadeControllerClient controller) {
         this.home = home;
         this.controller = controller;
         this.setOpaque(false);

@@ -19,7 +19,7 @@ import objects.Ticket;
  *
  * @author Giovanni
  */
-public interface InterfaceClient {
+public interface InterfaceServer {
 
     //modifica una ticket
     Ticket editSeatTicket(Ticket tp) throws SQLException;

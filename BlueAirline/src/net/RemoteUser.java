@@ -6,8 +6,8 @@
 package net;
 
 import com.google.gson.Gson;
-import controller.FacadeController;
-import controller.InterfaceClient;
+import controller.FacadeControllerServer;
+import controller.InterfaceServer;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -35,7 +35,7 @@ import static jdk.nashorn.internal.objects.NativeMath.log;
  */
 class RemoteUser extends Thread {
 
-    private InterfaceClient company;
+    private InterfaceServer company;
     private Socket socket;
     private PrintWriter out;
     private BufferedReader in;
@@ -55,7 +55,7 @@ class RemoteUser extends Thread {
         return counter++;
     }
 
-    RemoteUser(InterfaceClient company, Socket socket) throws IOException {
+    RemoteUser(InterfaceServer company, Socket socket) throws IOException {
         this.company = company;
         this.socket = socket;
         out = new PrintWriter(socket.getOutputStream(), true);

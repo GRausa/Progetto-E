@@ -5,7 +5,7 @@
  */
 package gui;
 
-import controller.Controller;
+import controller.FacadeControllerClient;
 import java.io.IOException;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -20,7 +20,7 @@ import javax.swing.JTextField;
 public class TestUi {
 
     public static void main(String[] args) throws IOException, InterruptedException {
-        Controller clientBlueAirline = new Controller();
+        FacadeControllerClient clientBlueAirline = new FacadeControllerClient();
         JFrame frame1 = new JFrame();
 
         //String s = (String) JOptionPane.showInputDialog(frame1, "Complete the sentence:\n" + "\"Green eggs and...\"", "Customized Dialog", JOptionPane.PLAIN_MESSAGE, null, null, "ham");

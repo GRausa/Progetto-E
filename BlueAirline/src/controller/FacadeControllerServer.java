@@ -21,11 +21,11 @@ import objects.Ticket;
  *
  * @author Giovanni
  */
-public class FacadeController implements InterfaceClient {
+public class FacadeControllerServer implements InterfaceServer {
 
     private AdapterDB adapter;
 
-    public FacadeController() {
+    public FacadeControllerServer() {
         adapter = new ConcreteAdapterDB();
     }
     

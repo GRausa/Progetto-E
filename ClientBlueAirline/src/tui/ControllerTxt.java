@@ -5,15 +5,16 @@
  */
 package tui;
 
-import controller.Controller;
+import controller.FacadeControllerClient;
+import controller.InterfaceClient;
 
 public class ControllerTxt implements Runnable {
 
-    private Controller client;
+    private FacadeControllerClient client;
     
 
-    public ControllerTxt(Controller n) {
-        this.client = n;
+    public ControllerTxt(InterfaceClient controllerClient) {
+        this.client = (FacadeControllerClient) controllerClient;
     }
 
     @Override
