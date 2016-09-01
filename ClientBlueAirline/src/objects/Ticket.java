@@ -141,12 +141,12 @@ public class Ticket {
         this.codeFlight = codeFlight;
     }
     
-    
+    /*
     @Override
     public String toString() {
         return "TicketPassenger{" + "code=" + code + ", ID=" + ID + ", name=" + name + ", surname=" + surname + ", codeFlight=" + codeFlight + ", nseat=" + nseat + ", codeReservation=" + codeReservation + ", totalPrice=" + this.getTotalPrice() + ", meals=" + meals + ", holdLuggages=" + holdLuggages + ", insurances=" + insurances + '}';
     }
-    
+    */
     public String printTicketPassenger(){
         double priceAggiunte=0;
         String s = "Codice Biglietto: "+code+"\n"+ID+" "+name+" "+surname+"\nVolo: "+codeFlight+" Posto: "+nseat+" ("+classe+" classe)\nAggiunte: ";

@@ -5,7 +5,7 @@
  */
 package gui;
 
-import controller.Controller;
+import controller.FacadeControllerClient;
 import com.toedter.calendar.JDateChooser;
 import java.awt.*;
 import java.awt.event.*;
@@ -25,7 +25,7 @@ import objects.*;
  */
 public class ReservationPanel extends JPanel {
 
-    Controller controller;
+    FacadeControllerClient controller;
     HomeFrame home;
 
     JComboBox andata = new JComboBox();
@@ -45,7 +45,7 @@ public class ReservationPanel extends JPanel {
     JButton ricerca = new JButton("Ricerca");
     JDateChooser data = new JDateChooser();
 
-    public ReservationPanel(Controller company, HomeFrame home) {
+    public ReservationPanel(FacadeControllerClient company, HomeFrame home) {
         try {
             this.home = home;
             this.controller = company;
@@ -61,9 +61,9 @@ public class ReservationPanel extends JPanel {
     }
 
     private void initComponents() throws IOException {
-        final String[] city = controller.listOfCity();
-
-        andata.setFont(new java.awt.Font("Helvetica", 0, 14));
+         final String[] city=  controller.getAllCitys();
+                 
+        andata.setFont(new java.awt.Font("Helvetica", 0, 14)); 
         andata.setEditable(true);
         andata.setSelectedItem("");
         andata.getEditor().getEditorComponent().addKeyListener(new KeyAdapter() {

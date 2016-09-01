@@ -6,8 +6,8 @@
 package net;
 
 import com.google.gson.Gson;
-import controller.FacadeController;
-import controller.InterfaceClient;
+import controller.FacadeControllerServer;
+import controller.InterfaceServer;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -35,7 +35,7 @@ import static jdk.nashorn.internal.objects.NativeMath.log;
  */
 class RemoteUser extends Thread {
 
-    private InterfaceClient company;
+    private InterfaceServer company;
     private Socket socket;
     private PrintWriter out;
     private BufferedReader in;
@@ -55,7 +55,7 @@ class RemoteUser extends Thread {
         return counter++;
     }
 
-    RemoteUser(InterfaceClient company, Socket socket) throws IOException {
+    RemoteUser(InterfaceServer company, Socket socket) throws IOException {
         this.company = company;
         this.socket = socket;
         out = new PrintWriter(socket.getOutputStream(), true);
@@ -87,7 +87,7 @@ class RemoteUser extends Thread {
             }
         });
 
-        commands.put("GETALLCITY", new Command() {
+        commands.put("CITYS", new Command() {
             @Override
             public void execute(String args) {
                 ArrayList<String> cities;
@@ -129,16 +129,16 @@ class RemoteUser extends Thread {
             @Override
             public void execute(String args) {
                 try {
-                    Ticket tp = gson.fromJson(args, Ticket.class);
-                    tp = company.editTicket(tp);
-                    out.println(gson.toJson(tp));
+                    Ticket t = gson.fromJson(args, Ticket.class);
+                    t = company.editTicket(t);
+                    out.println(gson.toJson(t));
                 } catch (SQLException ex) {
                     Logger.getLogger(RemoteUser.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         });
 
-        commands.put("EDITSEATTICKETPASSENGER", new Command() {
+        commands.put("EDITSEATTICKET", new Command() {
             @Override
             public void execute(String args) {
                 try {
@@ -151,7 +151,7 @@ class RemoteUser extends Thread {
             }
         });
 
-        commands.put("ROTTE", new Command() {
+        commands.put("ROUTES", new Command() {
             @Override
             public void execute(String args) {
                 ArrayList<Route> rottes = null;
@@ -184,8 +184,7 @@ class RemoteUser extends Thread {
         }
         );
 
-        commands.put(
-                "RICERCAVOLI", new Command() {
+        commands.put("SEARCHFLIGHTS", new Command() {
 
             @Override
             public void execute(String args) {
@@ -203,8 +202,7 @@ class RemoteUser extends Thread {
         }
         );
 
-        commands.put(
-                "RICERCAVOLOCODICE", new Command() {
+        commands.put("SEARCHFLIGHTCODE", new Command() {
             @Override
             public void execute(String args) {
                 try {
@@ -218,7 +216,7 @@ class RemoteUser extends Thread {
         }
         );
 
-        commands.put("PASTI", new Command() {
+        commands.put("MEALS", new Command() {
             @Override
             public void execute(String args) {
                 ArrayList<Meal> meals;
@@ -227,7 +225,7 @@ class RemoteUser extends Thread {
             }
         });
 
-        commands.put("BAGAGLI", new Command() {
+        commands.put("HOLDLUGGAGES", new Command() {
             @Override
             public void execute(String args) {
                 ArrayList<HoldLuggage> holdLuggages;
@@ -236,7 +234,7 @@ class RemoteUser extends Thread {
             }
         });
 
-        commands.put("ASSICURAZIONI", new Command() {
+        commands.put("INSURANCES", new Command() {
             @Override
             public void execute(String args) {
                 ArrayList<Insurance> insurances;
@@ -274,7 +272,7 @@ class RemoteUser extends Thread {
             }
         });
 
-        commands.put("PASSEGGERO", new Command() {
+        commands.put("TICKET", new Command() {
             @Override
             public void execute(String args) {
                 try {
@@ -288,7 +286,7 @@ class RemoteUser extends Thread {
             }
         });
 
-        commands.put("PRENOTAZIONE", new Command() {
+        commands.put("GETRESERVATION", new Command() {
             @Override
             public void execute(String args) {
                 try {

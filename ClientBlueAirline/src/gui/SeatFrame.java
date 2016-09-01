@@ -5,7 +5,7 @@
  */
 package gui;
 
-import controller.Controller;
+import controller.FacadeControllerClient;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -24,7 +24,7 @@ import objects.*;
  */
 public class SeatFrame extends JFrame{
 
-    private Controller controller;
+    private FacadeControllerClient controller;
     private HomeFrame home;
     private ArrayList<Seat> seats;
 
@@ -33,7 +33,7 @@ public class SeatFrame extends JFrame{
 
     JTable tabella;
 
-    public SeatFrame(HomeFrame home, Controller controller) {
+    public SeatFrame(HomeFrame home, FacadeControllerClient controller) {
         this.controller = controller;
 
         this.home = home;

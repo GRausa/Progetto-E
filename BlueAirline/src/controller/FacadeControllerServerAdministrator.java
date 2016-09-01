@@ -15,11 +15,11 @@ import objects.Flight;
  *
  * @author Giovanni
  */
-public class FacadeControllerAdministrator extends FacadeController{
+public class FacadeControllerServerAdministrator extends FacadeControllerServer{
     
     private AdapterDB adapter;
 
-    public FacadeControllerAdministrator() {
+    public FacadeControllerServerAdministrator() {
         adapter = new ConcreteAdapterDB();
     }
     

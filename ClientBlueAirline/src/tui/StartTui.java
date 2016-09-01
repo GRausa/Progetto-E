@@ -5,7 +5,8 @@
  */
 package tui;
 
-import controller.Controller;
+import controller.FacadeControllerClient;
+import controller.InterfaceClient;
 import java.io.IOException;
 import java.util.ArrayList;
 import static java.util.Arrays.asList;
@@ -17,7 +18,7 @@ import static java.util.Arrays.asList;
 public class StartTui {
 
     public static void main(String[] args) throws IOException {
-        Controller clientBlueAirline = new Controller();
+        InterfaceClient clientBlueAirline = new FacadeControllerClient();
         if (clientBlueAirline.connect(MethodsControl.scannerInput(new ArrayList<>(asList("PUT IP SERVER"))).get(0))) {
             ControllerTxt r1 = new ControllerTxt(clientBlueAirline);
 

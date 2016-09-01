@@ -7,7 +7,7 @@ package gui;
 
 
 
-import controller.Controller;
+import controller.FacadeControllerClient;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.IOException;
@@ -29,7 +29,7 @@ public class CustomerPanel extends JPanel{
     
  
     private HomeFrame home;
-    private Controller controller;
+    private FacadeControllerClient controller;
 
    
         JButton conferma = new JButton("Conferma");
@@ -39,7 +39,7 @@ public class CustomerPanel extends JPanel{
         JTextField email0 =new JTextField("Inserisci Email");
         JLabel email=new JLabel("Email");
            
-    public CustomerPanel(HomeFrame home, Controller controller) {
+    public CustomerPanel(HomeFrame home, FacadeControllerClient controller) {
         this.home = home;
         this.controller = controller;
         this.setOpaque(false);
