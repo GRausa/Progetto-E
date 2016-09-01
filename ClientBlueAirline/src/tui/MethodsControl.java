@@ -6,7 +6,6 @@
 package tui;
 
 import controller.FacadeControllerClient;
-import controller.FacadeControllerClientAdministrator;
 import java.io.IOException;
 import java.util.ArrayList;
 import static java.util.Arrays.asList;

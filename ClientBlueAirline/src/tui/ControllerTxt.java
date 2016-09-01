@@ -6,7 +6,6 @@
 package tui;
 
 import controller.FacadeControllerClient;
-import controller.FacadeControllerClientAdministrator;
 import controller.InterfaceClient;
 
 public class ControllerTxt implements Runnable {
