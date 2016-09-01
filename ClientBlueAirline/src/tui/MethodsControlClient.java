@@ -21,7 +21,7 @@ import objects.Reservation;
 import objects.Route;
 import objects.Ticket;
 
-public class MethodsControl {
+public class MethodsControlClient {
 
     public static ArrayList<String> scannerInput(ArrayList<String> n) {
         Scanner input = new Scanner(System.in);
@@ -67,9 +67,9 @@ public class MethodsControl {
 
     public static void searchFlight(FacadeControllerClient client) {
         //Scanner input = new Scanner(System.in);
-        ArrayList<String> inputtxt = MethodsControl.scannerInput(new ArrayList<>(asList("Inserisci città partenza", "Inserisci città destinazione")));
+        ArrayList<String> inputtxt = MethodsControlClient.scannerInput(new ArrayList<>(asList("Inserisci città partenza", "Inserisci città destinazione")));
         Route tmproute = new Route(inputtxt.get(0), inputtxt.get(1));
-        inputtxt = MethodsControl.scannerInput(new ArrayList<>(asList("Inserisci data di partenza AAAA-MM-GG")));
+        inputtxt = MethodsControlClient.scannerInput(new ArrayList<>(asList("Inserisci data di partenza AAAA-MM-GG")));
         String data = inputtxt.get(0);
         int day, month, year;
         String[] vetDate = data.split("-");
@@ -100,7 +100,7 @@ public class MethodsControl {
     }
 
     public static void searchRoute(FacadeControllerClient client) {
-        ArrayList<String> input = MethodsControl.scannerInput(new ArrayList<>(asList("Inserisci città partenza", "Inserisci città destinazione")));
+        ArrayList<String> input = MethodsControlClient.scannerInput(new ArrayList<>(asList("Inserisci città partenza", "Inserisci città destinazione")));
         Route tmproute1 = new Route(input.get(0), input.get(1));
         Route[] rotte = null;
         {
@@ -187,13 +187,13 @@ public class MethodsControl {
             String v = vetsplit[j];
             switch (vetsplit[j].charAt(0)) {
                 case 'M':
-                    MethodsControl.addMealTicket(p, meals, v);
+                    MethodsControlClient.addMealTicket(p, meals, v);
                     break;
                 case 'H':
-                    MethodsControl.addHoldLuggageTicket(p, holdLuggages, v);
+                    MethodsControlClient.addHoldLuggageTicket(p, holdLuggages, v);
                     break;
                 case 'I':
-                    MethodsControl.addInsuranceTicket(p, insurances, v);
+                    MethodsControlClient.addInsuranceTicket(p, insurances, v);
                     break;
                 default:
                     break;
@@ -208,7 +208,7 @@ public class MethodsControl {
         for (int k = 0; k < num; k++) {
             boolean c = false;
             do {
-                ArrayList<String> input = MethodsControl.scannerInput(new ArrayList<>(asList("INSERISCI PASSEGGERO (ID- NOME - COGNOME - NPOSTO - AGGIUNTE)")));
+                ArrayList<String> input = MethodsControlClient.scannerInput(new ArrayList<>(asList("INSERISCI PASSEGGERO (ID- NOME - COGNOME - NPOSTO - AGGIUNTE)")));
                 String s = input.get(0);
                 String[] vetsplit = s.split("\t");
                 if (vetsplit.length > 3) {
@@ -216,7 +216,7 @@ public class MethodsControl {
                     if (flight.getSeats().get(seat - 1).getTicket() == null) {
                         flight.getSeats().get(seat - 1).setTicket(vetsplit[0]);
                         int classe = flight.getSeats().get(seat - 1).getClasse();
-                        Ticket p = MethodsControl.insertTicketSupplements(vetsplit, seat, classe, flight.getCode(), flight.getPrezzo(), meals, insurances, holdLuggages);
+                        Ticket p = MethodsControlClient.insertTicketSupplements(vetsplit, seat, classe, flight.getCode(), flight.getPrezzo(), meals, insurances, holdLuggages);
                         c = true;
                         passengers.add(p);
                     } else {
@@ -234,7 +234,7 @@ public class MethodsControl {
         //Scanner input = new Scanner(System.in);
         int num;
         do {
-            ArrayList<String> input = MethodsControl.scannerInput(new ArrayList<>(asList("Inserisci numero passeggeri")));
+            ArrayList<String> input = MethodsControlClient.scannerInput(new ArrayList<>(asList("Inserisci numero passeggeri")));
             num = Integer.parseInt(input.get(0));
             if (num > flight.getSeatFree()) {
                 System.out.println("Il numero dei passeggeri inseriti supera la disponibilità di posti.");
@@ -252,9 +252,9 @@ public class MethodsControl {
                 Logger.getLogger(ControllerTxt.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        MethodsControl.toStringSupplements(meals, insurances, holdLuggages);
-        ArrayList<Ticket> passengers = MethodsControl.insertTicket(num, flight, meals, insurances, holdLuggages);
-        ArrayList<String> input = MethodsControl.scannerInput(new ArrayList<>(asList("INSERISCI NUMERO", "INSERISCI EMAIL")));
+        MethodsControlClient.toStringSupplements(meals, insurances, holdLuggages);
+        ArrayList<Ticket> passengers = MethodsControlClient.insertTicket(num, flight, meals, insurances, holdLuggages);
+        ArrayList<String> input = MethodsControlClient.scannerInput(new ArrayList<>(asList("INSERISCI NUMERO", "INSERISCI EMAIL")));
         String numero = input.get(0);
         String mail = input.get(1);
         Reservation res = new Reservation(cod, numero, mail, passengers);
@@ -272,7 +272,7 @@ public class MethodsControl {
                     System.out.println(flight.printAllSeats());
                     boolean c = false;
                     do {
-                        ArrayList<String> input = MethodsControl.scannerInput(new ArrayList<>(asList("Inserisci il nuovo posto")));
+                        ArrayList<String> input = MethodsControlClient.scannerInput(new ArrayList<>(asList("Inserisci il nuovo posto")));
                         int set = Integer.parseInt(input.get(0));
                         if (flight.getSeats().get(set - 1).getTicket() == null) {
                             tp.setNSeat(set);
@@ -302,15 +302,15 @@ public class MethodsControl {
 
     //prenotazione
     public static void makeReservation(FacadeControllerClient client) {
-        String cod = MethodsControl.scannerInput(new ArrayList<>(asList("Inserisci codice Volo"))).get(0);
-        Flight flight = MethodsControl.searchFlight(client, cod);
+        String cod = MethodsControlClient.scannerInput(new ArrayList<>(asList("Inserisci codice Volo"))).get(0);
+        Flight flight = MethodsControlClient.searchFlight(client, cod);
         if (flight != null) {
             if (flight.getSeatFree() > 0) {
                 try {
-                    Reservation res = MethodsControl.makeReservation(client, cod, flight);
-                    MethodsControl.checkReservation(client, res, flight);
+                    Reservation res = MethodsControlClient.makeReservation(client, cod, flight);
+                    MethodsControlClient.checkReservation(client, res, flight);
                 } catch (IOException ex) {
-                    Logger.getLogger(MethodsControl.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(MethodsControlClient.class.getName()).log(Level.SEVERE, null, ex);
                 }
             } else {
                 System.out.println("Posti non disponibili");
@@ -326,7 +326,7 @@ public class MethodsControl {
         boolean c = false;
         do {
             System.out.println("Modifica il posto e inserisci le nuove scelte (saranno aggiunte alle vecchie già acquistate)");
-            ArrayList<String> input = MethodsControl.scannerInput(new ArrayList<>(asList("INSERISCI MODIFICHE (NPOSTO - AGGIUNTE)")));
+            ArrayList<String> input = MethodsControlClient.scannerInput(new ArrayList<>(asList("INSERISCI MODIFICHE (NPOSTO - AGGIUNTE)")));
             String s = tp.getID() + "\t" + tp.getName() + "\t" + tp.getSurname() + "\t";
             s += input.get(0);
             String[] vetsplit = s.split("\t");
@@ -335,7 +335,7 @@ public class MethodsControl {
                 if (flight.getSeats().get(seat - 1).getTicket() == null) { //OSS -> -1
                     flight.getSeats().get(seat - 1).setTicket(tp.getCode());
                     int classe = flight.getSeats().get(seat - 1).getClasse();
-                    Ticket p2 = MethodsControl.insertTicketSupplements(vetsplit, seat, classe, flight.getCode(), flight.getPrezzo(), meals, insurances, holdLuggages);
+                    Ticket p2 = MethodsControlClient.insertTicketSupplements(vetsplit, seat, classe, flight.getCode(), flight.getPrezzo(), meals, insurances, holdLuggages);
                     p2.setCode(tp.getCode());
                     if (client.editTicket(p2).getNseat() == -1) {
                         System.out.println("Il posto è stato occupato. Riprova.");
@@ -365,30 +365,30 @@ public class MethodsControl {
             insurances = client.getAllInsurances();
             holdLuggages = client.getAllHoldLuggages();
         } catch (IOException ex) {
-            Logger.getLogger(MethodsControl.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MethodsControlClient.class.getName()).log(Level.SEVERE, null, ex);
         }
         try {
-            if (!MethodsControl.isCheckIn(client, tp)) {
-                flight = MethodsControl.searchFlight(client, tp.getCodeFlight());
-                MethodsControl.editTicket(client, tp, flight, meals, insurances, holdLuggages);
+            if (!MethodsControlClient.isCheckIn(client, tp)) {
+                flight = MethodsControlClient.searchFlight(client, tp.getCodeFlight());
+                MethodsControlClient.editTicket(client, tp, flight, meals, insurances, holdLuggages);
             } else {
                 System.out.println("Hai effettuato il check-in, non puoi modificare il biglietto.");
             }
         } catch (IOException ex) {
-            Logger.getLogger(MethodsControl.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MethodsControlClient.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
     public static void editTicket(FacadeControllerClient client) {
-        Ticket tp = MethodsControl.searchTicket(client);
+        Ticket tp = MethodsControlClient.searchTicket(client);
         if (tp != null) {
-            MethodsControl.editTicket(client, tp);
+            MethodsControlClient.editTicket(client, tp);
         }
     }
     //FINE MODIFICA//
 
     public static void searchFlightAirport(FacadeControllerClient client) {
-        ArrayList<String> inputtxt2 = MethodsControl.scannerInput(new ArrayList<>(asList("Inserisci Aeroporto partenza", "Inserisci Aeroporto destinazione")));
+        ArrayList<String> inputtxt2 = MethodsControlClient.scannerInput(new ArrayList<>(asList("Inserisci Aeroporto partenza", "Inserisci Aeroporto destinazione")));
         Route tmproute2 = new Route();
         tmproute2.setDeparutreAirport(inputtxt2.get(0));
         tmproute2.setDestinationAirport(inputtxt2.get(1));
@@ -417,13 +417,13 @@ public class MethodsControl {
 
     public static void checkIn(FacadeControllerClient client) {
         //Scanner input = new Scanner(System.in);
-        ArrayList<String> input = MethodsControl.scannerInput(new ArrayList<>(asList("Inserisci il codice ticket per effettuare il check-in:")));
+        ArrayList<String> input = MethodsControlClient.scannerInput(new ArrayList<>(asList("Inserisci il codice ticket per effettuare il check-in:")));
         String codeTicket = input.get(0);
         Ticket tp = new Ticket(codeTicket);
         try {
             tp = client.getTicket(tp);
             if (tp != null) {
-                if (MethodsControl.isCheckIn(client, tp)) {
+                if (MethodsControlClient.isCheckIn(client, tp)) {
                     System.out.println("Il check-in è stato già effettuato.");
                 } else {
                     tp = client.checkIn(tp);
@@ -434,13 +434,13 @@ public class MethodsControl {
             }
 
         } catch (IOException ex) {
-            Logger.getLogger(MethodsControl.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MethodsControlClient.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+    
     public static Ticket searchTicket(FacadeControllerClient client) {
         //Scanner input = new Scanner(System.in);
-        ArrayList<String> input = MethodsControl.scannerInput(new ArrayList<>(asList("Inserisci il codice del biglietto: ")));
+        ArrayList<String> input = MethodsControlClient.scannerInput(new ArrayList<>(asList("Inserisci il codice del biglietto: ")));
         String codeT = input.get(0);
         Ticket t = new Ticket(codeT);
         Flight f = null;
@@ -466,7 +466,7 @@ public class MethodsControl {
 
     public static void searchReservation(FacadeControllerClient client) {
         //Scanner input = new Scanner(System.in);
-        ArrayList<String> input = MethodsControl.scannerInput(new ArrayList<>(asList("Inserisci il codice della prenotazione: ")));
+        ArrayList<String> input = MethodsControlClient.scannerInput(new ArrayList<>(asList("Inserisci il codice della prenotazione: ")));
         int codeReservation = Integer.parseInt(input.get(0));
         Reservation r = new Reservation(codeReservation);
         Flight f1 = null;
@@ -504,8 +504,8 @@ public class MethodsControl {
 
     static void searchFlightCode(FacadeControllerClient client) {
         //Scanner input = new Scanner(System.in);
-        ArrayList<String> input = MethodsControl.scannerInput(new ArrayList<>(asList("Inserisci il codice del volo: ")));
-        MethodsControl.searchFlight(client, input.get(0));
+        ArrayList<String> input = MethodsControlClient.scannerInput(new ArrayList<>(asList("Inserisci il codice del volo: ")));
+        MethodsControlClient.searchFlight(client, input.get(0));
     }
 
 }

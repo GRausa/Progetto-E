@@ -21,51 +21,55 @@ public class ControllerTxt implements Runnable {
     public void run() {    
 
         loop:while (true) {            
-            String s = MethodsControl.toStringMenu();            
+            String s = MethodsControlClient.toStringMenu();            
             switch (s) {
                 
                 case "HI": 
-                    MethodsControl.hi((FacadeControllerClient) client);                
+                    MethodsControlClient.hi((FacadeControllerClient) client);                
                     break;               
                 
                 case "CERCA_VOLO":
-                    MethodsControl.searchFlight((FacadeControllerClient) client);
+                    MethodsControlClient.searchFlight((FacadeControllerClient) client);
                     break;
 
                 case "VERIFICA_TRATTA":
-                    MethodsControl.searchRoute((FacadeControllerClient) client);                    
+                    MethodsControlClient.searchRoute((FacadeControllerClient) client);                    
                     break;
 
                 case "PRENOTA":
-                    MethodsControl.makeReservation((FacadeControllerClient) client);
+                    MethodsControlClient.makeReservation((FacadeControllerClient) client);
                     break;
                     
                 case "CALENDARIO_AEROPORTI":
-                    MethodsControl.searchFlightAirport((FacadeControllerClient) client);                    
+                    MethodsControlClient.searchFlightAirport((FacadeControllerClient) client);                    
                     break;
                 
                 case "CHECK_IN":
-                    MethodsControl.checkIn((FacadeControllerClient) client); 
+                    MethodsControlClient.checkIn((FacadeControllerClient) client); 
                     break;
                 
                 case "CERCA_TICKETPASSENGER":
-                    MethodsControl.searchTicket((FacadeControllerClient) client);                     
+                    MethodsControlClient.searchTicket((FacadeControllerClient) client);                     
                     break;
                  
                 case "CERCA_PRENOTAZIONE":
-                    MethodsControl.searchReservation((FacadeControllerClient) client);
+                    MethodsControlClient.searchReservation((FacadeControllerClient) client);
                     break;
                     
                 case "CITTA_DISPONIBILI":
-                    MethodsControl.searchCitys((FacadeControllerClient) client);                    
+                    MethodsControlClient.searchCitys((FacadeControllerClient) client);                    
                     break;
                     
                 case "CERCA_VOLO_CODICE":
-                    MethodsControl.searchFlightCode((FacadeControllerClient) client);
+                    MethodsControlClient.searchFlightCode((FacadeControllerClient) client);
                     break;
                  
                 case "MODIFICA_BIGLIETTO":
-                    MethodsControl.editTicket((FacadeControllerClient) client);
+                    MethodsControlClient.editTicket((FacadeControllerClient) client);
+                    break;
+                
+                case "INSERISCI_VOLO":
+                    MethodsControlAdministrator.insertFlight((FacadeControllerClient) client);
                     break;
                                    
                 case "EXIT":

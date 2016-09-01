@@ -15,15 +15,13 @@ import static java.util.Arrays.asList;
  *
  * @author riccardoz
  */
-public class StartTui {
+public class StartTuiClient {
 
     public static void main(String[] args) throws IOException {
         InterfaceClient clientBlueAirline = new FacadeControllerClient();
-        if (clientBlueAirline.connect(MethodsControl.scannerInput(new ArrayList<>(asList("PUT IP SERVER"))).get(0))) {
+        if (clientBlueAirline.connect(MethodsControlClient.scannerInput(new ArrayList<>(asList("PUT IP SERVER"))).get(0))) {
             ControllerTxt r1 = new ControllerTxt(clientBlueAirline);
-
             Thread nuovoThread1 = new Thread(r1);
-
             nuovoThread1.start();
         }
         else{
