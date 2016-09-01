@@ -37,12 +37,9 @@ public class FacadeControllerClient implements InterfaceClient {
     public boolean connect(String ipServer) throws IOException{
         try {
             clientSocket = new Socket(ipServer, PortNumber);
-        }catch(UnknownHostException a){
-            return false;
-        } 
-        catch (ConnectException ex) {
-            //Logger.getLogger(ClientBlueAirline.class.getName()).log(Level.SEVERE, "ERROR", ex);
-            return false;
+        }catch(UnknownHostException | ConnectException a){
+            return false;            
+        //Logger.getLogger(ClientBlueAirline.class.getName()).log(Level.SEVERE, "ERROR", ex);
         }
         out = new PrintWriter(clientSocket.getOutputStream(), true);
         in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
