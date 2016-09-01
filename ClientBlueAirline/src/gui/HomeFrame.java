@@ -350,8 +350,8 @@ public class HomeFrame extends JFrame {
 
         for (Component tmp : c.getComponents()) {
             if (tmp instanceof JTextField) {
-            JTextFieldSelected((JTextField) tmp);
-        }
+                JTextFieldSelected((JTextField) tmp);
+            }
             if (tmp instanceof JLabel || tmp instanceof JButton) {
                 tmp.setFont(new Font("Helvetica", Font.BOLD, 25));
             } else {
@@ -459,6 +459,25 @@ public class HomeFrame extends JFrame {
             }
 
         });
+
+    }
+
+    public void noMinorZero(final JTextField t, final JButton meno,final JButton piu) {
+        t.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (Integer.parseInt(t.getText()) == 0) {
+                    meno.setEnabled(false);
+                } else {
+                    meno.setEnabled(true);
+                }
+            }
+        });
+        if(meno.isSelected() && Integer.parseInt(t.getText()) == 1 )
+            meno.setEnabled(false);
+        if(piu.isSelected() && Integer.parseInt(t.getText()) == 0 )
+            meno.setEnabled(true);
 
     }
 

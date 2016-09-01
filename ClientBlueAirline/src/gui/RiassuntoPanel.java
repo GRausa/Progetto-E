@@ -156,7 +156,7 @@ public class RiassuntoPanel extends JPanel {
         home.setallFont(infoGenerali);
         home.setallFont(info);
         riassunto.setOpaque(false);
-        riassunto.setFont(new Font("Helvetica", Font.BOLD, 20));
+        riassunto.setFont(new Font("Helvetica", Font.BOLD, 17));
     }
 
     private ActionListener PassengerListener() {

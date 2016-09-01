@@ -79,11 +79,11 @@ public class FlightsPanel extends JPanel {
         c.gridx = 3;
         c.gridy = 9;
         MyTableModel model = new MyTableModel();
-        Object data[][] = new Object[flights.size()][7];
+        Object data[][] = new Object[flights.size()][8];
         if (!flights.isEmpty()) {
             int i = 0;
             for (Flight f : flights) {
-                 if (!(home.getNpasseggeri() > f.getSeatFree())) {   
+                   
                     data[i][0] = f.getCode();
                     data[i][1] = f.getRoute().getDeparutreAirport();
                     data[i][2] = f.getRoute().getDestinationAirport();
@@ -94,9 +94,10 @@ public class FlightsPanel extends JPanel {
                     data[i][3] = d;
                     data[i][4] = d2;
                     data[i][5] = f.getPrezzo();
-                    data[i][6] = false;
+                    data[i][6] = f.getSeatFree();
+                    data[i][7] = false;
                     i++;
-            }}
+            }
         }
         model.setData(data);
         voli = new JTable(model);
@@ -108,6 +109,7 @@ public class FlightsPanel extends JPanel {
         ((DefaultTableCellRenderer) voli.getDefaultRenderer(String.class)).setOpaque(false);
         ((DefaultTableCellRenderer) voli.getDefaultRenderer(Date.class)).setOpaque(false);
         ((DefaultTableCellRenderer) voli.getDefaultRenderer(double.class)).setOpaque(false);
+        ((DefaultTableCellRenderer) voli.getDefaultRenderer(Integer.class)).setOpaque(false);
 
         conf.setOpaque(false);
         conf.getViewport().setOpaque(false);
@@ -161,9 +163,9 @@ public class FlightsPanel extends JPanel {
 
         private Integer riga;
 
-        String columnName[] = {"CODICE volo", "Partenza", "Destinazione", "Data", "Orario", "Prezzo (€)", "Seleziona"};
-        Object data[][] = {{"VOLO001", "Milano (Linate)", "New York(JFK)", "dd/MM/yyyy", "hh:mm", 100, false},
-        {"VOLO001", "Milano (Linate)", "New York(JFK)", "dd/MM/yyyy", "hh:mm", 300, false}};
+        String columnName[] = {"CODICE volo", "Partenza", "Destinazione", "Data", "Orario", "Prezzo (€)", "Posti Disponibili","Seleziona"};
+        Object data[][] = {{"VOLO001", "Milano (Linate)", "New York(JFK)", "dd/MM/yyyy", "hh:mm", 100,50, false},
+        {"VOLO001", "Milano (Linate)", "New York(JFK)", "dd/MM/yyyy", "hh:mm", 300, 50,false}};
 
         public void setData(Object[][] data) {
             this.data = data;
@@ -202,7 +204,7 @@ public class FlightsPanel extends JPanel {
         public boolean isCellEditable(int row, int col) {
             //Note that the data/cell address is constant,
             //no matter where the cell appears onscreen.
-            if (col < 6) {
+            if (col < 7) {
                 return false;
             } else {
                 return true;
@@ -215,7 +217,7 @@ public class FlightsPanel extends JPanel {
          */
         public void setValueAt(Object value, int row, int col) {
 
-            if (col != 6) {
+            if (col != 7) {
                 data[row][col] = value;
                 fireTableCellUpdated(row, col);
             } else {

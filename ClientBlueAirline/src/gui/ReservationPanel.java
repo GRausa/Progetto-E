@@ -161,6 +161,7 @@ public class ReservationPanel extends JPanel {
             }
         });
         npasseggeri.setFont(new Font("Helvetica", Font.BOLD, 15));
+        home.noMinorZero(npasseggeri, passeggerimeno,passeggeripiu);
 
         passeggeri.add(passeggerimeno);
 
@@ -194,6 +195,7 @@ public class ReservationPanel extends JPanel {
         });
         passeggeri.setOpaque(false);
 
+        
         reservationPanel.add(titnpasseggeri);
         titnpasseggeri.setFont(new Font("Helvetica", Font.BOLD, 25));
         reservationPanel.add(passeggeri);
