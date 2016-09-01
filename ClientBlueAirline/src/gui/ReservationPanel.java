@@ -169,11 +169,17 @@ public class ReservationPanel extends JPanel {
 
         passeggerimeno.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(ActionEvent e) {                
                 int a = Integer.parseInt(npasseggeri.getText());
                 a--;
-                npasseggeri.setText("" + a);
-                home.notifiche.setText("Rimosso un passeggero");
+                if(a<0){
+                    passeggerimeno.setEnabled(false);
+                    a=0;
+                }
+                else{
+                    npasseggeri.setText("" + a);
+                    home.notifiche.setText("Rimosso un passeggero");
+                }
             }
 
         });
@@ -188,8 +194,12 @@ public class ReservationPanel extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 int a = Integer.parseInt(npasseggeri.getText());
                 a++;
-                npasseggeri.setText("" + a);
-                home.notifiche.setText("Aggiunto un passeggero");
+                if(a>=0){
+                    npasseggeri.setText("" + a);
+                    home.notifiche.setText("Aggiunto un passeggero");
+                    passeggerimeno.setEnabled(true);
+                }
+                
             }
 
         });

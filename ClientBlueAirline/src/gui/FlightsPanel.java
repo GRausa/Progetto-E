@@ -21,6 +21,7 @@ import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -79,11 +80,17 @@ public class FlightsPanel extends JPanel {
         c.gridx = 3;
         c.gridy = 9;
         MyTableModel model = new MyTableModel();
-        Object data[][] = new Object[flights.size()][8];
+        int nfl=0;
+        for(Flight f:flights){
+            if(home.getNpasseggeri()<=f.getPrezzo()){
+                nfl++;
+            }
+        }
+        Object data[][] = new Object[nfl][8];
         if (!flights.isEmpty()) {
             int i = 0;
-            for (Flight f : flights) {
-                   
+            for (Flight f : flights) {  
+                if(home.getNpasseggeri()<=f.getSeatFree()){
                     data[i][0] = f.getCode();
                     data[i][1] = f.getRoute().getDeparutreAirport();
                     data[i][2] = f.getRoute().getDestinationAirport();
@@ -94,9 +101,10 @@ public class FlightsPanel extends JPanel {
                     data[i][3] = d;
                     data[i][4] = d2;
                     data[i][5] = f.getPrezzo();
-                    data[i][6] = f.getSeatFree();
-                    data[i][7] = false;
+                    data[i][6] = f.getSeatFree();     
+                    data[i][7] = false;   
                     i++;
+                }                
             }
         }
         model.setData(data);
@@ -162,7 +170,7 @@ public class FlightsPanel extends JPanel {
     class MyTableModel extends AbstractTableModel {
 
         private Integer riga;
-
+        
         String columnName[] = {"CODICE volo", "Partenza", "Destinazione", "Data", "Orario", "Prezzo (€)", "Posti Disponibili","Seleziona"};
         Object data[][] = {{"VOLO001", "Milano (Linate)", "New York(JFK)", "dd/MM/yyyy", "hh:mm", 100,50, false},
         {"VOLO001", "Milano (Linate)", "New York(JFK)", "dd/MM/yyyy", "hh:mm", 300, 50,false}};
