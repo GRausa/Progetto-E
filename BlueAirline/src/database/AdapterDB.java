@@ -13,7 +13,6 @@ import objects.Insurance;
 import objects.Meal;
 import objects.Reservation;
 import objects.Route;
-import objects.Seat;
 import objects.Ticket;
 
 /**

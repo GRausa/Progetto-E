@@ -162,7 +162,7 @@ public class NFrame extends JFrame {
 
                 for (JComboBox combo1 : combo) {
                     String[] tmp = combo1.getSelectedItem().toString().split(" ");
-                    System.out.println(tmp[0]);
+                    //System.out.println(tmp[0]);
                     home.addMeal(tmp[0]);
                 }
 
@@ -171,7 +171,7 @@ public class NFrame extends JFrame {
 
                 for (JComboBox combo1 : combo) {
                     String[] tmp = combo1.getSelectedItem().toString().split(" ");
-                    System.out.println(tmp[0]);
+                    //System.out.println(tmp[0]);
                     home.addInsurance(tmp[0]);
                 }
 
@@ -181,7 +181,7 @@ public class NFrame extends JFrame {
 
                 for (JComboBox combo1 : combo) {
                     String[] tmp = combo1.getSelectedItem().toString().split(" ");
-                    System.out.println(tmp[0]);
+                    //System.out.println(tmp[0]);
                     home.addHoldLuggage(tmp[0]);
                 }
 

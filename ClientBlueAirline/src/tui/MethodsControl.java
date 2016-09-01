@@ -6,10 +6,10 @@
 package tui;
 
 import controller.FacadeControllerClient;
+import controller.FacadeControllerClientAdministrator;
 import java.io.IOException;
 import java.util.ArrayList;
 import static java.util.Arrays.asList;
-import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Scanner;
 import java.util.logging.Level;
@@ -280,7 +280,7 @@ public class MethodsControl {
                     do {
                         ArrayList<String> input=MethodsControl.scannerInput(new ArrayList<>(asList("Inserisci il nuovo posto")));
                         int set = Integer.parseInt(input.get(0));
-                        if (flight.getSeats().get(set - 1).getTicket() == null) {
+                        if (flight.getSeats().get(set - 1).getTicket() == null ) {
                             tp.setNSeat(set);
                             tp = client.editSeatTicket(tp);
                             if (tp.getNseat() == set) {
@@ -290,7 +290,7 @@ public class MethodsControl {
                                 System.out.println("Posto non assegnato.");
                             }
                         } else {
-                            System.out.println("Errore inserimento.");
+                            System.out.println("Errore inserimento");
                         }
                     } while (!c);
                 }

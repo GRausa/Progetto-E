@@ -6,7 +6,6 @@
 package net;
 
 import com.google.gson.Gson;
-import controller.FacadeControllerServer;
 import controller.InterfaceServer;
 import java.io.BufferedReader;
 import java.io.IOException;
