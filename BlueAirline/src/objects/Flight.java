@@ -10,7 +10,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 /**
- *
+ * La classe Flight indica un volo che effettua la compagnia.
+ * 
  * @author Giovanni
  */
 public class Flight {
@@ -21,7 +22,16 @@ public class Flight {
     private Calendar dateDestination;
     private double prezzo;
     private ArrayList<Seat> seats;
-
+    
+    /**
+     * Istanzia un nuovo volo
+     * 
+     * @param code codice del volo
+     * @param r rotta del volo
+     * @param dateDeparture data di partenza 
+     * @param dateDestination data di arrivo
+     * @param prezzo prezzo del volo
+     */
     public Flight(String code, Route r, Calendar dateDeparture, Calendar dateDestination, double prezzo) {
         this.code = code;
         this.r = r;
@@ -29,7 +39,16 @@ public class Flight {
         this.dateDestination = dateDestination;
         this.prezzo = prezzo;
     }
-    
+    /**
+     * Istanzia un nuovo volo
+     * 
+     * @param code codice del volo
+     * @param r rotta del volo
+     * @param dateDeparture data di partenza
+     * @param dateDestination data di arrivo   
+     * @param prezzo prezzo del volo
+     * @param seats lista dei posti a sedere
+     */
     public Flight(String code, Route r, Calendar dateDeparture, Calendar dateDestination, double prezzo, ArrayList<Seat> seats) {
         this.code = code;
         this.r = r;

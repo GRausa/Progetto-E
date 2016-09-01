@@ -8,7 +8,8 @@ package objects;
 import java.util.ArrayList;
 
 /**
- *
+ * La classe Ticket indica un biglietto di un volo della compagnia.
+ * 
  * @author cl418377
  */
 public class Ticket {
@@ -20,7 +21,17 @@ public class Ticket {
     private ArrayList<HoldLuggage> holdLuggages;
     private ArrayList<Insurance> insurances;
     private boolean checkIn;
-
+    /**
+     * Istanzia un nuovo biglietto.
+     * 
+     * @param ID ID del passeggero
+     * @param name nome del passeggero
+     * @param surname cognome del passeggero
+     * @param nseat numero del posto a sedere
+     * @param classe classe del posto a sedere 
+     * @param codeFlight codice del volo
+     * @param priceFlight prezzo del volo
+     */
     public Ticket(String ID, String name, String surname, int nseat, int classe, String codeFlight, double priceFlight) {
         this.ID = ID;
         this.name = name;
@@ -34,7 +45,20 @@ public class Ticket {
         this.priceFlight=priceFlight;
         this.checkIn=false;
     }
-
+    /**
+     * Istanzia un nuovo biglietto.
+     * 
+     * @param code codice del biglietto
+     * @param priceFlight prezzo del volo
+     * @param ID ID del passeggero
+     * @param name nome del passeggero
+     * @param surname cognome del passeggero
+     * @param codeFlight codice del volo
+     * @param nseat numero del posto a sedere 
+     * @param codeReservation codice della prenotazione
+     * @param classe classe del posto 
+     * @param checkIn variabile che indica se il check-in è stato effettuato
+     */
     public Ticket(String code, double priceFlight, String ID, String name, String surname, String codeFlight, int nseat, int codeReservation, int classe, boolean checkIn) {
         this.code = code;
         this.priceFlight = priceFlight;
@@ -47,7 +71,11 @@ public class Ticket {
         this.classe = classe;
         this.checkIn = checkIn;
     }
-    
+    /**
+     * Istanzia un nuovo biglietto a partire dal suo codice.
+     * 
+     * @param code codice del biglietto
+     */
     public Ticket(String code){
         this.code = code;
     }
@@ -88,7 +116,10 @@ public class Ticket {
     public double getPriceFlight(){
         return priceFlight;
     }
-
+    /**
+     * 
+     * @return prezzo totale comprensivo delle varie aggiunte
+     */
     public double getTotalPrice() {
         double totalPrice=priceFlight;
         if(classe==1){

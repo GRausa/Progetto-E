@@ -30,43 +30,31 @@ public class Meal {
         this.timeMeal=timeMeal;
     }
 
+    /**
+     * Istanzia un nuovo pasto a partire dal suo codice
+     * 
+     * @param code codice del pasto
+     */
     public Meal(String code) {
         this.code = code;
     }
-    
-    
-    /**
-     * 
-     * @return nome del pasto 
-     */
+
     public String getName() {
         return name;
     }
-    /**
-     * 
-     * @return tempo di volo dal quale è disponibile il pasto
-     */
+ 
     public int getTimeMeal() {
         return timeMeal;
     }
-    /**
-     * 
-     * @return prezzo del pasto
-     */
+  
     public double getPrice() {
         return price;
     }
-    /**
-     * 
-     * @return codice del pasto 
-     */
+
     public String getCode() {
         return code;
     }
-    /**
-     * 
-     * @return rappresentazione scritta del pasto
-     */
+
     /*
     public String toString(){
         return code+" "+name+" "+price+" €";
