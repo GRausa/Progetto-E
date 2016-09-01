@@ -143,9 +143,14 @@ public class NFrame extends JFrame {
 
             @Override
             public void windowOpened(WindowEvent e) {
-                home.getMeals().clear();
-                home.getInsurances().clear();
-                home.getLuggages().clear();
+                switch(k){
+                        case 'M':home.getMeals().clear();
+                        break;
+                        case 'I':home.getInsurances().clear();
+                        break;
+                        case 'H':home.getLuggages().clear();
+                        break;
+                }
             }
 
             @Override

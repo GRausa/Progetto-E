@@ -142,8 +142,8 @@ public class RiassuntoPanel extends JPanel {
       passeggeri.addActionListener(PassengerListener());
         
         riassunto.setText("");
-        riassunto.append(passengers.get(0).printTicketPassenger());
-        riassunto.append("ATTENZIONE: codice biglietto verrà erogato solo al momento del check-in!");
+        riassunto.append(passengers.get(0).printTicketWithoutCode());
+        riassunto.append("\n\nATTENZIONE: il codice biglietto sarà valido solo al momento del check-in!");
         info.add(riassunto,BorderLayout.CENTER);
         riassunto.setEditable(false);
     }
@@ -156,7 +156,7 @@ public class RiassuntoPanel extends JPanel {
         home.setallFont(infoGenerali);
         home.setallFont(info);
         riassunto.setOpaque(false);
-        riassunto.setFont(new Font("Helvetica", Font.BOLD, 20));
+        riassunto.setFont(new Font("Helvetica", Font.BOLD, 15));
     }
 
     private ActionListener PassengerListener() {

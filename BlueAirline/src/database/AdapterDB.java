@@ -79,7 +79,6 @@ public interface AdapterDB {
 
     //void setAllSeatFlight(Flight volo) throws SQLException;
 
-    /* USATO NELL'INIZIALIZZAZIONE DEI POSTI*/
     ArrayList<Flight> setAllSeatFlights() ;
 
     void setCheckIn(String codeTicket) throws SQLException;

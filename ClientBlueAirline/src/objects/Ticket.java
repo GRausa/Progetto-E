@@ -148,22 +148,29 @@ public class Ticket {
     }
     */
     public String printTicketPassenger(){
+        String s = "Codice Biglietto"+code+" "+name+" "+surname+" "+this.printTicketWithoutCode();
+        return s;
+    }
+    public String printTicketWithoutCode(){
         double priceAggiunte=0;
-        String s = "Codice Biglietto: "+code+"\n"+ID+" "+name+" "+surname+"\nVolo: "+codeFlight+" Posto: "+nseat+" ("+classe+" classe)\nAggiunte: ";
+        String s = ID+"\nVolo: "+codeFlight+" Posto: "+nseat+" ("+classe+" classe)\nAggiunte:\n";
         boolean c=false;
         for(Meal m:meals){
             s+=m.toString()+" ";
             priceAggiunte += m.getPrice();
+            s+="\n";
             c=true;
         }
         for(HoldLuggage hl:holdLuggages){
             s+=hl.toString()+" ";
             priceAggiunte += hl.getPrice();
+            s+="\n";
             c=true;
         }
         for(Insurance in:insurances){
             s+=in.toString()+" ";
             priceAggiunte += in.getPrice();
+            s+="\n";
             c=true;
         }
         if(!c){

@@ -33,7 +33,7 @@ public class ConcreteAdapterDB implements AdapterDB {
 
     }
 
-    @Override
+    
     public int numberSeatFlight(String codeFlight) throws SQLException {
         String query
                 = "SELECT POSTI\n"
@@ -53,7 +53,7 @@ public class ConcreteAdapterDB implements AdapterDB {
         return (int) ParserSQL.parseFunctionSQL(resultQuery, "NUM");
     }
 
-    @Override
+    
     public int numberSeatFirstClassFlight(String cod) throws SQLException {
 
         String query
@@ -65,7 +65,6 @@ public class ConcreteAdapterDB implements AdapterDB {
 
     }
 
-    @Override
     public void setAllSeatFlight(Flight volo) throws SQLException {
         int numeroseat = numberSeatFlight(volo.getCode());
         int prima = numberSeatFirstClassFlight(volo.getCode());
@@ -78,7 +77,6 @@ public class ConcreteAdapterDB implements AdapterDB {
         }
     }
 
-    @Override
     public void setSeat(String volo, int num, int classe) throws SQLException {
         String query = "INSERT INTO Posto VALUES ('" + num + "', '" + volo + "', '" + classe + "', null)";
         SQL.queryWrite(query);
@@ -215,7 +213,6 @@ public class ConcreteAdapterDB implements AdapterDB {
         return reservation;
     }     
 
-    @Override
     public Reservation addTickets(Reservation reservation) throws SQLException{
         int i = 0;
         String codeTicket="";
@@ -253,7 +250,6 @@ public class ConcreteAdapterDB implements AdapterDB {
         return reservation;
     }
 
-    @Override
     public void setSeatBoolean(String codeFlight, int nSeat, String ticketPassenger, boolean b) throws SQLException {
         String query;
         if(b){ //IMPOSTA IL POSTO A SEDERE
@@ -268,7 +264,6 @@ public class ConcreteAdapterDB implements AdapterDB {
         SQL.queryWrite(query);
     }
     
-    @Override
     public void insertSupplementMeal(String code, String codeTicket) throws SQLException{
         ResultSet resultQuery;
         String query   
@@ -282,7 +277,6 @@ public class ConcreteAdapterDB implements AdapterDB {
         SQL.queryWrite(query);
     }
     
-    @Override
     public void insertSupplementHoldLuggage(String code, String codeTicket) throws SQLException{
         ResultSet resultQuery;
         String query
@@ -296,7 +290,6 @@ public class ConcreteAdapterDB implements AdapterDB {
         SQL.queryWrite(query);
     }
     
-    @Override
     public void insertSupplementInsurance(String code, String codeTicket) throws SQLException{
         ResultSet resultQuery;
         String query
@@ -311,7 +304,6 @@ public class ConcreteAdapterDB implements AdapterDB {
         SQL.queryWrite(query);    
     }
     
-    @Override
     public void insertSupplement(String code, String codeTicket) throws SQLException {        
         switch (code.charAt(0)) {
             case 'M':
@@ -334,7 +326,6 @@ public class ConcreteAdapterDB implements AdapterDB {
         return flight;
     }
     
-    @Override
     public ArrayList<Seat> getSeatsFlight(String codeFlight) throws SQLException{
         ArrayList<Seat> seats;
         String query

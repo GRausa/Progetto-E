@@ -224,7 +224,7 @@ public class PasseggeriPanel extends JPanel {
         bagagliobutton.setIcon(immagine);
         luggages = new ArrayList();
         home.setLuggages(luggages);
-        bagagliobutton.addActionListener(NListener(nbagagli, "Scegli il tipo di bagaglio.", "Specifica quale tipo di bagaglio vuoi.", 'H'));
+        bagagliobutton.addActionListener(NListener(nbagagli, "I nostri tipi di bagagli: ", "Specifica il tipo di bagaglio per il volo", 'H'));
 
         bagagli.add(bagagliobutton);
         bagaglipiu.addActionListener(new ActionListener() {
@@ -285,7 +285,7 @@ public class PasseggeriPanel extends JPanel {
         assicurazionibutton.setIcon(immagine2);
         insurances = new ArrayList();
         home.setInsurances(insurances);
-        assicurazionibutton.addActionListener(NListener(nassicurazioni, "Quale assicurazione vuoi?", "Inserisci le assicurazioni per il tuo volo.", 'I'));
+        assicurazionibutton.addActionListener(NListener(nassicurazioni, "Le nostre assicurazioni: ", "Inserisci le assicurazioni per il volo.", 'I'));
 
         assicurazioni.add(assicurazionibutton);
         assicurazionipiu.addActionListener(new ActionListener() {
@@ -370,7 +370,7 @@ public class PasseggeriPanel extends JPanel {
         pastibutton.setIcon(immagine1);
         meals = new ArrayList();
         home.setMeals(meals);
-        pastibutton.addActionListener(NListener(npasti, "Cosa mangi", "Inserisci i pasti per il volo", 'M'));
+        pastibutton.addActionListener(NListener(npasti, "I nostri menù:", "Inserisci i pasti per il volo", 'M'));
 
         pasti.add(pastibutton);
         pastipiu.addActionListener(new ActionListener() {
