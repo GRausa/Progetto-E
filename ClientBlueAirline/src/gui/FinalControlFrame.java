@@ -6,11 +6,9 @@
 package gui;
 
 import controller.FacadeControllerClient;
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -27,9 +25,8 @@ import objects.Ticket;
  *
  * @author andreacavagna
  */
-public class FinalControlFrame extends JFrame{
+public class FinalControlFrame extends JPanel{
     
-    boolean c = false;
     HomeFrame home;
     FacadeControllerClient controller;
     Reservation res;
@@ -39,7 +36,7 @@ public class FinalControlFrame extends JFrame{
     JComboBox cbclasse = new JComboBox();
     JComboBox posto0 = new JComboBox();
     JButton ok =new JButton("OK");
-   
+    boolean c = false;
     
     
     public FinalControlFrame(HomeFrame home, FacadeControllerClient controller,Reservation res, Ticket t,Flight f)
@@ -49,15 +46,14 @@ public class FinalControlFrame extends JFrame{
         this.res= res;
         this.t=t;
         this.f=f;
-        this.setTitle("Controllo Posto");
+       
         setSize(500, 500);
         setMinimumSize(new Dimension(500, 500));
-        this.setResizable(false);
+     
         initComponents();
-        this.setLayout(new GridLayout(1,4));
+        this.setLayout(new GridLayout(4,1));
         this.setVisible(true);
-        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        this.setAlwaysOnTop(true);
+        
         home.setEnabled(false);
     }
     
@@ -107,26 +103,20 @@ public class FinalControlFrame extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                
-                    int set= Integer.parseInt((String)posto0.getSelectedItem());
+                    int set= (int) posto0.getSelectedItem();
                     if(f.getSeats().get(set-1).getTicket()==null)
-                    {
-                        System.out.println("Sono entrato");
+                        {
                         try {
                             t.setNSeat(set);
                             t = controller.editSeatTicket(t);
-                            if(!(t.getNseat()==set)){
-                                System.out.println("Sono entrato 2");
+                            if(!(t.getNseat()==set))
                                 JOptionPane.showMessageDialog(home, "Il posto è gia stato assegnato\n");
-                            }
-                            else{
-                                System.out.println("Sono entrato 3");
-                                c=true;
+                            else
                                 closeWindow();
-                            }
                         } catch (IOException ex) {
                             Logger.getLogger(FinalControlFrame.class.getName()).log(Level.SEVERE, null, ex);
                         }
-                    }
+                        }
                 }
             
         });  
@@ -136,8 +126,4 @@ public class FinalControlFrame extends JFrame{
         {
         this.closeWindow();
         }
-    
-    public boolean esci(){
-         return c;
-    }
 }

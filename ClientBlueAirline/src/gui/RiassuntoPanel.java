@@ -100,9 +100,10 @@ public class RiassuntoPanel extends JPanel {
                     for(Ticket tick:reservation.getPassengers())
                     {
                        if( tick.getNseat()==-1)
-                        {
-                            //FinalControlFrame finale=new FinalControlFrame(home,controller,reservation,tick,flight);
-                            //APPLICARE JDIALOG
+                        {   
+                            String[] options = {"esci."};
+                            FinalControlFrame finale=new FinalControlFrame(home,controller,reservation,tick,flight);
+                            JOptionPane.showOptionDialog(home, finale, "BENVENUTI IN THETABLUEAIRLINE", JOptionPane.NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
                         }
                     }
                     reservation=controller.getReservation(reservation);
