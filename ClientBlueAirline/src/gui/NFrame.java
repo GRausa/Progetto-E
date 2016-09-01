@@ -49,6 +49,7 @@ public class NFrame extends JFrame {
         this.setResizable(false);
         initComponents();
         this.setVisible(false);
+       
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -143,6 +144,7 @@ public class NFrame extends JFrame {
 
             @Override
             public void windowOpened(WindowEvent e) {
+                home.setEnabled(false);
                 switch(k){
                         case 'M':home.getMeals().clear();
                         break;
@@ -155,7 +157,7 @@ public class NFrame extends JFrame {
 
             @Override
             public void windowClosing(WindowEvent e) {
-
+                home.setEnabled(true);
                 switch (k) {
 
                     case 'M':

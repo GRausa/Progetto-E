@@ -21,11 +21,11 @@ import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import objects.*;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -95,9 +95,22 @@ public class RiassuntoPanel extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    
-                    controller.makeReservation(home.getReservation());
-                    JOptionPane.showMessageDialog(home, "Congratulazioni!\n" + "Prenotazione Effettuata\n");
+                    reservation = controller.makeReservation(home.getReservation()); 
+                    flight= controller.searchFlight(flight);
+                    for(Ticket tick:reservation.getPassengers())
+                    {
+                       if( tick.getNseat()==-1)
+                       {
+                       FinalControlFrame finale=new FinalControlFrame(home,controller,reservation,tick,flight);
+                       }
+                    }
+                    reservation=controller.getReservation(reservation);
+                    String s = "Codice prenotazione:\n " + reservation.getCode();
+                    for(Ticket t : reservation.getPassengers())
+                    {
+                    s+=t.getName()+ " " + t.getSurname()+" "+ t.getCode()+"\n";
+                    }
+                    JOptionPane.showMessageDialog(home, "Congratulazioni!\n" + "Prenotazione Effettuata\n"+s+"\nLe è stata inviata un'email di recupero.");
                     home.returnHome();
                 } catch (IOException ex) {
                     Logger.getLogger(RiassuntoPanel.class.getName()).log(Level.SEVERE, null, ex);
@@ -170,7 +183,7 @@ public class RiassuntoPanel extends JPanel {
         };
         return evento;
     }
-
-      
-  
 }
+      
+
+
