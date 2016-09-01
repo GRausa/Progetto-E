@@ -211,7 +211,7 @@ public class ConcreteAdapterDB implements AdapterDB {
         SQL.queryWrite(query);
         reservation.setCode(codeReservation);
         this.addTickets(reservation);
-        Email.sendMail(new Email(reservation.getEmail(),"VOLO ACQUISTATO",reservation.toString()));
+        Email.sendMail(new Email(reservation.getEmail(),"VOLO ACQUISTATO",reservation.printReservation()+reservation.printTickets()));
         return reservation;
     }     
 
