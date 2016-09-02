@@ -14,7 +14,8 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 /**
- *
+ * La classe Email serve per l'invio del messaggio di conferma all'acquirente.
+ * 
  * @author Zodraccir
  */
 public class Email {
@@ -26,7 +27,14 @@ public class Email {
 
     private String object;          // questa variabile contiene l'oggetto dell'email    
     private String textemail;     // questa variabile contiene il testo dell'email
-
+    
+    /**
+     * Istanzia una nuova email.
+     * 
+     * @param sender email del destinatario
+     * @param object oggetto dell'email
+     * @param text testo dell'email
+     */
     public Email(String sender, String object, String text) {
         this.receiver = sender;
         this.object = object;
@@ -53,6 +61,11 @@ public class Email {
         return textemail;
     }
 
+    /**
+     * Invia una email di conferma al destinatario.
+     * 
+     * @param e indirizzo del destinatario e messaggio da inviare
+     */
     public static void sendMail(Email e) {
         try {
             Properties props = System.getProperties();

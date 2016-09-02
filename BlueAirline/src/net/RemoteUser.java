@@ -26,7 +26,6 @@ import objects.Meal;
 import objects.Route;
 import objects.Reservation;
 import objects.Ticket;
-import static jdk.nashorn.internal.objects.NativeMath.log;
 import mail.Email;
 import static jdk.nashorn.internal.objects.NativeMath.log;
 
