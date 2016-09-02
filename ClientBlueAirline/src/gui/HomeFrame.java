@@ -178,16 +178,17 @@ public class HomeFrame extends JFrame {
         JMenuBar menuBar;
         JMenu menu;
         JMenuItem menuItem;
+        JMenuItem contattaci;
 
         menuBar = new JMenuBar();
 
         menu = new JMenu("Home");
-        menu.setMnemonic(KeyEvent.VK_H);
+        
         menu.getAccessibleContext().setAccessibleDescription("Return to the Home Page");
         menuBar.add(menu);
 
-        menuItem = new JMenuItem("Home", KeyEvent.VK_F);
-        menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F, ActionEvent.ALT_MASK));
+        menuItem = new JMenuItem("Home", KeyEvent.VK_H);
+        menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_H, ActionEvent.CTRL_MASK));
         menuItem.getAccessibleContext().setAccessibleDescription("Return to the Home Page");
         menuItem.addActionListener(new ActionListener() {
             @Override
@@ -200,7 +201,9 @@ public class HomeFrame extends JFrame {
                     notifiche.setText("Operazione cancellata dall'utente");
                 }
             }
-
+            
+            
+            
         });
         menuItem.addMouseMotionListener(new MouseAdapter() {
 
@@ -212,6 +215,38 @@ public class HomeFrame extends JFrame {
 
         });
         menu.add(menuItem);
+        
+        
+        contattaci = new JMenuItem("Contattaci", KeyEvent.VK_C);
+        contattaci.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_C, ActionEvent.CTRL_MASK));
+        contattaci.getAccessibleContext().setAccessibleDescription("Contattaci");
+        contattaci.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int dialogResult = JOptionPane.showConfirmDialog(frame, "Proseguendo potresti perdere\n" + "i dati inseriti fino ad ora.\n" + "Vuoi proseguire?", "Avvertenza", JOptionPane.YES_NO_OPTION);
+                if (dialogResult == 0) {
+                    //inserire qui quello che deve fare in caso di contattaci!
+                    frame.returnHome();//Eliminare il ritorno a HOme Frame o no?
+                    notifiche.setText(DEFAULT);
+                } else {
+                    notifiche.setText("Operazione cancellata dall'utente");
+                }
+            }
+            
+            
+            
+        });
+        menuItem.addMouseMotionListener(new MouseAdapter() {
+
+            @Override
+            public void mouseMoved(MouseEvent e) {
+
+                notifiche.setText("Premere Contattaci per inviarci una mail(ATTENZIONE, possibile perdita dati).");
+            }
+
+        });
+        menu.add(menuItem);
+        
 
         return menuBar;
     }
