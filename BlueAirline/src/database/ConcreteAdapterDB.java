@@ -8,6 +8,7 @@ package database;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import mail.Email;
@@ -41,7 +42,7 @@ public class ConcreteAdapterDB implements AdapterDB {
                 + "FROM Aereo A,Volo V\n"
                 + "WHERE A.COD_AEREO = V.AEREO AND V.COD_VOLO='" + codeFlight + "'";
         ResultSet resultQuery = SQL.queryRead(query);
-        return (int) ParserSQL.parseFunctionSQL(resultQuery, "POSTI");
+        return (int) ParserSQL.parseFunctionDoubleSQL(resultQuery, "POSTI");
     }
 
     @Override
@@ -51,7 +52,7 @@ public class ConcreteAdapterDB implements AdapterDB {
                 + "FROM Posto\n"
                 + "WHERE Volo='" + codeFlight + "' AND PASSEGGERO IS NULL ";
         ResultSet resultQuery = SQL.queryRead(query);
-        return (int) ParserSQL.parseFunctionSQL(resultQuery, "NUM");
+        return (int) ParserSQL.parseFunctionDoubleSQL(resultQuery, "NUM");
     }
 
     
@@ -62,7 +63,7 @@ public class ConcreteAdapterDB implements AdapterDB {
                 + "FROM Aereo A,Volo V\n"
                 + "WHERE A.COD_AEREO = V.AEREO AND V.COD_VOLO='" + cod + "'";
         ResultSet resultQuery = SQL.queryRead(query);
-        return (int) ParserSQL.parseFunctionSQL(resultQuery, "POSTI1CLASSE");
+        return (int) ParserSQL.parseFunctionDoubleSQL(resultQuery, "POSTI1CLASSE");
 
     }
 
@@ -205,7 +206,7 @@ public class ConcreteAdapterDB implements AdapterDB {
                 = "SELECT MAX(COD_PRENOTAZIONE) AS MAXCOD\n"
                 + "FROM Prenotazione";
         ResultSet resultQuery = SQL.queryRead(query);
-        int codeReservation = (int) ParserSQL.parseFunctionSQL(resultQuery, "MAXCOD");
+        int codeReservation = (int) ParserSQL.parseFunctionDoubleSQL(resultQuery, "MAXCOD");
         codeReservation++;
         query = "INSERT INTO Prenotazione VALUES ('" + codeReservation + "', '" + reservation.getCodeFlight() + "', '" + reservation.getEmail() + "', '" + reservation.getNumber() + "')";
         SQL.queryWrite(query);
@@ -273,7 +274,7 @@ public class ConcreteAdapterDB implements AdapterDB {
                     + "FROM Pasto\n"
                     + "WHERE COD_PASTO='" + code + "'";
         resultQuery = SQL.queryRead(query);
-        double price = ParserSQL.parseFunctionSQL(resultQuery, "PREZZO");
+        double price = ParserSQL.parseFunctionDoubleSQL(resultQuery, "PREZZO");
         query = "INSERT INTO Pasto_Passeggero\n"
                 + "VALUES (NULL,'" + code + "', '" + codeTicket + "','" + price + "')";
         SQL.queryWrite(query);
@@ -286,7 +287,7 @@ public class ConcreteAdapterDB implements AdapterDB {
                 + "FROM Bagaglio\n"
                 + "WHERE COD_BAGAGLIO='" + code + "'";                
         resultQuery = SQL.queryRead(query);
-        double price = ParserSQL.parseFunctionSQL(resultQuery, "PREZZO");
+        double price = ParserSQL.parseFunctionDoubleSQL(resultQuery, "PREZZO");
         query = "INSERT INTO Bagaglio_Passeggero\n"
                 + "VALUES (NULL,'" + code + "', '" + codeTicket + "','" + price + "')";
         SQL.queryWrite(query);
@@ -300,7 +301,7 @@ public class ConcreteAdapterDB implements AdapterDB {
                 + "WHERE COD_ASSICURAZIONE='" + code + "'";
 
         resultQuery = SQL.queryRead(query);
-        double price = ParserSQL.parseFunctionSQL(resultQuery, "PREZZO");
+        double price = ParserSQL.parseFunctionDoubleSQL(resultQuery, "PREZZO");
         query = "INSERT INTO Assicurazione_Passeggero\n"
                 + "VALUES (NULL,'" + code + "', '" + codeTicket + "','" + price + "')";
         SQL.queryWrite(query);    
@@ -347,7 +348,7 @@ public class ConcreteAdapterDB implements AdapterDB {
                 + "FROM Posto\n"
                 + "WHERE Volo='"+codeFlight+"' AND NUMERO='"+nseat+"' AND PASSEGGERO IS NULL ";
         ResultSet resultQuery = SQL.queryRead(query);
-        double b = ParserSQL.parseFunctionSQL(resultQuery, "C");
+        double b = ParserSQL.parseFunctionDoubleSQL(resultQuery, "C");
         if(b==1){ //is null -> libero
             return true;
         }
@@ -426,7 +427,7 @@ public class ConcreteAdapterDB implements AdapterDB {
                 + "FROM `TicketPasseggero`\n" 
                 + "WHERE COD_TICKET = '"+ codeTicket + "' ";
         ResultSet resultQuery = SQL.queryRead(query);
-        int r = (int) ParserSQL.parseFunctionSQL(resultQuery, "CHECKIN");
+        int r = (int) ParserSQL.parseFunctionDoubleSQL(resultQuery, "CHECKIN");
         if(r==0){
             return false;
         }
@@ -540,7 +541,54 @@ public class ConcreteAdapterDB implements AdapterDB {
         }        
         return tp;
     }  
-
     
     
+    @Override
+    public Flight insertFlight(Flight flight) throws SQLException {
+        String codeRoute = this.getCodeRoute(flight.getRoute().getDeparutreAirport(), flight.getRoute().getDestinationAirport());
+        if(codeRoute!=null){
+            String query =
+                      "INSERT INTO `Volo` (`COD_VOLO` ,`ROTTA` ,`AEREO` ,`DATAPARTENZA` ,`DATAARRIVO` ,`ORAPARTENZA` ,`ORAARRIVO` ,`PREZZO`)"
+                    + "VALUES ('"+flight.getCode()+"', '"+codeRoute+"', '"+flight.getCodeAirplane()+"', '"+ParserSQL.stringDate((GregorianCalendar) flight.getDateDeparture())+"', '"+ParserSQL.stringDate((GregorianCalendar) flight.getDateDestination())+"', '"+ParserSQL.stringTime((GregorianCalendar) flight.getDateDeparture())+"', '"+ParserSQL.stringTime((GregorianCalendar) flight.getDateDestination())+"', '"+flight.getPrice()+"');";
+            SQL.queryWrite(query);
+            return flight;
+        }
+        else{
+            return null;
+        }
+    }
+    
+    @Override
+    public String getCodeRoute(String airportDeparture, String airportDestination) throws SQLException{
+       
+            String codeRoute;
+            String query = 
+                      "SELECT COD_ROTTA FROM `Rotta` "
+                    + "WHERE `AEROPORTOPARTENZA`= "
+                    + "(SELECT COD_AEROPORTO FROM `Aeroporto` "
+                    + "WHERE Nome = '"+airportDeparture+"') AND "
+                    + "`AEROPORTOARRIVO`= "
+                    + "(SELECT COD_AEROPORTO "
+                    + "FROM `Aeroporto` "
+                    + "WHERE Nome = '"+airportDestination+"')";
+                ResultSet resultQuery = SQL.queryRead(query);                
+                codeRoute = ParserSQL.parseFunctionStringSQL(resultQuery, "COD_ROTTA");
+                resultQuery.close();
+                return codeRoute;
+        
+    }
+    
+    @Override
+    public Boolean checkLogin(String userpass) throws SQLException{
+        Boolean b;
+        String[] vet = userpass.split("-");
+        String query = 
+                  "SELECT * "
+                + "FROM `Amministratore` "
+                + "WHERE USERNAME = '"+vet[0]+"' AND PASSWORD = '"+vet[1]+"' ";
+        ResultSet resultQuery = SQL.queryRead(query); 
+        b = ParserSQL.parseCheckLogin(resultQuery);
+        resultQuery.close();
+        return b;
+    }
 }

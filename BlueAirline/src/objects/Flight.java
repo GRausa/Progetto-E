@@ -5,7 +5,6 @@
  */
 package objects;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -20,8 +19,9 @@ public class Flight {
     private Route r;
     private Calendar dateDeparture;
     private Calendar dateDestination;
-    private double prezzo;
+    private double price;
     private ArrayList<Seat> seats;
+    private String codeAirplane;
     
     /**
      * Istanzia un nuovo volo
@@ -37,7 +37,7 @@ public class Flight {
         this.r = r;
         this.dateDeparture = dateDeparture;
         this.dateDestination = dateDestination;
-        this.prezzo = prezzo;
+        this.price = prezzo;
     }
     /**
      * Istanzia un nuovo volo
@@ -46,15 +46,15 @@ public class Flight {
      * @param r rotta del volo
      * @param dateDeparture data di partenza
      * @param dateDestination data di arrivo   
-     * @param prezzo prezzo del volo
+     * @param price prezzo del volo
      * @param seats lista dei posti a sedere
      */
-    public Flight(String code, Route r, Calendar dateDeparture, Calendar dateDestination, double prezzo, ArrayList<Seat> seats) {
+    public Flight(String code, Route r, Calendar dateDeparture, Calendar dateDestination, double price, ArrayList<Seat> seats) {
         this.code = code;
         this.r = r;
         this.dateDeparture = dateDeparture;
         this.dateDestination = dateDestination;
-        this.prezzo = prezzo;
+        this.price = price;
         this.seats = seats;
     }
 
@@ -74,8 +74,8 @@ public class Flight {
         return dateDestination;
     }
 
-    public double getPrezzo() {
-        return prezzo;
+    public double getPrice() {
+        return price;
     }
     /*
     public String toString(){
@@ -91,5 +91,9 @@ public class Flight {
     public void setSeats(ArrayList<Seat> seats) {
         this.seats = seats;
     }    
+    
+    public String getCodeAirplane(){
+        return this.codeAirplane;
+    }
     
 }

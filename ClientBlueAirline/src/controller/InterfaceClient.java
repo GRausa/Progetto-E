@@ -13,20 +13,19 @@ import objects.Meal;
 import objects.Reservation;
 import objects.Route;
 import objects.Ticket;
+import static tui.MethodsControlAdministrator.checkLogin;
 
 /**
  *
  * @author Giovanni
  */
-public interface InterfaceClient {
+public interface InterfaceClient{
 
-    boolean hello();
-    
-    boolean connect(String ipServer);
-    
     Flight[] calendar(Route rotta) throws IOException;
 
     Ticket checkIn(Ticket tp) throws IOException;
+
+    boolean connect(String ipServer);
 
     Ticket editSeatTicket(Ticket tp) throws IOException;
 
@@ -44,6 +43,10 @@ public interface InterfaceClient {
 
     Ticket getTicket(Ticket tp) throws IOException;
 
+    boolean hello();
+
+    Flight insertFlight(Flight flight) throws IOException;
+
     boolean isCheckIn(Ticket tp) throws IOException;
 
     Reservation makeReservation(Reservation res) throws IOException;
@@ -53,5 +56,7 @@ public interface InterfaceClient {
     Flight[] searchFlights(Flight flight) throws IOException;
 
     Route[] searchRoutes(Route rotta) throws IOException;
+    
+    boolean checkLogin(String userpass) throws IOException;
     
 }

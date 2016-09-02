@@ -8,11 +8,11 @@ package tui;
 import controller.FacadeControllerClient;
 import controller.InterfaceClient;
 
-public class ControllerTxt implements Runnable {
+public class ControllerClientTxt implements Runnable {
 
     private InterfaceClient client;
 
-    public ControllerTxt(InterfaceClient controllerClient) {
+    public ControllerClientTxt(InterfaceClient controllerClient) {
         this.client = (FacadeControllerClient) controllerClient;
     }
     
@@ -68,9 +68,9 @@ public class ControllerTxt implements Runnable {
                     MethodsControlClient.editTicket((FacadeControllerClient) client);
                     break;
                 
-                case "INSERISCI_VOLO":
+               /* case "INSERISCI_VOLO":
                     MethodsControlAdministrator.insertFlight((FacadeControllerClient) client);
-                    break;
+                    break;*/
                                    
                 case "EXIT":
                     break loop;

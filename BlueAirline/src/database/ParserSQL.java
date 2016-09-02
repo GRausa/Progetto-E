@@ -123,9 +123,14 @@ public class ParserSQL {
         }
     }
     
-    public static double parseFunctionSQL(ResultSet resultQuery, String value) throws SQLException{ //SINGOLI MAX,MIN,COUNT...
+    public static double parseFunctionDoubleSQL(ResultSet resultQuery, String value) throws SQLException{ //SINGOLI MAX,MIN,COUNT...
         resultQuery.next();
         return resultQuery.getDouble(value);
+    }
+    
+    public static String parseFunctionStringSQL(ResultSet resultQuery, String value) throws SQLException{ //SINGOLI MAX,MIN,COUNT...
+        resultQuery.next();
+        return resultQuery.getString(value);
     }
     
     public static ArrayList<String> parseCitis(ResultSet resultQuery) throws SQLException{
@@ -204,6 +209,15 @@ public class ParserSQL {
         }
     }
     
+    public static Boolean parseCheckLogin(ResultSet resultQuery) throws SQLException{
+        if(resultQuery.next()){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+        
     //METODI GENERICI
     
     public static Calendar returnCalendar(String stringDate, String stringTime){
@@ -224,6 +238,15 @@ public class ParserSQL {
         String[] vet = d.split("/");
         return vet[2]+"-"+vet[1]+"-"+vet[0];
     }
+    
+    public static String stringTime(GregorianCalendar date){
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+        String d = sdf.format(date.getTime());
+        String[] vet = d.split(":");
+        return vet[0]+":"+vet[1]+":00";
+    }
+    
+    
 
     
 }

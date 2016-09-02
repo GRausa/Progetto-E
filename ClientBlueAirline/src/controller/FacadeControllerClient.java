@@ -173,5 +173,19 @@ public class FacadeControllerClient implements InterfaceClient {
         out.println("GETRESERVATION " + gson.toJson(res));
         Reservation res1 = gson.fromJson(in.readLine(), Reservation.class);
         return res1;
-    }    
+    }   
+    
+    
+    @Override
+    public Flight insertFlight(Flight flight) throws IOException{
+        out.println("INSERTFLIGHT " + gson.toJson(flight));
+        Flight f = gson.fromJson(in.readLine(), Flight.class);
+        return f;
+    }
+    
+    public boolean checkLogin(String userpass) throws IOException{
+        out.println("LOGIN " + gson.toJson(userpass));
+        Boolean b = gson.fromJson(in.readLine(), Boolean.class);
+        return b;
+    }
 }

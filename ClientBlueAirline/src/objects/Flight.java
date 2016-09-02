@@ -20,8 +20,9 @@ public class Flight {
     private Route r;
     private Calendar dateDeparture;
     private Calendar dateDestination;
-    private double prezzo;
+    private double price;
     private ArrayList<Seat> seats;
+    private String codeAirplane;
     
     /**
      * Istanzia un nuovo volo
@@ -30,14 +31,23 @@ public class Flight {
      * @param r rotta del volo
      * @param dateDeparture data di partenza 
      * @param dateDestination data di arrivo
-     * @param prezzo prezzo del volo
+     * @param price prezzo del volo
      */
-    public Flight(String code, Route r, Calendar dateDeparture, Calendar dateDestination, double prezzo) {
+    public Flight(String code, Route r, Calendar dateDeparture, Calendar dateDestination, double price, String codeAirplane) {
         this.code = code;
         this.r = r;
         this.dateDeparture = dateDeparture;
         this.dateDestination = dateDestination;
-        this.prezzo = prezzo;
+        this.price = price;
+        this.codeAirplane = codeAirplane;
+    }
+    
+    public Flight(String code, Route r, Calendar dateDeparture, Calendar dateDestination, double price) {
+        this.code = code;
+        this.r = r;
+        this.dateDeparture = dateDeparture;
+        this.dateDestination = dateDestination;
+        this.price = price;
     }
     /**
      * Istanzia un nuovo volo
@@ -50,7 +60,7 @@ public class Flight {
         this.r = r;
         this.dateDeparture = dateDeparture;
         this.dateDestination = dateDeparture;
-        this.prezzo = 0;
+        this.price = 0;
     }
     
     /**
@@ -78,8 +88,8 @@ public class Flight {
         return dateDestination;
     }
 
-    public double getPrezzo() {
-        return prezzo;
+    public double getPrice() {
+        return price;
     }
 
     public ArrayList<Seat> getSeats() {
@@ -92,7 +102,7 @@ public class Flight {
      */
     public String toString(){
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MMM/yyyy HH:mm");
-        return code+" "+r.printRoute()+"\n"+sdf.format(this.dateDeparture.getTime())+" - "+sdf.format(this.dateDestination.getTime())+"\n"+prezzo+"€";
+        return code+" "+r.printRoute()+"\n"+sdf.format(this.dateDeparture.getTime())+" - "+sdf.format(this.dateDestination.getTime())+"\n"+price+"€";
     }
     
     /**
@@ -114,7 +124,7 @@ public class Flight {
      * @return tutti i posti liberi ed occupati del volo
      */
     public String printAllSeats(){
-        String st="PRIMA CLASSE -> prezzo: "+(this.getPrezzo()+Flight.COSTOPRIMACLASSE)+"€\n";
+        String st="PRIMA CLASSE -> prezzo: "+(this.getPrice()+Flight.COSTOPRIMACLASSE)+"€\n";
         for(Seat s : seats){
             if(s.getTicket()==null && s.getClasse()==1){
                 st+=s.getNumber()+" | ";
@@ -125,7 +135,7 @@ public class Flight {
                 }
             }
         }
-        st+="\nSECONDA CLASSE -> prezzo: "+this.getPrezzo()+"€\n";
+        st+="\nSECONDA CLASSE -> prezzo: "+this.getPrice()+"€\n";
         for(Seat s : seats){
             if(s.getTicket()==null && s.getClasse()==2){
                 st+=s.getNumber()+" | ";
@@ -138,7 +148,4 @@ public class Flight {
         }
         return st;
     }
-    
-    
-    
 }

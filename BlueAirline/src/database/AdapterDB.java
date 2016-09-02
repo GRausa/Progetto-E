@@ -65,6 +65,12 @@ public interface AdapterDB {
 
     Flight setSeatsFlight(Flight flight) throws SQLException;
     
+    Flight insertFlight(Flight flight) throws SQLException ;
+    
+    String getCodeRoute(String airportDeparture, String airportDestination) throws SQLException;
+    
+    Boolean checkLogin(String userpass) throws SQLException;;
+    
 //void setSeat(String volo, int num, int classe) throws SQLException;
     
     //int numberSeatFirstClassFlight(String cod) throws SQLException;

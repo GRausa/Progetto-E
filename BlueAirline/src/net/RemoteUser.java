@@ -107,6 +107,7 @@ class RemoteUser extends Thread {
                     out.println(gson.toJson(flights));
                 } catch (SQLException ex) {
                     Logger.getLogger(RemoteUser.class.getName()).log(Level.SEVERE, null, ex);
+                    out.println(gson.toJson(null));
                 }
             }
         });
@@ -120,6 +121,7 @@ class RemoteUser extends Thread {
                     out.println(gson.toJson(res));
                 } catch (SQLException ex) {
                     Logger.getLogger(RemoteUser.class.getName()).log(Level.SEVERE, null, ex);
+                    out.println(gson.toJson(null));
                 }
             }
         });
@@ -133,6 +135,7 @@ class RemoteUser extends Thread {
                     out.println(gson.toJson(t));
                 } catch (SQLException ex) {
                     Logger.getLogger(RemoteUser.class.getName()).log(Level.SEVERE, null, ex);
+                    out.println(gson.toJson(null));
                 }
             }
         });
@@ -146,6 +149,7 @@ class RemoteUser extends Thread {
                     out.println(gson.toJson(tp));
                 } catch (SQLException ex) {
                     Logger.getLogger(RemoteUser.class.getName()).log(Level.SEVERE, null, ex);
+                    out.println(gson.toJson(null));
                 }
             }
         });
@@ -196,6 +200,7 @@ class RemoteUser extends Thread {
                     out.println(gson.toJson(flights));
                 } catch (SQLException ex) {
                     Logger.getLogger(RemoteUser.class.getName()).log(Level.SEVERE, null, ex);
+                    out.println(gson.toJson(null));
                 }
             }
         }
@@ -210,6 +215,7 @@ class RemoteUser extends Thread {
                     out.println(gson.toJson(flight));
                 } catch (SQLException ex) {
                     Logger.getLogger(RemoteUser.class.getName()).log(Level.SEVERE, null, ex);
+                    out.println(gson.toJson(null));
                 }
             }
         }
@@ -252,6 +258,7 @@ class RemoteUser extends Thread {
                     out.println(gson.toJson(tp));
                 } catch (SQLException ex) {
                     Logger.getLogger(RemoteUser.class.getName()).log(Level.SEVERE, null, ex);
+                    out.println(gson.toJson(null));
                 }
 
             }
@@ -266,6 +273,7 @@ class RemoteUser extends Thread {
                     out.println(gson.toJson(checkIn));
                 } catch (SQLException ex) {
                     Logger.getLogger(RemoteUser.class.getName()).log(Level.SEVERE, null, ex);
+                    out.println(gson.toJson(null));
                 }
 
             }
@@ -280,6 +288,7 @@ class RemoteUser extends Thread {
                     out.println(gson.toJson(tp));
                 } catch (SQLException ex) {
                     Logger.getLogger(RemoteUser.class.getName()).log(Level.SEVERE, null, ex);
+                    out.println(gson.toJson(null));
                 }
 
             }
@@ -294,8 +303,38 @@ class RemoteUser extends Thread {
                     out.println(gson.toJson(res));
                 } catch (SQLException ex) {
                     Logger.getLogger(RemoteUser.class.getName()).log(Level.SEVERE, null, ex);
+                    out.println(gson.toJson(null));
                 }
 
+            }
+        });
+        
+        commands.put("INSERTFLIGHT", new Command() {
+            @Override
+            public void execute(String args) {
+                try {
+                    Flight flight = gson.fromJson(args, Flight.class);
+                    flight = company.insertFlight(flight);
+                    out.println(gson.toJson(flight));
+                } catch (SQLException ex) {
+                    Logger.getLogger(RemoteUser.class.getName()).log(Level.SEVERE, null, ex);
+                    out.println(gson.toJson(null));
+                }
+
+            }
+        });
+        
+        commands.put("LOGIN", new Command() {
+            @Override
+            public void execute(String args) {
+                try {
+                    String userpass = gson.fromJson(args, String.class);
+                    Boolean b = company.checkLogin(userpass);
+                    out.println(gson.toJson(b));
+                } catch (SQLException ex) {
+                    Logger.getLogger(RemoteUser.class.getName()).log(Level.SEVERE, null, ex);
+                    out.println(gson.toJson(null));
+                }
             }
         });
 
