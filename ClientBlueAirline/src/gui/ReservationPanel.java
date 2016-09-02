@@ -209,12 +209,13 @@ public class ReservationPanel extends JPanel {
         reservationPanel.add(titnpasseggeri);
         titnpasseggeri.setFont(new Font("Helvetica", Font.BOLD, 25));
         reservationPanel.add(passeggeri);
-
+        
         add(reservationPanel, BorderLayout.CENTER);
+        
         ImageIcon immagine = new ImageIcon("immagini/Logo.png");
-        logo.setIcon(this.scalaImmagine(immagine, 350, 400));
+        logo.setIcon(this.scalaImmagine(immagine, 400, 350));
         logo.setEnabled(true);
-
+                
         panelsud.add(logo);
         panelsud.add(ricerca);
 

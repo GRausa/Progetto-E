@@ -10,14 +10,7 @@ package gui;
 import controller.FacadeControllerClient;
 import java.awt.*;
 import java.awt.event.*;
-import java.io.IOException;
-
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.*;
-import objects.HoldLuggage;
-import objects.Insurance;
-import objects.Meal;
 import objects.Reservation;
 
 /**

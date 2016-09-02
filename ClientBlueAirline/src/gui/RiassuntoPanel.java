@@ -103,11 +103,11 @@ public class RiassuntoPanel extends JPanel {
                         {   
                             String[] options = {"esci."};
                             FinalControlFrame finale=new FinalControlFrame(home,controller,reservation,tick,flight);
-                            JOptionPane.showOptionDialog(home, finale, "BENVENUTI IN THETABLUEAIRLINE", JOptionPane.NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+                            JOptionPane.showOptionDialog(home, finale, "BlueAirline", JOptionPane.NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
                         }
                     }
                     reservation=controller.getReservation(reservation);
-                    String s = "Codice prenotazione:\n " + reservation.getCode();
+                    String s = "Codice prenotazione: " + reservation.getCode()+"\nCodici ticket:\n";
                     for(Ticket t : reservation.getPassengers())
                     {
                         s+=t.getName()+ " " + t.getSurname()+" "+ t.getCode()+"\n";

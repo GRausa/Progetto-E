@@ -60,7 +60,7 @@ public class HomeFrame extends JFrame {
     JButton order = new JButton("Prenota Volo");
     JLabel mb1 = new JLabel("\t\t");
 
-    JLabel scritta = new JLabel("BENVENUTO IN BLUE AIRLINE");
+    JLabel scritta = new JLabel("BENVENUTO IN BLUEAIRLINE");
 
     public HomeFrame(String title, FacadeControllerClient c) throws HeadlessException {
         try {
