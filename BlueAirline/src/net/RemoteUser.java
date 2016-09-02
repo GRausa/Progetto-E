@@ -30,7 +30,8 @@ import mail.Email;
 import static jdk.nashorn.internal.objects.NativeMath.log;
 
 /**
- *
+ * La classe RemoteUser serve per comunicare con il Server. 
+ * 
  * @author riccardo
  */
 class RemoteUser extends Thread {
@@ -55,6 +56,13 @@ class RemoteUser extends Thread {
         return counter++;
     }
 
+     /**
+       * Istanzia un nuovo RemoteUser per la comunicazione con il socket.
+       * 
+       * @param company
+       * @param socket socket utilizzato per la comunicazione
+       * @throws IOException 
+       */
     RemoteUser(InterfaceServer company, Socket socket) throws IOException {
         this.company = company;
         this.socket = socket;
@@ -65,13 +73,20 @@ class RemoteUser extends Thread {
         this.progressiven = generateProgressive();
     }
 
-    // Send an error message to the remote user.
+    /**
+    * Invia un messaggio di errore.
+    * 
+    * @param message messaggio
+    */
     private void error(String message) {
         log(Level.WARNING, "Sent error: " + message);
         out.println("ERR " + message);
     }
 
-    // Create the dispatch table mapping commands to actions.
+    /**
+    * Crea una tabella di invio che mappa tutti i comandi per eseguire le azioni.
+    * 
+    */
     private void registerCommands() {
         commands = new HashMap<>();
         
@@ -353,7 +368,12 @@ class RemoteUser extends Thread {
         });
         
     }
-
+    /**
+    * Esegue un determinato comando.
+    * 
+    * @param command comando da eseguire
+    * @param args 
+    */
     private void executeCommand(String command, String args) {
         Command cmd = commands.get(command);
         if (cmd == null) {
