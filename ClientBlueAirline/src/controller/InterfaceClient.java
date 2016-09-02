@@ -13,7 +13,7 @@ import objects.Meal;
 import objects.Reservation;
 import objects.Route;
 import objects.Ticket;
-import static tui.MethodsControlAdministrator.checkLogin;
+import static tui.administrator.MethodsControlAdministrator.checkLogin;
 
 /**
  *

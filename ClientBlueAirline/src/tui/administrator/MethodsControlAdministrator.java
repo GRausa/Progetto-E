@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package tui;
+package tui.administrator;
 
 import controller.InterfaceClient;
 import java.io.IOException;

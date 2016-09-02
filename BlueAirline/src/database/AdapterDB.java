@@ -71,7 +71,7 @@ public interface AdapterDB {
     
     Boolean checkLogin(String userpass) throws SQLException;;
     
-//void setSeat(String volo, int num, int classe) throws SQLException;
+    //void setSeat(String volo, int num, int classe) throws SQLException;
     
     //int numberSeatFirstClassFlight(String cod) throws SQLException;
     

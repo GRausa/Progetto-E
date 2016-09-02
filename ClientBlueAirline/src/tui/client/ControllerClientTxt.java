@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package tui;
+package tui.client;
 
 import controller.FacadeControllerClient;
 import controller.InterfaceClient;
@@ -67,11 +67,7 @@ public class ControllerClientTxt implements Runnable {
                 case "MODIFICA_BIGLIETTO":
                     MethodsControlClient.editTicket((FacadeControllerClient) client);
                     break;
-                
-               /* case "INSERISCI_VOLO":
-                    MethodsControlAdministrator.insertFlight((FacadeControllerClient) client);
-                    break;*/
-                                   
+                     
                 case "EXIT":
                     break loop;
                 

@@ -3,12 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package tui;
+package tui.client;
 
 import controller.InterfaceClient;
 import java.io.IOException;
 import java.util.ArrayList;
 import static java.util.Arrays.asList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Scanner;
 import java.util.logging.Level;
@@ -124,7 +126,10 @@ public class MethodsControlClient {
         {
             try {
                 flight = client.searchFlight(flight);
-                if (flight == null) {
+                Date date = new Date();
+                Calendar data = Calendar.getInstance();
+                data.setTime(date);
+                if (flight == null || flight.getDateDeparture().before(data)) {
                     System.out.println("Volo non trovato o risulta antecedente alla data odierna");
                     return null;
                 }
