@@ -26,6 +26,7 @@ import objects.Meal;
 import objects.Route;
 import objects.Reservation;
 import objects.Ticket;
+import mail.Email;
 import static jdk.nashorn.internal.objects.NativeMath.log;
 
 /**
@@ -73,12 +74,14 @@ class RemoteUser extends Thread {
     // Create the dispatch table mapping commands to actions.
     private void registerCommands() {
         commands = new HashMap<>();
+        
         commands.put("HI!", new Command() {
             @Override
             public void execute(String args) {
                 out.println("HI!");
             }
         });
+        
         commands.put("BYE", new Command() {
             @Override
             public void execute(String args) {
@@ -96,6 +99,7 @@ class RemoteUser extends Thread {
 
         }
         );
+        
         commands.put("CALENDAR", new Command() {
             @Override
             public void execute(String args) {
@@ -338,6 +342,16 @@ class RemoteUser extends Thread {
             }
         });
 
+        commands.put("SENDMAIL", new Command() {
+            @Override
+            public void execute(String args) {
+                String MailDetail=gson.fromJson(args,String.class);
+                String[] splittedMailDetail=MailDetail.split("\t");
+                Email.sendMail(new Email(splittedMailDetail[0],splittedMailDetail[1],splittedMailDetail[2]));
+                out.println("true");
+            }
+        });
+        
     }
 
     private void executeCommand(String command, String args) {

@@ -13,13 +13,18 @@ import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * La classe Server è utilizzata per la comunicazione fra client-server.
+ * 
+ * @author 
+ */
 public class Server {
     InterfaceServer company;
     int port;
     ServerSocket serverSocket = null;
 
     /**
-     * Server initialization.
+     * Inizializza il server.
      *
      * @param company
      * @param port
@@ -30,7 +35,7 @@ public class Server {
     }
 
     /**
-     * Start the server.
+     * Avvia il server.
      *
      * @throws IOException
      */

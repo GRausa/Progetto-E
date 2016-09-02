@@ -9,6 +9,7 @@ import database.AdapterDB;
 import database.ConcreteAdapterDB;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import mail.Email;
 import objects.Flight;
 import objects.HoldLuggage;
 import objects.Insurance;
@@ -162,6 +163,11 @@ public class FacadeControllerServer implements InterfaceServer {
     @Override
     public Ticket editTicket(Ticket tp) throws SQLException {
         return adapter.editTicket(tp);
+    }
+
+    @Override
+    public void sendMail(String sender, String object, String text) {
+        Email.sendMail(new Email(sender,object,text));
     }
     
     //inserisci un volo

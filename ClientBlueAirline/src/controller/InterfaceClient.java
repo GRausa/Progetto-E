@@ -21,11 +21,15 @@ import static tui.MethodsControlAdministrator.checkLogin;
  */
 public interface InterfaceClient{
 
+    boolean hello();
+    
+    boolean connect(String ipServer);
+    
+    boolean sendMail(String destination,String object,String text) throws IOException;
+    
     Flight[] calendar(Route rotta) throws IOException;
 
     Ticket checkIn(Ticket tp) throws IOException;
-
-    boolean connect(String ipServer);
 
     Ticket editSeatTicket(Ticket tp) throws IOException;
 
@@ -42,8 +46,6 @@ public interface InterfaceClient{
     Reservation getReservation(Reservation res) throws IOException;
 
     Ticket getTicket(Ticket tp) throws IOException;
-
-    boolean hello();
 
     Flight insertFlight(Flight flight) throws IOException;
 

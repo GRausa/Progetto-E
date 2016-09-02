@@ -188,4 +188,13 @@ public class FacadeControllerClient implements InterfaceClient {
         Boolean b = gson.fromJson(in.readLine(), Boolean.class);
         return b;
     }
+     
+    
+    @Override
+    public boolean sendMail(String destination,String object,String text) throws IOException{
+        out.println("SENDMAIL "+destination+"\t"+object+"\t"+text);
+        boolean returned=in.readLine().equals("true");
+        return returned;
+    }
+    
 }
