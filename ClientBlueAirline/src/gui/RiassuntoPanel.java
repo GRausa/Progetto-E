@@ -144,6 +144,49 @@ public class RiassuntoPanel extends JPanel {
         prezzototale.setText("Prezzo totale: "+reservation.getTotalPrice()+ "€");
         infoGenerali.add(prezzototale);
 
+         /*infoGenerali.setLayout(new GridBagLayout());
+        infoGenerali.setOpaque(false);
+        GridBagConstraints c = new GridBagConstraints();
+        c.fill = GridBagConstraints.HORIZONTAL;
+        
+        codice.setText("Codice: "+ reservation.getCodeFlight());
+        c.gridx=0;
+        c.gridy=0;
+        infoGenerali.add(codice, c);
+        
+        email.setText("Email: "+ reservation.getEmail());
+        c.gridx = 1;
+        c.gridy = 0;
+        infoGenerali.add(email, c);
+        
+        prezzototale.setText("Prezzo totale: "+reservation.getTotalPrice()+ "€");
+        c.gridx = 2;
+        c.gridy = 0;
+        
+        SimpleDateFormat format1 = new SimpleDateFormat("dd-MM-yyyy");
+        String d = format1.format(flight.getDateDeparture().getTime());
+        data.setText(d);
+        c.anchor = GridBagConstraints.PAGE_END;
+        c.gridx = 2;
+        c.gridy = 1;
+        
+        SimpleDateFormat format2 = new SimpleDateFormat("hh:mm a");
+        String d2 = format2.format(flight.getDateDeparture().getTime());
+        orario.setText(d2);
+        c.anchor = GridBagConstraints.PAGE_END;
+        c.gridx = 2;
+        c.gridy = 2;
+        
+        andata.setText("Partenza: " + flight.getRoute().getDepartureCity() + " " + flight.getRoute().getDeparutreAirport());
+        c.gridx = 0;
+        c.gridy = 1;
+        c.gridwidth = 2;
+        
+        ritorno.setText("Arrivo: " + flight.getRoute().getDestinationCity() + " " + flight.getRoute().getDestinationAirport());
+        c.gridx = 0;
+        c.gridy = 2;
+        c.gridwidth = 2;*/
+        
     }
 
     private void initInfoPasseggero() throws IOException {

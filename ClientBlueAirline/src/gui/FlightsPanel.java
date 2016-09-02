@@ -116,7 +116,7 @@ public class FlightsPanel extends JPanel {
         voli.setOpaque(false);
         ((DefaultTableCellRenderer) voli.getDefaultRenderer(String.class)).setOpaque(false);
         ((DefaultTableCellRenderer) voli.getDefaultRenderer(Date.class)).setOpaque(false);
-        ((DefaultTableCellRenderer) voli.getDefaultRenderer(double.class)).setOpaque(false);
+        ((DefaultTableCellRenderer) voli.getDefaultRenderer(Double.class)).setOpaque(false);
         ((DefaultTableCellRenderer) voli.getDefaultRenderer(Integer.class)).setOpaque(false);
 
         conf.setOpaque(false);
