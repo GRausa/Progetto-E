@@ -21,6 +21,7 @@ import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -115,7 +116,7 @@ public class FlightsPanel extends JPanel {
         voli.setOpaque(false);
         ((DefaultTableCellRenderer) voli.getDefaultRenderer(String.class)).setOpaque(false);
         ((DefaultTableCellRenderer) voli.getDefaultRenderer(Date.class)).setOpaque(false);
-        ((DefaultTableCellRenderer) voli.getDefaultRenderer(double.class)).setOpaque(false);
+        ((DefaultTableCellRenderer) voli.getDefaultRenderer(Double.class)).setOpaque(false);
         ((DefaultTableCellRenderer) voli.getDefaultRenderer(Integer.class)).setOpaque(false);
 
         conf.setOpaque(false);
