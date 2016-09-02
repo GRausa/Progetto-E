@@ -38,6 +38,7 @@ public class MethodsControlAdministrator {
         s = "\nCOMANDI DISPONIBILI\n"
                 + "\n>>> HI -> Test server\n"
                 + "\nAREA INSERIMENTO:\n\n>>> INSERISCI_VOLO -> Inserisci un nuovo volo\n"
+                + ">>> MODIFICA_VOLO -> Modifica data ora e prezzo di un volo\n"
                 + ">>> EXIT";                
         System.out.println(s);
         String s1 = input.nextLine().toUpperCase();
@@ -54,7 +55,7 @@ public class MethodsControlAdministrator {
     }
     
     public static void insertFlight(InterfaceClient client) throws IOException{
-        ArrayList<String> input = MethodsControlAdministrator.scannerInput(new ArrayList<>(asList("Inserisci codice volo:")));
+        ArrayList<String> input = MethodsControlAdministrator.scannerInput(new ArrayList<>(asList("Codice volo:")));
         String codeFlight = input.get(0);
         input = MethodsControlAdministrator.scannerInput(new ArrayList<>(asList("Città partenza:", "Aeroporto partenza:", "Città destinazione:","Aeroporto destnazione:")));
         Route route = new Route(input.get(1),input.get(3),input.get(0),input.get(2));
@@ -74,6 +75,33 @@ public class MethodsControlAdministrator {
             System.out.println("Volo inserito");
         }
     }
+    
+    public static void editFlight(InterfaceClient client) throws IOException{
+        ArrayList<String> input = MethodsControlAdministrator.scannerInput(new ArrayList<>(asList("Codice volo:")));
+        Flight flight = client.searchFlight(new Flight(input.get(0)));
+        if(flight!=null){
+            input = MethodsControlAdministrator.scannerInput(new ArrayList<>(asList("AREA MODIFICA\nData partenza YYYY-MM-GG :", "Ora partenza HH:MM :")));
+            Calendar dateDeparture = MethodsControlAdministrator.returnCalendar(input.get(0), input.get(1));
+            input = MethodsControlAdministrator.scannerInput(new ArrayList<>(asList("Data arrivo YYYY-MM-GG:", "Ora arrivo HH:MM:")));
+            Calendar dateDestination = MethodsControlAdministrator.returnCalendar(input.get(0), input.get(1));
+            input = MethodsControlAdministrator.scannerInput(new ArrayList<>(asList("Prezzo volo:")));
+            double price = Double.parseDouble(input.get(0));
+            flight.setDateDeparture(dateDeparture);
+            flight.setDateDestination(dateDestination);
+            flight.setPrice(price);
+            if(client.editFlight(flight)!=null){
+                System.out.println("Modifica effettuata\n"+flight.toString());
+                
+            }
+            else{
+                System.out.println("Non è stato possibile modificare il volo");
+            }
+        }
+        else{
+            System.out.println("Errore inserimento codice");
+        }
+    }
+        
     
     public static boolean checkLogin(InterfaceClient client) throws IOException{
         boolean b = false;

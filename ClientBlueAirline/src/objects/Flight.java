@@ -72,6 +72,18 @@ public class Flight {
         this.code=code;
     }
 
+    public void setDateDeparture(Calendar dateDeparture) {
+        this.dateDeparture = dateDeparture;
+    }
+
+    public void setDateDestination(Calendar dateDestination) {
+        this.dateDestination = dateDestination;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
     public String getCode() {
         return code;
     }

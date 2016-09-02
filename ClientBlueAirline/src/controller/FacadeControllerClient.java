@@ -197,4 +197,11 @@ public class FacadeControllerClient implements InterfaceClient {
         return returned;
     }
     
+    @Override
+    public Flight editFlight(Flight flight) throws IOException{
+        out.println("EDITFLIGHT " + gson.toJson(flight));
+        Flight f = gson.fromJson(in.readLine(), Flight.class);
+        return f;
+    }
+    
 }

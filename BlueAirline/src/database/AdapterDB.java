@@ -69,7 +69,9 @@ public interface AdapterDB {
     
     String getCodeRoute(String airportDeparture, String airportDestination) throws SQLException;
     
-    Boolean checkLogin(String userpass) throws SQLException;;
+    Boolean checkLogin(String userpass) throws SQLException;
+    
+    Flight editFlight(Flight flight) throws SQLException;
     
     //void setSeat(String volo, int num, int classe) throws SQLException;
     

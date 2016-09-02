@@ -591,4 +591,19 @@ public class ConcreteAdapterDB implements AdapterDB {
         resultQuery.close();
         return b;
     }
+    
+    public Flight editFlight(Flight flight) throws SQLException{
+        Flight f;
+        //ParserSQL.stringDate((GregorianCalendar) flight.getDateDestination())+"', 
+        //'"+ParserSQL.stringTime((GregorianCalendar) flight.getDateDeparture())+"
+        String query =
+                  "UPDATE `Volo` SET `DATAPARTENZA` = '"+ParserSQL.stringDate((GregorianCalendar) flight.getDateDeparture())+"',\n" 
+                + "`DATAARRIVO` = '"+ParserSQL.stringDate((GregorianCalendar) flight.getDateDestination())+"',\n" 
+                + "`ORAPARTENZA` = '"+ParserSQL.stringTime((GregorianCalendar) flight.getDateDeparture())+"',\n" 
+                + "`ORAARRIVO` = '"+ParserSQL.stringTime((GregorianCalendar) flight.getDateDestination())+"',\n" 
+                + "`PREZZO` = '"+flight.getPrice()+"' WHERE `Volo`.`COD_VOLO` = '"+flight.getCode()+"';";
+        SQL.queryWrite(query);
+        flight = this.searchFlight(flight.getCode());
+        return flight;
+    }
 }

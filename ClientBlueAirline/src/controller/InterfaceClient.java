@@ -61,4 +61,6 @@ public interface InterfaceClient{
     
     boolean checkLogin(String userpass) throws IOException;
     
+    Flight editFlight(Flight flight) throws IOException;
+    
 }

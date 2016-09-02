@@ -176,6 +176,12 @@ public class FacadeControllerServer implements InterfaceServer {
         return adapter.insertFlight(flight);
     }
     
+    //inserisci un volo
+    @Override
+    public Flight editFlight(Flight flight) throws SQLException{
+        return adapter.editFlight(flight);
+    }
+    
     //login
     @Override
     public Boolean checkLogin(String username) throws SQLException{

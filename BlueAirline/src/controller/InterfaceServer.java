@@ -73,6 +73,8 @@ public interface InterfaceServer {
     Boolean checkLogin(String username) throws SQLException;
 
     void sendMail(String sender, String object, String text);
+    
+    Flight editFlight(Flight flight) throws SQLException;
 
     //numero posti liberi in un volo
     //int numberSeatFreeFlight(String codeFlight) throws SQLException;

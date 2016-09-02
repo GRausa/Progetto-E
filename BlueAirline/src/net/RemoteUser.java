@@ -343,6 +343,21 @@ class RemoteUser extends Thread {
             }
         });
         
+        commands.put("EDITFLIGHT", new Command() {
+            @Override
+            public void execute(String args) {
+                try {
+                    Flight flight = gson.fromJson(args, Flight.class);
+                    flight = company.editFlight(flight);
+                    out.println(gson.toJson(flight));
+                } catch (SQLException ex) {
+                    Logger.getLogger(RemoteUser.class.getName()).log(Level.SEVERE, null, ex);
+                    out.println(gson.toJson(null));
+                }
+
+            }
+        });
+        
         commands.put("LOGIN", new Command() {
             @Override
             public void execute(String args) {

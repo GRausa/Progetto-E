@@ -36,6 +36,10 @@ public class ControllerAdministratorTxt implements Runnable {
                     case "INSERISCI_VOLO":
                         MethodsControlAdministrator.insertFlight((FacadeControllerClient) client);
                         break;
+                    
+                    case "MODIFICA_VOLO":
+                        MethodsControlAdministrator.editFlight((FacadeControllerClient) client);
+                        break;
                         
                     case "EXIT":
                         break loop;
