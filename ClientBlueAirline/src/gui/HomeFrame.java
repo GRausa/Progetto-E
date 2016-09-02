@@ -236,7 +236,7 @@ public class HomeFrame extends JFrame {
             
             
         });
-        menuItem.addMouseMotionListener(new MouseAdapter() {
+        contattaci.addMouseMotionListener(new MouseAdapter() {
 
             @Override
             public void mouseMoved(MouseEvent e) {
@@ -245,7 +245,7 @@ public class HomeFrame extends JFrame {
             }
 
         });
-        menu.add(menuItem);
+        menu.add(contattaci);
         
 
         return menuBar;
