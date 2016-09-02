@@ -24,6 +24,8 @@ public interface InterfaceClient {
     
     boolean connect(String ipServer);
     
+    public boolean sendMail(String destination,String object,String text) throws IOException;
+    
     Flight[] calendar(Route rotta) throws IOException;
 
     Ticket checkIn(Ticket tp) throws IOException;

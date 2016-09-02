@@ -183,7 +183,7 @@ public class HomeFrame extends JFrame {
         menuBar = new JMenuBar();
 
         menu = new JMenu("Home");
-        
+
         menu.getAccessibleContext().setAccessibleDescription("Return to the Home Page");
         menuBar.add(menu);
 
@@ -201,9 +201,7 @@ public class HomeFrame extends JFrame {
                     notifiche.setText("Operazione cancellata dall'utente");
                 }
             }
-            
-            
-            
+
         });
         menuItem.addMouseMotionListener(new MouseAdapter() {
 
@@ -215,26 +213,36 @@ public class HomeFrame extends JFrame {
 
         });
         menu.add(menuItem);
-        
-        
+
         contattaci = new JMenuItem("Contattaci", KeyEvent.VK_C);
         contattaci.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_C, ActionEvent.CTRL_MASK));
         contattaci.getAccessibleContext().setAccessibleDescription("Contattaci");
         contattaci.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int dialogResult = JOptionPane.showConfirmDialog(frame, "Proseguendo potresti perdere\n" + "i dati inseriti fino ad ora.\n" + "Vuoi proseguire?", "Avvertenza", JOptionPane.YES_NO_OPTION);
-                if (dialogResult == 0) {
+                //int dialogResult = JOptionPane.showConfirmDialog(frame, "Proseguendo potresti perdere\n" + "i dati inseriti fino ad ora.\n" + "Vuoi proseguire?", "Avvertenza", JOptionPane.YES_NO_OPTION);
+                String[] options = {"SEND"};
+                JPanel panel = new JPanel();
+                JLabel lbl = new JLabel("Send your opinion here : ");
+                JTextField txt = new JTextField(200);
+                panel.add(lbl);
+                panel.add(txt);
+                int selectedOption = JOptionPane.showOptionDialog(null, panel, "CONTATTACI", JOptionPane.NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+
+                if (selectedOption == 0) {
+                    try {
+                        controller.sendMail("thetablueairline@gmail.com","OPINIONE ANONIMA",txt.getText());
+                    } catch (IOException ex) {
+                        Logger.getLogger(HomeFrame.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                     //inserire qui quello che deve fare in caso di contattaci!
-                    frame.returnHome();//Eliminare il ritorno a HOme Frame o no?
+                    //frame.returnHome();//Eliminare il ritorno a HOme Frame o no?
                     notifiche.setText(DEFAULT);
                 } else {
                     notifiche.setText("Operazione cancellata dall'utente");
                 }
             }
-            
-            
-            
+
         });
         contattaci.addMouseMotionListener(new MouseAdapter() {
 
@@ -246,7 +254,6 @@ public class HomeFrame extends JFrame {
 
         });
         menu.add(contattaci);
-        
 
         return menuBar;
     }
@@ -495,7 +502,7 @@ public class HomeFrame extends JFrame {
 
     }
 
-    public void noMinorZero(final JTextField t, final JButton meno,final JButton piu) {
+    public void noMinorZero(final JTextField t, final JButton meno, final JButton piu) {
         t.addActionListener(new ActionListener() {
 
             @Override
@@ -507,10 +514,12 @@ public class HomeFrame extends JFrame {
                 }
             }
         });
-        if(meno.isSelected() && Integer.parseInt(t.getText()) == 1 )
+        if (meno.isSelected() && Integer.parseInt(t.getText()) == 1) {
             meno.setEnabled(false);
-        if(piu.isSelected() && Integer.parseInt(t.getText()) == 0 )
+        }
+        if (piu.isSelected() && Integer.parseInt(t.getText()) == 0) {
             meno.setEnabled(true);
+        }
 
     }
 

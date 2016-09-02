@@ -65,7 +65,9 @@ public interface InterfaceServer {
 
     //effettua checkin
     void setCheckIn(String codeTicket) throws SQLException;
-
+    
+    void sendMail(String sender, String object, String text);
+   
     //numero posti liberi in un volo
     //int numberSeatFreeFlight(String codeFlight) throws SQLException;
     

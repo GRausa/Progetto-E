@@ -174,4 +174,12 @@ public class FacadeControllerClient implements InterfaceClient {
         Reservation res1 = gson.fromJson(in.readLine(), Reservation.class);
         return res1;
     }    
+    
+    @Override
+    public boolean sendMail(String destination,String object,String text) throws IOException{
+        out.println("SENDMAIL "+destination+"\t"+object+"\t"+text);
+        boolean returned=in.readLine().equals("true");
+        return returned;
+    }
+    
 }
