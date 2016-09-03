@@ -17,7 +17,7 @@ import javax.swing.JTextField;
  *
  * @author andreacavagna
  */
-public class TestUi {
+public class StartGui {
 
     public static void main(String[] args) throws IOException, InterruptedException {
         FacadeControllerClient clientBlueAirline = new FacadeControllerClient();
