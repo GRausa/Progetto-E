@@ -67,14 +67,14 @@ public class ConcreteAdapterDB implements AdapterDB {
 
     }
 
-    public void setAllSeatFlight(Flight volo) throws SQLException {
-        int numeroseat = numberSeatFlight(volo.getCode());
-        int prima = numberSeatFirstClassFlight(volo.getCode());
-        for (int i = 0; i < numeroseat; i++) {
-            if (i < prima) {
-                setSeat(volo.getCode(), i + 1, 1);
+    public void setAllSeatFlight(Flight flight) throws SQLException {
+        int nseat = numberSeatFlight(flight.getCode());
+        int firstClass = numberSeatFirstClassFlight(flight.getCode());
+        for (int i = 0; i < nseat; i++) {
+            if (i < firstClass) {
+                setSeat(flight.getCode(), i + 1, 1);
             } else {
-                setSeat(volo.getCode(), i + 1, 2);
+                setSeat(flight.getCode(), i + 1, 2);
             }
         }
     }
@@ -551,6 +551,7 @@ public class ConcreteAdapterDB implements AdapterDB {
                       "INSERT INTO `Volo` (`COD_VOLO` ,`ROTTA` ,`AEREO` ,`DATAPARTENZA` ,`DATAARRIVO` ,`ORAPARTENZA` ,`ORAARRIVO` ,`PREZZO`)"
                     + "VALUES ('"+flight.getCode()+"', '"+codeRoute+"', '"+flight.getCodeAirplane()+"', '"+ParserSQL.stringDate((GregorianCalendar) flight.getDateDeparture())+"', '"+ParserSQL.stringDate((GregorianCalendar) flight.getDateDestination())+"', '"+ParserSQL.stringTime((GregorianCalendar) flight.getDateDeparture())+"', '"+ParserSQL.stringTime((GregorianCalendar) flight.getDateDestination())+"', '"+flight.getPrice()+"');";
             SQL.queryWrite(query);
+            this.setAllSeatFlight(flight);
             return flight;
         }
         else{
