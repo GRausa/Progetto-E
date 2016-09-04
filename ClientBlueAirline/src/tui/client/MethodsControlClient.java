@@ -212,7 +212,7 @@ public class MethodsControlClient {
         for (int k = 0; k < num; k++) {
             boolean c = false;
             do {
-                ArrayList<String> input = MethodsControlClient.scannerInput(new ArrayList<>(asList("INSERISCI PASSEGGERO (ID- NOME - COGNOME - NPOSTO - AGGIUNTE)")));
+                ArrayList<String> input = MethodsControlClient.scannerInput(new ArrayList<>(asList("INSERISCI PASSEGGERO (ID - NOME - COGNOME - NUM POSTO - CODICE AGGIUNTE(facoltative))\nN.B. Le informazioni devono essere separate da tab")));
                 String s = input.get(0);
                 String[] vetsplit = s.split("\t");
                 if (vetsplit.length > 3) {

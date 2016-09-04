@@ -17,7 +17,7 @@ import javax.swing.JTextField;
  *
  * @author andreacavagna
  */
-public class TestUi {
+public class StartGui {
 
     public static void main(String[] args) throws IOException, InterruptedException {
         FacadeControllerClient clientBlueAirline = new FacadeControllerClient();
@@ -35,7 +35,7 @@ public class TestUi {
         if (selectedOption == 0) {
             String text = txt.getText();
             if (clientBlueAirline.connect(text)) {
-                HomeFrame frame = new HomeFrame("BLUE AIRLINES", clientBlueAirline);
+                HomeFrame frame = new HomeFrame("BLUE AIRLINE", clientBlueAirline);
             } else {
                 String backupDir = "IP ADDRESS ERROR";
 
