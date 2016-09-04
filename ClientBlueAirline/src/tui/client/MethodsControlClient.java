@@ -297,8 +297,8 @@ public class MethodsControlClient {
             System.out.println("Riepilogo:");
             res = client.getReservation(res);
             System.out.println(flight.toString());
-            System.out.println(res.printReservation());
-            System.out.println(res.printTickets());
+            System.out.println(res.printReservation("\n"));
+            System.out.println(res.printTickets("\n"));
         } catch (IOException ex) {
             Logger.getLogger(ControllerClientTxt.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -313,6 +313,8 @@ public class MethodsControlClient {
                 try {
                     Reservation res = MethodsControlClient.makeReservation(client, cod, flight);
                     MethodsControlClient.checkReservation(client, res, flight);
+                    String stamp=res.printReservation("&%")+"&%"+res.printTickets("&%");
+                    client.sendMail(res.getEmail(), "ACQUISTO BIGLIETTO", stamp);
                 } catch (IOException ex) {
                     Logger.getLogger(MethodsControlClient.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -345,7 +347,7 @@ public class MethodsControlClient {
                         System.out.println("Il posto è stato occupato. Riprova.");
                     } else {
                         Ticket tp2 = client.getTicket(p2);
-                        System.out.println(tp2.printTicketPassenger());
+                        System.out.println(tp2.printTicketPassenger("\n"));
                         System.out.println("Aggiunta totale di: " + (tp2.getTotalPrice() - tp.getTotalPrice()) + " euro");
                         c = true;
                     }
@@ -431,7 +433,7 @@ public class MethodsControlClient {
                     System.out.println("Il check-in è stato già effettuato.");
                 } else {
                     tp = client.checkIn(tp);
-                    System.out.println("Check-in effettuato.\n" + tp.printTicketPassenger());
+                    System.out.println("Check-in effettuato.\n" + tp.printTicketPassenger("\n"));
                 }
             } else {
                 System.out.println("Errore inserimento codice biglietto");
@@ -460,7 +462,7 @@ public class MethodsControlClient {
         }
         if (t != null) {
             System.out.println(f.toString());
-            System.out.println(t.printTicketPassenger());
+            System.out.println(t.printTicketPassenger("\n"));
             return t;
         } else {
             System.out.println("Biglietto non trovato");
@@ -486,8 +488,8 @@ public class MethodsControlClient {
         }
         if (r != null) {
             System.out.println(f1.toString());
-            System.out.println(r.printReservation());
-            System.out.println(r.printTickets());
+            System.out.println(r.printReservation("\n"));
+            System.out.println(r.printTickets("\n"));
         } else {
             System.out.println("Prenotazione non trovata.");
         }

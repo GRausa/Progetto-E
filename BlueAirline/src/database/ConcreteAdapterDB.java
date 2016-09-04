@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import mail.Email;
 import objects.Flight;
 import objects.HoldLuggage;
 import objects.Insurance;
@@ -212,7 +211,6 @@ public class ConcreteAdapterDB implements AdapterDB {
         SQL.queryWrite(query);
         reservation.setCode(codeReservation);
         this.addTickets(reservation);
-        Email.sendMail(new Email(reservation.getEmail(),"VOLO ACQUISTATO",reservation.printReservation()+"\n\n"+reservation.printTickets()));
         return reservation;
     }     
 

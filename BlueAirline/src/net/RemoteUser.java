@@ -375,8 +375,11 @@ class RemoteUser extends Thread {
         commands.put("SENDMAIL", new Command() {
             @Override
             public void execute(String args) {
-                String MailDetail=gson.fromJson(args,String.class);
+                String MailDetail=args;
+                MailDetail=MailDetail.replaceAll("&%","\n");
                 String[] splittedMailDetail=MailDetail.split("\t");
+                System.out.println(args);
+                
                 Email.sendMail(new Email(splittedMailDetail[0],splittedMailDetail[1],splittedMailDetail[2]));
                 out.println("true");
             }
