@@ -35,7 +35,7 @@ public class StartGui {
         if (selectedOption == 0) {
             String text = txt.getText();
             if (clientBlueAirline.connect(text)) {
-                HomeFrame frame = new HomeFrame("BLUE AIRLINES", clientBlueAirline);
+                HomeFrame frame = new HomeFrame("BLUE AIRLINE", clientBlueAirline);
             } else {
                 String backupDir = "IP ADDRESS ERROR";
 
