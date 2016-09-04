@@ -90,10 +90,10 @@ public class Reservation {
      * 
      * @return rappresentazione scritta della prenotazione 
      */
-    public String printReservation(){
+    public String printReservation(String tab){
         String s="";
-        s+="Prenotazione: "+code+" ("+email+" "+number+")\n";
-        s+="Volo: "+codeFlight+"\n";
+        s+="Prenotazione: "+code+" ("+email+" "+number+")"+tab;
+        s+="Volo: "+codeFlight+tab;
         s+="Numero passeggeri: "+tickets.size();
         return s;
     }   
@@ -106,10 +106,10 @@ public class Reservation {
      * 
      * @return lista dei passeggeri della prenotazione
      */
-    public String printTickets() {
+    public String printTickets(String tab) {
         String s="";
         for(Ticket tp:tickets){
-            s+=tp.printTicketPassenger()+"\n";
+            s+=tp.printTicketPassenger(tab)+tab;
         }
         return s;
     }
