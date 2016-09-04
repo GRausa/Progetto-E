@@ -2,7 +2,7 @@
 
 Realizzazione di un sistema per la prenotazione dei posti a sedere sui voli di una compagnia aerea denominata **BlueAirline**.  
 
-![](https://github.com/claudio-unipv/Progetto-E/blob/master/docs/logo2.jpg) 
+![](https://github.com/claudio-unipv/Progetto-E/blob/master/docs/images/logo2.jpg) 
 
 
 Circa il **70% della popolazione** ha già intrapreso un viaggio in aereo.
@@ -11,7 +11,7 @@ Ma quanti possono affermare di essere soddisfatti al 100% dalla loro esperienza 
 La **BlueAirline** è una nuova compagnia aerea che permette ai propri clienti di viaggiare secondo i propri standard, senza imporre al cliente scelte che potrebbero far calare il soddisfacimento del viaggio, mantenendo prezzi vantaggiosi!
 
 I nostri clienti possono scegliere tra numerosi comfort tra cui:
-![](https://github.com/claudio-unipv/Progetto-E/blob/master/docs/scelta3.jpg)
+![](https://github.com/claudio-unipv/Progetto-E/blob/master/docs/images/scelta3.jpg)
 
 Tutto questo per rendere il tuo viaggio il più confortevole possibile!
 
@@ -24,4 +24,4 @@ Inoltre la nostra piattaforma offre numerose varianti e funzioni:
 * interfaccia grafica e testuale
 * e molto altro
 
-![](https://github.com/claudio-unipv/Progetto-E/blob/master/docs/fine2.jpg) 
+![](https://github.com/claudio-unipv/Progetto-E/blob/master/docs/images/fine2.jpg) 
