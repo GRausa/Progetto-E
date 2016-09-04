@@ -185,7 +185,7 @@ public class Ticket {
      * @return descrizione scritta del biglietto
      */
     public String printTicketPassenger(String tab){
-        String s = "Codice Biglietto"+code+" "+name+" "+surname+" "+this.printTicketWithoutCode(tab);
+        String s = tab+"Codice Biglietto: "+code+" "+name+" "+surname+" "+this.printTicketWithoutCode(tab);
         return s;
     }
     
@@ -216,7 +216,7 @@ public class Ticket {
             c=true;
         }
         if(!c){
-            s+="0";
+            s+="0"+tab;
         }
         if(classe==1){
             s+=tab+"Prezzo biglietto: "+(priceFlight+priceAggiunte+Flight.COSTOPRIMACLASSE)+"€ (Volo: "+priceFlight+"€ + Prima Classe: "+Flight.COSTOPRIMACLASSE+"€ + Aggiunte: "+priceAggiunte+"€)";
