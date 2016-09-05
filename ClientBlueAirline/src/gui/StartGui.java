@@ -20,7 +20,7 @@ import javax.swing.JTextField;
 public class StartGui {
 
     public static void main(String[] args) throws IOException, InterruptedException {
-        FacadeControllerClient clientBlueAirline = new FacadeControllerClient();
+        FacadeControllerClient clientBlueAirline = FacadeControllerClient.getIstance();
         JFrame frame1 = new JFrame();
 
         //String s = (String) JOptionPane.showInputDialog(frame1, "Complete the sentence:\n" + "\"Green eggs and...\"", "Customized Dialog", JOptionPane.PLAIN_MESSAGE, null, null, "ham");

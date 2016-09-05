@@ -29,12 +29,23 @@ import objects.Ticket;
  * @author Giovanni
  */
 public class FacadeControllerClient implements InterfaceClient {
+    
+    static FacadeControllerClient istance;
 
     private Socket clientSocket;
     private int PortNumber = 8888;
     private PrintWriter out;
     private BufferedReader in;
     private Gson gson = new Gson();
+    
+    private FacadeControllerClient(){        
+    }
+    
+    public static FacadeControllerClient getIstance(){
+        if(istance==null)
+            istance = new FacadeControllerClient();
+        return istance;
+    }
 
     @Override
     public boolean connect(String ipServer) {

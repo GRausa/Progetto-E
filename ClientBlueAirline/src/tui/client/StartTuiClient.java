@@ -18,7 +18,7 @@ import static java.util.Arrays.asList;
 public class StartTuiClient {
 
     public static void main(String[] args) throws IOException {
-        InterfaceClient clientBlueAirline = new FacadeControllerClient();
+        InterfaceClient clientBlueAirline = FacadeControllerClient.getIstance();
         if (clientBlueAirline.connect(MethodsControlClient.scannerInput(new ArrayList<>(asList("PUT IP SERVER"))).get(0))) {
             ControllerClientTxt r1 = new ControllerClientTxt(clientBlueAirline);
             Thread nuovoThread1 = new Thread(r1);

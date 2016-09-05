@@ -17,7 +17,7 @@ import static java.util.Arrays.asList;
  */
 public class StartTuiAdministrator {
     public static void main(String[] args) throws IOException {
-        InterfaceClient clientBlueAirline = new FacadeControllerClient();
+        InterfaceClient clientBlueAirline = FacadeControllerClient.getIstance();
         if (clientBlueAirline.connect(MethodsControlAdministrator.scannerInput(new ArrayList<>(asList("PUT IP SERVER"))).get(0))) {
             if(MethodsControlAdministrator.checkLogin(clientBlueAirline)){           
                 ControllerAdministratorTxt r1 = new ControllerAdministratorTxt(clientBlueAirline);

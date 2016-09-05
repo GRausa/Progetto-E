@@ -25,9 +25,17 @@ import objects.Ticket;
 public class FacadeControllerServer implements InterfaceServer {
 
     private AdapterDB adapter;
-
-    public FacadeControllerServer() {
+    
+    static FacadeControllerServer istance;
+    
+    private FacadeControllerServer(){   
         adapter = new ConcreteAdapterDB();
+    }
+    
+    public static FacadeControllerServer getIstance(){
+        if(istance==null)
+            istance = new FacadeControllerServer();
+        return istance;
     }
     
     //ricerca tutte le rotte

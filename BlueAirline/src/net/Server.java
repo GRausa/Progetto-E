@@ -59,7 +59,7 @@ public class Server {
      */
     public static void main(String[] args) {
         final int PORT = 8888;
-        final InterfaceServer c = new FacadeControllerServer();
+        final InterfaceServer c = FacadeControllerServer.getIstance();
         Server server = new Server(c, PORT);
         try {
             server.startServer();
