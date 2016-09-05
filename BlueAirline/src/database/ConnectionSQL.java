@@ -25,10 +25,10 @@ public class ConnectionSQL {
     private final String password;
     
     public ConnectionSQL() {
-        this.db = "localhost";
-        this.nameDb = "blueairlinedb";
-        this.username = "root"; 
-        this.password = "utente";
+        this.db = "sql7.freemysqlhosting.net";
+        this.nameDb = "sql7130256";
+        this.username = "sql7130256"; 
+        this.password = "urHL9UR5SD";
     }
 
     public ResultSet queryRead(String query) throws SQLException {
