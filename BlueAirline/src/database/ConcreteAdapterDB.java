@@ -35,7 +35,7 @@ public class ConcreteAdapterDB implements AdapterDB {
     }
 
     
-    public int numberSeatFlight(String codeFlight) throws SQLException {
+    private int numberSeatFlight(String codeFlight) throws SQLException {
         String query
                 = "SELECT POSTI\n"
                 + "FROM Aereo A,Volo V\n"
@@ -55,7 +55,7 @@ public class ConcreteAdapterDB implements AdapterDB {
     }
 
     
-    public int numberSeatFirstClassFlight(String cod) throws SQLException {
+    private int numberSeatFirstClassFlight(String cod) throws SQLException {
 
         String query
                 = "SELECT POSTI1CLASSE \n"
@@ -66,7 +66,7 @@ public class ConcreteAdapterDB implements AdapterDB {
 
     }
 
-    public void setAllSeatFlight(Flight flight) throws SQLException {
+    private void setAllSeatFlight(Flight flight) throws SQLException {
         int nseat = numberSeatFlight(flight.getCode());
         int firstClass = numberSeatFirstClassFlight(flight.getCode());
         for (int i = 0; i < nseat; i++) {
@@ -78,7 +78,7 @@ public class ConcreteAdapterDB implements AdapterDB {
         }
     }
 
-    public void setSeat(String volo, int num, int classe) throws SQLException {
+    private void setSeat(String volo, int num, int classe) throws SQLException {
         String query = "INSERT INTO Posto VALUES ('" + num + "', '" + volo + "', '" + classe + "', null)";
         SQL.queryWrite(query);
 
@@ -214,7 +214,7 @@ public class ConcreteAdapterDB implements AdapterDB {
         return reservation;
     }     
 
-    public Reservation addTickets(Reservation reservation) throws SQLException{
+    private Reservation addTickets(Reservation reservation) throws SQLException{
         int i = 0;
         String codeTicket="";
         for (Ticket t : reservation.getTickets()) {
@@ -251,7 +251,7 @@ public class ConcreteAdapterDB implements AdapterDB {
         return reservation;
     }
 
-    public void setSeatBoolean(String codeFlight, int nSeat, String ticketPassenger, boolean b) throws SQLException {
+    private void setSeatBoolean(String codeFlight, int nSeat, String ticketPassenger, boolean b) throws SQLException {
         String query;
         if(b){ //IMPOSTA IL POSTO A SEDERE
             query 
@@ -265,7 +265,7 @@ public class ConcreteAdapterDB implements AdapterDB {
         SQL.queryWrite(query);
     }
     
-    public void insertSupplementMeal(String code, String codeTicket) throws SQLException{
+    private void insertSupplementMeal(String code, String codeTicket) throws SQLException{
         ResultSet resultQuery;
         String query   
                     = "SELECT PREZZO\n"
@@ -278,7 +278,7 @@ public class ConcreteAdapterDB implements AdapterDB {
         SQL.queryWrite(query);
     }
     
-    public void insertSupplementHoldLuggage(String code, String codeTicket) throws SQLException{
+    private void insertSupplementHoldLuggage(String code, String codeTicket) throws SQLException{
         ResultSet resultQuery;
         String query
                 = "SELECT PREZZO\n"
@@ -291,7 +291,7 @@ public class ConcreteAdapterDB implements AdapterDB {
         SQL.queryWrite(query);
     }
     
-    public void insertSupplementInsurance(String code, String codeTicket) throws SQLException{
+    private void insertSupplementInsurance(String code, String codeTicket) throws SQLException{
         ResultSet resultQuery;
         String query
                 = "SELECT PREZZO\n"
@@ -305,7 +305,7 @@ public class ConcreteAdapterDB implements AdapterDB {
         SQL.queryWrite(query);    
     }
     
-    public void insertSupplement(String code, String codeTicket) throws SQLException {        
+    private void insertSupplement(String code, String codeTicket) throws SQLException {        
         switch (code.charAt(0)) {
             case 'M':
                 this.insertSupplementMeal(code, codeTicket);
@@ -327,7 +327,7 @@ public class ConcreteAdapterDB implements AdapterDB {
         return flight;
     }
     
-    public ArrayList<Seat> getSeatsFlight(String codeFlight) throws SQLException{
+    private ArrayList<Seat> getSeatsFlight(String codeFlight) throws SQLException{
         ArrayList<Seat> seats;
         String query
                 = "SELECT NUMERO, Classe, PASSEGGERO\n"
@@ -591,6 +591,7 @@ public class ConcreteAdapterDB implements AdapterDB {
         return b;
     }
     
+    @Override
     public Flight editFlight(Flight flight) throws SQLException{
         Flight f;
         //ParserSQL.stringDate((GregorianCalendar) flight.getDateDestination())+"', 

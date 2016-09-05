@@ -121,7 +121,7 @@ public class MethodsControlClient {
     }
 
     /*METODI PER PRENOTAZIONE*/
-    public static Flight searchFlight(InterfaceClient client, String cod) {
+    private static Flight searchFlight(InterfaceClient client, String cod) {
         Flight flight = new Flight(cod);
         {
             try {
@@ -143,7 +143,7 @@ public class MethodsControlClient {
         return flight;
     }
 
-    public static void toStringSupplements(Meal[] meals, Insurance[] insurances, HoldLuggage[] holdLuggages) {
+    private static void toStringSupplements(Meal[] meals, Insurance[] insurances, HoldLuggage[] holdLuggages) {
         System.out.println("Scelte in aggiunta:\nPASTI: ");
         for (Meal m : meals) {
             System.out.println(m.toString());
@@ -158,7 +158,7 @@ public class MethodsControlClient {
         }
     }
 
-    public static void addMealTicket(Ticket p, Meal[] meals, String v) {
+    private static void addMealTicket(Ticket p, Meal[] meals, String v) {
         for (Meal m : meals) {
             if (m.getCode().equals(v)) {
                 p.addMeals(m);
@@ -167,7 +167,7 @@ public class MethodsControlClient {
         }
     }
 
-    public static void addHoldLuggageTicket(Ticket p, HoldLuggage[] holdLuggages, String v) {
+    private static void addHoldLuggageTicket(Ticket p, HoldLuggage[] holdLuggages, String v) {
         for (HoldLuggage hl : holdLuggages) {
             if (hl.getCode().equals(v)) {
                 p.addHoldLuggage(hl);
@@ -176,7 +176,7 @@ public class MethodsControlClient {
         }
     }
 
-    public static void addInsuranceTicket(Ticket p, Insurance[] insurances, String v) {
+    private static void addInsuranceTicket(Ticket p, Insurance[] insurances, String v) {
         for (Insurance in : insurances) {
             if (in.getCode().equals(v)) {
                 p.addInsurance(in);
@@ -185,7 +185,7 @@ public class MethodsControlClient {
         }
     }
 
-    public static Ticket insertTicketSupplements(String[] vetsplit, int seat, int classe, String codeFlight, double price, Meal[] meals, Insurance[] insurances, HoldLuggage[] holdLuggages) {
+    private static Ticket insertTicketSupplements(String[] vetsplit, int seat, int classe, String codeFlight, double price, Meal[] meals, Insurance[] insurances, HoldLuggage[] holdLuggages) {
         Ticket p = new Ticket(vetsplit[0], vetsplit[1], vetsplit[2], seat, classe, codeFlight, price);
         for (int j = 4; j < vetsplit.length; j++) {
             String v = vetsplit[j];
@@ -206,7 +206,7 @@ public class MethodsControlClient {
         return p;
     }
 
-    public static ArrayList<Ticket> insertTicket(int num, Flight flight, Meal[] meals, Insurance[] insurances, HoldLuggage[] holdLuggages) {
+    private static ArrayList<Ticket> insertTicket(int num, Flight flight, Meal[] meals, Insurance[] insurances, HoldLuggage[] holdLuggages) {
         //Scanner input = new Scanner(System.in);
         ArrayList<Ticket> passengers = new ArrayList<Ticket>();
         for (int k = 0; k < num; k++) {
@@ -234,7 +234,7 @@ public class MethodsControlClient {
         return passengers;
     }
 
-    public static Reservation makeReservation(InterfaceClient client, String cod, Flight flight) throws IOException {
+    private static Reservation makeReservation(InterfaceClient client, String cod, Flight flight) throws IOException {
         //Scanner input = new Scanner(System.in);
         int num;
         do {
@@ -266,7 +266,7 @@ public class MethodsControlClient {
         return res;
     }
 
-    public static void checkReservation(InterfaceClient client, Reservation res, Flight flight) {
+    private static void checkReservation(InterfaceClient client, Reservation res, Flight flight) {
         //Scanner input = new Scanner(System.in);
         try {
             flight = client.searchFlight(flight); //aggiorno il flight dopo la prenotazione
@@ -327,7 +327,7 @@ public class MethodsControlClient {
 
     /*FINE PRENOTAZIONE*/
  /*MODIFICA BIGLIETTO*/
-    public static void editTicket(InterfaceClient client, Ticket tp, Flight flight, Meal[] meals, Insurance[] insurances, HoldLuggage[] holdLuggages) throws IOException {
+    private static void editTicket(InterfaceClient client, Ticket tp, Flight flight, Meal[] meals, Insurance[] insurances, HoldLuggage[] holdLuggages) throws IOException {
         //Scanner input = new Scanner(System.in);
         boolean c = false;
         do {
@@ -360,7 +360,7 @@ public class MethodsControlClient {
         } while (!c);
     }
 
-    public static void editTicket(InterfaceClient client, Ticket tp) {
+    private static void editTicket(InterfaceClient client, Ticket tp) {
         System.out.println("\nAREA MODIFICA:");
         Flight flight = null;
         Meal[] meals = null;
@@ -413,7 +413,7 @@ public class MethodsControlClient {
         }
     }
 
-    public static boolean isCheckIn(InterfaceClient client, Ticket tp) throws IOException {
+    private static boolean isCheckIn(InterfaceClient client, Ticket tp) throws IOException {
         if (client.isCheckIn(tp)) {
             return true;
         } else {
@@ -508,7 +508,7 @@ public class MethodsControlClient {
         }
     }
 
-    static void searchFlightCode(InterfaceClient client) {
+    public static void searchFlightCode(InterfaceClient client) {
         //Scanner input = new Scanner(System.in);
         ArrayList<String> input = MethodsControlClient.scannerInput(new ArrayList<>(asList("Inserisci il codice del volo: ")));
         MethodsControlClient.searchFlight(client, input.get(0));

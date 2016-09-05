@@ -193,7 +193,8 @@ public class FacadeControllerClient implements InterfaceClient {
         Flight f = gson.fromJson(in.readLine(), Flight.class);
         return f;
     }
-
+    
+    @Override
     public boolean checkLogin(String userpass) throws IOException {
         out.println("LOGIN " + gson.toJson(userpass));
         Boolean b = gson.fromJson(in.readLine(), Boolean.class);

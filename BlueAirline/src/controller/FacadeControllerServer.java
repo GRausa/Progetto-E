@@ -63,21 +63,21 @@ public class FacadeControllerServer implements InterfaceServer {
     }
     
     //imposta array posti di un volo 
-    
-    public Flight setSeatsFlight(Flight flight) throws SQLException{
+    /*
+    private Flight setSeatsFlight(Flight flight) throws SQLException{
         return adapter.setSeatsFlight(flight);
-    }
+    }*/
     
     //effettua prenotazione
     @Override
     public Reservation makeReservation(Reservation reservation) throws SQLException{
         return adapter.makeReservation(reservation);
     }
-    
+    /*
     //numero posti liberi in un volo
-    public int numberSeatFreeFlight(String codeFlight) throws SQLException{
+    private int numberSeatFreeFlight(String codeFlight) throws SQLException{
         return adapter.numberSeatFreeFlight(codeFlight);
-    }
+    }*/
     
     //modifica una ticket
     @Override
@@ -90,11 +90,11 @@ public class FacadeControllerServer implements InterfaceServer {
     public ArrayList<String> searchAllCitys() {
         return adapter.searchAllCitys();
     }
-    
+    /*
     //dato volo e posto vedere se è libero
-    public boolean seatIsFree(String codeFlight, int nseat) throws SQLException{
+    private boolean seatIsFree(String codeFlight, int nseat) throws SQLException{
         return adapter.seatIsFree(codeFlight, nseat);
-    }
+    }*/
     
     //ritorna tutti i meal
     @Override
@@ -139,17 +139,17 @@ public class FacadeControllerServer implements InterfaceServer {
     }
     
     //ritorna i pasti di un ticket
-    public ArrayList<Meal> getMealsTicket(String codeTicket) throws SQLException{
+    private ArrayList<Meal> getMealsTicket(String codeTicket) throws SQLException{
         return adapter.getMealsTicket(codeTicket);
     }
     
     //ritorna le assicurazioni di un ticket
-    public ArrayList<Insurance> getInsurancesTicket(String codeTicket) throws SQLException{
+    private ArrayList<Insurance> getInsurancesTicket(String codeTicket) throws SQLException{
         return adapter.getInsurancesTicket(codeTicket);
     }
     
     //ritorna i bagagli di un ticket
-    public ArrayList<HoldLuggage> getHoldLuggagesTicket(String codeTicket) throws SQLException{
+    private ArrayList<HoldLuggage> getHoldLuggagesTicket(String codeTicket) throws SQLException{
         return adapter.getHoldLuggagesTicket(codeTicket);
     }
     

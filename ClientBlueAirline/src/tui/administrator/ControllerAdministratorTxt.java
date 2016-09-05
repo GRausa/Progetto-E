@@ -19,7 +19,6 @@ public class ControllerAdministratorTxt implements Runnable {
         this.client = (FacadeControllerClient) controllerClient;
     }
     
-
     @Override
     public void run() {    
 
