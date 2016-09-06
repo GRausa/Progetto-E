@@ -50,6 +50,7 @@ public class Server {
             Logger.getLogger(Server.class.getName()).log(Level.INFO, "Accepting a new user. Ip guest : " + socket.getInetAddress() + "port guest:" + socket.getPort());
             u.start();
         }
+        
     }
 
     /**
