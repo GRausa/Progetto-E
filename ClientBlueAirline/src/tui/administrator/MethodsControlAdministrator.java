@@ -16,10 +16,16 @@ import objects.Flight;
 import objects.Route;
 
 /**
- *
+ * Provides the administrator's methods for the textual user interface.
+ * 
  * @author Giovanni
  */
 public class MethodsControlAdministrator {
+    /**
+     * 
+     * @param n
+     * @return 
+     */
     public static ArrayList<String> scannerInput(ArrayList<String> n) {
         Scanner input = new Scanner(System.in);
         ArrayList<String> ritorno = new ArrayList<>(n.size());
@@ -31,7 +37,11 @@ public class MethodsControlAdministrator {
         }
         return ritorno;
     }
-
+    /**
+     * Prints the menu.
+     * 
+     * @return 
+     */
     public static String toStringMenu() {
         Scanner input = new Scanner(System.in);
         String s;
@@ -44,7 +54,11 @@ public class MethodsControlAdministrator {
         String s1 = input.nextLine().toUpperCase();
         return s1;
     }
-
+    /**
+     * Prints a message indicating the server's status.
+     * 
+     * @param client Client.
+     */
     public static void hi(InterfaceClient client) {
         if(client.hello()){
             System.out.println("IL SERVER E' ATTIVO");
@@ -53,7 +67,12 @@ public class MethodsControlAdministrator {
             System.out.println("IL SERVER NON E' ATTIVO");           
         }
     }
-    
+    /**
+     * Text for inserting a new flight.
+     * 
+     * @param client Client
+     * @throws IOException if has occurred an I/O exception.
+     */
     public static void insertFlight(InterfaceClient client) throws IOException{
         ArrayList<String> input = MethodsControlAdministrator.scannerInput(new ArrayList<>(asList("Codice volo:")));
         String codeFlight = input.get(0);
@@ -75,7 +94,12 @@ public class MethodsControlAdministrator {
             System.out.println("Volo inserito");
         }
     }
-    
+    /**
+     * Text for editing a flight.
+     * 
+     * @param client Client
+     * @throws IOException if has occurred an I/O exception.
+     */
     public static void editFlight(InterfaceClient client) throws IOException{
         ArrayList<String> input = MethodsControlAdministrator.scannerInput(new ArrayList<>(asList("Codice volo:")));
         Flight flight = client.searchFlight(new Flight(input.get(0)));
@@ -102,7 +126,14 @@ public class MethodsControlAdministrator {
         }
     }
         
-    
+    /**
+     * Text for inserting user/pass for the administration area.
+     * 
+     * @param client Client.
+     * @return <code>true</code> if the combination user/pass is correct.
+     *         <code>false</code> otherwise.
+     * @throws IOException 
+     */
     public static boolean checkLogin(InterfaceClient client) throws IOException{
         boolean b = false;
         do{
@@ -121,6 +152,13 @@ public class MethodsControlAdministrator {
     
     //METODI GENERICI
     
+    /**
+     * Converts the string date/time in a date in GregorianCalendar format.
+     * 
+     * @param stringDate Date in String format.
+     * @param stringTime Time in String format.
+     * @return Date in GregorianCalendar format.
+     */
     public static Calendar returnCalendar(String stringDate, String stringTime){
         String[] vetDate = stringDate.split("-");
         int year = Integer.parseInt(vetDate[0]);

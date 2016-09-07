@@ -12,10 +12,17 @@ import java.util.ArrayList;
 import static java.util.Arrays.asList;
 
 /**
- *
+ * Provides the running of the textual user interface for administrator.
+ * 
  * @author Giovanni
  */
 public class StartTuiAdministrator {
+    /**
+     * Main method.
+     * 
+     * @param args
+     * @throws IOException if has occurred an I/O exception.
+     */
     public static void main(String[] args) throws IOException {
         InterfaceClient clientBlueAirline = FacadeControllerClient.getIstance();
         if (clientBlueAirline.connect(MethodsControlAdministrator.scannerInput(new ArrayList<>(asList("PUT IP SERVER"))).get(0))) {

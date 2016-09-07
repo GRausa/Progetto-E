@@ -10,11 +10,20 @@ import controller.InterfaceClient;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
+/**
+ * Provides the controller for the textual user interface.
+ * 
+ * @author 
+ */
 public class ControllerAdministratorTxt implements Runnable {
 
     private InterfaceClient client;
-
+    /**
+     * Constructs a new controller 
+     * 
+     * @param controllerClient Object that provides methods in order to administrate the application and the
+     *                         information that are set in the database.
+     */
     public ControllerAdministratorTxt(InterfaceClient controllerClient) {
         this.client = (FacadeControllerClient) controllerClient;
     }
