@@ -6,21 +6,21 @@
 package objects;
 
 /**
- * La classe Route indica una rotta su cui la compagnia effettua dei voli.
+ * Represent a route exercised by the company. A route is a connection between two airports.
  * 
- * @author riccardo
+ * @author Giovanni
  */
 public class Route {
 
     private String deparutreAirport, destinationAirport, departureCity, destinationCity;
 
     /**
-     * Crea una nuova rotta sulla quali verranno effettuati dei voli.
+     * Constructs a new Route.
      * 
-     * @param deparutreAirport aeroporto di partenza
-     * @param destinationAirport aeroporto di arrivo
-     * @param departureCity città di partenza 
-     * @param destinationCity città di arrivo
+     * @param deparutreAirport Departure airport.
+     * @param destinationAirport Destination airport.
+     * @param departureCity Departure city. 
+     * @param destinationCity Destination city.
      */
     public Route(String deparutreAirport, String destinationAirport, String departureCity, String destinationCity) {
         this.deparutreAirport = deparutreAirport;
@@ -29,7 +29,7 @@ public class Route {
         this.destinationCity = destinationCity;
     }
     /**
-     * Crea una nuova rotta fra città sulla quali verranno effettuati dei voli.
+     * Constructs a new Route with only departure's and destination's cities. Airports set to null.
      * 
      * @param departureCity città di partenza 
      * @param destinationCity città di arrivo
@@ -42,7 +42,7 @@ public class Route {
     }
     
     /**
-     * Crea una nuova rotta vuota.
+     * Constructs an empy route.
      * 
      */
     public Route(){

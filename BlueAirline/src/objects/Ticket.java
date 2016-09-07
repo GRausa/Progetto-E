@@ -195,7 +195,7 @@ public class Ticket {
     /**
      * 
      * @return <code>true</code> if the passenger already did the check in;
- *         <code>false</code> otherwise.
+     *         <code>false</code> otherwise.
      */
     public boolean isCheckIn() {
         return checkIn;

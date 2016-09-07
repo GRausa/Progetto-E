@@ -6,8 +6,7 @@
 package objects;
 
 /**
- *La classe Insurance indica la presenza dell'assicurazione. Questa può essere di vario tipo 
- * e non è obbligatoria ai fini dell'acquisto del biglietto.
+ * Represents an insurance. Insurances are supplements of the ticket.
  * 
  * @author cl418377
  */
@@ -18,11 +17,11 @@ public class Insurance { //ASSICURAZIONE
     private String description;
     
     /**
-     * Istanzia una nuova assicurazione.
+     * Contructs a new insurance.
      * 
-     * @param code codice dell'assicurazione
-     * @param name nome dell'assicurazione
-     * @param price prezzo dell'assicurazione
+     * @param code Code of the insurance.
+     * @param name Name of the insurance.
+     * @param price Price of the insurance.
      */
     public Insurance (String code, String name, double price, String description){
         this.code=code;
@@ -32,9 +31,9 @@ public class Insurance { //ASSICURAZIONE
     }
     
     /**
-     * Istanzia una nuova assicurazione a partire dal suo codice.
+     * Contructs a new insurance with only the code.
      * 
-     * @param code codice dell'assicurazione
+     * @param code Code of the insurance.
      */
     public Insurance (String code){
         this.code=code;

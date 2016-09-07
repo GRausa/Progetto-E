@@ -10,11 +10,14 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 /**
- * La classe Flight indica un volo che effettua la compagnia.
+ * Represents a flight that the company performs.
  * 
  * @author Giovanni
  */
 public class Flight {
+    /**
+     * Supplement of the first class.
+     */
     public static double COSTOPRIMACLASSE=30;
     private String code;
     private Route r;
@@ -25,13 +28,14 @@ public class Flight {
     private String codeAirplane;
     
     /**
-     * Istanzia un nuovo volo
+     * Constructs a new flight. Seats are not added.
      * 
-     * @param code codice del volo
-     * @param r rotta del volo
-     * @param dateDeparture data di partenza 
-     * @param dateDestination data di arrivo
-     * @param price prezzo del volo
+     * @param code Code of the flight.
+     * @param r Route of the flight.
+     * @param dateDeparture Departure's date.
+     * @param dateDestination Arrival's date.
+     * @param price Price of a ticket in the second class of the flight.
+     * @param codeAirplane Code of the airplane.
      */
     public Flight(String code, Route r, Calendar dateDeparture, Calendar dateDestination, double price, String codeAirplane) {
         this.code = code;
@@ -41,7 +45,15 @@ public class Flight {
         this.price = price;
         this.codeAirplane = codeAirplane;
     }
-    
+    /**
+     * Constructs a new flight. Seats and codeAirplane not added.
+     * 
+     * @param code Code of the flight.
+     * @param r Route of the flight.
+     * @param dateDeparture Departure's date.
+     * @param dateDestination Arrival's date.  
+     * @param price Price of a ticket in the second class of the flight.
+     */
     public Flight(String code, Route r, Calendar dateDeparture, Calendar dateDestination, double price) {
         this.code = code;
         this.r = r;
@@ -50,10 +62,10 @@ public class Flight {
         this.price = price;
     }
     /**
-     * Istanzia un nuovo volo
+     * Constructs a new flight. The code of the flight is initialized to null and the price to 0.
      * 
-     * @param r rotta del volo
-     * @param dateDeparture data di partenza
+     * @param r Route of the flight.
+     * @param dateDeparture Departure's date.
      */
     public Flight(Route r, Calendar dateDeparture) {
         this.code = null;
@@ -64,7 +76,7 @@ public class Flight {
     }
     
     /**
-     * Istanzia un nuovo volo
+     * Constructs an empty flight with only the flight's code.
      * 
      * @param code codice del volo
      */
@@ -110,7 +122,7 @@ public class Flight {
     
     /**
      * 
-     * @return descrizione scritta del volo
+     * @return Written description of the flight.
      */
     public String toString(){
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MMM/yyyy HH:mm");
@@ -119,7 +131,7 @@ public class Flight {
     
     /**
      * 
-     * @return numero di posti liberi del volo
+     * @return Number of free seats in the flight.
      */
     public int getSeatFree(){
         int n=0;
@@ -133,7 +145,7 @@ public class Flight {
     
     /**
      * 
-     * @return tutti i posti liberi ed occupati del volo
+     * @return Written description of all seat of the flight.
      */
     public String printAllSeats(){
         String st="PRIMA CLASSE -> prezzo: "+(this.getPrice()+Flight.COSTOPRIMACLASSE)+"€\n";

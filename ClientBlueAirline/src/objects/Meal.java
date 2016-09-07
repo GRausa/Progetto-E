@@ -6,7 +6,8 @@
 package objects;
 
 /**
- * La classe Meal indica la presenza del pasto. Non in tutti i voli si ha la possibilità di scegliere il pasto.
+ * Represents a meal on the airplane. Meals are supplements of the ticket. Meals can be added 
+ * only in certain flights.
  *
  * @author cl418377
  */
@@ -17,13 +18,13 @@ public class Meal {
     private int timeMeal; // Il pasto è disponibile solo su voli che hanno una certa durata
     
     /**
-     * Istanzia un nuovo pasto.
-     * 
-     * @param code codice del pasto
-     * @param name nome del pasto
-     * @param price prezzo del pasto in euro
-     * @param timeMeal tempo di volo dal quale è disponibile il pasto
-     */
+    * Constructs a new meal.
+    * 
+    * @param code Code of the meal.
+    * @param name Name of the meal.
+    * @param price Price of the meal.
+    * @param timeMeal Time of the flight from which the meal will be available.
+    */
     public Meal (String code, String name, double price, int timeMeal){
         this.code=code;
         this.name=name;
@@ -31,9 +32,9 @@ public class Meal {
         this.timeMeal=timeMeal;
     }
     /**
-     * Istanzia un nuovo pasto a partire dal suo codice.
+     * Constructs a new meal with only the code.
      * 
-     * @param code codice del pasto
+     * @param code Code of the meal.
      */
     public Meal (String code){
         this.code=code;

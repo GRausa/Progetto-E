@@ -8,7 +8,7 @@ package objects;
 import java.util.ArrayList;
 
 /**
- * La classe Reservation indica una prenotazione di uno o più Ticket.
+ * Represents a reservation of one or more tickets. The customer is identified with his forwarding address.
  * 
  * @author Giovanni
  */
@@ -18,11 +18,11 @@ public class Reservation {
     private String email, number, codeFlight;
 
     /**
-     * Crea una nuova prenotazione su un volo della compagnia.
+     * Constructs an empty reservation (no tickets).
      * 
-     * @param codeFlight codice del volo del quale si vuole effettuare una prenotazione
-     * @param email email del cliente che effettua la prenotazione
-     * @param number recapito telefonico del cliente che effettua la prenotazione
+     * @param codeFlight Code of the flight of which the customer wants a reservation.
+     * @param email Email of the customer.
+     * @param number Phone address of the customer.
      */
     public Reservation(String codeFlight, String email, String number) {
         this.email = email;
@@ -31,12 +31,14 @@ public class Reservation {
     }
     
     /**
-     * Crea una nuova prenotazione su un volo della compagnia
+     * Constructs a reservation with one or more tickets. 
      * 
-     * @param codeFlight codice del volo del quale si vuole effettuare una prenotazione
-     * @param number recapito telefonico del cliente che effettua la prenotazione
-     * @param email email del cliente che effettua la prenotazione
-     * @param p lista dei biglietti della prenotazione
+     * @param codeFlight Code of the flight of which the customer wants a reservation.
+     * @param number Phone address of the customer.
+     * @param email Email of the customer.
+     * @param p List of tickets.
+     * 
+     * 
      */
     public Reservation(String codeFlight, String number, String email, ArrayList<Ticket> p) {
         
@@ -46,7 +48,7 @@ public class Reservation {
         this.tickets=p;
     }
     /**
-     * Crea una nuova prenotazione su un volo della compagnia a partire dal suo codice
+     * Constructs a new reservation with only the resrvation's code.
      * 
      * @param code codice del volo del quale si vuole effettuare una prenotazione
      */
@@ -88,7 +90,7 @@ public class Reservation {
     }
     /**
      * 
-     * @return rappresentazione scritta della prenotazione 
+     * @return Written description of the reservation.
      */
     public String printReservation(String tab){
         String s="";
@@ -104,7 +106,7 @@ public class Reservation {
 
     /**
      * 
-     * @return lista dei passeggeri della prenotazione
+     * @return Written description of the reservation.
      */
     public String printTickets(String tab) {
         String s="";
