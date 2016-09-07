@@ -8,25 +8,19 @@ package test;
 import controller.FacadeControllerClient;
 import controller.InterfaceClient;
 import java.io.IOException;
-import java.util.ArrayList;
-import static java.util.Arrays.asList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import objects.Route;
-import tui.client.ControllerClientTxt;
-import tui.client.MethodsControlClient;
 
 /**
  *
  * @author Giovanni
  */
 
-//SINGOLA ROTTA
-public class Test1 {
+//TUTTE ROTTE
+public class Test2_searchAllRoutes {
     public static void main(String[] args) throws IOException {
         InterfaceClient client = FacadeControllerClient.getIstance();
         client.connect("localhost");
-        Route route = new Route("New York", "Roma");
+        Route route = new Route("", "");
         Route[] routes = client.searchRoutes(route);
         if (routes.length > 0) {
             for (Route r : routes) {

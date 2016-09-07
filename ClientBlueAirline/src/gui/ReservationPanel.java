@@ -10,8 +10,10 @@ import com.toedter.calendar.JDateChooser;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.IOException;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -129,7 +131,6 @@ public class ReservationPanel extends JPanel {
 
         reservationPanel.add(titdata);
         titdata.setFont(new Font("Helvetica", Font.BOLD, 25));
-
         data.setDateFormatString("yyyy-MM-dd");
         //data.setMinSelectableDate(new Date());
         data.setPreferredSize(new java.awt.Dimension(170, 30));
@@ -142,9 +143,9 @@ public class ReservationPanel extends JPanel {
                 }
             }
         });
+        data.setDate(Date.from(Instant.now()));
         data.setSize(new java.awt.Dimension(170, 30));
         data.setFont(new Font("Helvetica", Font.BOLD, 15));
-
         titandata.setFont(new Font("Helvetica", Font.BOLD, 25));
         titritorno.setFont(new Font("Helvetica", Font.BOLD, 25));
 

@@ -23,7 +23,6 @@ public class StartGui {
         FacadeControllerClient clientBlueAirline = FacadeControllerClient.getIstance();
         JFrame frame1 = new JFrame();
 
-        //String s = (String) JOptionPane.showInputDialog(frame1, "Complete the sentence:\n" + "\"Green eggs and...\"", "Customized Dialog", JOptionPane.PLAIN_MESSAGE, null, null, "ham");
         String[] options = {"OK"};
         JPanel panel = new JPanel();
         JLabel lbl = new JLabel("Enter IP server: ");

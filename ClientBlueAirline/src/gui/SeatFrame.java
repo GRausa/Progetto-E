@@ -19,10 +19,11 @@ import javax.swing.table.TableCellRenderer;
 import objects.*;
 
 /**
- *K9SLPO
+ * K9SLPO
+ *
  * @author andreacavagna
  */
-public class SeatFrame extends JFrame{
+public class SeatFrame extends JFrame {
 
     private FacadeControllerClient controller;
     private HomeFrame home;

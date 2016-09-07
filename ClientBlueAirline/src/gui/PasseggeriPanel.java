@@ -146,6 +146,15 @@ public class PasseggeriPanel extends JPanel {
         c.gridx = 1;
         c.gridy = 1;
 
+        id0.addMouseMotionListener(new MouseAdapter() {
+
+            @Override
+            public void mouseMoved(MouseEvent e) {
+
+                home.notifiche.setText("Inserire l'identificativo del proprio passaporto");
+            }
+        });
+        
         pane.add(id0, c);
 
         c.weightx = 3;
@@ -155,7 +164,17 @@ public class PasseggeriPanel extends JPanel {
         pane.add(classe, c);
 
         cbclasse.setModel(new javax.swing.DefaultComboBoxModel(new String[]{"Prima Classe ", "Seconda Classe"}));
+        
+        cbclasse.addMouseMotionListener(new MouseAdapter() {
 
+            @Override
+            public void mouseMoved(MouseEvent e) {
+
+                home.notifiche.setText("Selezionare prima la classe per vedere i posti disponibili");
+            }
+
+        });
+        
         c.weightx = 3;
 
         c.fill = GridBagConstraints.HORIZONTAL;
@@ -211,22 +230,43 @@ public class PasseggeriPanel extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 int a = Integer.parseInt(nbagagli.getText());
                 a--;
-                if(a<0){
+                if (a < 0) {
                     bagaglimeno.setEnabled(false);
-                    a=0;
-                }
-                else{
+                    a = 0;
+                } else {
                     nbagagli.setText("" + a);
                     home.notifiche.setText("Rimosso un bagaglio da stiva.");
-                }                               
+                }
             }
 
         });
         nbagagli.setColumns(1);
         bagagli.add(nbagagli);
+        
+         nbagagli.addMouseMotionListener(new MouseAdapter() {
+
+            @Override
+            public void mouseMoved(MouseEvent e) {
+
+                home.notifiche.setText("Inserire il numero di bagagli desiderati");
+            }
+
+        });
+        
         bagagli.add(bagaglipiu);
         ImageIcon immagine = new ImageIcon("immagini/HoldLuggage.png");
         bagagliobutton.setIcon(immagine);
+        
+         bagagliobutton.addMouseMotionListener(new MouseAdapter() {
+
+            @Override
+            public void mouseMoved(MouseEvent e) {
+
+                home.notifiche.setText("Specificare il tipo di bagaglio desiderato.");
+            }
+
+        });
+        
         luggages = new ArrayList();
         home.setLuggages(luggages);
         bagagliobutton.addActionListener(NListener(nbagagli, "I nostri tipi di bagagli: ", "Specifica il tipo di bagaglio per il volo", 'H'));
@@ -237,7 +277,7 @@ public class PasseggeriPanel extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 int a = Integer.parseInt(nbagagli.getText());
                 a++;
-                if(a>=0){
+                if (a >= 0) {
                     nbagagli.setText("" + a);
                     home.notifiche.setText("Aggiunto un bagaglio da stiva");
                     bagaglimeno.setEnabled(true);
@@ -265,6 +305,17 @@ public class PasseggeriPanel extends JPanel {
 
         //aggiunta tasto per assicurazioni
         nassicurazioni.setText("0");
+        
+        nassicurazioni.addMouseMotionListener(new MouseAdapter() {
+
+            @Override
+            public void mouseMoved(MouseEvent e) {
+
+                home.notifiche.setText("Inserire il numero di assicurazioni desiderate");
+            }
+
+        });
+        
         nassicurazioni.addKeyListener(new KeyAdapter() {
             public void keyTyped(KeyEvent e) {
                 char caracter = e.getKeyChar();
@@ -281,11 +332,10 @@ public class PasseggeriPanel extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 int a = Integer.parseInt(nassicurazioni.getText());
                 a--;
-                if(a<0){
+                if (a < 0) {
                     assicurazionimeno.setEnabled(false);
-                    a=0;
-                }
-                else{
+                    a = 0;
+                } else {
                     nassicurazioni.setText("" + a);
                     home.notifiche.setText("Rimosso un'assicurazione.");
                 }
@@ -297,6 +347,17 @@ public class PasseggeriPanel extends JPanel {
         assicurazioni.add(assicurazionipiu);
         ImageIcon immagine2 = new ImageIcon("immagini/Air_insurance.png");
         assicurazionibutton.setIcon(immagine2);
+        
+         assicurazionibutton.addMouseMotionListener(new MouseAdapter() {
+
+            @Override
+            public void mouseMoved(MouseEvent e) {
+
+                home.notifiche.setText("Specificare il tipo di assicurazione desiderata.");
+            }
+
+        });
+        
         insurances = new ArrayList();
         home.setInsurances(insurances);
         assicurazionibutton.addActionListener(NListener(nassicurazioni, "Le nostre assicurazioni: ", "Inserisci le assicurazioni per il volo.", 'I'));
@@ -307,7 +368,7 @@ public class PasseggeriPanel extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 int a = Integer.parseInt(nassicurazioni.getText());
                 a++;
-                if(a>=0){
+                if (a >= 0) {
                     nassicurazioni.setText("" + a);
                     home.notifiche.setText("Aggiunta un'assicurazione.");
                     assicurazionimeno.setEnabled(true);
@@ -359,6 +420,17 @@ public class PasseggeriPanel extends JPanel {
 
         //aggiunta tasto per numero pasti
         npasti.setText("0");
+        
+         npasti.addMouseMotionListener(new MouseAdapter() {
+
+            @Override
+            public void mouseMoved(MouseEvent e) {
+
+                home.notifiche.setText("Inserire il numero di pasti desiderati");
+            }
+
+        });
+        
         npasti.addKeyListener(new KeyAdapter() {
             public void keyTyped(KeyEvent e) {
                 char caracter = e.getKeyChar();
@@ -375,14 +447,13 @@ public class PasseggeriPanel extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 int a = Integer.parseInt(npasti.getText());
                 a--;
-                if(a<0){
+                if (a < 0) {
                     pastimeno.setEnabled(false);
-                    a=0;
-                }
-                else{
+                    a = 0;
+                } else {
                     npasti.setText("" + a);
                     home.notifiche.setText("Rimosso un pasto");
-                }   
+                }
             }
 
         });
@@ -391,6 +462,17 @@ public class PasseggeriPanel extends JPanel {
         pasti.add(pastipiu);
         ImageIcon immagine1 = new ImageIcon("immagini/Meal.png");
         pastibutton.setIcon(immagine1);
+        
+         pastibutton.addMouseMotionListener(new MouseAdapter() {
+
+            @Override
+            public void mouseMoved(MouseEvent e) {
+
+                home.notifiche.setText("Specificare il tipo di pasto desiderato.");
+            }
+
+        });
+        
         meals = new ArrayList();
         home.setMeals(meals);
         pastibutton.addActionListener(NListener(npasti, "I nostri menù:", "Inserisci i pasti per il volo", 'M'));
@@ -401,7 +483,7 @@ public class PasseggeriPanel extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 int a = Integer.parseInt(npasti.getText());
                 a++;
-                if(a>=0){
+                if (a >= 0) {
                     npasti.setText("" + a);
                     home.notifiche.setText("Aggiunto un pasto");
                     pastimeno.setEnabled(true);
@@ -435,21 +517,25 @@ public class PasseggeriPanel extends JPanel {
         ActionListener evento = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                
+
                 if (cognome0.getText().isEmpty() || nome0.getText().isEmpty() || id0.getText().isEmpty() || cognome0.getText().equals("Inserisci Cognome") || nome0.getText().equals("Inserisci Nome") || id0.getText().equals("Inserisci id")) {
                     JOptionPane.showConfirmDialog(home, "Riempire tutti i campi" + " per poter proseguire.", "Errore", JOptionPane.OK_CANCEL_OPTION);
                 } else {
-                    try {
-                        home.addPassenger(id0.getText(), nome0.getText(), cognome0.getText(), (int) posto0.getSelectedItem(), cbclasse.getSelectedIndex() + 1, home.getCodeflight(), home.getPriceflight());
+                    if ((Integer.parseInt(npasti.getText()) != home.getMeals().size()) || (Integer.parseInt(nbagagli.getText()) != home.getLuggages().size()) || (Integer.parseInt(nassicurazioni.getText()) != home.getInsurances().size())) {
+                        JOptionPane.showConfirmDialog(home, "Specificare il tipo di aggiunta" + " per poter proseguire.", "Errore", JOptionPane.OK_CANCEL_OPTION);
+                    } else {
+                        try {
+                            home.addPassenger(id0.getText(), nome0.getText(), cognome0.getText(), (int) posto0.getSelectedItem(), cbclasse.getSelectedIndex() + 1, home.getCodeflight(), home.getPriceflight());
 
-                        if (home.PassengerMeno()) {
-                            home.refreshGUI(new PasseggeriPanel(home, controller));
-                        } else {
-                            home.notifiche.setText("Riassunto volo:");
-                            home.refreshGUI(new RiassuntoPanel(home, controller));
+                            if (home.PassengerMeno()) {
+                                home.refreshGUI(new PasseggeriPanel(home, controller));
+                            } else {
+                                home.notifiche.setText("Riassunto volo:");
+                                home.refreshGUI(new RiassuntoPanel(home, controller));
+                            }
+                        } catch (IOException ex) {
+                            Logger.getLogger(PasseggeriPanel.class.getName()).log(Level.SEVERE, null, ex);
                         }
-                    } catch (IOException ex) {
-                        Logger.getLogger(PasseggeriPanel.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
             }
@@ -509,8 +595,5 @@ public class PasseggeriPanel extends JPanel {
     private ArrayList<Seat> getSeatFlight() {
         return home.getFlighttmp().getSeats();
     }
-
-  
-   
 
 }
