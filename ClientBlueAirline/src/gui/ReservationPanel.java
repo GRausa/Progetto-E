@@ -61,9 +61,9 @@ public class ReservationPanel extends JPanel {
     }
 
     private void initComponents() throws IOException {
-         final String[] city=  controller.getAllCitys();
-                 
-        andata.setFont(new java.awt.Font("Helvetica", 0, 14)); 
+        final String[] city = controller.getAllCitys();
+
+        andata.setFont(new java.awt.Font("Helvetica", 0, 14));
         andata.setEditable(true);
         andata.setSelectedItem("");
         andata.getEditor().getEditorComponent().addKeyListener(new KeyAdapter() {
@@ -161,7 +161,7 @@ public class ReservationPanel extends JPanel {
             }
         });
         npasseggeri.setFont(new Font("Helvetica", Font.BOLD, 15));
-        home.noMinorZero(npasseggeri, passeggerimeno,passeggeripiu);
+        home.noMinorZero(npasseggeri, passeggerimeno, passeggeripiu);
 
         passeggeri.add(passeggerimeno);
 
@@ -169,14 +169,13 @@ public class ReservationPanel extends JPanel {
 
         passeggerimeno.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {                
+            public void actionPerformed(ActionEvent e) {
                 int a = Integer.parseInt(npasseggeri.getText());
                 a--;
-                if(a<0){
+                if (a < 0) {
                     passeggerimeno.setEnabled(false);
-                    a=0;
-                }
-                else{
+                    a = 0;
+                } else {
                     npasseggeri.setText("" + a);
                     home.notifiche.setText("Rimosso un passeggero");
                 }
@@ -194,28 +193,27 @@ public class ReservationPanel extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 int a = Integer.parseInt(npasseggeri.getText());
                 a++;
-                if(a>=0){
+                if (a >= 0) {
                     npasseggeri.setText("" + a);
                     home.notifiche.setText("Aggiunto un passeggero");
                     passeggerimeno.setEnabled(true);
                 }
-                
+
             }
 
         });
         passeggeri.setOpaque(false);
 
-        
         reservationPanel.add(titnpasseggeri);
         titnpasseggeri.setFont(new Font("Helvetica", Font.BOLD, 25));
         reservationPanel.add(passeggeri);
-        
+
         add(reservationPanel, BorderLayout.CENTER);
-        
+
         ImageIcon immagine = new ImageIcon("immagini/Logo.png");
         logo.setIcon(this.scalaImmagine(immagine, 400, 350));
         logo.setEnabled(true);
-                
+
         panelsud.add(logo);
         panelsud.add(ricerca);
 
@@ -248,25 +246,22 @@ public class ReservationPanel extends JPanel {
                     calendar.setTime(data.getDate());
                     if (Integer.parseInt(npasseggeri.getText()) > 0) {
 
-                        try {
-                            home.notifiche.setText("Ricerco informazioni sulla rotta.. ");
-                            Calendar c = new GregorianCalendar();
-                            c.setTime(data.getDate());
-                            Flight[] a = controller.searchFlights(new Flight(new Route(andata.getSelectedItem().toString(), ritorno.getSelectedItem().toString()), c));
-                            //System.out.println(a);
-                            if (a.length == 0) {
-                                JOptionPane.showConfirmDialog(home, "Non risulta nessuna rotta nei voli" + "della compagnia aerea", "Errore", JOptionPane.OK_CANCEL_OPTION);
-                            } else {
-                                home.setNpasseggeri(Integer.parseInt(npasseggeri.getText()));
-                                ArrayList<Flight> ar = new ArrayList();
-                                for (int i = 0; i < a.length; i++) {
-                                    ar.add(a[i]);
-                                }
-                                home.refreshGUI(new FlightsPanel(controller, home, ar));
+                        home.notifiche.setText("Ricerco informazioni sulla rotta.. ");
+                        Calendar c = new GregorianCalendar();
+                        c.setTime(data.getDate());
+                        Flight[] a = controller.searchFlights(new Flight(new Route(andata.getSelectedItem().toString(), ritorno.getSelectedItem().toString()), c));
+                        //System.out.println(a);
+                        if (a.length == 0) {
+                            JOptionPane.showConfirmDialog(home, "Non risulta nessuna rotta nei voli" + "della compagnia aerea", "Errore", JOptionPane.OK_CANCEL_OPTION);
+                        } else {
+                            home.setNpasseggeri(Integer.parseInt(npasseggeri.getText()));
+                            ArrayList<Flight> ar = new ArrayList();
+                            for (int i = 0; i < a.length; i++) {
+                                ar.add(a[i]);
                             }
-                        } catch (IOException ex) {
-                            Logger.getLogger(ReservationPanel.class.getName()).log(Level.SEVERE, null, ex);
+                            home.refreshGUI(new FlightsPanel(controller, home, ar));
                         }
+
                     } else {
                         JOptionPane.showConfirmDialog(home, "Selezionare almeno un passeggero" + " per poter proseguire", "Errore", JOptionPane.OK_CANCEL_OPTION);
                         home.notifiche.setText("Attenzione: aggiungere almeno un passeggero.");

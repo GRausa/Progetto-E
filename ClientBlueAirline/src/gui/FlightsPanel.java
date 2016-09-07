@@ -143,15 +143,11 @@ public class FlightsPanel extends JPanel {
                 home.notifiche.setText("Seleziono il volo da prenotare..");
                 MyTableModel m = (MyTableModel) voli.getModel();
                 if (m.getRiga() != null) {
-                    try {
-                        Flight f = controller.searchFlight(new Flight((String) voli.getValueAt(m.getRiga(), 0)));
-                        home.setFlighttmp(f);
-                        home.setCodeflight((String) voli.getValueAt(m.getRiga(), 0));
-                        home.setPriceflight((double) voli.getValueAt(m.getRiga(), 5));
-                        home.refreshGUI(new CustomerPanel(home, controller));
-                    } catch (IOException ex) {
-                        Logger.getLogger(FlightsPanel.class.getName()).log(Level.SEVERE, null, ex);
-                    }
+                    Flight f = controller.searchFlights(new Flight((String) voli.getValueAt(m.getRiga(), 0)))[0];
+                    home.setFlighttmp(f);
+                    home.setCodeflight((String) voli.getValueAt(m.getRiga(), 0));
+                    home.setPriceflight((double) voli.getValueAt(m.getRiga(), 5));
+                    home.refreshGUI(new CustomerPanel(home, controller));
                 } else {
                     JOptionPane.showConfirmDialog(home, "Selezionare almeno un volo\n" + "per poter proseguire.\n", "Errore", JOptionPane.OK_CANCEL_OPTION);
                 }

@@ -87,19 +87,25 @@ public class FacadeControllerClient implements InterfaceClient {
     }
 
     @Override
-    public Flight[] searchFlights(Flight flight) throws IOException {
-        out.println("SEARCHFLIGHTS " + gson.toJson(flight));
-        Flight[] flights = gson.fromJson(in.readLine(), Flight[].class);
-        return flights;
+    public Flight[] searchFlights(Flight flight){
+        try {
+            out.println("SEARCHFLIGHTS " + gson.toJson(flight));
+            Flight[] flights = gson.fromJson(in.readLine(), Flight[].class);
+            return flights;
+        } catch (IOException ex) {
+            Logger.getLogger(FacadeControllerClient.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+        
     }
-
+/*
     @Override
     public Flight searchFlight(Flight flight) throws IOException {
         out.println("SEARCHFLIGHTCODE " + gson.toJson(flight));
         Flight f = gson.fromJson(in.readLine(), Flight.class);
         return f;
     }
-
+*/
     @Override
     public Reservation makeReservation(Reservation res) throws IOException {
         out.println("RESERVATION " + gson.toJson(res));

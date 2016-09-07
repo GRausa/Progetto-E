@@ -49,7 +49,6 @@ public class RiassuntoPanel extends JPanel {
     JLabel prezzototale = new JLabel();
 
     JPanel info = new JPanel();
-    
 
     JLabel classe = new JLabel();
 
@@ -57,7 +56,7 @@ public class RiassuntoPanel extends JPanel {
     JLabel numPosto = new JLabel();
     JComboBox passeggeri = new JComboBox();
     JTextArea riassunto = new JTextArea(30, 10);
-    JScrollPane riassuntoS=new JScrollPane(riassunto);
+    JScrollPane riassuntoS = new JScrollPane(riassunto);
 
     JButton conferma = new JButton("Conferma");
 
@@ -67,13 +66,11 @@ public class RiassuntoPanel extends JPanel {
         home.getReservation().setTickets(passengers);
         reservation = home.getReservation();
         this.controller = controller;
-        flight = controller.searchFlight(new Flight(home.getCodeflight()));
+        flight = controller.searchFlights(new Flight(home.getCodeflight()))[0];
         this.setVisible(true);
         setOpaque(false);
         addComponents(this);
-        
-        
-        
+
         this.makeComponentsTrasparent();
         passeggeri.setForeground(Color.black);
 
@@ -88,32 +85,30 @@ public class RiassuntoPanel extends JPanel {
         pane.add(info, BorderLayout.CENTER);
 
         pane.add(conferma, BorderLayout.SOUTH);
-        
+
         //LISTENER CONFERMA!
         conferma.addActionListener(new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    reservation = controller.makeReservation(home.getReservation()); 
-                    flight= controller.searchFlight(flight);
-                    for(Ticket tick:reservation.getPassengers())
-                    {
-                       if( tick.getNseat()==-1)
-                        {   
+                    reservation = controller.makeReservation(home.getReservation());
+                    flight = controller.searchFlights(flight)[0];
+                    for (Ticket tick : reservation.getPassengers()) {
+                        if (tick.getNseat() == -1) {
                             String[] options = {"esci."};
-                            FinalControlFrame finale=new FinalControlFrame(home,controller,reservation,tick,flight);
+                            FinalControlFrame finale = new FinalControlFrame(home, controller, reservation, tick, flight);
                             JOptionPane.showOptionDialog(home, finale, "BENVENUTI IN THETABLUEAIRLINE", JOptionPane.NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
                         }
                     }
-                    reservation=controller.getReservation(reservation);
+                    reservation = controller.getReservation(reservation);
                     String s = "Codice prenotazione:\n " + reservation.getCode();
-                    for(Ticket t : reservation.getPassengers())
-                    {
-                        s+=t.getName()+ " " + t.getSurname()+" "+ t.getCode()+"\n";
+                    for (Ticket t : reservation.getPassengers()) {
+                        s += t.getName() + " " + t.getSurname() + " " + t.getCode() + "\n";
                     }
-                    JOptionPane.showMessageDialog(home, "Congratulazioni!\n" + "Prenotazione Effettuata\n"+s+"\nLe è stata inviata un'email di recupero.");
-                    controller.sendMail(reservation.getEmail(), "ACQUISTO BIGLIETTO", reservation.printReservation("&%")+"&%"+reservation.printTickets("&%"));
+                    controller.sendMail(reservation.getEmail(), "ACQUISTO BIGLIETTO", reservation.printReservation("&%") + "&%" + reservation.printTickets("&%"));
+
+                    JOptionPane.showMessageDialog(home, "Congratulazioni!\n" + "Prenotazione Effettuata\n" + s + "\nLe è stata inviata un'email di recupero.");
                     home.returnHome();
                 } catch (IOException ex) {
                     Logger.getLogger(RiassuntoPanel.class.getName()).log(Level.SEVERE, null, ex);
@@ -142,10 +137,10 @@ public class RiassuntoPanel extends JPanel {
         String d2 = format2.format(flight.getDateDeparture().getTime());
         orario.setText(d2);
         infoGenerali.add(orario);
-        prezzototale.setText("Prezzo totale: "+reservation.getTotalPrice()+ "€");
+        prezzototale.setText("Prezzo totale: " + reservation.getTotalPrice() + "€");
         infoGenerali.add(prezzototale);
 
-         /*infoGenerali.setLayout(new GridBagLayout());
+        /*infoGenerali.setLayout(new GridBagLayout());
         infoGenerali.setOpaque(false);
         GridBagConstraints c = new GridBagConstraints();
         c.fill = GridBagConstraints.HORIZONTAL;
@@ -187,7 +182,6 @@ public class RiassuntoPanel extends JPanel {
         c.gridx = 0;
         c.gridy = 2;
         c.gridwidth = 2;*/
-        
     }
 
     private void initInfoPasseggero() throws IOException {
@@ -198,12 +192,12 @@ public class RiassuntoPanel extends JPanel {
         for (int i = 0; i < passengers.size(); i++) {
             passeggeri.addItem(passengers.get(i).getName() + " " + passengers.get(i).getSurname());
         }
-      passeggeri.addActionListener(PassengerListener());
-        
+        passeggeri.addActionListener(PassengerListener());
+
         riassunto.setText("");
         riassunto.append(passengers.get(0).printTicketWithoutCode("\n"));
         riassunto.append("\n\nATTENZIONE: il codice biglietto sarà valido solo al momento del check-in!");
-        info.add(riassunto,BorderLayout.CENTER);
+        info.add(riassunto, BorderLayout.CENTER);
         riassunto.setEditable(false);
     }
 
@@ -230,6 +224,3 @@ public class RiassuntoPanel extends JPanel {
         return evento;
     }
 }
-      
-
-

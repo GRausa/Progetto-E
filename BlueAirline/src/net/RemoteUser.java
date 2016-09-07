@@ -31,7 +31,7 @@ import static jdk.nashorn.internal.objects.NativeMath.log;
 
 /**
  * The class RemoteUser is used for creating a new connection with the socket.
- * 
+ *
  * @author riccardo
  */
 class RemoteUser extends Thread {
@@ -46,18 +46,17 @@ class RemoteUser extends Thread {
     private boolean stop;
     private Map<String, Command> commands;
 
-   
     static synchronized private int generateProgressive() {
         return counter++;
     }
 
-     /**
-       * Constructs a new remote user for the connection with the socket.
-       * 
-       * @param company
-       * @param socket Socket used for the connection.
-       *
-       */
+    /**
+     * Constructs a new remote user for the connection with the socket.
+     *
+     * @param company
+     * @param socket Socket used for the connection.
+     *
+     */
     RemoteUser(InterfaceServer company, Socket socket) throws IOException {
         this.company = company;
         this.socket = socket;
@@ -69,29 +68,29 @@ class RemoteUser extends Thread {
     }
 
     /**
-    * Send an errore message.
-    * 
-    * @param message Message to be sended.
-    */
+     * Send an errore message.
+     *
+     * @param message Message to be sended.
+     */
     private void error(String message) {
         log(Level.WARNING, "Sent error: " + message);
         out.println("ERR " + message);
     }
 
     /**
-    * Create a new table that maps the commands for performing various action.
-    * 
-    */
+     * Create a new table that maps the commands for performing various action.
+     *
+     */
     private void registerCommands() {
         commands = new HashMap<>();
-        
+
         commands.put("HI!", new Command() {
             @Override
             public void execute(String args) {
                 out.println("HI!");
             }
         });
-        
+
         commands.put("BYE", new Command() {
             @Override
             public void execute(String args) {
@@ -109,14 +108,12 @@ class RemoteUser extends Thread {
 
         }
         );
-        
+
         commands.put("CALENDAR", new Command() {
             @Override
             public void execute(String args) {
                 try {
-                    ArrayList<Route> rottes = null;
                     Route r = gson.fromJson(args, Route.class);
-                    rottes = company.searchRoutes();
                     ArrayList<Flight> flights = company.searchFlights(r);
                     out.println(gson.toJson(flights));
                 } catch (SQLException ex) {
@@ -200,18 +197,27 @@ class RemoteUser extends Thread {
 
         }
         );
-
+        //MODIFICA 7set19.13
         commands.put("SEARCHFLIGHTS", new Command() {
 
             @Override
             public void execute(String args) {
                 try {
                     Flight r = gson.fromJson(args, Flight.class);
-                    SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
-                    String formatted = format1.format(r.getDateDeparture().getTime());
                     ArrayList<Flight> flights = new ArrayList<>();
-                    flights = company.searchFlights(r.getRoute().getDepartureCity(), r.getRoute().getDestinationCity(), formatted);
-                    out.println(gson.toJson(flights));
+
+                    if (r.getCode() == null) {
+                        SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
+                        String formatted = format1.format(r.getDateDeparture().getTime());
+                        flights = company.searchFlights(r.getRoute().getDepartureCity(), r.getRoute().getDestinationCity(), formatted);
+                        out.println(gson.toJson(flights));
+                    } else {
+                        //Flight flight = gson.fromJson(args, Flight.class);
+                        //flight = company.searchFlight(flight.getCode());
+                        flights.add(company.searchFlight(r.getCode()));
+
+                        out.println(gson.toJson(flights));
+                    }
                 } catch (SQLException ex) {
                     Logger.getLogger(RemoteUser.class.getName()).log(Level.SEVERE, null, ex);
                     out.println(gson.toJson(null));
@@ -219,7 +225,8 @@ class RemoteUser extends Thread {
             }
         }
         );
-
+        //PICCOLA MODIFICA7set19
+        /*
         commands.put("SEARCHFLIGHTCODE", new Command() {
             @Override
             public void execute(String args) {
@@ -233,7 +240,7 @@ class RemoteUser extends Thread {
                 }
             }
         }
-        );
+        );*/
 
         commands.put("MEALS", new Command() {
             @Override
@@ -322,7 +329,7 @@ class RemoteUser extends Thread {
 
             }
         });
-        
+
         commands.put("INSERTFLIGHT", new Command() {
             @Override
             public void execute(String args) {
@@ -337,7 +344,7 @@ class RemoteUser extends Thread {
 
             }
         });
-        
+
         commands.put("EDITFLIGHT", new Command() {
             @Override
             public void execute(String args) {
@@ -352,7 +359,7 @@ class RemoteUser extends Thread {
 
             }
         });
-        
+
         commands.put("LOGIN", new Command() {
             @Override
             public void execute(String args) {
@@ -370,23 +377,24 @@ class RemoteUser extends Thread {
         commands.put("SENDMAIL", new Command() {
             @Override
             public void execute(String args) {
-                String MailDetail=args;
-                MailDetail=MailDetail.replaceAll("&%","\n");
-                String[] splittedMailDetail=MailDetail.split("\t");
+                String MailDetail = args;
+                MailDetail = MailDetail.replaceAll("&%", "\n");
+                String[] splittedMailDetail = MailDetail.split("\t");
                 System.out.println(args);
-                
-                Email.sendMail(new Email(splittedMailDetail[0],splittedMailDetail[1],splittedMailDetail[2]));
+
+                Email.sendMail(new Email(splittedMailDetail[0], splittedMailDetail[1], splittedMailDetail[2]));
                 out.println("true");
             }
         });
-        
+
     }
+
     /**
-    * Perform a specified command.
-    * 
-    * @param command Command to be performed.
-    * @param args 
-    */
+     * Perform a specified command.
+     *
+     * @param command Command to be performed.
+     * @param args
+     */
     private void executeCommand(String command, String args) {
         Command cmd = commands.get(command);
         if (cmd == null) {

@@ -128,9 +128,9 @@ public interface InterfaceClient{
     
     Reservation makeReservation(Reservation res) throws IOException;
     
-    Flight searchFlight(Flight flight) throws IOException;
+    //Flight searchFlight(Flight flight) throws IOException;
     
-    Flight[] searchFlights(Flight flight) throws IOException;
+    Flight[] searchFlights(Flight flight);
     
     Route[] searchRoutes(Route rotta) throws IOException;
     /**

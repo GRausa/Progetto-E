@@ -102,7 +102,7 @@ public class MethodsControlAdministrator {
      */
     public static void editFlight(InterfaceClient client) throws IOException{
         ArrayList<String> input = MethodsControlAdministrator.scannerInput(new ArrayList<>(asList("Codice volo:")));
-        Flight flight = client.searchFlight(new Flight(input.get(0)));
+        Flight flight = client.searchFlights(new Flight(input.get(0)))[0];
         if(flight!=null){
             input = MethodsControlAdministrator.scannerInput(new ArrayList<>(asList("AREA MODIFICA\nData partenza YYYY-MM-GG :", "Ora partenza HH:MM :")));
             Calendar dateDeparture = MethodsControlAdministrator.returnCalendar(input.get(0), input.get(1));
@@ -142,7 +142,7 @@ public class MethodsControlAdministrator {
             b = client.checkLogin(userpass);
             if(b==false){
                 input = MethodsControlAdministrator.scannerInput(new ArrayList<>(asList("Errore inserimento. Riprovare: Y/N")));
-                if(!input.get(0).equals("Y")){
+                if(!input.get(0).equalsIgnoreCase("Y")){
                     return false;
                 }            
             }

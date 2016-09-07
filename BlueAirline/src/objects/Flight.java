@@ -18,7 +18,7 @@ public class Flight {
      * Supplement of the first class.
      */
     public static double COSTOPRIMACLASSE=30;
-    private String code;
+    private String code=null;
     private Route r;
     private Calendar dateDeparture;
     private Calendar dateDestination;

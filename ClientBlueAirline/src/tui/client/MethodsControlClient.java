@@ -25,14 +25,15 @@ import objects.Ticket;
 
 /**
  * Provides the customers' methods for the textual user interface.
- * 
+ *
  * @author Giovanni
  */
 public class MethodsControlClient {
+
     /**
-     * 
+     *
      * @param n
-     * @return 
+     * @return
      */
     public static ArrayList<String> scannerInput(ArrayList<String> n) {
         Scanner input = new Scanner(System.in);
@@ -44,10 +45,11 @@ public class MethodsControlClient {
         }
         return ritorno;
     }
+
     /**
      * Prints the menu.
-     * 
-     * @return 
+     *
+     * @return
      */
     public static String toStringMenu() {
         Scanner input = new Scanner(System.in);
@@ -69,23 +71,24 @@ public class MethodsControlClient {
         String s1 = input.nextLine().toUpperCase();
         return s1;
     }
-    
+
     /**
      * Prints a message indicating the server's status.
-     * 
+     *
      * @param client Client.
      */
     public static void hi(InterfaceClient client) {
-        if(client.hello()){
+        if (client.hello()) {
             System.out.println("IL SERVER E' ATTIVO");
-        }
-        else{
-            System.out.println("IL SERVER NON E' ATTIVO");           
+        } else {
+            System.out.println("IL SERVER NON E' ATTIVO");
         }
     }
+
     /**
-     * Search a flight in the database passing departure's date, departure's city and destination's city.
-     * 
+     * Search a flight in the database passing departure's date, departure's
+     * city and destination's city.
+     *
      * @param client Client.
      */
     public static void searchFlight(InterfaceClient client) {
@@ -101,17 +104,15 @@ public class MethodsControlClient {
             Flight tmpflight = new Flight(tmproute, date);
             Flight[] volit = null;
             {
-                try {
-                    volit = client.searchFlights(tmpflight);
-                    if (volit.length == 0) {
-                        System.out.println("Nessun volo trovato.");
-                    }
-                    for (Flight v : volit) {
-                        System.out.println(v);
-                    }
-                } catch (IOException ex) {
-                    Logger.getLogger(ControllerClientTxt.class.getName()).log(Level.SEVERE, null, ex);
+
+                volit = client.searchFlights(tmpflight);
+                if (volit.length == 0) {
+                    System.out.println("Nessun volo trovato.");
                 }
+                for (Flight v : volit) {
+                    System.out.println(v);
+                }
+
             }
             if (volit.length == 1) {
                 System.out.println("Mappa posti: :");
@@ -121,9 +122,11 @@ public class MethodsControlClient {
             System.out.println("Hai inserito la data sbagliata");
         }
     }
+
     /**
-     * Search a route in the database passing the departure's and destination's cities.
-     * 
+     * Search a route in the database passing the departure's and destination's
+     * cities.
+     *
      * @param client Client.
      */
     public static void searchRoute(InterfaceClient client) {
@@ -149,7 +152,7 @@ public class MethodsControlClient {
     /*METODI PER PRENOTAZIONE*/
     /**
      * Searches a flight and prints the number of free seats.
-     * 
+     *
      * @param client Client
      * @param cod Code of the flight.
      * @return flight.
@@ -157,17 +160,13 @@ public class MethodsControlClient {
     private static Flight searchFlight(InterfaceClient client, String cod) {
         Flight flight = new Flight(cod);
         {
-            try {
-                flight = client.searchFlight(flight);
-                Date date = new Date();
-                Calendar data = Calendar.getInstance();
-                data.setTime(date);
-                if (flight == null || flight.getDateDeparture().before(data)) {
-                    System.out.println("Volo non trovato o risulta antecedente alla data odierna");
-                    return null;
-                }
-            } catch (IOException ex) {
-                Logger.getLogger(ControllerClientTxt.class.getName()).log(Level.SEVERE, null, ex);
+            flight = client.searchFlights(flight)[0];
+            Date date = new Date();
+            Calendar data = Calendar.getInstance();
+            data.setTime(date);
+            if (flight == null || flight.getDateDeparture().before(data)) {
+                System.out.println("Volo non trovato o risulta antecedente alla data odierna");
+                return null;
             }
         }
         System.out.println(flight.toString());
@@ -175,10 +174,10 @@ public class MethodsControlClient {
         System.out.println(flight.printAllSeats());
         return flight;
     }
-    
+
     /**
      * Prints a written description of the supplements.
-     * 
+     *
      * @param meals List of meals.
      * @param insurances List of insurances.
      * @param holdLuggages List of hold lugagges.
@@ -197,12 +196,13 @@ public class MethodsControlClient {
             System.out.println(in.toString());
         }
     }
+
     /**
      * Adds on or more meals to a ticket.
-     * 
+     *
      * @param p Ticket.
      * @param meals List of meals.
-     * @param v 
+     * @param v
      */
     private static void addMealTicket(Ticket p, Meal[] meals, String v) {
         for (Meal m : meals) {
@@ -212,12 +212,13 @@ public class MethodsControlClient {
             }
         }
     }
+
     /**
      * Adds on or more hold luggages to a ticket.
-     * 
+     *
      * @param p Ticket.
      * @param holdLuggages List of hold luggages.
-     * @param v 
+     * @param v
      */
     private static void addHoldLuggageTicket(Ticket p, HoldLuggage[] holdLuggages, String v) {
         for (HoldLuggage hl : holdLuggages) {
@@ -227,12 +228,13 @@ public class MethodsControlClient {
             }
         }
     }
+
     /**
      * Adds on or more insurances to a ticket.
-     * 
+     *
      * @param p Ticket.
      * @param holdLuggages List of insurances.
-     * @param v 
+     * @param v
      */
     private static void addInsuranceTicket(Ticket p, Insurance[] insurances, String v) {
         for (Insurance in : insurances) {
@@ -242,9 +244,10 @@ public class MethodsControlClient {
             }
         }
     }
+
     /**
      * Adds supplements to a ticket.
-     * 
+     *
      * @param vetsplit
      * @param seat Seat's number.
      * @param classe Seat's class.
@@ -275,9 +278,10 @@ public class MethodsControlClient {
         }
         return p;
     }
+
     /**
      * Adds tickets to a list.
-     * 
+     *
      * @param num Number of passengers.
      * @param flight Flight.
      * @param meals Meals.
@@ -312,9 +316,10 @@ public class MethodsControlClient {
         }
         return passengers;
     }
+
     /**
      * Creates a reservation.
-     * 
+     *
      * @param client Client.
      * @param cod Reservation's code.
      * @param flight Flight where the customer wants a reservation.
@@ -352,9 +357,10 @@ public class MethodsControlClient {
         res = client.makeReservation(res);
         return res;
     }
+
     /**
      * Prints a recap of a reservation.
-     * 
+     *
      * @param client Client.
      * @param res Reservation.
      * @param flight Flight.
@@ -362,7 +368,7 @@ public class MethodsControlClient {
     private static void checkReservation(InterfaceClient client, Reservation res, Flight flight) {
         //Scanner input = new Scanner(System.in);
         try {
-            flight = client.searchFlight(flight); //aggiorno il flight dopo la prenotazione
+            flight = client.searchFlights(flight)[0]; //aggiorno il flight dopo la prenotazione
             for (Ticket tp : res.getPassengers()) { //controllo assegnamento posti
                 if (tp.getNseat() == -1) {
                     System.out.println("Passeggero: " + tp.getName() + " " + tp.getSurname() + " (" + tp.getID() + ") non inserito, il posto è stato occupato.\nPosti disponibili:");
@@ -399,7 +405,7 @@ public class MethodsControlClient {
 
     /**
      * Makes a reservation.
-     * 
+     *
      * @param client Client
      */
     public static void makeReservation(InterfaceClient client) {
@@ -410,7 +416,7 @@ public class MethodsControlClient {
                 try {
                     Reservation res = MethodsControlClient.makeReservation(client, cod, flight);
                     MethodsControlClient.checkReservation(client, res, flight);
-                    String stamp=res.printReservation("&%")+"&%"+res.printTickets("&%");
+                    String stamp = res.printReservation("&%") + "&%" + res.printTickets("&%");
                     client.sendMail(res.getEmail(), "ACQUISTO BIGLIETTO", stamp);
                 } catch (IOException ex) {
                     Logger.getLogger(MethodsControlClient.class.getName()).log(Level.SEVERE, null, ex);
@@ -423,8 +429,8 @@ public class MethodsControlClient {
     }
 
     /**
-     * Provides to edit the ticket and add new supplements. 
-     * 
+     * Provides to edit the ticket and add new supplements.
+     *
      * @param client Client.
      * @param tp Ticket.
      * @param flight Flight.
@@ -465,8 +471,9 @@ public class MethodsControlClient {
             }
         } while (!c);
     }
+
     /**
-     * 
+     *
      * @param client Client.
      * @param tp Ticket.
      */
@@ -494,10 +501,11 @@ public class MethodsControlClient {
             Logger.getLogger(MethodsControlClient.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
     /**
      * Edits a ticket.
-     * 
-     * @param client  Client.
+     *
+     * @param client Client.
      */
     public static void editTicket(InterfaceClient client) {
         Ticket tp = MethodsControlClient.searchTicket(client);
@@ -505,9 +513,10 @@ public class MethodsControlClient {
             MethodsControlClient.editTicket(client, tp);
         }
     }
+
     /**
      * Searches a flight passing two airports.
-     * 
+     *
      * @param client Client.
      */
     public static void searchFlightAirport(InterfaceClient client) {
@@ -529,12 +538,13 @@ public class MethodsControlClient {
             }
         }
     }
+
     /**
-     * 
+     *
      * @param client Client.
      * @param tp Ticket.
      * @return<code>true</code> if the passenger already did the check in;
-     *        <code>false</code> otherwise.
+     * <code>false</code> otherwise.
      * @throws IOException if occurs an I/O exception.
      */
     private static boolean isCheckIn(InterfaceClient client, Ticket tp) throws IOException {
@@ -544,9 +554,10 @@ public class MethodsControlClient {
             return false;
         }
     }
+
     /**
      * Makes the check in of a ticket.
-     * 
+     *
      * @param client Client.
      */
     public static void checkIn(InterfaceClient client) {
@@ -571,9 +582,10 @@ public class MethodsControlClient {
             Logger.getLogger(MethodsControlClient.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
     /**
      * Search a ticket from his code.
-     * 
+     *
      * @param client Client.
      * @return the ticket.
      */
@@ -587,7 +599,7 @@ public class MethodsControlClient {
             try {
                 t = client.getTicket(t);
                 if (t != null) {
-                    f = client.searchFlight(new Flight(t.getCodeFlight()));
+                    f = client.searchFlights(new Flight(t.getCodeFlight()))[0];
                 }
             } catch (IOException ex) {
                 Logger.getLogger(ControllerClientTxt.class.getName()).log(Level.SEVERE, null, ex);
@@ -602,9 +614,11 @@ public class MethodsControlClient {
             return null;
         }
     }
+
     /**
      * Search a reservation from his code and prints it.
-     * @param client 
+     *
+     * @param client
      */
     public static void searchReservation(InterfaceClient client) {
         //Scanner input = new Scanner(System.in);
@@ -616,7 +630,7 @@ public class MethodsControlClient {
             try {
                 r = client.getReservation(r);
                 if (r != null) {
-                    f1 = client.searchFlight(new Flight(r.getCodeFlight()));
+                    f1 = client.searchFlights(new Flight(r.getCodeFlight()))[0];
                 }
             } catch (IOException ex) {
                 Logger.getLogger(ControllerClientTxt.class.getName()).log(Level.SEVERE, null, ex);
@@ -630,9 +644,10 @@ public class MethodsControlClient {
             System.out.println("Prenotazione non trovata.");
         }
     }
+
     /**
      * Print all cities available.
-     * 
+     *
      * @param client Client.
      */
     public static void searchCitys(InterfaceClient client) {
@@ -647,9 +662,10 @@ public class MethodsControlClient {
             Logger.getLogger(ControllerClientTxt.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
     /**
      * Search a flight from his code.
-     * 
+     *
      * @param client Client.
      */
     public static void searchFlightCode(InterfaceClient client) {
