@@ -7,28 +7,26 @@ package test;
 
 import controller.FacadeControllerClient;
 import controller.InterfaceClient;
-import java.io.IOException;
-import objects.Ticket;
+import objects.Route;
 
 /**
  *
  * @author Giovanni
  */
-public class Test6_checkIn {
+//TUTTE ROTTE
+public class Test03_searchAllRoutes {
 
     public static void main(String[] args)  {
         InterfaceClient client = FacadeControllerClient.getIstance();
         client.connect("localhost");
-
-        Ticket tp = client.getTicket(new Ticket("A4D5F621"));
-        System.out.println(tp.printTicketPassenger("\n"));
-
-        System.out.println("Check-in:");
-        if (!tp.isCheckIn()) {
-            client.checkIn(tp);
-            System.out.println(tp.printTicketPassenger("\n"));
+        Route route = new Route("", "");
+        Route[] routes = client.searchRoutes(route);
+        if (routes.length > 0) {
+            for (Route r : routes) {
+                System.out.println(r.printRoute());
+            }
         } else {
-            System.out.println("Il Check-in è già stato effettuato");
+            System.out.println("Non esiste tratta per queste città");
         }
     }
 

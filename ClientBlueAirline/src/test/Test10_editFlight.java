@@ -7,16 +7,14 @@ package test;
 
 import controller.FacadeControllerClient;
 import controller.InterfaceClient;
-import java.io.IOException;
 import java.util.GregorianCalendar;
 import objects.Flight;
-import objects.Route;
 
 /**
  *
  * @author Giovanni
  */
-public class Test8_editFlight {
+public class Test10_editFlight {
 
     public static void main(String[] args) {
         InterfaceClient client = FacadeControllerClient.getIstance();

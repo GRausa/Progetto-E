@@ -7,20 +7,19 @@ package test;
 
 import controller.FacadeControllerClient;
 import controller.InterfaceClient;
-import java.io.IOException;
 import objects.Route;
 
 /**
  *
  * @author Giovanni
  */
-//TUTTE ROTTE
-public class Test2_searchAllRoutes {
+//SINGOLA ROTTA
+public class Test01_searchRoute {
 
-    public static void main(String[] args)  {
+    public static void main(String[] args) {
         InterfaceClient client = FacadeControllerClient.getIstance();
         client.connect("localhost");
-        Route route = new Route("", "");
+        Route route = new Route("New York", "Roma");
         Route[] routes = client.searchRoutes(route);
         if (routes.length > 0) {
             for (Route r : routes) {
