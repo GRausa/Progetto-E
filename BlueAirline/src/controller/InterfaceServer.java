@@ -16,7 +16,7 @@ import objects.Route;
 import objects.Ticket;
 
 /**
- * Provides methods for the Database managment. This methods are those who the customers need.
+ * Provides methods for the Database managment. 
  * 
  * @author Giovanni
  */

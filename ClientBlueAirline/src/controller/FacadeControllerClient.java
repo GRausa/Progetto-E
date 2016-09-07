@@ -25,7 +25,8 @@ import objects.Route;
 import objects.Ticket;
 
 /**
- *
+ * Provides a simplified interface to the methods the customers need.
+ * 
  * @author Giovanni
  */
 public class FacadeControllerClient implements InterfaceClient {
@@ -40,7 +41,10 @@ public class FacadeControllerClient implements InterfaceClient {
     
     private FacadeControllerClient(){        
     }
-    
+    /**
+     * 
+     * @return an istance of facadeControllerClient.
+     */
     public static FacadeControllerClient getIstance(){
         if(istance==null)
             istance = new FacadeControllerClient();
