@@ -14,7 +14,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * La classe Server è utilizzata per la comunicazione fra client-server.
+ * Used for the comunication between client and server.
  * 
  * @author 
  */
@@ -23,22 +23,23 @@ public class Server {
     int port;
     ServerSocket serverSocket = null;
 
-    /**
-     * Inizializza il server.
+     /**
+     * Constructs a new Server.
      *
-     * @param company
-     * @param port
+     * @param company Company.
+     * @param port Network port.
      */
+
     public Server(InterfaceServer company, int port) {
         this.company = company;
         this.port = port;
     }
 
     /**
-     * Avvia il server.
-     *
-     * @throws IOException
-     */
+    * Starts the server.
+    *
+    * @throws IOException if the connection doesn't start.
+    */
     public void startServer() throws IOException {
         serverSocket = new ServerSocket(port);
 
@@ -54,10 +55,10 @@ public class Server {
     }
 
     /**
-     * Start the application.
-     *
-     * @param args not used
-     */
+    * Start the application.
+    *
+    * @param args not used
+    */
     public static void main(String[] args) {
         final int PORT = 8888;
         final InterfaceServer c = FacadeControllerServer.getIstance();
