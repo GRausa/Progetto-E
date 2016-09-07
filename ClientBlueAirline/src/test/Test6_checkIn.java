@@ -19,16 +19,16 @@ public class Test6_checkIn {
         InterfaceClient client = FacadeControllerClient.getIstance();
         client.connect("localhost");
         
-        Ticket tp = client.getTicket(new Ticket("R1JUD721"));
+        Ticket tp = client.getTicket(new Ticket("A4D5F621"));
         System.out.println(tp.printTicketPassenger("\n"));
         
-        System.out.println("CHECK-IN:");
+        System.out.println("Check-in:");
         if(!tp.isCheckIn()){
             client.checkIn(tp);
             System.out.println(tp.printTicketPassenger("\n"));
         }
         else{
-            System.out.println("Il Check-in è stato effettuato");
+            System.out.println("Il Check-in è già stato effettuato");
         }
     }   
     

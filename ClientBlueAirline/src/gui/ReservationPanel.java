@@ -247,8 +247,23 @@ public class ReservationPanel extends JPanel {
                     calendar.setTime(data.getDate());
                     if (Integer.parseInt(npasseggeri.getText()) > 0) {
 
+                        
+                            home.notifiche.setText("Ricerco informazioni sulla rotta.. ");
+                            Calendar c = new GregorianCalendar();
+                            c.setTime(data.getDate());
+                            Flight[] a = controller.searchFlights(new Flight(new Route(andata.getSelectedItem().toString(), ritorno.getSelectedItem().toString()), c));
+                            //System.out.println(a);
+                            if (a.length == 0) {
+                                JOptionPane.showConfirmDialog(home, "Siamo spiacenti. In questa data non risulta" + " nessun volo per la tratta desiderata.", "Errore", JOptionPane.OK_CANCEL_OPTION);
+                            } else {
+                                home.setNpasseggeri(Integer.parseInt(npasseggeri.getText()));
+                                ArrayList<Flight> ar = new ArrayList();
+                                for (int i = 0; i < a.length; i++) {
+                                    ar.add(a[i]);
+                                }
+                                home.refreshGUI(new FlightsPanel(controller, home, ar));
                         home.notifiche.setText("Ricerco informazioni sulla rotta.. ");
-                        Calendar c = new GregorianCalendar();
+                        /*Calendar c = new GregorianCalendar();
                         c.setTime(data.getDate());
                         Flight[] a = controller.searchFlights(new Flight(new Route(andata.getSelectedItem().toString(), ritorno.getSelectedItem().toString()), c));
                         //System.out.println(a);
@@ -261,7 +276,7 @@ public class ReservationPanel extends JPanel {
                                 ar.add(a[i]);
                             }
                             home.refreshGUI(new FlightsPanel(controller, home, ar));
-                        }
+                        }*/}
 
                     } else {
                         JOptionPane.showConfirmDialog(home, "Selezionare almeno un passeggero" + " per poter proseguire", "Errore", JOptionPane.OK_CANCEL_OPTION);
