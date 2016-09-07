@@ -49,7 +49,7 @@ public class NFrame extends JFrame {
         this.setResizable(false);
         initComponents();
         this.setVisible(false);
-       
+
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -117,7 +117,7 @@ public class NFrame extends JFrame {
                     }
                 }
                 break;
-                
+
             case 'I':
 
                 for (JComboBox c1 : combo) {
@@ -126,7 +126,7 @@ public class NFrame extends JFrame {
                     }
                 }
                 break;
-                
+
             case 'H':
 
                 for (JComboBox c1 : combo) {
@@ -145,12 +145,15 @@ public class NFrame extends JFrame {
             @Override
             public void windowOpened(WindowEvent e) {
                 home.setEnabled(false);
-                switch(k){
-                        case 'M':home.getMeals().clear();
+                switch (k) {
+                    case 'M':
+                        home.getMeals().clear();
                         break;
-                        case 'I':home.getInsurances().clear();
+                    case 'I':
+                        home.getInsurances().clear();
                         break;
-                        case 'H':home.getLuggages().clear();
+                    case 'H':
+                        home.getLuggages().clear();
                         break;
                 }
             }
@@ -162,30 +165,30 @@ public class NFrame extends JFrame {
 
                     case 'M':
 
-                for (JComboBox combo1 : combo) {
-                    String[] tmp = combo1.getSelectedItem().toString().split(" ");
-                    //System.out.println(tmp[0]);
-                    home.addMeal(tmp[0]);
-                }
+                        for (JComboBox combo1 : combo) {
+                            String[] tmp = combo1.getSelectedItem().toString().split(" ");
+                            //System.out.println(tmp[0]);
+                            home.addMeal(tmp[0]);
+                        }
 
                         break;
                     case 'I':
 
-                for (JComboBox combo1 : combo) {
-                    String[] tmp = combo1.getSelectedItem().toString().split(" ");
-                    //System.out.println(tmp[0]);
-                    home.addInsurance(tmp[0]);
-                }
+                        for (JComboBox combo1 : combo) {
+                            String[] tmp = combo1.getSelectedItem().toString().split(" ");
+                            //System.out.println(tmp[0]);
+                            home.addInsurance(tmp[0]);
+                        }
 
                         break;
 
                     case 'H':
 
-                for (JComboBox combo1 : combo) {
-                    String[] tmp = combo1.getSelectedItem().toString().split(" ");
-                    //System.out.println(tmp[0]);
-                    home.addHoldLuggage(tmp[0]);
-                }
+                        for (JComboBox combo1 : combo) {
+                            String[] tmp = combo1.getSelectedItem().toString().split(" ");
+                            //System.out.println(tmp[0]);
+                            home.addHoldLuggage(tmp[0]);
+                        }
 
                     default:
                         break;

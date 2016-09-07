@@ -211,14 +211,13 @@ public class PasseggeriPanel extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 int a = Integer.parseInt(nbagagli.getText());
                 a--;
-                if(a<0){
+                if (a < 0) {
                     bagaglimeno.setEnabled(false);
-                    a=0;
-                }
-                else{
+                    a = 0;
+                } else {
                     nbagagli.setText("" + a);
                     home.notifiche.setText("Rimosso un bagaglio da stiva.");
-                }                               
+                }
             }
 
         });
@@ -237,7 +236,7 @@ public class PasseggeriPanel extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 int a = Integer.parseInt(nbagagli.getText());
                 a++;
-                if(a>=0){
+                if (a >= 0) {
                     nbagagli.setText("" + a);
                     home.notifiche.setText("Aggiunto un bagaglio da stiva");
                     bagaglimeno.setEnabled(true);
@@ -281,11 +280,10 @@ public class PasseggeriPanel extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 int a = Integer.parseInt(nassicurazioni.getText());
                 a--;
-                if(a<0){
+                if (a < 0) {
                     assicurazionimeno.setEnabled(false);
-                    a=0;
-                }
-                else{
+                    a = 0;
+                } else {
                     nassicurazioni.setText("" + a);
                     home.notifiche.setText("Rimosso un'assicurazione.");
                 }
@@ -307,7 +305,7 @@ public class PasseggeriPanel extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 int a = Integer.parseInt(nassicurazioni.getText());
                 a++;
-                if(a>=0){
+                if (a >= 0) {
                     nassicurazioni.setText("" + a);
                     home.notifiche.setText("Aggiunta un'assicurazione.");
                     assicurazionimeno.setEnabled(true);
@@ -375,14 +373,13 @@ public class PasseggeriPanel extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 int a = Integer.parseInt(npasti.getText());
                 a--;
-                if(a<0){
+                if (a < 0) {
                     pastimeno.setEnabled(false);
-                    a=0;
-                }
-                else{
+                    a = 0;
+                } else {
                     npasti.setText("" + a);
                     home.notifiche.setText("Rimosso un pasto");
-                }   
+                }
             }
 
         });
@@ -401,7 +398,7 @@ public class PasseggeriPanel extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 int a = Integer.parseInt(npasti.getText());
                 a++;
-                if(a>=0){
+                if (a >= 0) {
                     npasti.setText("" + a);
                     home.notifiche.setText("Aggiunto un pasto");
                     pastimeno.setEnabled(true);
@@ -435,21 +432,25 @@ public class PasseggeriPanel extends JPanel {
         ActionListener evento = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                
+
                 if (cognome0.getText().isEmpty() || nome0.getText().isEmpty() || id0.getText().isEmpty() || cognome0.getText().equals("Inserisci Cognome") || nome0.getText().equals("Inserisci Nome") || id0.getText().equals("Inserisci id")) {
                     JOptionPane.showConfirmDialog(home, "Riempire tutti i campi" + " per poter proseguire.", "Errore", JOptionPane.OK_CANCEL_OPTION);
                 } else {
-                    try {
-                        home.addPassenger(id0.getText(), nome0.getText(), cognome0.getText(), (int) posto0.getSelectedItem(), cbclasse.getSelectedIndex() + 1, home.getCodeflight(), home.getPriceflight());
+                    if ((Integer.parseInt(npasti.getText()) != home.getMeals().size()) || (Integer.parseInt(nbagagli.getText()) != home.getLuggages().size()) || (Integer.parseInt(nassicurazioni.getText()) != home.getInsurances().size())) {
+                        JOptionPane.showConfirmDialog(home, "Specificare il tipo di aggiunta" + " per poter proseguire.", "Errore", JOptionPane.OK_CANCEL_OPTION);
+                    } else {
+                        try {
+                            home.addPassenger(id0.getText(), nome0.getText(), cognome0.getText(), (int) posto0.getSelectedItem(), cbclasse.getSelectedIndex() + 1, home.getCodeflight(), home.getPriceflight());
 
-                        if (home.PassengerMeno()) {
-                            home.refreshGUI(new PasseggeriPanel(home, controller));
-                        } else {
-                            home.notifiche.setText("Riassunto volo:");
-                            home.refreshGUI(new RiassuntoPanel(home, controller));
+                            if (home.PassengerMeno()) {
+                                home.refreshGUI(new PasseggeriPanel(home, controller));
+                            } else {
+                                home.notifiche.setText("Riassunto volo:");
+                                home.refreshGUI(new RiassuntoPanel(home, controller));
+                            }
+                        } catch (IOException ex) {
+                            Logger.getLogger(PasseggeriPanel.class.getName()).log(Level.SEVERE, null, ex);
                         }
-                    } catch (IOException ex) {
-                        Logger.getLogger(PasseggeriPanel.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
             }
@@ -509,8 +510,5 @@ public class PasseggeriPanel extends JPanel {
     private ArrayList<Seat> getSeatFlight() {
         return home.getFlighttmp().getSeats();
     }
-
-  
-   
 
 }

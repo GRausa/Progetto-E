@@ -220,15 +220,14 @@ public class HomeFrame extends JFrame {
         contattaci.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //int dialogResult = JOptionPane.showConfirmDialog(frame, "Proseguendo potresti perdere\n" + "i dati inseriti fino ad ora.\n" + "Vuoi proseguire?", "Avvertenza", JOptionPane.YES_NO_OPTION);
                 String[] options = {"SEND"};
                 JPanel panel = new JPanel();
                 JLabel lbl = new JLabel("Send your opinion here : ");
-                JTextField txt = new JTextField(200);
+                JTextArea txt = new JTextArea(20,30);
                 panel.add(lbl);
                 panel.add(txt);
                 int selectedOption = JOptionPane.showOptionDialog(null, panel, "CONTATTACI", JOptionPane.NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
-
+                 
                 if (selectedOption == 0) {
                     try {
                         controller.sendMail("thetablueairline@gmail.com","OPINIONE ANONIMA",txt.getText());

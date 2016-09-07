@@ -74,17 +74,17 @@ public class FlightsPanel extends JPanel {
         c.gridx = 3;
         c.gridy = 9;
         MyTableModel model = new MyTableModel();
-        int nfl=0;
-        for(Flight f:flights){
-            if(home.getNpasseggeri()<=f.getPrice()){
+        int nfl = 0;
+        for (Flight f : flights) {
+            if (home.getNpasseggeri() <= f.getPrice()) {
                 nfl++;
             }
         }
         Object data[][] = new Object[nfl][8];
         if (!flights.isEmpty()) {
             int i = 0;
-            for (Flight f : flights) {  
-                if(home.getNpasseggeri()<=f.getSeatFree()){
+            for (Flight f : flights) {
+                if (home.getNpasseggeri() <= f.getSeatFree()) {
                     data[i][0] = f.getCode();
                     data[i][1] = f.getRoute().getDeparutreAirport();
                     data[i][2] = f.getRoute().getDestinationAirport();
@@ -95,10 +95,10 @@ public class FlightsPanel extends JPanel {
                     data[i][3] = d;
                     data[i][4] = d2;
                     data[i][5] = f.getPrice();
-                    data[i][6] = f.getSeatFree();     
-                    data[i][7] = false;   
+                    data[i][6] = f.getSeatFree();
+                    data[i][7] = false;
                     i++;
-                }                
+                }
             }
         }
         model.setData(data);
@@ -164,59 +164,46 @@ public class FlightsPanel extends JPanel {
     class MyTableModel extends AbstractTableModel {
 
         private Integer riga;
-        
-        String columnName[] = {"CODICE volo", "Partenza", "Destinazione", "Data", "Orario", "Prezzo (€)", "Posti Disponibili","Seleziona"};
-        Object data[][] = {{"VOLO001", "Milano (Linate)", "New York(JFK)", "dd/MM/yyyy", "hh:mm", 100,50, false},
-        {"VOLO001", "Milano (Linate)", "New York(JFK)", "dd/MM/yyyy", "hh:mm", 300, 50,false}};
+
+        String columnName[] = {"CODICE volo", "Partenza", "Destinazione", "Data", "Orario", "Prezzo (€)", "Posti Disponibili", "Seleziona"};
+        Object data[][] = {{"VOLO001", "Milano (Linate)", "New York(JFK)", "dd/MM/yyyy", "hh:mm", 100, 50, false},
+        {"VOLO001", "Milano (Linate)", "New York(JFK)", "dd/MM/yyyy", "hh:mm", 300, 50, false}};
 
         public void setData(Object[][] data) {
             this.data = data;
         }
 
+        @Override
         public int getColumnCount() {
             return columnName.length;
         }
 
+        @Override
         public int getRowCount() {
             return data.length;
         }
 
+        @Override
         public String getColumnName(int col) {
             return columnName[col];
         }
 
+        @Override
         public Object getValueAt(int row, int col) {
             return data[row][col];
         }
 
-        /*
-         * JTable uses this method to determine the default renderer/
-         * editor for each cell.  If we didn't implement this method,
-         * then the last column would contain text ("true"/"false"),
-         * rather than a check box.
-         */
+        @Override
         public Class getColumnClass(int c) {
             return getValueAt(0, c).getClass();
         }
 
-        /*
-         * Don't need to implement this method unless your table's
-         * editable.
-         */
+        @Override
         public boolean isCellEditable(int row, int col) {
-            //Note that the data/cell address is constant,
-            //no matter where the cell appears onscreen.
-            if (col < 7) {
-                return false;
-            } else {
-                return true;
-            }
+            return col >= 7;
         }
 
-        /*
-         * Don't need to implement this method unless your table's
-         * data can change.
-         */
+        @Override
         public void setValueAt(Object value, int row, int col) {
 
             if (col != 7) {
