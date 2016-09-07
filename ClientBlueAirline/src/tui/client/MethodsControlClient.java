@@ -23,8 +23,17 @@ import objects.Reservation;
 import objects.Route;
 import objects.Ticket;
 
+/**
+ * Provides the customers' methods for the textual user interface.
+ * 
+ * @author Giovanni
+ */
 public class MethodsControlClient {
-
+    /**
+     * 
+     * @param n
+     * @return 
+     */
     public static ArrayList<String> scannerInput(ArrayList<String> n) {
         Scanner input = new Scanner(System.in);
         ArrayList<String> ritorno = new ArrayList<>(n.size());
@@ -35,7 +44,11 @@ public class MethodsControlClient {
         }
         return ritorno;
     }
-
+    /**
+     * Prints the menu.
+     * 
+     * @return 
+     */
     public static String toStringMenu() {
         Scanner input = new Scanner(System.in);
         String s;
@@ -56,7 +69,12 @@ public class MethodsControlClient {
         String s1 = input.nextLine().toUpperCase();
         return s1;
     }
-
+    
+    /**
+     * Prints a message indicating the server's status.
+     * 
+     * @param client Client.
+     */
     public static void hi(InterfaceClient client) {
         if(client.hello()){
             System.out.println("IL SERVER E' ATTIVO");
@@ -65,7 +83,11 @@ public class MethodsControlClient {
             System.out.println("IL SERVER NON E' ATTIVO");           
         }
     }
-
+    /**
+     * Search a flight in the database passing departure's date, departure's city and destination's city.
+     * 
+     * @param client Client.
+     */
     public static void searchFlight(InterfaceClient client) {
         //Scanner input = new Scanner(System.in);
         ArrayList<String> inputtxt = MethodsControlClient.scannerInput(new ArrayList<>(asList("Inserisci città partenza", "Inserisci città destinazione")));
@@ -99,7 +121,11 @@ public class MethodsControlClient {
             System.out.println("Hai inserito la data sbagliata");
         }
     }
-
+    /**
+     * Search a route in the database passing the departure's and destination's cities.
+     * 
+     * @param client Client.
+     */
     public static void searchRoute(InterfaceClient client) {
         ArrayList<String> input = MethodsControlClient.scannerInput(new ArrayList<>(asList("Inserisci città partenza", "Inserisci città destinazione")));
         Route tmproute1 = new Route(input.get(0), input.get(1));
@@ -121,6 +147,13 @@ public class MethodsControlClient {
     }
 
     /*METODI PER PRENOTAZIONE*/
+    /**
+     * Searches a flight and prints the number of free seats.
+     * 
+     * @param client Client
+     * @param cod Code of the flight.
+     * @return flight.
+     */
     private static Flight searchFlight(InterfaceClient client, String cod) {
         Flight flight = new Flight(cod);
         {
@@ -142,7 +175,14 @@ public class MethodsControlClient {
         System.out.println(flight.printAllSeats());
         return flight;
     }
-
+    
+    /**
+     * Prints a written description of the supplements.
+     * 
+     * @param meals List of meals.
+     * @param insurances List of insurances.
+     * @param holdLuggages List of hold lugagges.
+     */
     private static void toStringSupplements(Meal[] meals, Insurance[] insurances, HoldLuggage[] holdLuggages) {
         System.out.println("Scelte in aggiunta:\nPASTI: ");
         for (Meal m : meals) {
@@ -157,7 +197,13 @@ public class MethodsControlClient {
             System.out.println(in.toString());
         }
     }
-
+    /**
+     * Adds on or more meals to a ticket.
+     * 
+     * @param p Ticket.
+     * @param meals List of meals.
+     * @param v 
+     */
     private static void addMealTicket(Ticket p, Meal[] meals, String v) {
         for (Meal m : meals) {
             if (m.getCode().equals(v)) {
@@ -166,7 +212,13 @@ public class MethodsControlClient {
             }
         }
     }
-
+    /**
+     * Adds on or more hold luggages to a ticket.
+     * 
+     * @param p Ticket.
+     * @param holdLuggages List of hold luggages.
+     * @param v 
+     */
     private static void addHoldLuggageTicket(Ticket p, HoldLuggage[] holdLuggages, String v) {
         for (HoldLuggage hl : holdLuggages) {
             if (hl.getCode().equals(v)) {
@@ -175,7 +227,13 @@ public class MethodsControlClient {
             }
         }
     }
-
+    /**
+     * Adds on or more insurances to a ticket.
+     * 
+     * @param p Ticket.
+     * @param holdLuggages List of insurances.
+     * @param v 
+     */
     private static void addInsuranceTicket(Ticket p, Insurance[] insurances, String v) {
         for (Insurance in : insurances) {
             if (in.getCode().equals(v)) {
@@ -184,7 +242,19 @@ public class MethodsControlClient {
             }
         }
     }
-
+    /**
+     * Adds supplements to a ticket.
+     * 
+     * @param vetsplit
+     * @param seat Seat's number.
+     * @param classe Seat's class.
+     * @param codeFlight Code of the flight.
+     * @param price Price of the flight.
+     * @param meals Meals.
+     * @param insurances Insurances.
+     * @param holdLuggages Hold luggages.
+     * @return Ticket with supplements.
+     */
     private static Ticket insertTicketSupplements(String[] vetsplit, int seat, int classe, String codeFlight, double price, Meal[] meals, Insurance[] insurances, HoldLuggage[] holdLuggages) {
         Ticket p = new Ticket(vetsplit[0], vetsplit[1], vetsplit[2], seat, classe, codeFlight, price);
         for (int j = 4; j < vetsplit.length; j++) {
@@ -205,7 +275,16 @@ public class MethodsControlClient {
         }
         return p;
     }
-
+    /**
+     * Adds tickets to a list.
+     * 
+     * @param num Number of passengers.
+     * @param flight Flight.
+     * @param meals Meals.
+     * @param insurances Insurances.
+     * @param holdLuggages Hold luggages.
+     * @return List of passenger.
+     */
     private static ArrayList<Ticket> insertTicket(int num, Flight flight, Meal[] meals, Insurance[] insurances, HoldLuggage[] holdLuggages) {
         //Scanner input = new Scanner(System.in);
         ArrayList<Ticket> passengers = new ArrayList<Ticket>();
@@ -233,7 +312,15 @@ public class MethodsControlClient {
         }
         return passengers;
     }
-
+    /**
+     * Creates a reservation.
+     * 
+     * @param client Client.
+     * @param cod Reservation's code.
+     * @param flight Flight where the customer wants a reservation.
+     * @return the reservation.
+     * @throws IOException if has occurred an I/O exception.
+     */
     private static Reservation makeReservation(InterfaceClient client, String cod, Flight flight) throws IOException {
         //Scanner input = new Scanner(System.in);
         int num;
@@ -265,7 +352,13 @@ public class MethodsControlClient {
         res = client.makeReservation(res);
         return res;
     }
-
+    /**
+     * Prints a recap of a reservation.
+     * 
+     * @param client Client.
+     * @param res Reservation.
+     * @param flight Flight.
+     */
     private static void checkReservation(InterfaceClient client, Reservation res, Flight flight) {
         //Scanner input = new Scanner(System.in);
         try {
@@ -304,7 +397,11 @@ public class MethodsControlClient {
         }
     }
 
-    //prenotazione
+    /**
+     * Makes a reservation.
+     * 
+     * @param client Client
+     */
     public static void makeReservation(InterfaceClient client) {
         String cod = MethodsControlClient.scannerInput(new ArrayList<>(asList("Inserisci codice Volo"))).get(0);
         Flight flight = MethodsControlClient.searchFlight(client, cod);
@@ -325,8 +422,17 @@ public class MethodsControlClient {
         }
     }
 
-    /*FINE PRENOTAZIONE*/
- /*MODIFICA BIGLIETTO*/
+    /**
+     * Provides to edit the ticket and add new supplements. 
+     * 
+     * @param client Client.
+     * @param tp Ticket.
+     * @param flight Flight.
+     * @param meals List of meals.
+     * @param insurances List of insurances.
+     * @param holdLuggages List of hold lugagges.
+     * @throws IOException if occurs a in I/O exception.
+     */
     private static void editTicket(InterfaceClient client, Ticket tp, Flight flight, Meal[] meals, Insurance[] insurances, HoldLuggage[] holdLuggages) throws IOException {
         //Scanner input = new Scanner(System.in);
         boolean c = false;
@@ -359,7 +465,11 @@ public class MethodsControlClient {
             }
         } while (!c);
     }
-
+    /**
+     * 
+     * @param client Client.
+     * @param tp Ticket.
+     */
     private static void editTicket(InterfaceClient client, Ticket tp) {
         System.out.println("\nAREA MODIFICA:");
         Flight flight = null;
@@ -384,15 +494,22 @@ public class MethodsControlClient {
             Logger.getLogger(MethodsControlClient.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+    /**
+     * Edits a ticket.
+     * 
+     * @param client  Client.
+     */
     public static void editTicket(InterfaceClient client) {
         Ticket tp = MethodsControlClient.searchTicket(client);
         if (tp != null) {
             MethodsControlClient.editTicket(client, tp);
         }
     }
-    //FINE MODIFICA//
-
+    /**
+     * Searches a flight passing two airports.
+     * 
+     * @param client Client.
+     */
     public static void searchFlightAirport(InterfaceClient client) {
         ArrayList<String> inputtxt2 = MethodsControlClient.scannerInput(new ArrayList<>(asList("Inserisci Aeroporto partenza", "Inserisci Aeroporto destinazione")));
         Route tmproute2 = new Route();
@@ -412,7 +529,14 @@ public class MethodsControlClient {
             }
         }
     }
-
+    /**
+     * 
+     * @param client Client.
+     * @param tp Ticket.
+     * @return<code>true</code> if the passenger already did the check in;
+     *        <code>false</code> otherwise.
+     * @throws IOException if occurs an I/O exception.
+     */
     private static boolean isCheckIn(InterfaceClient client, Ticket tp) throws IOException {
         if (client.isCheckIn(tp)) {
             return true;
@@ -420,7 +544,11 @@ public class MethodsControlClient {
             return false;
         }
     }
-
+    /**
+     * Makes the check in of a ticket.
+     * 
+     * @param client Client.
+     */
     public static void checkIn(InterfaceClient client) {
         //Scanner input = new Scanner(System.in);
         ArrayList<String> input = MethodsControlClient.scannerInput(new ArrayList<>(asList("Inserisci il codice ticket per effettuare il check-in:")));
@@ -443,7 +571,12 @@ public class MethodsControlClient {
             Logger.getLogger(MethodsControlClient.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+    /**
+     * Search a ticket from his code.
+     * 
+     * @param client Client.
+     * @return the ticket.
+     */
     public static Ticket searchTicket(InterfaceClient client) {
         //Scanner input = new Scanner(System.in);
         ArrayList<String> input = MethodsControlClient.scannerInput(new ArrayList<>(asList("Inserisci il codice del biglietto: ")));
@@ -469,7 +602,10 @@ public class MethodsControlClient {
             return null;
         }
     }
-
+    /**
+     * Search a reservation from his code and prints it.
+     * @param client 
+     */
     public static void searchReservation(InterfaceClient client) {
         //Scanner input = new Scanner(System.in);
         ArrayList<String> input = MethodsControlClient.scannerInput(new ArrayList<>(asList("Inserisci il codice della prenotazione: ")));
@@ -494,7 +630,11 @@ public class MethodsControlClient {
             System.out.println("Prenotazione non trovata.");
         }
     }
-
+    /**
+     * Print all cities available.
+     * 
+     * @param client Client.
+     */
     public static void searchCitys(InterfaceClient client) {
         String[] citta = null;
         try {
@@ -507,7 +647,11 @@ public class MethodsControlClient {
             Logger.getLogger(ControllerClientTxt.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+    /**
+     * Search a flight from his code.
+     * 
+     * @param client Client.
+     */
     public static void searchFlightCode(InterfaceClient client) {
         //Scanner input = new Scanner(System.in);
         ArrayList<String> input = MethodsControlClient.scannerInput(new ArrayList<>(asList("Inserisci il codice del volo: ")));

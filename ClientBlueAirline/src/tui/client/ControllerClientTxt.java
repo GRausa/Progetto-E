@@ -8,10 +8,21 @@ package tui.client;
 import controller.FacadeControllerClient;
 import controller.InterfaceClient;
 
+/**
+ * Provides the controller for the textual user interface for client.
+ * 
+ * @author 
+ */
 public class ControllerClientTxt implements Runnable {
 
     private InterfaceClient client;
 
+    /**
+     * Constructs a new controller 
+     * 
+     * @param controllerClient Object that provides methods in order to use the application and the
+     *                         information that are set in the database.
+     */
     public ControllerClientTxt(InterfaceClient controllerClient) {
         this.client = (FacadeControllerClient) controllerClient;
     }

@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 /**
- * Provides the controller for the textual user interface.
+ * Provides the controller for the textual user interface for administrators.
  * 
  * @author 
  */
