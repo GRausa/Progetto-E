@@ -16,8 +16,6 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -76,7 +74,7 @@ public class RiassuntoPanel extends JPanel {
 
     }
 
-    private void addComponents(Container pane) throws IOException {
+    private void addComponents(Container pane) throws IOException  {
 
         pane.setLayout(new BorderLayout());
         initInfoGenerali();
@@ -91,28 +89,23 @@ public class RiassuntoPanel extends JPanel {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                try {
-                    reservation = controller.makeReservation(home.getReservation());
-                    flight = controller.searchFlights(flight)[0];
-                    for (Ticket tick : reservation.getPassengers()) {
-                        if (tick.getNseat() == -1) {
-                            String[] options = {"esci."};
-                            FinalControlFrame finale = new FinalControlFrame(home, controller, reservation, tick, flight);
-                            JOptionPane.showOptionDialog(home, finale, "BENVENUTI IN THETABLUEAIRLINE", JOptionPane.NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
-                        }
+                reservation = controller.makeReservation(home.getReservation());
+                flight = controller.searchFlights(flight)[0];
+                for (Ticket tick : reservation.getPassengers()) {
+                    if (tick.getNseat() == -1) {
+                        String[] options = {"esci."};
+                        FinalControlFrame finale = new FinalControlFrame(home, controller, reservation, tick, flight);
+                        JOptionPane.showOptionDialog(home, finale, "BENVENUTI IN THETABLUEAIRLINE", JOptionPane.NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
                     }
-                    reservation = controller.getReservation(reservation);
-                    String s = "Codice prenotazione:\n " + reservation.getCode();
-                    for (Ticket t : reservation.getPassengers()) {
-                        s += t.getName() + " " + t.getSurname() + " " + t.getCode() + "\n";
-                    }
-                    controller.sendMail(reservation.getEmail(), "ACQUISTO BIGLIETTO", reservation.printReservation("&%") + "&%" + reservation.printTickets("&%"));
-
-                    JOptionPane.showMessageDialog(home, "Congratulazioni!\n" + "Prenotazione Effettuata\n" + s + "\nLe è stata inviata un'email di recupero.");
-                    home.returnHome();
-                } catch (IOException ex) {
-                    Logger.getLogger(RiassuntoPanel.class.getName()).log(Level.SEVERE, null, ex);
                 }
+                reservation = controller.getReservation(reservation);
+                String s = "Codice prenotazione:\n " + reservation.getCode();
+                for (Ticket t : reservation.getPassengers()) {
+                    s += t.getName() + " " + t.getSurname() + " " + t.getCode() + "\n";
+                }
+                controller.sendMail(reservation.getEmail(), "ACQUISTO BIGLIETTO", reservation.printReservation("&%") + "&%" + reservation.printTickets("&%"));
+                JOptionPane.showMessageDialog(home, "Congratulazioni!\n" + "Prenotazione Effettuata\n" + s + "\nLe è stata inviata un'email di recupero.");
+                home.returnHome();
             }
         });
 

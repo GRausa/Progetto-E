@@ -5,10 +5,7 @@ import java.awt.*;
 import com.toedter.calendar.JDateChooser;
 
 import java.awt.event.*;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.*;
 import objects.Flight;
 import objects.HoldLuggage;

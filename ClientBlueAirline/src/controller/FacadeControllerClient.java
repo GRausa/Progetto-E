@@ -110,9 +110,14 @@ public class FacadeControllerClient implements InterfaceClient {
     }
      */
     @Override
-    public Reservation makeReservation(Reservation res) throws IOException {
-        out.println("RESERVATION " + gson.toJson(res));
-        return gson.fromJson(in.readLine(), Reservation.class);
+    public Reservation makeReservation(Reservation res) {
+        try {
+            out.println("RESERVATION " + gson.toJson(res));
+            return gson.fromJson(in.readLine(), Reservation.class);
+        } catch (IOException ex) {
+            Logger.getLogger(FacadeControllerClient.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
     }
 
     @Override
@@ -127,11 +132,16 @@ public class FacadeControllerClient implements InterfaceClient {
     }
 
     @Override
-    public Route[] searchRoutes(Route rotta) throws IOException {
-        out.println("ROUTES " + gson.toJson(rotta));
-        String serverout = in.readLine();
-        Route[] rotte = gson.fromJson(serverout, Route[].class);
-        return rotte;
+    public Route[] searchRoutes(Route rotta) {
+        try {
+            out.println("ROUTES " + gson.toJson(rotta));
+            String serverout = in.readLine();
+            Route[] rotte = gson.fromJson(serverout, Route[].class);
+            return rotte;
+        } catch (IOException ex) {
+            Logger.getLogger(FacadeControllerClient.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
     }
 
     @Override
@@ -242,17 +252,27 @@ public class FacadeControllerClient implements InterfaceClient {
     }
 
     @Override
-    public Reservation getReservation(Reservation res) throws IOException {
-        out.println("GETRESERVATION " + gson.toJson(res));
-        Reservation res1 = gson.fromJson(in.readLine(), Reservation.class);
-        return res1;
+    public Reservation getReservation(Reservation res){
+        try {
+            out.println("GETRESERVATION " + gson.toJson(res));
+            Reservation res1 = gson.fromJson(in.readLine(), Reservation.class);
+            return res1;
+        } catch (IOException ex) {
+            Logger.getLogger(FacadeControllerClient.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
     }
 
     @Override
-    public Flight insertFlight(Flight flight) throws IOException {
-        out.println("INSERTFLIGHT " + gson.toJson(flight));
-        Flight f = gson.fromJson(in.readLine(), Flight.class);
-        return f;
+    public Flight insertFlight(Flight flight)  {
+        try {
+            out.println("INSERTFLIGHT " + gson.toJson(flight));
+            Flight f = gson.fromJson(in.readLine(), Flight.class);
+            return f;
+        } catch (IOException ex) {
+            Logger.getLogger(FacadeControllerClient.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
     }
 
     @Override

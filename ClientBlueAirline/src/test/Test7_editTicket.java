@@ -7,8 +7,6 @@ package test;
 
 import controller.FacadeControllerClient;
 import controller.InterfaceClient;
-import java.io.IOException;
-import java.util.ArrayList;
 import objects.Flight;
 import objects.HoldLuggage;
 import objects.Insurance;

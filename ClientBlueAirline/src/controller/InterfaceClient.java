@@ -116,7 +116,7 @@ public interface InterfaceClient {
      */
     Meal[] getAllMeals();
 
-    Reservation getReservation(Reservation res) throws IOException;
+    Reservation getReservation(Reservation res);
 
     Ticket getTicket(Ticket tp) ;
 
@@ -127,7 +127,7 @@ public interface InterfaceClient {
      * @return flight inserted.
      * @throws IOException if occurs an I/O exception.
      */
-    Flight insertFlight(Flight flight) throws IOException;
+    Flight insertFlight(Flight flight);
 
     /**
      * Verifies if the check in is already done.
@@ -139,12 +139,12 @@ public interface InterfaceClient {
      */
     boolean isCheckIn(Ticket tp) ;
 
-    Reservation makeReservation(Reservation res) throws IOException;
+    Reservation makeReservation(Reservation res) ;
 
     //Flight searchFlight(Flight flight) throws IOException;
     Flight[] searchFlights(Flight flight);
 
-    Route[] searchRoutes(Route rotta) throws IOException;
+    Route[] searchRoutes(Route rotta) ;
 
     /**
      *

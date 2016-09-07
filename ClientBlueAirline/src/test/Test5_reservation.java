@@ -7,12 +7,8 @@ package test;
 
 import controller.FacadeControllerClient;
 import controller.InterfaceClient;
-import java.io.IOException;
 import java.util.ArrayList;
-import static java.util.Arrays.asList;
 import java.util.GregorianCalendar;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import objects.Flight;
 import objects.HoldLuggage;
 import objects.Insurance;
@@ -20,8 +16,6 @@ import objects.Meal;
 import objects.Reservation;
 import objects.Route;
 import objects.Ticket;
-import tui.client.ControllerClientTxt;
-import tui.client.MethodsControlClient;
 
 /**
  *
@@ -29,7 +23,7 @@ import tui.client.MethodsControlClient;
  */
 public class Test5_reservation {
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args)  {
         InterfaceClient client = FacadeControllerClient.getIstance();
         client.connect("localhost");
 

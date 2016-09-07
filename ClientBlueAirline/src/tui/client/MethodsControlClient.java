@@ -134,11 +134,7 @@ public class MethodsControlClient {
         Route tmproute1 = new Route(input.get(0), input.get(1));
         Route[] rotte = null;
         {
-            try {
-                rotte = client.searchRoutes(tmproute1);
-            } catch (IOException ex) {
-                Logger.getLogger(ControllerClientTxt.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            rotte = client.searchRoutes(tmproute1);
         }
         if (rotte.length > 0) {
             for (Route r : rotte) {
@@ -326,7 +322,7 @@ public class MethodsControlClient {
      * @return the reservation.
      * @throws IOException if has occurred an I/O exception.
      */
-    private static Reservation makeReservation(InterfaceClient client, String cod, Flight flight) throws IOException {
+    private static Reservation makeReservation(InterfaceClient client, String cod, Flight flight) {
         //Scanner input = new Scanner(System.in);
         int num;
         do {
@@ -364,41 +360,36 @@ public class MethodsControlClient {
      * @param flight Flight.
      */
     private static void checkReservation(InterfaceClient client, Reservation res, Flight flight) {
-        //Scanner input = new Scanner(System.in);
-        try {
-            flight = client.searchFlights(flight)[0]; //aggiorno il flight dopo la prenotazione
-            for (Ticket tp : res.getPassengers()) { //controllo assegnamento posti
-                if (tp.getNseat() == -1) {
-                    System.out.println("Passeggero: " + tp.getName() + " " + tp.getSurname() + " (" + tp.getID() + ") non inserito, il posto è stato occupato.\nPosti disponibili:");
-                    System.out.println(flight.printAllSeats());
-                    boolean c = false;
-                    do {
-                        ArrayList<String> input = MethodsControlClient.scannerInput(new ArrayList<>(asList("Inserisci il nuovo posto")));
-                        int set = Integer.parseInt(input.get(0));
-                        if (flight.getSeats().get(set - 1).getTicket() == null) {
-                            tp.setNSeat(set);
-                            tp = client.editSeatTicket(tp);
-                            if (tp.getNseat() == set) {
-                                System.out.println("Modifica effettuata.");
-                                c = true;
-                            } else {
-                                System.out.println("Posto non assegnato.");
-                            }
+        flight = client.searchFlights(flight)[0];
+        for (Ticket tp : res.getPassengers()) { //controllo assegnamento posti
+            if (tp.getNseat() == -1) {
+                System.out.println("Passeggero: " + tp.getName() + " " + tp.getSurname() + " (" + tp.getID() + ") non inserito, il posto è stato occupato.\nPosti disponibili:");
+                System.out.println(flight.printAllSeats());
+                boolean c = false;
+                do {
+                    ArrayList<String> input = MethodsControlClient.scannerInput(new ArrayList<>(asList("Inserisci il nuovo posto")));
+                    int set = Integer.parseInt(input.get(0));
+                    if (flight.getSeats().get(set - 1).getTicket() == null) {
+                        tp.setNSeat(set);
+                        tp = client.editSeatTicket(tp);
+                        if (tp.getNseat() == set) {
+                            System.out.println("Modifica effettuata.");
+                            c = true;
                         } else {
-                            System.out.println("Errore inserimento");
+                            System.out.println("Posto non assegnato.");
                         }
-                    } while (!c);
-                }
+                    } else {
+                        System.out.println("Errore inserimento");
+                    }
+                } while (!c);
             }
-            System.out.println("PRENOTAZIONE EFFETTUATA\nCodice Prenotazione: " + res.getCode());
-            System.out.println("Riepilogo:");
-            res = client.getReservation(res);
-            System.out.println(flight.toString());
-            System.out.println(res.printReservation("\n"));
-            System.out.println(res.printTickets("\n"));
-        } catch (IOException ex) {
-            Logger.getLogger(ControllerClientTxt.class.getName()).log(Level.SEVERE, null, ex);
         }
+        System.out.println("PRENOTAZIONE EFFETTUATA\nCodice Prenotazione: " + res.getCode());
+        System.out.println("Riepilogo:");
+        res = client.getReservation(res);
+        System.out.println(flight.toString());
+        System.out.println(res.printReservation("\n"));
+        System.out.println(res.printTickets("\n"));
     }
 
     /**
@@ -411,14 +402,10 @@ public class MethodsControlClient {
         Flight flight = MethodsControlClient.searchFlight(client, cod);
         if (flight != null) {
             if (flight.getSeatFree() > 0) {
-                try {
-                    Reservation res = MethodsControlClient.makeReservation(client, cod, flight);
-                    MethodsControlClient.checkReservation(client, res, flight);
-                    String stamp = res.printReservation("&%") + "&%" + res.printTickets("&%");
-                    client.sendMail(res.getEmail(), "ACQUISTO BIGLIETTO", stamp);
-                } catch (IOException ex) {
-                    Logger.getLogger(MethodsControlClient.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                Reservation res = MethodsControlClient.makeReservation(client, cod, flight);
+                MethodsControlClient.checkReservation(client, res, flight);
+                String stamp = res.printReservation("&%") + "&%" + res.printTickets("&%");
+                client.sendMail(res.getEmail(), "ACQUISTO BIGLIETTO", stamp);
             } else {
                 System.out.println("Posti non disponibili");
             }
@@ -608,13 +595,9 @@ public class MethodsControlClient {
         Reservation r = new Reservation(codeReservation);
         Flight f1 = null;
         {
-            try {
-                r = client.getReservation(r);
-                if (r != null) {
-                    f1 = client.searchFlights(new Flight(r.getCodeFlight()))[0];
-                }
-            } catch (IOException ex) {
-                Logger.getLogger(ControllerClientTxt.class.getName()).log(Level.SEVERE, null, ex);
+            r = client.getReservation(r);
+            if (r != null) {
+                f1 = client.searchFlights(new Flight(r.getCodeFlight()))[0];
             }
         }
         if (r != null) {

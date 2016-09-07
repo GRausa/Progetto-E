@@ -8,13 +8,7 @@ package test;
 import controller.FacadeControllerClient;
 import controller.InterfaceClient;
 import java.io.IOException;
-import java.util.ArrayList;
-import static java.util.Arrays.asList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import objects.Route;
-import tui.client.ControllerClientTxt;
-import tui.client.MethodsControlClient;
 
 /**
  *
@@ -23,7 +17,7 @@ import tui.client.MethodsControlClient;
 //SINGOLA ROTTA
 public class Test1_searchRoute {
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         InterfaceClient client = FacadeControllerClient.getIstance();
         client.connect("localhost");
         Route route = new Route("New York", "Roma");

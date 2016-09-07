@@ -76,7 +76,7 @@ public class MethodsControlAdministrator {
      * @param client Client
      * @throws IOException if has occurred an I/O exception.
      */
-    public static void insertFlight(InterfaceClient client) throws IOException {
+    public static void insertFlight(InterfaceClient client)  {
         ArrayList<String> input = MethodsControlAdministrator.scannerInput(new ArrayList<>(asList("Codice volo:")));
         String codeFlight = input.get(0);
         input = MethodsControlAdministrator.scannerInput(new ArrayList<>(asList("Città partenza:", "Aeroporto partenza:", "Città destinazione:", "Aeroporto destnazione:")));
