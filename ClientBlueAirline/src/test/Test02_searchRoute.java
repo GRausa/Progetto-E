@@ -7,27 +7,25 @@ package test;
 
 import controller.FacadeControllerClient;
 import controller.InterfaceClient;
-import java.io.IOException;
-import objects.Flight;
 import objects.Route;
 
 /**
  *
  * @author riccardo
  */
-public class Test0_searchFlightRoute {
+public class Test02_searchRoute {
 
-    public static void main(String[] args) {
+    public static void main(String[] args){
         InterfaceClient client = FacadeControllerClient.getIstance();
         client.connect("localhost");
-        Route route = new Route("Tegel", "Linate", "Berlino", "Milano");
-        Flight[] flights = client.calendar(route);
-        if (flights.length > 0) {
-            for (Flight r : flights) {
-                System.out.println(r.toString());
+        Route route = new Route("Milano", "");
+        Route[] routes = client.searchRoutes(route);
+        if (routes.length > 0) {
+            for (Route r : routes) {
+                System.out.println(r.printRoute());
             }
         } else {
-            System.out.println("Non esistono voli per queste tratta");
+            System.out.println("Non esiste tratta per queste città");
         }
     }
 }

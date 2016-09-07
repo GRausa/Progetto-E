@@ -1,5 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
+* To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
@@ -21,9 +21,9 @@ import objects.Ticket;
  *
  * @author Giovanni
  */
-public class Test5_reservation {
+public class Test07_reservation {
 
-    public static void main(String[] args) {
+    public static void main(String[] args)  {
         InterfaceClient client = FacadeControllerClient.getIstance();
         client.connect("localhost");
 

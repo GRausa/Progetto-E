@@ -7,24 +7,26 @@ package test;
 
 import controller.FacadeControllerClient;
 import controller.InterfaceClient;
-import java.io.IOException;
 import objects.Route;
 
 /**
  *
  * @author Giovanni
  */
-//TUTTE CITTA'
-public class Test3_getCitys {
+//TUTTE ROTTE
+public class Test03_searchAllRoutes {
 
-    public static void main(String[] args) {
+    public static void main(String[] args)  {
         InterfaceClient client = FacadeControllerClient.getIstance();
         client.connect("localhost");
-        String[] citys = client.getAllCitys();
-        if (citys.length > 0) {
-            for (String c : citys) {
-                System.out.println(c.toString());
+        Route route = new Route("", "");
+        Route[] routes = client.searchRoutes(route);
+        if (routes.length > 0) {
+            for (Route r : routes) {
+                System.out.println(r.printRoute());
             }
+        } else {
+            System.out.println("Non esiste tratta per queste città");
         }
     }
 

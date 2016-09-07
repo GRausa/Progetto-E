@@ -17,7 +17,7 @@ import objects.Ticket;
  *
  * @author Giovanni
  */
-public class Test7_editTicket {
+public class Test09_editTicket {
 
     public static void main(String[] args) {
         InterfaceClient client = FacadeControllerClient.getIstance();

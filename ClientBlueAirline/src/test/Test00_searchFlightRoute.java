@@ -7,8 +7,6 @@ package test;
 
 import controller.FacadeControllerClient;
 import controller.InterfaceClient;
-import java.io.IOException;
-import java.util.GregorianCalendar;
 import objects.Flight;
 import objects.Route;
 
@@ -16,23 +14,19 @@ import objects.Route;
  *
  * @author riccardo
  */
-public class Test7 {
+public class Test00_searchFlightRoute {
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         InterfaceClient client = FacadeControllerClient.getIstance();
         client.connect("localhost");
-        Route route = new Route("Milano", "Oslo");
-
-        GregorianCalendar date = new GregorianCalendar(2016, 07 - 1, 13);
-
-        Flight flight = new Flight(route, date);
-        Flight[] flights = client.searchFlights(flight);
+        Route route = new Route("Tegel", "Linate", "Berlino", "Milano");
+        Flight[] flights = client.calendar(route);
         if (flights.length > 0) {
             for (Flight r : flights) {
                 System.out.println(r.toString());
             }
         } else {
-            System.out.println("Non esiste tratta per queste città");
+            System.out.println("Non esistono voli per queste tratta");
         }
     }
 }

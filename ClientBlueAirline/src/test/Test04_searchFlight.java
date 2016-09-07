@@ -8,27 +8,31 @@ package test;
 import controller.FacadeControllerClient;
 import controller.InterfaceClient;
 import java.io.IOException;
+import java.util.GregorianCalendar;
+import objects.Flight;
 import objects.Route;
 
 /**
  *
- * @author Giovanni
+ * @author riccardo
  */
-//TUTTE ROTTE
-public class Test2_searchAllRoutes {
+public class Test04_searchFlight {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         InterfaceClient client = FacadeControllerClient.getIstance();
         client.connect("localhost");
-        Route route = new Route("", "");
-        Route[] routes = client.searchRoutes(route);
-        if (routes.length > 0) {
-            for (Route r : routes) {
-                System.out.println(r.printRoute());
+        Route route = new Route("New York", "Roma");
+
+        GregorianCalendar date = new GregorianCalendar(2016, 8, 15); //15 Settembre 2016
+
+        Flight flight = new Flight(route, date);
+        Flight[] flights = client.searchFlights(flight);
+        if (flights.length > 0) {
+            for (Flight r : flights) {
+                System.out.println(r.toString());
             }
         } else {
             System.out.println("Non esiste tratta per queste città");
         }
     }
-
 }

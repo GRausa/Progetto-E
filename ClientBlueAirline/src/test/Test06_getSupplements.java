@@ -17,7 +17,7 @@ import objects.Meal;
  * @author Giovanni
  */
 //TUTTE CITTA'
-public class Test4_getSupplements {
+public class Test06_getSupplements {
 
     public static void main(String[] args) throws IOException {
         InterfaceClient client = FacadeControllerClient.getIstance();
