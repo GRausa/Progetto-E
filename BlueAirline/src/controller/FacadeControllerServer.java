@@ -7,7 +7,6 @@ package controller;
 
 import database.AdapterDB;
 import database.ConcreteAdapterDB;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import mail.Email;
 import objects.Flight;

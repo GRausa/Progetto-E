@@ -5,7 +5,6 @@
  */
 package controller;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 import objects.Flight;
 import objects.HoldLuggage;

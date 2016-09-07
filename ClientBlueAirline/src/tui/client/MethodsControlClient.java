@@ -13,8 +13,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import objects.Flight;
 import objects.HoldLuggage;
 import objects.Insurance;

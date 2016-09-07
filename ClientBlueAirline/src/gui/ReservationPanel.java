@@ -9,14 +9,11 @@ import controller.FacadeControllerClient;
 import com.toedter.calendar.JDateChooser;
 import java.awt.*;
 import java.awt.event.*;
-import java.io.IOException;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.swing.*;
 import objects.*;
