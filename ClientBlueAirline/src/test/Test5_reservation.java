@@ -44,7 +44,7 @@ public class Test5_reservation {
         //SCELTA VOLO--> A4D5F6        
         Flight f = flights[0];
         System.out.println(f.printAllSeats());
-        f = client.searchFlight(f);
+        f = client.searchFlights(f)[0];
         Meal[] meals = client.getAllMeals();
         Insurance[] insurances = client.getAllInsurances();
         HoldLuggage[] holdLuggages = client.getAllHoldLuggages();

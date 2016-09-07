@@ -26,7 +26,7 @@ public class Test7_editTicket {
         
         Ticket t = new Ticket("A4D5F621");
         t = client.getTicket(t);
-        Flight f = client.searchFlight(new Flight(t.getCodeFlight()));
+        Flight f = client.searchFlights(new Flight(t.getCodeFlight()))[0];
         
         
         Meal[] meals = client.getAllMeals();
