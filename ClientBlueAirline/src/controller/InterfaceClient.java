@@ -85,7 +85,7 @@ public interface InterfaceClient {
      * @return Ticket modified.
      * @throws IOException if occurs an I/O exception
      */
-    Ticket editTicket(Ticket ticketPassenger) throws IOException;
+    Ticket editTicket(Ticket ticketPassenger);
 
     /**
      *
@@ -100,25 +100,25 @@ public interface InterfaceClient {
      * @return List of all possible hold luggages in the database.
      * @throws IOException if occurs an I/O exception
      */
-    HoldLuggage[] getAllHoldLuggages() throws IOException;
+    HoldLuggage[] getAllHoldLuggages();
 
     /**
      *
      * @return List of all possible hinsurances in the database.
      * @throws IOException if occurs an I/O exception
      */
-    Insurance[] getAllInsurances() throws IOException;
+    Insurance[] getAllInsurances();
 
     /**
      *
      * @return List of all possible meals in the database.
      * @throws IOException if occurs an I/O exception
      */
-    Meal[] getAllMeals() throws IOException;
+    Meal[] getAllMeals();
 
     Reservation getReservation(Reservation res) throws IOException;
 
-    Ticket getTicket(Ticket tp) throws IOException;
+    Ticket getTicket(Ticket tp) ;
 
     /**
      * Insert a flight in the database.
@@ -137,7 +137,7 @@ public interface InterfaceClient {
      * <code>false</code> otherwise.
      * @throws IOException if occurs an I/O exception
      */
-    boolean isCheckIn(Ticket tp) throws IOException;
+    boolean isCheckIn(Ticket tp) ;
 
     Reservation makeReservation(Reservation res) throws IOException;
 
@@ -153,7 +153,7 @@ public interface InterfaceClient {
      * otherwise.
      * @throws IOException if occurs an I/O exception
      */
-    boolean checkLogin(String userpass) throws IOException;
+    boolean checkLogin(String userpass);
 
     /**
      * Modifies a flight.
@@ -162,6 +162,6 @@ public interface InterfaceClient {
      * @return Flight modified.
      * @throws IOException if occurs an I/O exception
      */
-    Flight editFlight(Flight flight) throws IOException;
+    Flight editFlight(Flight flight);
 
 }

@@ -18,7 +18,7 @@ import objects.Route;
  */
 public class Test8_editFlight {
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         InterfaceClient client = FacadeControllerClient.getIstance();
         client.connect("localhost");
 

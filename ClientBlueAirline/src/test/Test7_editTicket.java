@@ -21,7 +21,7 @@ import objects.Ticket;
  */
 public class Test7_editTicket {
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         InterfaceClient client = FacadeControllerClient.getIstance();
         client.connect("localhost");
 

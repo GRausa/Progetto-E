@@ -102,16 +102,12 @@ public class FinalControlFrame extends JPanel {
 
                 int set = (int) posto0.getSelectedItem();
                 if (f.getSeats().get(set - 1).getTicket() == null) {
-                    try {
-                        t.setNSeat(set);
-                        t = controller.editSeatTicket(t);
-                        if (!(t.getNseat() == set)) {
-                            JOptionPane.showMessageDialog(home, "Il posto è gia stato assegnato\n");
-                        } else {
-                            closeWindow();
-                        }
-                    } catch (IOException ex) {
-                        Logger.getLogger(FinalControlFrame.class.getName()).log(Level.SEVERE, null, ex);
+                    t.setNSeat(set);
+                    t = controller.editSeatTicket(t);
+                    if (!(t.getNseat() == set)) {
+                        JOptionPane.showMessageDialog(home, "Il posto è gia stato assegnato\n");
+                    } else {
+                        closeWindow();
                     }
                 }
             }

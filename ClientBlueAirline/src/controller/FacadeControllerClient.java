@@ -116,9 +116,14 @@ public class FacadeControllerClient implements InterfaceClient {
     }
 
     @Override
-    public Ticket editSeatTicket(Ticket tp) throws IOException {
-        out.println("EDITSEATTICKET " + gson.toJson(tp));
-        return gson.fromJson(in.readLine(), Ticket.class);
+    public Ticket editSeatTicket(Ticket tp) {
+        try {
+            out.println("EDITSEATTICKET " + gson.toJson(tp));
+            return gson.fromJson(in.readLine(), Ticket.class);
+        } catch (IOException ex) {
+            Logger.getLogger(FacadeControllerClient.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
     }
 
     @Override
@@ -142,59 +147,98 @@ public class FacadeControllerClient implements InterfaceClient {
     }
 
     @Override
-    public Flight[] calendar(Route rotta) throws IOException {
-        out.println("CALENDAR " + gson.toJson(rotta));
-        Flight[] flights = gson.fromJson(in.readLine(), Flight[].class);
-        return flights;
+    public Flight[] calendar(Route rotta) {
+        try {
+            out.println("CALENDAR " + gson.toJson(rotta));
+            Flight[] flights = gson.fromJson(in.readLine(), Flight[].class);
+            return flights;
+        } catch (IOException ex) {
+            Logger.getLogger(FacadeControllerClient.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
     }
 
     @Override
-    public Meal[] getAllMeals() throws IOException {
-        out.println("MEALS ");
-        Meal[] meals = gson.fromJson(in.readLine(), Meal[].class);
-        return meals;
+    public Meal[] getAllMeals() {
+        try {
+            out.println("MEALS ");
+            Meal[] meals = gson.fromJson(in.readLine(), Meal[].class);
+            return meals;
+        } catch (IOException ex) {
+            Logger.getLogger(FacadeControllerClient.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
     }
 
     @Override
-    public HoldLuggage[] getAllHoldLuggages() throws IOException {
-        out.println("HOLDLUGGAGES ");
-        HoldLuggage[] holdLuggages = gson.fromJson(in.readLine(), HoldLuggage[].class);
-        return holdLuggages;
+    public HoldLuggage[] getAllHoldLuggages() {
+        try {
+            out.println("HOLDLUGGAGES ");
+            HoldLuggage[] holdLuggages = gson.fromJson(in.readLine(), HoldLuggage[].class);
+            return holdLuggages;
+        } catch (IOException ex) {
+            Logger.getLogger(FacadeControllerClient.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
     }
 
     @Override
-    public Insurance[] getAllInsurances() throws IOException {
-        out.println("INSURANCES ");
-        Insurance[] insurances = gson.fromJson(in.readLine(), Insurance[].class);
-        return insurances;
+    public Insurance[] getAllInsurances() {
+        try {
+            out.println("INSURANCES ");
+            Insurance[] insurances = gson.fromJson(in.readLine(), Insurance[].class);
+            return insurances;
+        } catch (IOException ex) {
+            Logger.getLogger(FacadeControllerClient.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
     }
 
     @Override
-    public Ticket checkIn(Ticket tp) throws IOException {
-        out.println("CHECKIN " + gson.toJson(tp));
-        Ticket tp1 = gson.fromJson(in.readLine(), Ticket.class);
-        return tp1;
+    public Ticket checkIn(Ticket tp) {
+        try {
+            out.println("CHECKIN " + gson.toJson(tp));
+            Ticket tp1 = gson.fromJson(in.readLine(), Ticket.class);
+            return tp1;
+        } catch (IOException ex) {
+            Logger.getLogger(FacadeControllerClient.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
     }
 
     @Override
-    public boolean isCheckIn(Ticket tp) throws IOException {
-        out.println("ISCHECKIN " + gson.toJson(tp));
-        Boolean isCheckIn = gson.fromJson(in.readLine(), Boolean.class);
-        return isCheckIn;
+    public boolean isCheckIn(Ticket tp)  {
+        try {
+            out.println("ISCHECKIN " + gson.toJson(tp));
+            Boolean isCheckIn = gson.fromJson(in.readLine(), Boolean.class);
+            return isCheckIn;
+        } catch (IOException ex) {
+            Logger.getLogger(FacadeControllerClient.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
     }
 
     @Override
-    public Ticket getTicket(Ticket tp) throws IOException {
-        out.println("TICKET " + gson.toJson(tp));
-        Ticket tp1 = gson.fromJson(in.readLine(), Ticket.class);
-        return tp1;
+    public Ticket getTicket(Ticket tp) {
+        try {
+            out.println("TICKET " + gson.toJson(tp));
+            Ticket tp1 = gson.fromJson(in.readLine(), Ticket.class);
+            return tp1;
+        } catch (IOException ex) {
+            return null;
+        }
     }
 
     @Override
-    public Ticket editTicket(Ticket ticketPassenger) throws IOException {
-        out.println("EDITTICKET " + gson.toJson(ticketPassenger));
-        Ticket tp = gson.fromJson(in.readLine(), Ticket.class);
-        return tp;
+    public Ticket editTicket(Ticket ticketPassenger) {
+        try {
+            out.println("EDITTICKET " + gson.toJson(ticketPassenger));
+            Ticket tp = gson.fromJson(in.readLine(), Ticket.class);
+            return tp;
+        } catch (IOException ex) {
+            Logger.getLogger(FacadeControllerClient.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
     }
 
     @Override
@@ -212,26 +256,41 @@ public class FacadeControllerClient implements InterfaceClient {
     }
 
     @Override
-    public boolean checkLogin(String userpass) throws IOException {
-        out.println("LOGIN " + gson.toJson(userpass));
-        Boolean b = gson.fromJson(in.readLine(), Boolean.class);
-        return b;
+    public boolean checkLogin(String userpass)  {
+        try {
+            out.println("LOGIN " + gson.toJson(userpass));
+            Boolean b = gson.fromJson(in.readLine(), Boolean.class);
+            return b;
+        } catch (IOException ex) {
+            Logger.getLogger(FacadeControllerClient.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
     }
 
     @Override
-    public boolean sendMail(String destination, String object, String text) throws IOException {
-        String mail = destination + "\t" + object + "\t" + text;
-        out.println("SENDMAIL " + mail);
+    public boolean sendMail(String destination, String object, String text) {
+        try {
+            String mail = destination + "\t" + object + "\t" + text;
+            out.println("SENDMAIL " + mail);
 
-        boolean returned = in.readLine().equals("true");
-        return returned;
+            boolean returned = in.readLine().equals("true");
+            return returned;
+        } catch (IOException ex) {
+            Logger.getLogger(FacadeControllerClient.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
     }
 
     @Override
-    public Flight editFlight(Flight flight) throws IOException {
-        out.println("EDITFLIGHT " + gson.toJson(flight));
-        Flight f = gson.fromJson(in.readLine(), Flight.class);
-        return f;
+    public Flight editFlight(Flight flight) {
+        try {
+            out.println("EDITFLIGHT " + gson.toJson(flight));
+            Flight f = gson.fromJson(in.readLine(), Flight.class);
+            return f;
+        } catch (IOException ex) {
+            Logger.getLogger(FacadeControllerClient.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
     }
 
 }

@@ -135,7 +135,7 @@ public class MethodsControlAdministrator {
      * <code>false</code> otherwise.
      * @throws IOException
      */
-    public static boolean checkLogin(InterfaceClient client) throws IOException {
+    public static boolean checkLogin(InterfaceClient client) {
         boolean b = false;
         do {
             ArrayList<String> input = MethodsControlAdministrator.scannerInput(new ArrayList<>(asList("AREA AMMINISTRATORE\nUsername:", "Password:")));

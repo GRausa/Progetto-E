@@ -16,7 +16,7 @@ import objects.Ticket;
  */
 public class Test6_checkIn {
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args)  {
         InterfaceClient client = FacadeControllerClient.getIstance();
         client.connect("localhost");
 

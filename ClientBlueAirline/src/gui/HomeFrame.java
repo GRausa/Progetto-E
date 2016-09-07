@@ -63,33 +63,26 @@ public class HomeFrame extends JFrame {
     JLabel scritta = new JLabel("BENVENUTO IN BLUEAIRLINE");
 
     public HomeFrame(String title, FacadeControllerClient c) throws HeadlessException {
-        try {
-            this.frame = this;
-            this.controller = c;
-            setTitle(title);
-            setSize(WEIGHT, HEIGHT);
-            setMinimumSize(new Dimension(WEIGHT, HEIGHT));
-            this.setResizable(false);
-            initComponents();
-            this.setVisible(true);
-            this.passengers = new ArrayList<>();
-            this.allmeals = this.controller.getAllMeals();
-            this.allholdluggages = this.controller.getAllHoldLuggages();
-            this.allinsurances = this.controller.getAllInsurances();
-
-            this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            this.setContentPane(sfondo);
-            notifiche.setFont(new Font("Helvetica", Font.BOLD, 15));
-            notifiche.setForeground(Color.white);
-
-            Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-            Dimension frameSize = this.getSize();
-
-            this.setLocation((screenSize.width - frameSize.width) / 2,
-                    (screenSize.height - frameSize.height) / 2);
-        } catch (IOException ex) {
-            Logger.getLogger(HomeFrame.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        this.frame = this;
+        this.controller = c;
+        setTitle(title);
+        setSize(WEIGHT, HEIGHT);
+        setMinimumSize(new Dimension(WEIGHT, HEIGHT));
+        this.setResizable(false);
+        initComponents();
+        this.setVisible(true);
+        this.passengers = new ArrayList<>();
+        this.allmeals = this.controller.getAllMeals();
+        this.allholdluggages = this.controller.getAllHoldLuggages();
+        this.allinsurances = this.controller.getAllInsurances();
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setContentPane(sfondo);
+        notifiche.setFont(new Font("Helvetica", Font.BOLD, 15));
+        notifiche.setForeground(Color.white);
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        Dimension frameSize = this.getSize();
+        this.setLocation((screenSize.width - frameSize.width) / 2,
+                (screenSize.height - frameSize.height) / 2);
 
     }
 
@@ -181,26 +174,21 @@ public class HomeFrame extends JFrame {
                 int selectedOption = JOptionPane.showOptionDialog(null, panel, "EFFETTUA IL CHECK-IN", JOptionPane.NO_OPTION, JOptionPane.QUESTION_MESSAGE, immagine, options, options[0]);
 
                 if (selectedOption == 0) {
-                    try {
-                        String codeTicket = txt.getText();
-                        Ticket tp = new Ticket(codeTicket);
-                        tp = controller.getTicket(tp);
-                        if (tp != null) {
-                            String[] option = {"o"};
-                            if (controller.isCheckIn(tp)) {
-                                JOptionPane.showConfirmDialog(panel, "Il check-in è stato già effettuato.", null, JOptionPane.CLOSED_OPTION);
-                            } else {
-                                tp = controller.checkIn(tp);
-                                JOptionPane.showConfirmDialog(panel, "Check-in effettuato.\n" + tp.printTicketPassenger("\n"), null, JOptionPane.CLOSED_OPTION);
-                            }
+                    String codeTicket = txt.getText();
+                    Ticket tp = new Ticket(codeTicket);
+                    tp = controller.getTicket(tp);
+                    if (tp != null) {
+                        String[] option = {"o"};
+                        if (controller.isCheckIn(tp)) {
+                            JOptionPane.showConfirmDialog(panel, "Il check-in è stato già effettuato.", null, JOptionPane.CLOSED_OPTION);
                         } else {
-                            JOptionPane.showConfirmDialog(panel, "Errore inserimento codice biglietto", null, JOptionPane.CLOSED_OPTION);
+                            tp = controller.checkIn(tp);
+                            JOptionPane.showConfirmDialog(panel, "Check-in effettuato.\n" + tp.printTicketPassenger("\n"), null, JOptionPane.CLOSED_OPTION);
                         }
-
-                        notifiche.setText(DEFAULT);
-                    } catch (IOException ex) {
-                        Logger.getLogger(HomeFrame.class.getName()).log(Level.SEVERE, null, ex);
+                    } else {
+                        JOptionPane.showConfirmDialog(panel, "Errore inserimento codice biglietto", null, JOptionPane.CLOSED_OPTION);
                     }
+                    notifiche.setText(DEFAULT);
                 } else {
                     notifiche.setText("Operazione cancellata dall'utente");
                 }
@@ -274,11 +262,7 @@ public class HomeFrame extends JFrame {
                 int selectedOption = JOptionPane.showOptionDialog(null, panel, "CONTATTACI", JOptionPane.NO_OPTION, JOptionPane.QUESTION_MESSAGE, immagine, options, options[0]);
 
                 if (selectedOption == 0) {
-                    try {
-                        controller.sendMail("thetablueairline@gmail.com", "OPINIONE ANONIMA", txt.getText());
-                    } catch (IOException ex) {
-                        Logger.getLogger(HomeFrame.class.getName()).log(Level.SEVERE, null, ex);
-                    }
+                    controller.sendMail("thetablueairline@gmail.com", "OPINIONE ANONIMA", txt.getText());
                     //inserire qui quello che deve fare in caso di contattaci!
                     //frame.returnHome();//Eliminare il ritorno a HOme Frame o no?
                     notifiche.setText(DEFAULT);

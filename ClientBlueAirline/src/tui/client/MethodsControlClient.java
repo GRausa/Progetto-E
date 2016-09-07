@@ -340,13 +340,11 @@ public class MethodsControlClient {
         Insurance[] insurances = null;
         HoldLuggage[] holdLuggages = null;
         {
-            try {
+            
                 meals = client.getAllMeals();
                 insurances = client.getAllInsurances();
                 holdLuggages = client.getAllHoldLuggages();
-            } catch (IOException ex) {
-                Logger.getLogger(ControllerClientTxt.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            
         }
         MethodsControlClient.toStringSupplements(meals, insurances, holdLuggages);
         ArrayList<Ticket> passengers = MethodsControlClient.insertTicket(num, flight, meals, insurances, holdLuggages);
@@ -483,13 +481,9 @@ public class MethodsControlClient {
         Meal[] meals = null;
         Insurance[] insurances = null;
         HoldLuggage[] holdLuggages = null;
-        try {
-            meals = client.getAllMeals();
-            insurances = client.getAllInsurances();
-            holdLuggages = client.getAllHoldLuggages();
-        } catch (IOException ex) {
-            Logger.getLogger(MethodsControlClient.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        meals = client.getAllMeals();
+        insurances = client.getAllInsurances();
+        holdLuggages = client.getAllHoldLuggages();
         try {
             if (!MethodsControlClient.isCheckIn(client, tp)) {
                 flight = MethodsControlClient.searchFlight(client, tp.getCodeFlight());
@@ -525,16 +519,12 @@ public class MethodsControlClient {
         tmproute2.setDeparutreAirport(inputtxt2.get(0));
         tmproute2.setDestinationAirport(inputtxt2.get(1));
         {
-            try {
-                Flight[] calendario = client.calendar(tmproute2);
-                if (calendario.length == 0) {
-                    System.out.println("Nessun volo trovato");
-                }
-                for (Flight a : calendario) {
-                    System.out.println(a);
-                }
-            } catch (IOException ex) {
-                Logger.getLogger(ControllerClientTxt.class.getName()).log(Level.SEVERE, null, ex);
+            Flight[] calendario = client.calendar(tmproute2);
+            if (calendario.length == 0) {
+                System.out.println("Nessun volo trovato");
+            }
+            for (Flight a : calendario) {
+                System.out.println(a);
             }
         }
     }
@@ -547,7 +537,7 @@ public class MethodsControlClient {
      * <code>false</code> otherwise.
      * @throws IOException if occurs an I/O exception.
      */
-    private static boolean isCheckIn(InterfaceClient client, Ticket tp) throws IOException {
+    private static boolean isCheckIn(InterfaceClient client, Ticket tp)    {
         if (client.isCheckIn(tp)) {
             return true;
         } else {
@@ -565,21 +555,16 @@ public class MethodsControlClient {
         ArrayList<String> input = MethodsControlClient.scannerInput(new ArrayList<>(asList("Inserisci il codice ticket per effettuare il check-in:")));
         String codeTicket = input.get(0);
         Ticket tp = new Ticket(codeTicket);
-        try {
-            tp = client.getTicket(tp);
-            if (tp != null) {
-                if (MethodsControlClient.isCheckIn(client, tp)) {
-                    System.out.println("Il check-in è stato già effettuato.");
-                } else {
-                    tp = client.checkIn(tp);
-                    System.out.println("Check-in effettuato.\n" + tp.printTicketPassenger("\n"));
-                }
+        tp = client.getTicket(tp);
+        if (tp != null) {
+            if (MethodsControlClient.isCheckIn(client, tp)) {
+                System.out.println("Il check-in è stato già effettuato.");
             } else {
-                System.out.println("Errore inserimento codice biglietto");
+                tp = client.checkIn(tp);
+                System.out.println("Check-in effettuato.\n" + tp.printTicketPassenger("\n"));
             }
-
-        } catch (IOException ex) {
-            Logger.getLogger(MethodsControlClient.class.getName()).log(Level.SEVERE, null, ex);
+        } else {
+            System.out.println("Errore inserimento codice biglietto");
         }
     }
 
@@ -596,13 +581,9 @@ public class MethodsControlClient {
         Ticket t = new Ticket(codeT);
         Flight f = null;
         {
-            try {
-                t = client.getTicket(t);
-                if (t != null) {
-                    f = client.searchFlights(new Flight(t.getCodeFlight()))[0];
-                }
-            } catch (IOException ex) {
-                Logger.getLogger(ControllerClientTxt.class.getName()).log(Level.SEVERE, null, ex);
+            t = client.getTicket(t);
+            if (t != null) {
+                f = client.searchFlights(new Flight(t.getCodeFlight()))[0];
             }
         }
         if (t != null) {
