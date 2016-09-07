@@ -6,8 +6,9 @@
 package objects;
 
 /**
- * Represent a route exercised by the company. A route is a connection between two airports.
- * 
+ * Represent a route exercised by the company. A route is a connection between
+ * two airports.
+ *
  * @author Giovanni
  */
 public class Route {
@@ -16,10 +17,10 @@ public class Route {
 
     /**
      * Constructs a new Route.
-     * 
+     *
      * @param deparutreAirport Departure airport.
      * @param destinationAirport Destination airport.
-     * @param departureCity Departure city. 
+     * @param departureCity Departure city.
      * @param destinationCity Destination city.
      */
     public Route(String deparutreAirport, String destinationAirport, String departureCity, String destinationCity) {
@@ -28,24 +29,26 @@ public class Route {
         this.departureCity = departureCity;
         this.destinationCity = destinationCity;
     }
+
     /**
-     * Constructs a new Route with only departure's and destination's cities. Airports set to null.
-     * 
-     * @param departureCity città di partenza 
+     * Constructs a new Route with only departure's and destination's cities.
+     * Airports set to null.
+     *
+     * @param departureCity città di partenza
      * @param destinationCity città di arrivo
      */
-    public Route(String departureCity,String destinationCity){
+    public Route(String departureCity, String destinationCity) {
         this.deparutreAirport = null;
         this.destinationAirport = null;
         this.departureCity = departureCity;
         this.destinationCity = destinationCity;
     }
-    
+
     /**
      * Constructs an empy route.
-     * 
+     *
      */
-    public Route(){
+    public Route() {
         this.deparutreAirport = null;
         this.destinationAirport = null;
         this.departureCity = null;
@@ -59,7 +62,7 @@ public class Route {
     public void setDestinationAirport(String destinationAirport) {
         this.destinationAirport = destinationAirport;
     }
-    
+
     public String getDeparutreAirport() {
         return deparutreAirport;
     }

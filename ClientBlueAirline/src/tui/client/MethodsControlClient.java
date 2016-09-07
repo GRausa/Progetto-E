@@ -652,15 +652,13 @@ public class MethodsControlClient {
      */
     public static void searchCitys(InterfaceClient client) {
         String[] citta = null;
-        try {
-            citta = client.getAllCitys();
-            System.out.println("Le città disponibili sono:");
-            for (String a : citta) {
-                System.out.println(a);
-            }
-        } catch (IOException ex) {
-            Logger.getLogger(ControllerClientTxt.class.getName()).log(Level.SEVERE, null, ex);
+
+        citta = client.getAllCitys();
+        System.out.println("Le città disponibili sono:");
+        for (String a : citta) {
+            System.out.println(a);
         }
+
     }
 
     /**

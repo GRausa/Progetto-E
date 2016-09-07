@@ -18,25 +18,26 @@ import objects.Meal;
  */
 //TUTTE CITTA'
 public class Test4_getSupplements {
+
     public static void main(String[] args) throws IOException {
         InterfaceClient client = FacadeControllerClient.getIstance();
         client.connect("localhost");
         Meal[] meals = client.getAllMeals();
         HoldLuggage[] holdLuggages = client.getAllHoldLuggages();
         Insurance[] insurances = client.getAllInsurances();
-        
+
         System.out.println("PASTI: ");
         for (Meal m : meals) {
-                System.out.println(m.toString());
+            System.out.println(m.toString());
         }
         System.out.println("BAGAGLI: ");
         for (HoldLuggage hl : holdLuggages) {
-                System.out.println(hl.toString());   
+            System.out.println(hl.toString());
         }
         System.out.println("ASSICURAZIONI: ");
         for (Insurance i : insurances) {
-                System.out.println(i.toString());
-        }        
+            System.out.println(i.toString());
+        }
     }
-        
+
 }

@@ -14,9 +14,9 @@ import objects.Route;
  *
  * @author Giovanni
  */
-
 //TUTTE ROTTE
 public class Test2_searchAllRoutes {
+
     public static void main(String[] args) throws IOException {
         InterfaceClient client = FacadeControllerClient.getIstance();
         client.connect("localhost");
@@ -30,5 +30,5 @@ public class Test2_searchAllRoutes {
             System.out.println("Non esiste tratta per queste città");
         }
     }
-        
+
 }

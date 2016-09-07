@@ -7,24 +7,26 @@ package objects;
 
 /**
  * Represents a booked in seat associated to a ticket.
- * 
+ *
  * @author Giovanni
  */
 public class Seat {
+
     private int number;
     private int classe;
     private String ticket;
+
     /**
      * Construct a new seat.
-     * 
+     *
      * @param numero Number of the seat.
      * @param classe Class of the seat.
      * @param ticket Ticket associated to the seat.
      */
-    public Seat(int numero,int classe, String ticket){
-        this.ticket=ticket;
-        this.classe=classe;
-        this.number=numero;
+    public Seat(int numero, int classe, String ticket) {
+        this.ticket = ticket;
+        this.classe = classe;
+        this.number = numero;
     }
 
     public int getNumber() {
@@ -41,12 +43,11 @@ public class Seat {
 
     public void setTicket(String ticket) {
         this.ticket = ticket;
-    }  
-    
+    }
+
     /*
     @Override
     public String toString(){        
         return "Posto n°"+this.getNumber()+" classe:"+this.getClasse()+" occupato"+this.getTicket();
     }*/
-    
 }

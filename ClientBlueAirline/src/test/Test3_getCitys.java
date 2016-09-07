@@ -16,7 +16,8 @@ import objects.Route;
  */
 //TUTTE CITTA'
 public class Test3_getCitys {
-    public static void main(String[] args) throws IOException {
+
+    public static void main(String[] args) {
         InterfaceClient client = FacadeControllerClient.getIstance();
         client.connect("localhost");
         String[] citys = client.getAllCitys();
@@ -26,5 +27,5 @@ public class Test3_getCitys {
             }
         }
     }
-        
+
 }

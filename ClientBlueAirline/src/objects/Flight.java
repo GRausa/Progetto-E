@@ -11,14 +11,15 @@ import java.util.Calendar;
 
 /**
  * Represents a flight that the company performs.
- * 
+ *
  * @author Giovanni
  */
 public class Flight {
+
     /**
      * Supplement of the first class.
      */
-    public static double COSTOPRIMACLASSE=30;
+    public static double COSTOPRIMACLASSE = 30;
     private String code;
     private Route r;
     private Calendar dateDeparture;
@@ -26,10 +27,10 @@ public class Flight {
     private double price;
     private ArrayList<Seat> seats;
     private String codeAirplane;
-    
+
     /**
      * Constructs a new flight. Seats are not added.
-     * 
+     *
      * @param code Code of the flight.
      * @param r Route of the flight.
      * @param dateDeparture Departure's date.
@@ -45,13 +46,14 @@ public class Flight {
         this.price = price;
         this.codeAirplane = codeAirplane;
     }
+
     /**
      * Constructs a new flight. Seats and codeAirplane not added.
-     * 
+     *
      * @param code Code of the flight.
      * @param r Route of the flight.
      * @param dateDeparture Departure's date.
-     * @param dateDestination Arrival's date.  
+     * @param dateDestination Arrival's date.
      * @param price Price of a ticket in the second class of the flight.
      */
     public Flight(String code, Route r, Calendar dateDeparture, Calendar dateDestination, double price) {
@@ -61,9 +63,11 @@ public class Flight {
         this.dateDestination = dateDestination;
         this.price = price;
     }
+
     /**
-     * Constructs a new flight. The code of the flight is initialized to null and the price to 0.
-     * 
+     * Constructs a new flight. The code of the flight is initialized to null
+     * and the price to 0.
+     *
      * @param r Route of the flight.
      * @param dateDeparture Departure's date.
      */
@@ -74,14 +78,14 @@ public class Flight {
         this.dateDestination = dateDeparture;
         this.price = 0;
     }
-    
+
     /**
      * Constructs an empty flight with only the flight's code.
-     * 
+     *
      * @param code codice del volo
      */
-    public Flight(String code){
-        this.code=code;
+    public Flight(String code) {
+        this.code = code;
     }
 
     public void setDateDeparture(Calendar dateDeparture) {
@@ -119,55 +123,49 @@ public class Flight {
     public ArrayList<Seat> getSeats() {
         return seats;
     }
-    
+
     /**
-     * 
+     *
      * @return Written description of the flight.
      */
-    public String toString(){
+    public String toString() {
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MMM/yyyy HH:mm");
-        return code+" "+r.printRoute()+"\n"+sdf.format(this.dateDeparture.getTime())+" - "+sdf.format(this.dateDestination.getTime())+"\n"+price+"€";
+        return code + " " + r.printRoute() + "\n" + sdf.format(this.dateDeparture.getTime()) + " - " + sdf.format(this.dateDestination.getTime()) + "\n" + price + "€";
     }
-    
+
     /**
-     * 
+     *
      * @return Number of free seats in the flight.
      */
-    public int getSeatFree(){
-        int n=0;
-        for(Seat s : seats){
-            if(s.getTicket()==null){
+    public int getSeatFree() {
+        int n = 0;
+        for (Seat s : seats) {
+            if (s.getTicket() == null) {
                 n++;
             }
         }
         return n;
     }
-    
+
     /**
-     * 
+     *
      * @return Written description of all seat of the flight.
      */
-    public String printAllSeats(){
-        String st="PRIMA CLASSE -> prezzo: "+(this.getPrice()+Flight.COSTOPRIMACLASSE)+"€\n";
-        for(Seat s : seats){
-            if(s.getTicket()==null && s.getClasse()==1){
-                st+=s.getNumber()+" | ";
-            }
-            else{
-                if(s.getTicket()!=null && s.getClasse()==1){
-                    st+="X | ";
-                }
+    public String printAllSeats() {
+        String st = "PRIMA CLASSE -> prezzo: " + (this.getPrice() + Flight.COSTOPRIMACLASSE) + "€\n";
+        for (Seat s : seats) {
+            if (s.getTicket() == null && s.getClasse() == 1) {
+                st += s.getNumber() + " | ";
+            } else if (s.getTicket() != null && s.getClasse() == 1) {
+                st += "X | ";
             }
         }
-        st+="\nSECONDA CLASSE -> prezzo: "+this.getPrice()+"€\n";
-        for(Seat s : seats){
-            if(s.getTicket()==null && s.getClasse()==2){
-                st+=s.getNumber()+" | ";
-            }
-            else{
-                if(s.getTicket()!=null && s.getClasse()==2){
-                    st+="X | ";
-                }
+        st += "\nSECONDA CLASSE -> prezzo: " + this.getPrice() + "€\n";
+        for (Seat s : seats) {
+            if (s.getTicket() == null && s.getClasse() == 2) {
+                st += s.getNumber() + " | ";
+            } else if (s.getTicket() != null && s.getClasse() == 2) {
+                st += "X | ";
             }
         }
         return st;

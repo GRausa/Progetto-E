@@ -103,7 +103,7 @@ public class SeatFrame extends JFrame {
                 case 1:
                     return "Text for " + rowIndex;
                 case 2: // fall through
-               /*Adding button and creating click listener*/
+                /*Adding button and creating click listener*/
                 case 3:
                     final JButton button = new JButton(COLUMN_NAMES[columnIndex]);
                     button.addActionListener(new ActionListener() {

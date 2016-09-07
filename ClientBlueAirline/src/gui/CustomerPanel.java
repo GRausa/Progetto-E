@@ -121,13 +121,11 @@ public class CustomerPanel extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 if (email0.getText().isEmpty() || tell0.getText().isEmpty() || email0.getText().equals("Inserisci Email") || tell0.getText().equals("Inserisci telefono")) {
                     JOptionPane.showConfirmDialog(home, "Riempire tutti i campi" + " per poter proseguire", "Errore", JOptionPane.OK_CANCEL_OPTION);
+                } else if (email0.getText().contains("%@%")) {
+                    JOptionPane.showConfirmDialog(home, "Email non valida,inserirne una valida" + " per poter proseguire", "Errore", JOptionPane.OK_CANCEL_OPTION);
                 } else {
-                    if (email0.getText().contains("%@%")) {
-                        JOptionPane.showConfirmDialog(home, "Email non valida,inserirne una valida" + " per poter proseguire", "Errore", JOptionPane.OK_CANCEL_OPTION);
-                    } else {
-                        home.setReservation(new Reservation(home.getCodeflight(), email0.getText(), tell0.getText()));
-                        home.refreshGUI(new PasseggeriPanel(home, controller));
-                    }
+                    home.setReservation(new Reservation(home.getCodeflight(), email0.getText(), tell0.getText()));
+                    home.refreshGUI(new PasseggeriPanel(home, controller));
                 }
             }
 

@@ -17,22 +17,22 @@ import objects.Route;
  * @author Giovanni
  */
 public class Test8_editFlight {
+
     public static void main(String[] args) throws IOException {
         InterfaceClient client = FacadeControllerClient.getIstance();
         client.connect("localhost");
-        
-        if(client.checkLogin("user-password")){
+
+        if (client.checkLogin("user-password")) {
             Flight f = client.searchFlights(new Flight("00IDG7"))[0];
             f.setDateDeparture(new GregorianCalendar(2016, 8, 16, 15, 30)); //16 Settembre 2016 alle 15:30
             f.setDateDestination(new GregorianCalendar(2016, 8, 16, 18, 00)); //16 Settembre 2016 alle 18:00
             f.setPrice(225);
             f = client.editFlight(f);
-            System.out.println("Modifica effettuata\n"+f.toString());
-        }
-        else{
+            System.out.println("Modifica effettuata\n" + f.toString());
+        } else {
             System.out.println("Credenziali non valide");
         }
-        
+
     }
-    
+
 }

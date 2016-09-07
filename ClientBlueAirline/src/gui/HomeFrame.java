@@ -143,7 +143,6 @@ public class HomeFrame extends JFrame {
         this.setallFont(modificavolo);
         this.trasparentButton(checkin);
         this.setallFont(checkin);
-        
 
         order.addActionListener(nuovaPrenotazione());
         order.addMouseMotionListener(new MouseAdapter() {
@@ -165,12 +164,12 @@ public class HomeFrame extends JFrame {
             }
 
         });
-        
+
         checkin.addActionListener(new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                
+
                 String[] options = {"Check-in"};
                 JPanel panel = new JPanel();
                 JLabel lbl = new JLabel("Insert the Ticket code: ");
@@ -178,26 +177,26 @@ public class HomeFrame extends JFrame {
                 panel.add(lbl);
                 panel.add(txt);
                 ImageIcon immagine = new ImageIcon("immagini/logo2.jpg");
-                immagine= scalaImmagine(immagine,60,60);
+                immagine = scalaImmagine(immagine, 60, 60);
                 int selectedOption = JOptionPane.showOptionDialog(null, panel, "EFFETTUA IL CHECK-IN", JOptionPane.NO_OPTION, JOptionPane.QUESTION_MESSAGE, immagine, options, options[0]);
-                 
+
                 if (selectedOption == 0) {
                     try {
                         String codeTicket = txt.getText();
                         Ticket tp = new Ticket(codeTicket);
                         tp = controller.getTicket(tp);
                         if (tp != null) {
-                             String[] option = {"o"};
+                            String[] option = {"o"};
                             if (controller.isCheckIn(tp)) {
-                               JOptionPane.showConfirmDialog(panel,"Il check-in è stato già effettuato.",null,JOptionPane.CLOSED_OPTION);
+                                JOptionPane.showConfirmDialog(panel, "Il check-in è stato già effettuato.", null, JOptionPane.CLOSED_OPTION);
                             } else {
                                 tp = controller.checkIn(tp);
-                                JOptionPane.showConfirmDialog(panel,"Check-in effettuato.\n" + tp.printTicketPassenger("\n"),null,JOptionPane.CLOSED_OPTION);
+                                JOptionPane.showConfirmDialog(panel, "Check-in effettuato.\n" + tp.printTicketPassenger("\n"), null, JOptionPane.CLOSED_OPTION);
                             }
                         } else {
-                            JOptionPane.showConfirmDialog(panel,"Errore inserimento codice biglietto",null,JOptionPane.CLOSED_OPTION);
+                            JOptionPane.showConfirmDialog(panel, "Errore inserimento codice biglietto", null, JOptionPane.CLOSED_OPTION);
                         }
-                
+
                         notifiche.setText(DEFAULT);
                     } catch (IOException ex) {
                         Logger.getLogger(HomeFrame.class.getName()).log(Level.SEVERE, null, ex);
@@ -206,7 +205,7 @@ public class HomeFrame extends JFrame {
                     notifiche.setText("Operazione cancellata dall'utente");
                 }
             }
-       
+
         });
 
         homepanel.setOpaque(false);
@@ -267,16 +266,16 @@ public class HomeFrame extends JFrame {
                 String[] options = {"SEND"};
                 JPanel panel = new JPanel();
                 JLabel lbl = new JLabel("Send your opinion here : ");
-                JTextArea txt = new JTextArea(20,30);
+                JTextArea txt = new JTextArea(20, 30);
                 panel.add(lbl);
                 panel.add(txt);
                 ImageIcon immagine = new ImageIcon("immagini/logo2.jpg");
-                immagine= scalaImmagine(immagine,150,150);
+                immagine = scalaImmagine(immagine, 150, 150);
                 int selectedOption = JOptionPane.showOptionDialog(null, panel, "CONTATTACI", JOptionPane.NO_OPTION, JOptionPane.QUESTION_MESSAGE, immagine, options, options[0]);
-                 
+
                 if (selectedOption == 0) {
                     try {
-                        controller.sendMail("thetablueairline@gmail.com","OPINIONE ANONIMA",txt.getText());
+                        controller.sendMail("thetablueairline@gmail.com", "OPINIONE ANONIMA", txt.getText());
                     } catch (IOException ex) {
                         Logger.getLogger(HomeFrame.class.getName()).log(Level.SEVERE, null, ex);
                     }
@@ -567,7 +566,5 @@ public class HomeFrame extends JFrame {
         }
 
     }
-    
-    
 
 }

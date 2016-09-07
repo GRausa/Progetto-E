@@ -16,10 +16,11 @@ import objects.Route;
  * @author riccardo
  */
 public class Test0_searchFlightRoute {
-      public static void main(String[] args) throws IOException {
+
+    public static void main(String[] args) throws IOException {
         InterfaceClient client = FacadeControllerClient.getIstance();
         client.connect("localhost");
-        Route route = new Route("Tegel", "Linate","Berlino","Milano");
+        Route route = new Route("Tegel", "Linate", "Berlino", "Milano");
         Flight[] flights = client.calendar(route);
         if (flights.length > 0) {
             for (Flight r : flights) {

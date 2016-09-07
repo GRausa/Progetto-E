@@ -13,13 +13,14 @@ import static java.util.Arrays.asList;
 
 /**
  * Provides the running of the textual user interface for customers.
- * 
+ *
  * @author riccardoz
  */
 public class StartTuiClient {
+
     /**
      * Main method.
-     * 
+     *
      * @param args
      * @throws IOException if has occurred an I/O exception.
      */
@@ -29,10 +30,8 @@ public class StartTuiClient {
             ControllerClientTxt r1 = new ControllerClientTxt(clientBlueAirline);
             Thread nuovoThread1 = new Thread(r1);
             nuovoThread1.start();
-        }
-        else{
+        } else {
             System.out.println("ERRORE CONNESSIONE SERVER NON RIUSCITA");
-        }        
+        }
     }
 }
-

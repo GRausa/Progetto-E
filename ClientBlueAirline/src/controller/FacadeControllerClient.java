@@ -25,11 +25,11 @@ import objects.Ticket;
 
 /**
  * Provides a simplified interface to the methods the customers need.
- * 
+ *
  * @author Giovanni
  */
 public class FacadeControllerClient implements InterfaceClient {
-    
+
     static FacadeControllerClient istance;
 
     private Socket clientSocket;
@@ -37,16 +37,18 @@ public class FacadeControllerClient implements InterfaceClient {
     private PrintWriter out;
     private BufferedReader in;
     private Gson gson = new Gson();
-    
-    private FacadeControllerClient(){        
+
+    private FacadeControllerClient() {
     }
+
     /**
-     * 
+     *
      * @return an istance of facadeControllerClient.
      */
-    public static FacadeControllerClient getIstance(){
-        if(istance==null)
+    public static FacadeControllerClient getIstance() {
+        if (istance == null) {
             istance = new FacadeControllerClient();
+        }
         return istance;
     }
 
@@ -87,7 +89,7 @@ public class FacadeControllerClient implements InterfaceClient {
     }
 
     @Override
-    public Flight[] searchFlights(Flight flight){
+    public Flight[] searchFlights(Flight flight) {
         try {
             out.println("SEARCHFLIGHTS " + gson.toJson(flight));
             Flight[] flights = gson.fromJson(in.readLine(), Flight[].class);
@@ -96,16 +98,17 @@ public class FacadeControllerClient implements InterfaceClient {
             Logger.getLogger(FacadeControllerClient.class.getName()).log(Level.SEVERE, null, ex);
             return null;
         }
-        
+
     }
-/*
+
+    /*
     @Override
     public Flight searchFlight(Flight flight) throws IOException {
         out.println("SEARCHFLIGHTCODE " + gson.toJson(flight));
         Flight f = gson.fromJson(in.readLine(), Flight.class);
         return f;
     }
-*/
+     */
     @Override
     public Reservation makeReservation(Reservation res) throws IOException {
         out.println("RESERVATION " + gson.toJson(res));
@@ -127,10 +130,15 @@ public class FacadeControllerClient implements InterfaceClient {
     }
 
     @Override
-    public String[] getAllCitys() throws IOException {
-        out.println("CITYS");
-        String[] cities = gson.fromJson(in.readLine(), String[].class);
-        return cities;
+    public String[] getAllCitys() {
+        try {
+            out.println("CITYS");
+            String[] cities = gson.fromJson(in.readLine(), String[].class);
+            return cities;
+        } catch (IOException ex) {
+            Logger.getLogger(FacadeControllerClient.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
     }
 
     @Override
@@ -202,7 +210,7 @@ public class FacadeControllerClient implements InterfaceClient {
         Flight f = gson.fromJson(in.readLine(), Flight.class);
         return f;
     }
-    
+
     @Override
     public boolean checkLogin(String userpass) throws IOException {
         out.println("LOGIN " + gson.toJson(userpass));

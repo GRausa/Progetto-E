@@ -15,21 +15,21 @@ import objects.Ticket;
  * @author Giovanni
  */
 public class Test6_checkIn {
+
     public static void main(String[] args) throws IOException {
         InterfaceClient client = FacadeControllerClient.getIstance();
         client.connect("localhost");
-        
+
         Ticket tp = client.getTicket(new Ticket("A4D5F621"));
         System.out.println(tp.printTicketPassenger("\n"));
-        
+
         System.out.println("Check-in:");
-        if(!tp.isCheckIn()){
+        if (!tp.isCheckIn()) {
             client.checkIn(tp);
             System.out.println(tp.printTicketPassenger("\n"));
-        }
-        else{
+        } else {
             System.out.println("Il Check-in è già stato effettuato");
         }
-    }   
-    
+    }
+
 }

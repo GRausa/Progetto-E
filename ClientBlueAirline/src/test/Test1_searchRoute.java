@@ -20,9 +20,9 @@ import tui.client.MethodsControlClient;
  *
  * @author Giovanni
  */
-
 //SINGOLA ROTTA
 public class Test1_searchRoute {
+
     public static void main(String[] args) throws IOException {
         InterfaceClient client = FacadeControllerClient.getIstance();
         client.connect("localhost");
@@ -36,5 +36,5 @@ public class Test1_searchRoute {
             System.out.println("Non esiste tratta per queste città");
         }
     }
-        
+
 }

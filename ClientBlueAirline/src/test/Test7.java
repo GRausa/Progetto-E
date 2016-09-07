@@ -17,12 +17,13 @@ import objects.Route;
  * @author riccardo
  */
 public class Test7 {
-      public static void main(String[] args) throws IOException {
+
+    public static void main(String[] args) throws IOException {
         InterfaceClient client = FacadeControllerClient.getIstance();
         client.connect("localhost");
         Route route = new Route("Milano", "Oslo");
 
-        GregorianCalendar date = new GregorianCalendar(2016, 07- 1, 13);
+        GregorianCalendar date = new GregorianCalendar(2016, 07 - 1, 13);
 
         Flight flight = new Flight(route, date);
         Flight[] flights = client.searchFlights(flight);
