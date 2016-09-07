@@ -16,7 +16,7 @@ import objects.Route;
 import objects.Ticket;
 
 /**
- * Provides methods for the Database managment.
+ * Provides methods for the Database managment. Provides also methods for the administrators. 
  * 
  * @author Giovanni
  */
@@ -26,7 +26,7 @@ public interface AdapterDB {
      * 
      * @param tp Ticket to modify.
      * @return Ticket modified.
-     * @throws SQLException 
+     * @throws SQLException If there is Database access error or other errors.
      */
     Ticket editSeatTicket(Ticket tp) throws SQLException;
     /**
@@ -34,7 +34,7 @@ public interface AdapterDB {
      * 
      * @param tp Ticket to modify.
      * @return Ticket modified.
-     * @throws SQLException 
+     * @throws SQLException If there is Database access error or other errors.
      */
     Ticket editTicket(Ticket tp) throws SQLException;
     /**
@@ -57,35 +57,35 @@ public interface AdapterDB {
      * 
      * @param codeTicket Code of the ticket.
      * @return List of the hold luggages associated to the ticket.
-     * @throws SQLException 
+     * @throws SQLException If there is Database access error or other errors.
      */
     ArrayList<HoldLuggage> getHoldLuggagesTicket(String codeTicket) throws SQLException;
     /**
      * 
      * @param codeTicket Code of the ticket.
      * @return List of the insurances associated to the ticket.
-     * @throws SQLException 
+     * @throws SQLException If there is Database access error or other errors.
      */
     ArrayList<Insurance> getInsurancesTicket(String codeTicket) throws SQLException;
     /**
      * 
      * @param codeTicket Code of the ticket.
      * @return List of the meals associated to the ticket.
-     * @throws SQLException 
+     * @throws SQLException If there is Database access error or other errors.
      */
     ArrayList<Meal> getMealsTicket(String codeTicket) throws SQLException;
     /**
      * 
      * @param codeReservation Code of the reservation.
      * @return Full reservation.
-     * @throws SQLException 
+     * @throws SQLException If there is Database access error or other errors.
      */
     Reservation getReservation(int codeReservation) throws SQLException;
     /**
      * 
      * @param codeTicket Code of the ticket.
      * @return Full ticket.
-     * @throws SQLException 
+     * @throws SQLException If there is Database access error or other errors.
      */
     Ticket getTicket(String codeTicket) throws SQLException;
     /**
@@ -93,7 +93,7 @@ public interface AdapterDB {
      * @param codeTicket Code of the ticket.
      * @return <code>true</code> if the check in is already done;
      *         <code>false</code> otherwise.
-     * @throws SQLException 
+     * @throws SQLException If there is Database access error or other errors.
      */
     boolean isCheckIn(String codeTicket) throws SQLException;
     /**
@@ -101,14 +101,14 @@ public interface AdapterDB {
      * 
      * @param reservation Reservation to do.
      * @return Reservation done.
-     * @throws SQLException 
+     * @throws SQLException If there is Database access error or other errors.
      */
     Reservation makeReservation(Reservation reservation) throws SQLException;
     /**
      * 
      * @param codeFlight Code of the flight.
      * @return Number of the seats available.
-     * @throws SQLException 
+     * @throws SQLException If there is Database access error or other errors.
      */
     int numberSeatFreeFlight(String codeFlight) throws SQLException;
     /**
@@ -121,7 +121,7 @@ public interface AdapterDB {
      * 
      * @param codeFlight Code of the flight.
      * @return Flight found.
-     * @throws SQLException 
+     * @throws SQLException If there is Database access error or other errors.
      */
     Flight searchFlight(String codeFlight) throws SQLException;
     /**
@@ -131,14 +131,14 @@ public interface AdapterDB {
      * @param destination Destination city.
      * @param date Date of the flight.
      * @return Corrispondences found.
-     * @throws SQLException 
+     * @throws SQLException If there is Database access error or other errors.
      */
     ArrayList<Flight> searchFlights(String departure, String destination, String date) throws SQLException;
     /**
      * 
      * @param route Route.
      * @return Flights that travel over this route.
-     * @throws SQLException 
+     * @throws SQLException If there is Database access error or other errors.
      */
     ArrayList<Flight> searchFlights(Route route) throws SQLException;
     /**
@@ -152,7 +152,7 @@ public interface AdapterDB {
      * @param nseat Number of the seat.
      * @return <code>true</code> if the seat is available;
      *         <code>false</code> otherwise.
-     * @throws SQLException 
+     * @throws SQLException If there is Database access error or other errors.
      */
     boolean seatIsFree(String codeFlight, int nseat) throws SQLException;
     
@@ -166,7 +166,7 @@ public interface AdapterDB {
      * Makes the check in of a ticket.
      * 
      * @param codeTicket Code of the ticket.
-     * @throws SQLException 
+     * @throws SQLException If there is Database access error or other errors.
      */
     void setCheckIn(String codeTicket) throws SQLException;
     /**
@@ -174,7 +174,7 @@ public interface AdapterDB {
      * 
      * @param flight Flight.
      * @return Flight with all seats set.
-     * @throws SQLException 
+     * @throws SQLException If there is Database access error or other errors.
      */
     Flight setSeatsFlight(Flight flight) throws SQLException;
     /**
@@ -182,7 +182,7 @@ public interface AdapterDB {
      * 
      * @param flight Flight. 
      * @return Flight inserted.
-     * @throws SQLException 
+     * @throws SQLException If there is Database access error or other errors.
      */
     Flight insertFlight(Flight flight) throws SQLException ;
     /**
@@ -190,7 +190,7 @@ public interface AdapterDB {
      * @param airportDeparture Departure's airport.
      * @param airportDestination Destinarion's airport.
      * @return Code of the route.
-     * @throws SQLException 
+     * @throws SQLException If there is Database access error or other errors.
      */
     String getCodeRoute(String airportDeparture, String airportDestination) throws SQLException;
     /**
@@ -198,7 +198,7 @@ public interface AdapterDB {
      * @param userpass Login information.
      * @return <code>true</code> if informations are correct.
  *   *          <code>false</code> otherwise.
-     * @throws SQLException
+     * @throws SQLException If there is Database access error or other errors.
      */
     Boolean checkLogin(String userpass) throws SQLException;
     /**
@@ -206,7 +206,7 @@ public interface AdapterDB {
      * 
      * @param flight Flight to modify.
      * @return Flight modified.
-     * @throws SQLException 
+     * @throws SQLException If there is Database access error or other errors.
      */
     Flight editFlight(Flight flight) throws SQLException;
     

@@ -16,64 +16,162 @@ import objects.Route;
 import objects.Ticket;
 
 /**
- *
+ * Provides methods for the Database managment. This methods are those who the customers need.
+ * 
  * @author Giovanni
  */
 public interface InterfaceServer {
 
-    //modifica una ticket
+    /**
+     * Modifies the seat number of a ticket.
+     * 
+     * @param tp Ticket to modify.
+     * @return Ticket modified.
+     * @throws SQLException If there is Database access error or other errors.
+     */
     Ticket editSeatTicket(Ticket tp) throws SQLException;
 
-    //modifica il biglietto
+    /**
+     * Modifies a ticket.
+     * 
+     * @param tp Ticket to modify.
+     * @return Ticket modified.
+     * @throws SQLException If there is Database access error or other errors.
+     */
     Ticket editTicket(Ticket tp) throws SQLException;
 
-    //ritorna tutti i bagagli
+    /**
+     * 
+     * @return List of all hold luggages.
+     */
     ArrayList<HoldLuggage> getAllHoldLuggages();
 
-    //ritorna tutte le assicurazioni
+    /**
+     * 
+     * @return List of all insurances.
+     */
     ArrayList<Insurance> getAllInsurances();
 
-    //ritorna tutti i meal
+    /**
+     * 
+     * @return List of all meals.
+     */
     ArrayList<Meal> getAllMeals() ;
 
-    //ritorna tutta la prenotazione
+    /**
+     * 
+     * @param codeReservation Code of the reservation.
+     * @return Full reservation.
+     * @throws SQLException If there is Database access error or other errors.
+     */
     Reservation getReservtion(int codeReservation) throws SQLException;
 
-    //ritorna ticketPassenger
+    /**
+     * 
+     * @param codeTicket Code of the ticket.
+     * @return Full ticket.
+     * @throws SQLException If there is Database access error or other errors.
+     */
     Ticket getTicket(String codeTicket) throws SQLException;
 
-    //controlla se è stato fatto il checkin
+    /**
+     * 
+     * @param codeTicket Code of the ticket.
+     * @return <code>true</code> if the check in is already done;
+     *         <code>false</code> otherwise.
+     * @throws SQLException If there is Database access error or other errors.
+     */
     boolean isCheckIn(String codeTicket) throws SQLException;
 
-    //effettua prenotazione
+    /**
+     * Inserts a reservation in the database.
+     * 
+     * @param reservation Reservation to do.
+     * @return Reservation done.
+     * @throws SQLException If there is Database access error or other errors.
+     */
     Reservation makeReservation(Reservation reservation) throws SQLException;
 
-    //ricerca di tutte le città
+    /**
+     * 
+     * @return List of all cities.
+     */
     ArrayList<String> searchAllCitys() ;
 
-    //ricerca volo in base al codice -> restituisce tutto il volo con i posti
+    /**
+     * Search a flight in the database.
+     * 
+     * @param codeFlight Code of the flight.
+     * @return Flight found.
+     * @throws SQLException If there is Database access error or other errors.
+     */
     Flight searchFlight(String codeFlight) throws SQLException;
 
-    //ricerca voli da città partenza e città arrivo e data
+    /**
+     * Search flights corrispondences.
+     * 
+     * @param departure Departure city.
+     * @param destination Destination city.
+     * @param date Date of the flight.
+     * @return Corrispondences found.
+     * @throws SQLException If there is Database access error or other errors.
+     */
     ArrayList<Flight> searchFlights(String departure, String destination, String date) throws SQLException;
 
-    //ricerca volo in base alla rotta
+    /**
+     * 
+     * @param route Route.
+     * @return Flights that travel over this route.
+     * @throws SQLException If there is Database access error or other errors.
+     */
     ArrayList<Flight> searchFlights(Route route) throws SQLException;
 
-    //ricerca tutte le rotte
+    /**
+     * 
+     * @return List of routes.
+     */
     ArrayList<Route> searchRoutes();
 
-    //effettua checkin
+    /**
+     * Makes the check in of a ticket.
+     * 
+     * @param codeTicket Code of the ticket.
+     * @throws SQLException If there is Database access error or other errors.
+     */
     void setCheckIn(String codeTicket) throws SQLException;
     
-    //inserisci un volo
+    /**
+     * Inserts a flight in the Database.
+     * 
+     * @param flight Flight. 
+     * @return Flight inserted.
+     * @throws SQLException If there is Database access error or other errors.
+     */
     Flight insertFlight(Flight flight) throws SQLException;
     
-    //login
+    /**
+     * 
+     * @param userpass Login information.
+     * @return <code>true</code> if informations are correct.
+ *   *          <code>false</code> otherwise.
+     * @throws SQLException If there is Database access error or other errors.
+     */
     Boolean checkLogin(String username) throws SQLException;
-
+    /**
+     * Send an email to the addressee.
+     * 
+     * @param sender Addressee of the email.
+     * @param object Object of the email.
+     * @param text Text of the email.
+     */
     void sendMail(String sender, String object, String text);
-    
+    /**
+     * Modifies a flight in the Database.
+     * 
+     * @param flight Flight to modify.
+     * @return Flight modified.
+     * @throws SQLException If there is Database access error or other errors.
+     */
     Flight editFlight(Flight flight) throws SQLException;
 
     //numero posti liberi in un volo

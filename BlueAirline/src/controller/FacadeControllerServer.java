@@ -19,7 +19,8 @@ import objects.Route;
 import objects.Ticket;
 
 /**
- *
+ * Provides a simplified interface to the methods the customers need.
+ * 
  * @author Giovanni
  */
 public class FacadeControllerServer implements InterfaceServer {

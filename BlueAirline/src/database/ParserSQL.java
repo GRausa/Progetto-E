@@ -21,11 +21,18 @@ import objects.Seat;
 import objects.Ticket;
 
 /**
- *
+ *Provides the query written in SQL language in order to modify/add new elements in the Database.
+ * 
  * @author Giovanni
  */
 public class ParserSQL {
-
+    /**
+     * Inserts the routes located in the databdase in an ArrayList.
+     * 
+     * @param resultQuery Result of the query.
+     * @return List of all routes found in the database.
+     * @throws SQLException 
+     */
     public static ArrayList<Route> parseRoutes(ResultSet resultQuery) throws SQLException{
         ArrayList<Route> routes = new ArrayList<>();
         while (resultQuery.next()) {
@@ -37,7 +44,13 @@ public class ParserSQL {
         }
         return routes;        
     }
-    
+    /**
+     * Inserts the flights located in the databdase in an ArrayList.
+     * 
+     * @param resultQuery Result of the query.
+     * @return List of all flights found in the database.
+     * @throws SQLException 
+     */
     public static ArrayList<Flight> parseFlights(ResultSet resultQuery) throws SQLException{
         ArrayList<Flight> flights = new ArrayList<>();
         while (resultQuery.next()) {
@@ -61,6 +74,13 @@ public class ParserSQL {
         return flights;        
     }
     
+    /**
+     * Inserts the flights located in the databdase in an ArrayList setting also the seats.
+     * 
+     * @param resultQuery Result of the query.
+     * @return List of all flights found in the database.
+     * @throws SQLException 
+     */
     public static Flight parseFlight(ResultSet resultQuery) throws SQLException{
         if(resultQuery.next()){
             String code = resultQuery.getString("COD_VOLO");
@@ -98,7 +118,13 @@ public class ParserSQL {
             return null;
         }
     }
-    
+    /**
+     * Inserts the reservation located in the databdase in an ArrayList.
+     * 
+     * @param resultQuery Result of the query.
+     * @return List of all reservation found in the database.
+     * @throws SQLException 
+     */
     public static Reservation parseReservation(ResultSet resultQuery) throws SQLException{
         if(resultQuery.next()){
             int codeReservation = resultQuery.getInt("COD_PRENOTAZIONE");
@@ -122,7 +148,7 @@ public class ParserSQL {
             return null;
         }
     }
-    
+ 
     public static double parseFunctionDoubleSQL(ResultSet resultQuery, String value) throws SQLException{ //SINGOLI MAX,MIN,COUNT...
         resultQuery.next();
         return resultQuery.getDouble(value);
@@ -132,7 +158,13 @@ public class ParserSQL {
         resultQuery.next();
         return resultQuery.getString(value);
     }
-    
+    /**
+     * Inserts the cities located in the databdase in an ArrayList.
+     * 
+     * @param resultQuery Result of the query.
+     * @return List of all cities found in the database.
+     * @throws SQLException 
+     */
     public static ArrayList<String> parseCitis(ResultSet resultQuery) throws SQLException{
         ArrayList<String> citys = new ArrayList<>();
         while (resultQuery.next()) {
@@ -140,7 +172,13 @@ public class ParserSQL {
         }
         return citys;
     }
-    
+    /**
+     * Inserts the seats located in the databdase in an ArrayList.
+     * 
+     * @param resultQuery Result of the query.
+     * @return List of all seats found in the database.
+     * @throws SQLException 
+     */
     public static ArrayList<Seat> parseSeats(ResultSet resultQuery) throws SQLException {
         ArrayList<Seat> seats = new ArrayList<>();
         while (resultQuery.next()) {
@@ -163,7 +201,13 @@ public class ParserSQL {
         }
         return meals;   
     } 
-    
+    /**
+     * Inserts the hold luggages located in the databdase in an ArrayList.
+     * 
+     * @param resultQuery Result of the query.
+     * @return List of all hold luggages found in the database.
+     * @throws SQLException 
+     */
     public static ArrayList<HoldLuggage> parseHoldLuggages(ResultSet resultQuery) throws SQLException{
         ArrayList<HoldLuggage> holdLuggages = new ArrayList<>();
         while (resultQuery.next()) {
@@ -175,7 +219,13 @@ public class ParserSQL {
         }
         return holdLuggages; 
     }
-    
+    /**
+     * Inserts the insurances located in the databdase in an ArrayList.
+     * 
+     * @param resultQuery Result of the query.
+     * @return List of all insurances found in the database.
+     * @throws SQLException 
+     */
     public static ArrayList<Insurance> parseInsurances(ResultSet resultQuery) throws SQLException{
         ArrayList<Insurance> insurances = new ArrayList<>();
         while (resultQuery.next()) {
@@ -187,7 +237,13 @@ public class ParserSQL {
         }
         return insurances; 
     }
-    
+    /**
+     * Inserts the tickets located in the databdase in an ArrayList.
+     * 
+     * @param resultQuery Result of the query.
+     * @return List of all tickets found in the database.
+     * @throws SQLException 
+     */
     public static Ticket parseTicketPassenger(ResultSet resultQuery) throws SQLException{
         if(resultQuery.next()){
             String codeTicket = resultQuery.getString("COD_TICKET");
@@ -220,6 +276,13 @@ public class ParserSQL {
         
     //METODI GENERICI
     
+    /**
+     * Converts the string date/time in a date in GregorianCalendar format.
+     * 
+     * @param stringDate Date in String format.
+     * @param stringTime Time in String format.
+     * @return Date in GregorianCalendar format.
+     */
     public static Calendar returnCalendar(String stringDate, String stringTime){
         String[] vetDate = stringDate.split("-");
         int year = Integer.parseInt(vetDate[0]);
@@ -232,13 +295,24 @@ public class ParserSQL {
         return date;
     }
     
+    /**
+     * Converts a date in Gregorian calendar format in a String.
+     * 
+     * @param date Date in GregorianCalendar format.
+     * @return Date in String format.
+     */
     public static String stringDate(GregorianCalendar date){
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         String d = sdf.format(date.getTime());
         String[] vet = d.split("/");
         return vet[2]+"-"+vet[1]+"-"+vet[0];
     }
-    
+    /**
+     * Converts a time in Gregorian calendar format in a String.
+     * 
+     * @param date Time in GregorianCalendar format.
+     * @return Time in String format.
+     */
     public static String stringTime(GregorianCalendar date){
         SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
         String d = sdf.format(date.getTime());
