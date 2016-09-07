@@ -15,7 +15,7 @@ import objects.Route;
  *
  * @author riccardo
  */
-public class Test0 {
+public class Test0_searchFlightRoute {
       public static void main(String[] args) throws IOException {
         InterfaceClient client = FacadeControllerClient.getIstance();
         client.connect("localhost");
