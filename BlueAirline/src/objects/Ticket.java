@@ -8,7 +8,8 @@ package objects;
 import java.util.ArrayList;
 
 /**
- * La classe Ticket indica un biglietto di un volo della compagnia.
+ * Represents a ticket associated to a one and only seat on a 
+ * specific flight on an airplane. A passengers can customize the ticket with supplements.
  * 
  * @author cl418377
  */
@@ -22,15 +23,15 @@ public class Ticket {
     private ArrayList<Insurance> insurances;
     private boolean checkIn;
     /**
-     * Istanzia un nuovo biglietto.
+     * Constructs a ticket with the specified informations. CheckIn set to false and no supplements.
      * 
-     * @param ID ID del passeggero
-     * @param name nome del passeggero
-     * @param surname cognome del passeggero
-     * @param nseat numero del posto a sedere
-     * @param classe classe del posto a sedere 
-     * @param codeFlight codice del volo
-     * @param priceFlight prezzo del volo
+     * @param ID Number of identity document of the passenger.
+     * @param name Name of the passenger.
+     * @param surname Surname of the passenger.
+     * @param nseat Seat number.
+     * @param classe Class of the seat.
+     * @param codeFlight Code of the flight.
+     * @param priceFlight Price of the flight.
      */
     public Ticket(String ID, String name, String surname, int nseat, int classe, String codeFlight, double priceFlight) {
         this.ID = ID;
@@ -46,18 +47,19 @@ public class Ticket {
         this.checkIn=false;
     }
     /**
-     * Istanzia un nuovo biglietto.
+     * Constructs a ticket with the specified informations. No supplements.
      * 
-     * @param code codice del biglietto
-     * @param priceFlight prezzo del volo
-     * @param ID ID del passeggero
-     * @param name nome del passeggero
-     * @param surname cognome del passeggero
-     * @param codeFlight codice del volo
-     * @param nseat numero del posto a sedere 
-     * @param codeReservation codice della prenotazione
-     * @param classe classe del posto 
-     * @param checkIn variabile che indica se il check-in è stato effettuato
+     * @param code Code of the ticket.
+     * @param priceFlight Price of the ticket.
+     * @param ID Number of identity document of the passenger.
+     * @param name Name of the passenger.
+     * @param surname Surname of the passenger.
+     * @param codeFlight Code of the flight.
+     * @param nseat Seat number.
+     * @param codeReservation Code of the reservation where the ticket is.
+     * @param classe Class of the seat. 
+     * @param checkIn It can be set to <code>true</code> if the passenger already did the CheckIn;
+     *                <code>false</code> otherwise.  
      */
     public Ticket(String code, double priceFlight, String ID, String name, String surname, String codeFlight, int nseat, int codeReservation, int classe, boolean checkIn) {
         this.code = code;
@@ -72,9 +74,9 @@ public class Ticket {
         this.checkIn = checkIn;
     }
     /**
-     * Istanzia un nuovo biglietto a partire dal suo codice.
+     * Constructs an empty ticket with only the ticket's code.
      * 
-     * @param code codice del biglietto
+     * @param code Code of the ticket.
      */
     public Ticket(String code){
         this.code = code;
@@ -116,9 +118,10 @@ public class Ticket {
     public double getPriceFlight(){
         return priceFlight;
     }
+    
     /**
      * 
-     * @return prezzo totale comprensivo delle varie aggiunte
+     * @return Total price of the ticket calculating also the supplements.
      */
     public double getTotalPrice() {
         double totalPrice=priceFlight;
@@ -189,17 +192,26 @@ public class Ticket {
         this.insurances = insurances;
     }
     
+    /**
+     * 
+     * @return <code>true</code> if the passenger already did the check in;
+ *         <code>false</code> otherwise.
+     */
     public boolean isCheckIn() {
         return checkIn;
     }    
     /**
      * 
-     * @return descrizione scritta del biglietto
+     * @return written description of the ticket.
      */
     public String printTicketPassenger(){
         String s = "Codice Biglietto"+code+" "+name+" "+surname+" "+this.printTicketWithoutCode();
         return s;
     }
+    /**
+     * 
+     * @return written description of the ticket. The code ticket not added.
+     */
     public String printTicketWithoutCode(){
         double priceAggiunte=0;
         String s = ID+"\nVolo: "+codeFlight+" Posto: "+nseat+" ("+classe+" classe)\nAggiunte:\n";

@@ -6,7 +6,7 @@
 package objects;
 
 /**
- * La classe Seat indica un posto a sedere su un aereo.
+ * Represents a booked in seat associated to a ticket.
  * 
  * @author Giovanni
  */
@@ -15,11 +15,11 @@ public class Seat {
     private int classe;
     private String ticket;
     /**
-     * Istanzia un nuovo posto a sedere.
+     * Construct a new seat.
      * 
-     * @param numero numero del posto a sedere
-     * @param classe classe del posto
-     * @param ticket ticket associato al posto
+     * @param numero Number of the seat.
+     * @param classe Class of the seat.
+     * @param ticket Ticket associated to the seat.
      */
     public Seat(int numero,int classe, String ticket){
         this.ticket=ticket;

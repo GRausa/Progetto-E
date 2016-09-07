@@ -30,7 +30,7 @@ import mail.Email;
 import static jdk.nashorn.internal.objects.NativeMath.log;
 
 /**
- * La classe RemoteUser serve per comunicare con il Server. 
+ * The class RemoteUser is used for creating a new connection with the socket.
  * 
  * @author riccardo
  */
@@ -46,22 +46,17 @@ class RemoteUser extends Thread {
     private boolean stop;
     private Map<String, Command> commands;
 
-    /**
-     * Create a user connected with a socket.
-     *
-     * @param chat the main chat object
-     * @param socket the socket used to communicate
-     */
+   
     static synchronized private int generateProgressive() {
         return counter++;
     }
 
      /**
-       * Istanzia un nuovo RemoteUser per la comunicazione con il socket.
+       * Constructs a new remote user for the connection with the socket.
        * 
        * @param company
-       * @param socket socket utilizzato per la comunicazione
-       * @throws IOException 
+       * @param socket Socket used for the connection.
+       *
        */
     RemoteUser(InterfaceServer company, Socket socket) throws IOException {
         this.company = company;
@@ -74,9 +69,9 @@ class RemoteUser extends Thread {
     }
 
     /**
-    * Invia un messaggio di errore.
+    * Send an errore message.
     * 
-    * @param message messaggio
+    * @param message Message to be sended.
     */
     private void error(String message) {
         log(Level.WARNING, "Sent error: " + message);
@@ -84,7 +79,7 @@ class RemoteUser extends Thread {
     }
 
     /**
-    * Crea una tabella di invio che mappa tutti i comandi per eseguire le azioni.
+    * Create a new table that maps the commands for performing various action.
     * 
     */
     private void registerCommands() {
@@ -387,9 +382,9 @@ class RemoteUser extends Thread {
         
     }
     /**
-    * Esegue un determinato comando.
+    * Perform a specified command.
     * 
-    * @param command comando da eseguire
+    * @param command Command to be performed.
     * @param args 
     */
     private void executeCommand(String command, String args) {

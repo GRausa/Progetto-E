@@ -9,11 +9,14 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 /**
- * La classe Flight indica un volo che effettua la compagnia.
+ * Represents a flight that the company performs.
  * 
  * @author Giovanni
  */
 public class Flight {
+    /**
+     * Supplement of the first class.
+     */
     public static double COSTOPRIMACLASSE=30;
     private String code;
     private Route r;
@@ -24,13 +27,13 @@ public class Flight {
     private String codeAirplane;
     
     /**
-     * Istanzia un nuovo volo
+     * Constructs a new flight. The seats are not added.
      * 
-     * @param code codice del volo
-     * @param r rotta del volo
-     * @param dateDeparture data di partenza 
-     * @param dateDestination data di arrivo
-     * @param prezzo prezzo del volo
+     * @param code Code of the flight.
+     * @param r Route of the flight.
+     * @param dateDeparture Departure's date.
+     * @param dateDestination Arrival's date.
+     * @param prezzo Price of a ticket in the second class of the flight.
      */
     public Flight(String code, Route r, Calendar dateDeparture, Calendar dateDestination, double prezzo) {
         this.code = code;
@@ -40,14 +43,14 @@ public class Flight {
         this.price = prezzo;
     }
     /**
-     * Istanzia un nuovo volo
+     * Constructs a new flight.
      * 
-     * @param code codice del volo
-     * @param r rotta del volo
-     * @param dateDeparture data di partenza
-     * @param dateDestination data di arrivo   
-     * @param price prezzo del volo
-     * @param seats lista dei posti a sedere
+     * @param code Code of the flight.
+     * @param r Route of the flight.
+     * @param dateDeparture Departure's date.
+     * @param dateDestination Arrival's date.  
+     * @param price Price of a ticket in the second class of the flight.
+     * @param seats List of the seat.
      */
     public Flight(String code, Route r, Calendar dateDeparture, Calendar dateDestination, double price, ArrayList<Seat> seats) {
         this.code = code;

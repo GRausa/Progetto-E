@@ -9,7 +9,7 @@ import javax.mail.PasswordAuthentication;
  */
 
 /**
- * La classe GMailAuthenticator serve per l'autenticazione per l'invio della mail.
+ * Provides the authentication for sending emails.
  * 
  * @author riccardoz
  */
@@ -19,9 +19,10 @@ public class GMailAuthenticator extends Authenticator {
         String pw;
         /**
          * Istanzia un nuovo authenticator per l'invio della mail.
+         * Constructs a new authenticator for sending emails.
          * 
-         * @param username
-         * @param password 
+         * @param username Username.
+         * @param password Password.
          */
         public GMailAuthenticator(String username, String password) {
             super();

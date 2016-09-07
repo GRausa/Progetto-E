@@ -21,13 +21,16 @@ import objects.Seat;
 import objects.Ticket;
 
 /**
- *
+ * Provides the connection with the Database.
+ * 
  * @author Giovanni
  */
 public class ConcreteAdapterDB implements AdapterDB {
 
     private ConnectionSQL SQL;
-
+    /**
+     * Starts a connection with the Database.
+     */
     public ConcreteAdapterDB() {
         SQL = new ConnectionSQL();
         SQL.startConnection();

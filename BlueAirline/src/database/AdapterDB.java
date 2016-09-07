@@ -16,183 +16,196 @@ import objects.Route;
 import objects.Ticket;
 
 /**
- * L'interfaccia AdapterDB definisce i metodi per la gestione del DB.
+ * Provides methods for the Database managment.
  * 
  * @author Giovanni
  */
 public interface AdapterDB {
     /**
+     * Modifies the seat number of a ticket.
      * 
-     * @param tp Ticket di cui vogliamo modificare il posto a sedere
-     * @return Ticket modificato
+     * @param tp Ticket to modify.
+     * @return Ticket modified.
      * @throws SQLException 
      */
     Ticket editSeatTicket(Ticket tp) throws SQLException;
     /**
+     * Modifies a ticket.
      * 
-     * @param tp Ticket da modificare
-     * @return Ticket modificato
+     * @param tp Ticket to modify.
+     * @return Ticket modified.
      * @throws SQLException 
      */
     Ticket editTicket(Ticket tp) throws SQLException;
     /**
      * 
-     * @return Lista dei bagagli da stiva 
+     * @return List of all hold luggages.
      */
     ArrayList<HoldLuggage> getAllHoldLuggages();
     /**
      * 
-     * @return Lista delle assicurazioni 
+     * @return List of all insurances.
      */
     ArrayList<Insurance> getAllInsurances();
     /**
      * 
-     * @return Lista dei pasti
+     * @return List of all meals.
      */
     ArrayList<Meal> getAllMeals();
     /**
      * 
-     * @param codeTicket codice del Ticket 
-     * @return lista di bagagli da stiva associati al Ticket
+     * 
+     * @param codeTicket Code of the ticket.
+     * @return List of the hold luggages associated to the ticket.
      * @throws SQLException 
      */
     ArrayList<HoldLuggage> getHoldLuggagesTicket(String codeTicket) throws SQLException;
     /**
      * 
-     * @param codeTicket codice del Ticket
-     * @return lista delle assicurazioni associate al Ticket
+     * @param codeTicket Code of the ticket.
+     * @return List of the insurances associated to the ticket.
      * @throws SQLException 
      */
     ArrayList<Insurance> getInsurancesTicket(String codeTicket) throws SQLException;
     /**
      * 
-     * @param codeTicket codice del Ticket
-     * @return lista dei pasti associati al Ticket
+     * @param codeTicket Code of the ticket.
+     * @return List of the meals associated to the ticket.
      * @throws SQLException 
      */
     ArrayList<Meal> getMealsTicket(String codeTicket) throws SQLException;
     /**
      * 
-     * @param codeReservation codice della prenotazione
-     * @return prenotazione completa
+     * @param codeReservation Code of the reservation.
+     * @return Full reservation.
      * @throws SQLException 
      */
     Reservation getReservation(int codeReservation) throws SQLException;
     /**
      * 
-     * @param codeTicket codice ticket
-     * @return Ticket completo
+     * @param codeTicket Code of the ticket.
+     * @return Full ticket.
      * @throws SQLException 
      */
     Ticket getTicket(String codeTicket) throws SQLException;
     /**
      * 
-     * @param codeTicket codice del biglietto
-     * @return <code>true</code> se il check in è gia stato effettuato;
-     *         <code>false</code> altrimenti
+     * @param codeTicket Code of the ticket.
+     * @return <code>true</code> if the check in is already done;
+     *         <code>false</code> otherwise.
      * @throws SQLException 
      */
     boolean isCheckIn(String codeTicket) throws SQLException;
     /**
+     * Inserts a reservation in the database.
      * 
-     * @param reservation prenotazione da inserire nel database
-     * @return prenotazione effettuata
+     * @param reservation Reservation to do.
+     * @return Reservation done.
      * @throws SQLException 
      */
     Reservation makeReservation(Reservation reservation) throws SQLException;
     /**
      * 
-     * @param codeFlight codice del volo
-     * @return numero dei posti disponibili sul volo indicato
+     * @param codeFlight Code of the flight.
+     * @return Number of the seats available.
      * @throws SQLException 
      */
     int numberSeatFreeFlight(String codeFlight) throws SQLException;
     /**
      * 
-     * @return lista di tutte le città.
+     * @return List of all cities.
      */
     ArrayList<String> searchAllCitys();
     /**
+     * Search a flight in the database.
      * 
-     * @param codeFlight codice del volo
-     * @return volo ricercato
+     * @param codeFlight Code of the flight.
+     * @return Flight found.
      * @throws SQLException 
      */
     Flight searchFlight(String codeFlight) throws SQLException;
     /**
+     * Search flights corrispondences.
      * 
-     * @param departure città di partenza
-     * @param destination città di destinazione
-     * @param date data
-     * @return corrispondenze trovate
+     * @param departure Departure city.
+     * @param destination Destination city.
+     * @param date Date of the flight.
+     * @return Corrispondences found.
      * @throws SQLException 
      */
     ArrayList<Flight> searchFlights(String departure, String destination, String date) throws SQLException;
     /**
      * 
-     * @param route rotta del volo
-     * @return voli che percorrono la rotta indicata
+     * @param route Route.
+     * @return Flights that travel over this route.
      * @throws SQLException 
      */
     ArrayList<Flight> searchFlights(Route route) throws SQLException;
     /**
      * 
-     * @return lista delle rotte
+     * @return List of routes.
      */
     ArrayList<Route> searchRoutes();
     /**
      * 
-     * @param codeFlight codice volo
-     * @param nseat numero del posto a sedere
-     * @return <code>true</code> se il posto è libero;
-     *         <code>false</code> altrimenti
+     * @param codeFlight Code of the flight.
+     * @param nseat Number of the seat.
+     * @return <code>true</code> if the seat is available;
+     *         <code>false</code> otherwise.
      * @throws SQLException 
      */
     boolean seatIsFree(String codeFlight, int nseat) throws SQLException;
     
+    /**
+     * Sets all the seats of all flights.
+     * 
+     * @return List of all flights.
+     */
     ArrayList<Flight> setAllSeatFlights();
     /**
-     * Effettua il check-in di un biglietto.
+     * Makes the check in of a ticket.
      * 
-     * @param codeTicket codice del biglietto
+     * @param codeTicket Code of the ticket.
      * @throws SQLException 
      */
     void setCheckIn(String codeTicket) throws SQLException;
     /**
-     * Setta tutti i posti a sedere di un volo.
+     * Sets all the seats of a flight.
      * 
-     * @param flight volo
-     * @return volo settato
+     * @param flight Flight.
+     * @return Flight with all seats set.
      * @throws SQLException 
      */
     Flight setSeatsFlight(Flight flight) throws SQLException;
     /**
+     * Inserts a flight in the Database.
      * 
-     * @param flight volo 
-     * @return volo inserito.
+     * @param flight Flight. 
+     * @return Flight inserted.
      * @throws SQLException 
      */
     Flight insertFlight(Flight flight) throws SQLException ;
     /**
      * 
-     * @param airportDeparture aeroporto di partenza
-     * @param airportDestination aeroporto di destinazione
-     * @return codice della rotta
+     * @param airportDeparture Departure's airport.
+     * @param airportDestination Destinarion's airport.
+     * @return Code of the route.
      * @throws SQLException 
      */
     String getCodeRoute(String airportDeparture, String airportDestination) throws SQLException;
     /**
      * 
-     * @param userpass dati d'accesso
-     * @return <code>true</code> se le credenziali sono esatte
- *   *          <code>false</code> altrimenti
+     * @param userpass Login information.
+     * @return <code>true</code> if informations are correct.
+ *   *          <code>false</code> otherwise.
      * @throws SQLException
      */
     Boolean checkLogin(String userpass) throws SQLException;
     /**
+     * Modifies a flight in the Database.
      * 
-     * @param flight volo da modificare
-     * @return volo modificato
+     * @param flight Flight to modify.
+     * @return Flight modified.
      * @throws SQLException 
      */
     Flight editFlight(Flight flight) throws SQLException;

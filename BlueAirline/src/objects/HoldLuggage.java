@@ -6,8 +6,7 @@
 package objects;
 
 /**
- *La classe HoldLuggage indica la presenza del bagaglio da stiva. A differenza del bagaglio a mano richiede
- * un supplemento. Non è obbligatorio.
+ * Represents an hold luggage. Unlike the hand baggage, it is a supplement of the ticket.
  * 
  * @author cl418377
  */
@@ -18,11 +17,11 @@ public class HoldLuggage {
     private String description;
     
     /**
-     * Istanzia un nuovo bagaglio da stiva.
+     * Contructs a new hold luggage.
      * 
-     * @param code codice del bagaglio
-     * @param kg peso del bagaglio in kili
-     * @param price prezzo del bagaglio
+     * @param code Code of the luggage.
+     * @param kg Max wheight of the luggage in Kilograms.
+     * @param price Price of the luggage.
      */
     public HoldLuggage (String code,Double kg, Double price, String description){
         this.code=code;
@@ -32,7 +31,7 @@ public class HoldLuggage {
     }
     
     /**
-     * Istanzia un nuovo bagaglio da stiva a partire dal codice.
+     * Constructs a new hold luggage with only the code.
      * 
      * @param code codice del bagaglio
      */

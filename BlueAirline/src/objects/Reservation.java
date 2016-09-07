@@ -8,7 +8,7 @@ package objects;
 import java.util.ArrayList;
 
 /**
- * La classe Reservation indica una prenotazione di uno o più Ticket.
+ * Represents a reservation of one or more tickets. The customer is identified with his forwarding address.
  * 
  * @author Giovanni
  */
@@ -18,11 +18,11 @@ public class Reservation {
     private String email, number, codeFlight;
 
     /**
-     * Crea una nuova prenotazione su un volo della compagnia.
+     * Constructs an empty reservation (no tickets).
      * 
-     * @param codeFlight codice del volo del quale si vuole effettuare una prenotazione
-     * @param email email del cliente che effettua la prenotazione
-     * @param number recapito telefonico del cliente che effettua la prenotazione
+     * @param codeFlight Code of the flight of which the customer wants a reservation.
+     * @param email Email of the customer.
+     * @param number Phone address of the customer.
      */
     public Reservation(String codeFlight, String email, String number) {
         this.email = email;
@@ -30,12 +30,12 @@ public class Reservation {
         this.codeFlight = codeFlight;
     }
     /**
-     * Crea una nuova prenotazione su un volo della compagnia.
+     * Constructs a reservation without any ticket. 
      * 
-     * @param code recapito telefonico del cliente che effettua la prenotazione
-     * @param email email del cliente che effettua la prenotazione
-     * @param number numero della prenotazione
-     * @param codeFlight codice del volo del quale si vuole effettuare una prenotazione
+     * @param code Code of the reservation.
+     * @param email Email of the customer.
+     * @param number Phone address of the customer.
+     * @param codeFlight Code of the flight of which the customer wants a reservation.
      */
     public Reservation(int code, String email, String number, String codeFlight) {
         this.code = code;
@@ -71,7 +71,10 @@ public class Reservation {
     public void setCode(int code) {
         this.code = code;
     }
-    
+    /**
+     * 
+     * @return Written description of the reservation.
+     */
     public String printReservation(){
         String s="";
         s+="Prenotazione: "+code+" ("+email+" "+number+")\n";
@@ -79,7 +82,10 @@ public class Reservation {
         s+="Numero passeggeri: "+tickets.size();
         return s;
     }   
-    
+    /**
+     * 
+     * @return Written description of the tickets of the reservation. 
+     */
     public String printTickets() {
         String s="";
         for(Ticket tp:tickets){
