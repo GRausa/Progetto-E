@@ -118,7 +118,7 @@ public interface InterfaceClient {
 
     Reservation getReservation(Reservation res);
 
-    Ticket getTicket(Ticket tp) ;
+    Ticket getTicket(Ticket tp);
 
     /**
      * Insert a flight in the database.
@@ -137,14 +137,14 @@ public interface InterfaceClient {
      * <code>false</code> otherwise.
      * @throws IOException if occurs an I/O exception
      */
-    boolean isCheckIn(Ticket tp) ;
+    boolean isCheckIn(Ticket tp);
 
-    Reservation makeReservation(Reservation res) ;
+    Reservation makeReservation(Reservation res);
 
     //Flight searchFlight(Flight flight) throws IOException;
     Flight[] searchFlights(Flight flight);
 
-    Route[] searchRoutes(Route rotta) ;
+    Route[] searchRoutes(Route rotta);
 
     /**
      *

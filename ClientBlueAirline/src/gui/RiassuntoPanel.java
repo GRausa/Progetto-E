@@ -74,7 +74,7 @@ public class RiassuntoPanel extends JPanel {
 
     }
 
-    private void addComponents(Container pane) throws IOException  {
+    private void addComponents(Container pane) throws IOException {
 
         pane.setLayout(new BorderLayout());
         initInfoGenerali();

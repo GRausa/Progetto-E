@@ -217,7 +217,7 @@ public class FacadeControllerClient implements InterfaceClient {
     }
 
     @Override
-    public boolean isCheckIn(Ticket tp)  {
+    public boolean isCheckIn(Ticket tp) {
         try {
             out.println("ISCHECKIN " + gson.toJson(tp));
             Boolean isCheckIn = gson.fromJson(in.readLine(), Boolean.class);
@@ -252,7 +252,7 @@ public class FacadeControllerClient implements InterfaceClient {
     }
 
     @Override
-    public Reservation getReservation(Reservation res){
+    public Reservation getReservation(Reservation res) {
         try {
             out.println("GETRESERVATION " + gson.toJson(res));
             Reservation res1 = gson.fromJson(in.readLine(), Reservation.class);
@@ -264,7 +264,7 @@ public class FacadeControllerClient implements InterfaceClient {
     }
 
     @Override
-    public Flight insertFlight(Flight flight)  {
+    public Flight insertFlight(Flight flight) {
         try {
             out.println("INSERTFLIGHT " + gson.toJson(flight));
             Flight f = gson.fromJson(in.readLine(), Flight.class);
@@ -276,7 +276,7 @@ public class FacadeControllerClient implements InterfaceClient {
     }
 
     @Override
-    public boolean checkLogin(String userpass)  {
+    public boolean checkLogin(String userpass) {
         try {
             out.println("LOGIN " + gson.toJson(userpass));
             Boolean b = gson.fromJson(in.readLine(), Boolean.class);

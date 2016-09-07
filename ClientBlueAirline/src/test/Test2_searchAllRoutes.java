@@ -17,7 +17,7 @@ import objects.Route;
 //TUTTE ROTTE
 public class Test2_searchAllRoutes {
 
-    public static void main(String[] args)  {
+    public static void main(String[] args) {
         InterfaceClient client = FacadeControllerClient.getIstance();
         client.connect("localhost");
         Route route = new Route("", "");

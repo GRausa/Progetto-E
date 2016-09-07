@@ -23,7 +23,7 @@ import objects.Ticket;
  */
 public class Test5_reservation {
 
-    public static void main(String[] args)  {
+    public static void main(String[] args) {
         InterfaceClient client = FacadeControllerClient.getIstance();
         client.connect("localhost");
 

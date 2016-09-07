@@ -336,11 +336,11 @@ public class MethodsControlClient {
         Insurance[] insurances = null;
         HoldLuggage[] holdLuggages = null;
         {
-            
-                meals = client.getAllMeals();
-                insurances = client.getAllInsurances();
-                holdLuggages = client.getAllHoldLuggages();
-            
+
+            meals = client.getAllMeals();
+            insurances = client.getAllInsurances();
+            holdLuggages = client.getAllHoldLuggages();
+
         }
         MethodsControlClient.toStringSupplements(meals, insurances, holdLuggages);
         ArrayList<Ticket> passengers = MethodsControlClient.insertTicket(num, flight, meals, insurances, holdLuggages);
@@ -424,7 +424,7 @@ public class MethodsControlClient {
      * @param holdLuggages List of hold lugagges.
      * @throws IOException if occurs a in I/O exception.
      */
-    private static void editTicket(InterfaceClient client, Ticket tp, Flight flight, Meal[] meals, Insurance[] insurances, HoldLuggage[] holdLuggages) throws IOException {
+    private static void editTicket(InterfaceClient client, Ticket tp, Flight flight, Meal[] meals, Insurance[] insurances, HoldLuggage[] holdLuggages) {
         //Scanner input = new Scanner(System.in);
         boolean c = false;
         do {
@@ -471,16 +471,14 @@ public class MethodsControlClient {
         meals = client.getAllMeals();
         insurances = client.getAllInsurances();
         holdLuggages = client.getAllHoldLuggages();
-        try {
-            if (!MethodsControlClient.isCheckIn(client, tp)) {
-                flight = MethodsControlClient.searchFlight(client, tp.getCodeFlight());
-                MethodsControlClient.editTicket(client, tp, flight, meals, insurances, holdLuggages);
-            } else {
-                System.out.println("Hai effettuato il check-in, non puoi modificare il biglietto.");
-            }
-        } catch (IOException ex) {
-            Logger.getLogger(MethodsControlClient.class.getName()).log(Level.SEVERE, null, ex);
+
+        if (!MethodsControlClient.isCheckIn(client, tp)) {
+            flight = MethodsControlClient.searchFlight(client, tp.getCodeFlight());
+            MethodsControlClient.editTicket(client, tp, flight, meals, insurances, holdLuggages);
+        } else {
+            System.out.println("Hai effettuato il check-in, non puoi modificare il biglietto.");
         }
+
     }
 
     /**
@@ -524,7 +522,7 @@ public class MethodsControlClient {
      * <code>false</code> otherwise.
      * @throws IOException if occurs an I/O exception.
      */
-    private static boolean isCheckIn(InterfaceClient client, Ticket tp)    {
+    private static boolean isCheckIn(InterfaceClient client, Ticket tp) {
         if (client.isCheckIn(tp)) {
             return true;
         } else {

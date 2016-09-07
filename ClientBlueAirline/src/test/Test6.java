@@ -16,7 +16,7 @@ import objects.Route;
  */
 public class Test6 {
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
         InterfaceClient client = FacadeControllerClient.getIstance();
         client.connect("localhost");
         Route route = new Route("Milano", "");
