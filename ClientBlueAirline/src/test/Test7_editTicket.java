@@ -24,7 +24,7 @@ public class Test7_editTicket {
         InterfaceClient client = FacadeControllerClient.getIstance();
         client.connect("localhost");
         
-        Ticket t = new Ticket("R1JUD722");
+        Ticket t = new Ticket("A4D5F621");
         t = client.getTicket(t);
         Flight f = client.searchFlight(new Flight(t.getCodeFlight()));
         
@@ -48,10 +48,10 @@ public class Test7_editTicket {
 
             t=client.editTicket(t);
             
-            System.out.println(t.printTicketPassenger("\n"));
+            System.out.println("Modifica effettuata\n"+t.printTicketPassenger("\n"));
         }
         else{
-            System.out.println("POSTO OCCUPATO");
+            System.out.println("Posto occupato");
         }
     
     }

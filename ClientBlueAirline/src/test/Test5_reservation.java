@@ -32,17 +32,17 @@ public class Test5_reservation {
         InterfaceClient client = FacadeControllerClient.getIstance();
         client.connect("localhost");
         
-        //CERCA VOLO Milano - Oslo 13 Luglio 2016
-        Route route = new Route("Milano", "Oslo");
-        GregorianCalendar date = new GregorianCalendar(2016, 6, 13); //13 Luglio 2016
+        //CERCA VOLO New York - Roma 15 Settembre 2016
+        Route route = new Route("New York", "Roma");
+        GregorianCalendar date = new GregorianCalendar(2016, 8, 15); //15 Settembre 2016 (mese=mese-1)
         Flight tmpflight = new Flight(route, date);
         Flight[] flights = client.searchFlights(tmpflight);
         for (Flight v : flights) {
             System.out.println(v);            
         }    
         
-        //SCELTA VOLO: R1JUD7        
-        Flight f = flights[2];
+        //SCELTA VOLO--> A4D5F6        
+        Flight f = flights[0];
         System.out.println(f.printAllSeats());
         f = client.searchFlight(f);
         Meal[] meals = client.getAllMeals();
@@ -86,7 +86,7 @@ public class Test5_reservation {
             System.out.println(reservation.printTickets("\n"));    
         }
         else{
-            System.out.println("PRENOTAZIONE GIA' EFFETTUATA");            
+            System.out.println("Prenotazione già effettuata");            
         }     
     }
     
