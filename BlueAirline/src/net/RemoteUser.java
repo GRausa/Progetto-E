@@ -12,7 +12,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
-import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -112,56 +111,36 @@ class RemoteUser extends Thread {
         commands.put("CALENDAR", new Command() {
             @Override
             public void execute(String args) {
-                try {
-                    Route r = gson.fromJson(args, Route.class);
-                    ArrayList<Flight> flights = company.searchFlights(r);
-                    out.println(gson.toJson(flights));
-                } catch (SQLException ex) {
-                    Logger.getLogger(RemoteUser.class.getName()).log(Level.SEVERE, null, ex);
-                    out.println(gson.toJson(null));
-                }
+                Route r = gson.fromJson(args, Route.class);
+                ArrayList<Flight> flights = company.searchFlights(r);
+                out.println(gson.toJson(flights));
             }
         });
 
         commands.put("RESERVATION", new Command() {
             @Override
             public void execute(String args) {
-                try {
-                    Reservation res = gson.fromJson(args, Reservation.class);
-                    res = company.makeReservation(res);
-                    out.println(gson.toJson(res));
-                } catch (SQLException ex) {
-                    Logger.getLogger(RemoteUser.class.getName()).log(Level.SEVERE, null, ex);
-                    out.println(gson.toJson(null));
-                }
+                Reservation res = gson.fromJson(args, Reservation.class);
+                res = company.makeReservation(res);
+                out.println(gson.toJson(res));
             }
         });
 
         commands.put("EDITTICKET", new Command() {
             @Override
             public void execute(String args) {
-                try {
-                    Ticket t = gson.fromJson(args, Ticket.class);
-                    t = company.editTicket(t);
-                    out.println(gson.toJson(t));
-                } catch (SQLException ex) {
-                    Logger.getLogger(RemoteUser.class.getName()).log(Level.SEVERE, null, ex);
-                    out.println(gson.toJson(null));
-                }
+                Ticket t = gson.fromJson(args, Ticket.class);
+                t = company.editTicket(t);
+                out.println(gson.toJson(t));
             }
         });
 
         commands.put("EDITSEATTICKET", new Command() {
             @Override
             public void execute(String args) {
-                try {
-                    Ticket tp = gson.fromJson(args, Ticket.class);
-                    tp = company.editSeatTicket(tp);
-                    out.println(gson.toJson(tp));
-                } catch (SQLException ex) {
-                    Logger.getLogger(RemoteUser.class.getName()).log(Level.SEVERE, null, ex);
-                    out.println(gson.toJson(null));
-                }
+                Ticket tp = gson.fromJson(args, Ticket.class);
+                tp = company.editSeatTicket(tp);
+                out.println(gson.toJson(tp));
             }
         });
 
@@ -202,25 +181,19 @@ class RemoteUser extends Thread {
 
             @Override
             public void execute(String args) {
-                try {
-                    Flight r = gson.fromJson(args, Flight.class);
-                    ArrayList<Flight> flights = new ArrayList<>();
+                Flight r = gson.fromJson(args, Flight.class);
+                ArrayList<Flight> flights = new ArrayList<>();
+                if (r.getCode() == null) {
+                    SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
+                    String formatted = format1.format(r.getDateDeparture().getTime());
+                    flights = company.searchFlights(r.getRoute().getDepartureCity(), r.getRoute().getDestinationCity(), formatted);
+                    out.println(gson.toJson(flights));
+                } else {
+                    //Flight flight = gson.fromJson(args, Flight.class);
+                    //flight = company.searchFlight(flight.getCode());
+                    flights.add(company.searchFlight(r.getCode()));
 
-                    if (r.getCode() == null) {
-                        SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
-                        String formatted = format1.format(r.getDateDeparture().getTime());
-                        flights = company.searchFlights(r.getRoute().getDepartureCity(), r.getRoute().getDestinationCity(), formatted);
-                        out.println(gson.toJson(flights));
-                    } else {
-                        //Flight flight = gson.fromJson(args, Flight.class);
-                        //flight = company.searchFlight(flight.getCode());
-                        flights.add(company.searchFlight(r.getCode()));
-
-                        out.println(gson.toJson(flights));
-                    }
-                } catch (SQLException ex) {
-                    Logger.getLogger(RemoteUser.class.getName()).log(Level.SEVERE, null, ex);
-                    out.println(gson.toJson(null));
+                    out.println(gson.toJson(flights));
                 }
             }
         }
@@ -272,15 +245,10 @@ class RemoteUser extends Thread {
         commands.put("CHECKIN", new Command() {
             @Override
             public void execute(String args) {
-                try {
-                    Ticket tp = gson.fromJson(args, Ticket.class);
-                    company.setCheckIn(tp.getCode());
-                    tp = company.getTicket(tp.getCode());
-                    out.println(gson.toJson(tp));
-                } catch (SQLException ex) {
-                    Logger.getLogger(RemoteUser.class.getName()).log(Level.SEVERE, null, ex);
-                    out.println(gson.toJson(null));
-                }
+                Ticket tp = gson.fromJson(args, Ticket.class);
+                company.setCheckIn(tp.getCode());
+                tp = company.getTicket(tp.getCode());
+                out.println(gson.toJson(tp));
 
             }
         });
@@ -288,14 +256,9 @@ class RemoteUser extends Thread {
         commands.put("ISCHECKIN", new Command() {
             @Override
             public void execute(String args) {
-                try {
-                    Ticket tp = gson.fromJson(args, Ticket.class);
-                    Boolean checkIn = company.isCheckIn(tp.getCode());
-                    out.println(gson.toJson(checkIn));
-                } catch (SQLException ex) {
-                    Logger.getLogger(RemoteUser.class.getName()).log(Level.SEVERE, null, ex);
-                    out.println(gson.toJson(null));
-                }
+                Ticket tp = gson.fromJson(args, Ticket.class);
+                Boolean checkIn = company.isCheckIn(tp.getCode());
+                out.println(gson.toJson(checkIn));
 
             }
         });
@@ -303,14 +266,9 @@ class RemoteUser extends Thread {
         commands.put("TICKET", new Command() {
             @Override
             public void execute(String args) {
-                try {
-                    Ticket tp = gson.fromJson(args, Ticket.class);
-                    tp = company.getTicket(tp.getCode());
-                    out.println(gson.toJson(tp));
-                } catch (SQLException ex) {
-                    Logger.getLogger(RemoteUser.class.getName()).log(Level.SEVERE, null, ex);
-                    out.println(gson.toJson(null));
-                }
+                Ticket tp = gson.fromJson(args, Ticket.class);
+                tp = company.getTicket(tp.getCode());
+                out.println(gson.toJson(tp));
 
             }
         });
@@ -318,14 +276,9 @@ class RemoteUser extends Thread {
         commands.put("GETRESERVATION", new Command() {
             @Override
             public void execute(String args) {
-                try {
-                    Reservation res = gson.fromJson(args, Reservation.class);
-                    res = company.getReservtion(res.getCode());
-                    out.println(gson.toJson(res));
-                } catch (SQLException ex) {
-                    Logger.getLogger(RemoteUser.class.getName()).log(Level.SEVERE, null, ex);
-                    out.println(gson.toJson(null));
-                }
+                Reservation res = gson.fromJson(args, Reservation.class);
+                res = company.getReservtion(res.getCode());
+                out.println(gson.toJson(res));
 
             }
         });
@@ -333,14 +286,9 @@ class RemoteUser extends Thread {
         commands.put("INSERTFLIGHT", new Command() {
             @Override
             public void execute(String args) {
-                try {
-                    Flight flight = gson.fromJson(args, Flight.class);
-                    flight = company.insertFlight(flight);
-                    out.println(gson.toJson(flight));
-                } catch (SQLException ex) {
-                    Logger.getLogger(RemoteUser.class.getName()).log(Level.SEVERE, null, ex);
-                    out.println(gson.toJson(null));
-                }
+                Flight flight = gson.fromJson(args, Flight.class);
+                flight = company.insertFlight(flight);
+                out.println(gson.toJson(flight));
 
             }
         });
@@ -348,14 +296,9 @@ class RemoteUser extends Thread {
         commands.put("EDITFLIGHT", new Command() {
             @Override
             public void execute(String args) {
-                try {
-                    Flight flight = gson.fromJson(args, Flight.class);
-                    flight = company.editFlight(flight);
-                    out.println(gson.toJson(flight));
-                } catch (SQLException ex) {
-                    Logger.getLogger(RemoteUser.class.getName()).log(Level.SEVERE, null, ex);
-                    out.println(gson.toJson(null));
-                }
+                Flight flight = gson.fromJson(args, Flight.class);
+                flight = company.editFlight(flight);
+                out.println(gson.toJson(flight));
 
             }
         });
@@ -363,14 +306,9 @@ class RemoteUser extends Thread {
         commands.put("LOGIN", new Command() {
             @Override
             public void execute(String args) {
-                try {
-                    String userpass = gson.fromJson(args, String.class);
-                    Boolean b = company.checkLogin(userpass);
-                    out.println(gson.toJson(b));
-                } catch (SQLException ex) {
-                    Logger.getLogger(RemoteUser.class.getName()).log(Level.SEVERE, null, ex);
-                    out.println(gson.toJson(null));
-                }
+                String userpass = gson.fromJson(args, String.class);
+                Boolean b = company.checkLogin(userpass);
+                out.println(gson.toJson(b));
             }
         });
 

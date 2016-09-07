@@ -47,19 +47,19 @@ public class FacadeControllerServer implements InterfaceServer {
    
     //ricerca voli da città partenza e città arrivo e data
     @Override
-    public ArrayList<Flight> searchFlights(String departure, String destination, String date) throws SQLException {       
+    public ArrayList<Flight> searchFlights(String departure, String destination, String date)  {       
         return adapter.searchFlights(departure, destination, date);
     }
     
     //ricerca volo in base alla rotta
     @Override
-    public ArrayList<Flight> searchFlights(Route route) throws SQLException {
+    public ArrayList<Flight> searchFlights(Route route)  {
         return adapter.searchFlights(route);
     }
     
     //ricerca volo in base al codice -> restituisce tutto il volo con i posti
     @Override
-    public Flight searchFlight(String codeFlight) throws SQLException{
+    public Flight searchFlight(String codeFlight) {
         return adapter.searchFlight(codeFlight);
     }
     
@@ -71,7 +71,7 @@ public class FacadeControllerServer implements InterfaceServer {
     
     //effettua prenotazione
     @Override
-    public Reservation makeReservation(Reservation reservation) throws SQLException{
+    public Reservation makeReservation(Reservation reservation) {
         return adapter.makeReservation(reservation);
     }
     /*
@@ -82,7 +82,7 @@ public class FacadeControllerServer implements InterfaceServer {
     
     //modifica una ticket
     @Override
-    public Ticket editSeatTicket(Ticket tp) throws SQLException{
+    public Ticket editSeatTicket(Ticket tp) {
         return adapter.editSeatTicket(tp);
     }
     
@@ -117,19 +117,19 @@ public class FacadeControllerServer implements InterfaceServer {
     
     //effettua checkin
     @Override
-    public void setCheckIn(String codeTicket) throws SQLException{
+    public void setCheckIn(String codeTicket) {
         adapter.setCheckIn(codeTicket);
     }
     
     //controlla se è stato fatto il checkin
     @Override
-    public boolean isCheckIn(String codeTicket) throws SQLException{
+    public boolean isCheckIn(String codeTicket) {
         return adapter.isCheckIn(codeTicket);
     }
     
     //ritorna ticketPassenger
     @Override
-    public Ticket getTicket(String codeTicket) throws SQLException{
+    public Ticket getTicket(String codeTicket) {
         Ticket tp = adapter.getTicket(codeTicket);
         if(tp!=null){
             tp.setMeals(this.getMealsTicket(codeTicket));
@@ -140,23 +140,23 @@ public class FacadeControllerServer implements InterfaceServer {
     }
     
     //ritorna i pasti di un ticket
-    private ArrayList<Meal> getMealsTicket(String codeTicket) throws SQLException{
+    private ArrayList<Meal> getMealsTicket(String codeTicket) {
         return adapter.getMealsTicket(codeTicket);
     }
     
     //ritorna le assicurazioni di un ticket
-    private ArrayList<Insurance> getInsurancesTicket(String codeTicket) throws SQLException{
+    private ArrayList<Insurance> getInsurancesTicket(String codeTicket) {
         return adapter.getInsurancesTicket(codeTicket);
     }
     
     //ritorna i bagagli di un ticket
-    private ArrayList<HoldLuggage> getHoldLuggagesTicket(String codeTicket) throws SQLException{
+    private ArrayList<HoldLuggage> getHoldLuggagesTicket(String codeTicket) {
         return adapter.getHoldLuggagesTicket(codeTicket);
     }
     
     //ritorna tutta la prenotazione
     @Override
-    public Reservation getReservtion(int codeReservation) throws SQLException{
+    public Reservation getReservtion(int codeReservation) {
         Reservation res = adapter.getReservation(codeReservation);
         if(res!=null){
             ArrayList<Ticket> tickets=  new ArrayList<>();
@@ -170,7 +170,7 @@ public class FacadeControllerServer implements InterfaceServer {
     
     //modifica il biglietto 
     @Override
-    public Ticket editTicket(Ticket tp) throws SQLException {
+    public Ticket editTicket(Ticket tp)  {
         return adapter.editTicket(tp);
     }
 
@@ -181,19 +181,19 @@ public class FacadeControllerServer implements InterfaceServer {
     
     //inserisci un volo
     @Override
-    public Flight insertFlight(Flight flight) throws SQLException{
+    public Flight insertFlight(Flight flight) {
         return adapter.insertFlight(flight);
     }
     
     //inserisci un volo
     @Override
-    public Flight editFlight(Flight flight) throws SQLException{
+    public Flight editFlight(Flight flight) {
         return adapter.editFlight(flight);
     }
     
     //login
     @Override
-    public Boolean checkLogin(String username) throws SQLException{
+    public Boolean checkLogin(String username) {
         return adapter.checkLogin(username);
     }
     
