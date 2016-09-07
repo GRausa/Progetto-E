@@ -146,6 +146,15 @@ public class PasseggeriPanel extends JPanel {
         c.gridx = 1;
         c.gridy = 1;
 
+        id0.addMouseMotionListener(new MouseAdapter() {
+
+            @Override
+            public void mouseMoved(MouseEvent e) {
+
+                home.notifiche.setText("Inserire l'identificativo del proprio passaporto");
+            }
+        });
+        
         pane.add(id0, c);
 
         c.weightx = 3;
@@ -155,7 +164,17 @@ public class PasseggeriPanel extends JPanel {
         pane.add(classe, c);
 
         cbclasse.setModel(new javax.swing.DefaultComboBoxModel(new String[]{"Prima Classe ", "Seconda Classe"}));
+        
+        cbclasse.addMouseMotionListener(new MouseAdapter() {
 
+            @Override
+            public void mouseMoved(MouseEvent e) {
+
+                home.notifiche.setText("Selezionare prima la classe per vedere i posti disponibili");
+            }
+
+        });
+        
         c.weightx = 3;
 
         c.fill = GridBagConstraints.HORIZONTAL;
@@ -223,9 +242,31 @@ public class PasseggeriPanel extends JPanel {
         });
         nbagagli.setColumns(1);
         bagagli.add(nbagagli);
+        
+         nbagagli.addMouseMotionListener(new MouseAdapter() {
+
+            @Override
+            public void mouseMoved(MouseEvent e) {
+
+                home.notifiche.setText("Inserire il numero di bagagli desiderati");
+            }
+
+        });
+        
         bagagli.add(bagaglipiu);
         ImageIcon immagine = new ImageIcon("immagini/HoldLuggage.png");
         bagagliobutton.setIcon(immagine);
+        
+         bagagliobutton.addMouseMotionListener(new MouseAdapter() {
+
+            @Override
+            public void mouseMoved(MouseEvent e) {
+
+                home.notifiche.setText("Specificare il tipo di bagaglio desiderato.");
+            }
+
+        });
+        
         luggages = new ArrayList();
         home.setLuggages(luggages);
         bagagliobutton.addActionListener(NListener(nbagagli, "I nostri tipi di bagagli: ", "Specifica il tipo di bagaglio per il volo", 'H'));
@@ -264,6 +305,17 @@ public class PasseggeriPanel extends JPanel {
 
         //aggiunta tasto per assicurazioni
         nassicurazioni.setText("0");
+        
+        nassicurazioni.addMouseMotionListener(new MouseAdapter() {
+
+            @Override
+            public void mouseMoved(MouseEvent e) {
+
+                home.notifiche.setText("Inserire il numero di assicurazioni desiderate");
+            }
+
+        });
+        
         nassicurazioni.addKeyListener(new KeyAdapter() {
             public void keyTyped(KeyEvent e) {
                 char caracter = e.getKeyChar();
@@ -295,6 +347,17 @@ public class PasseggeriPanel extends JPanel {
         assicurazioni.add(assicurazionipiu);
         ImageIcon immagine2 = new ImageIcon("immagini/Air_insurance.png");
         assicurazionibutton.setIcon(immagine2);
+        
+         assicurazionibutton.addMouseMotionListener(new MouseAdapter() {
+
+            @Override
+            public void mouseMoved(MouseEvent e) {
+
+                home.notifiche.setText("Specificare il tipo di assicurazione desiderata.");
+            }
+
+        });
+        
         insurances = new ArrayList();
         home.setInsurances(insurances);
         assicurazionibutton.addActionListener(NListener(nassicurazioni, "Le nostre assicurazioni: ", "Inserisci le assicurazioni per il volo.", 'I'));
@@ -357,6 +420,17 @@ public class PasseggeriPanel extends JPanel {
 
         //aggiunta tasto per numero pasti
         npasti.setText("0");
+        
+         npasti.addMouseMotionListener(new MouseAdapter() {
+
+            @Override
+            public void mouseMoved(MouseEvent e) {
+
+                home.notifiche.setText("Inserire il numero di pasti desiderati");
+            }
+
+        });
+        
         npasti.addKeyListener(new KeyAdapter() {
             public void keyTyped(KeyEvent e) {
                 char caracter = e.getKeyChar();
@@ -388,6 +462,17 @@ public class PasseggeriPanel extends JPanel {
         pasti.add(pastipiu);
         ImageIcon immagine1 = new ImageIcon("immagini/Meal.png");
         pastibutton.setIcon(immagine1);
+        
+         pastibutton.addMouseMotionListener(new MouseAdapter() {
+
+            @Override
+            public void mouseMoved(MouseEvent e) {
+
+                home.notifiche.setText("Specificare il tipo di pasto desiderato.");
+            }
+
+        });
+        
         meals = new ArrayList();
         home.setMeals(meals);
         pastibutton.addActionListener(NListener(npasti, "I nostri menù:", "Inserisci i pasti per il volo", 'M'));
