@@ -50,7 +50,7 @@ public interface InterfaceClient {
      * otherwise.
      * @throws IOException if occurs an I/O exception
      */
-    boolean sendMail(String destination, String object, String text) throws IOException;
+    boolean sendMail(String destination, String object, String text);
 
     /**
      *
@@ -58,7 +58,7 @@ public interface InterfaceClient {
      * @return List of flight that cover the route.
      * @throws IOException if occurs an I/O exception.
      */
-    Flight[] calendar(Route rotta) throws IOException;
+    Flight[] calendar(Route rotta);
 
     /**
      * Makes the checkin of a ticket.
@@ -67,7 +67,7 @@ public interface InterfaceClient {
      * @return ticket with checkin.
      * @throws IOException if occurs an I/O exception
      */
-    Ticket checkIn(Ticket tp) throws IOException;
+    Ticket checkIn(Ticket tp);
 
     /**
      * Edits a seat number of a ticket.
@@ -76,7 +76,7 @@ public interface InterfaceClient {
      * @return Modified ticket.
      * @throws IOException if occurs an I/O exception
      */
-    Ticket editSeatTicket(Ticket tp) throws IOException;
+    Ticket editSeatTicket(Ticket tp);
 
     /**
      * Edits a ticket.
