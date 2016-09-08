@@ -74,7 +74,7 @@ public class ConnectionSQL {
             System.err.println("SQLState:     " + E.getSQLState());
             System.err.println("VendorError:  " + E.getErrorCode());
             return false;
-        } catch (Exception E) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException E) {
             System.err.println("Driver non trovato");
             E.printStackTrace();
             return false;
