@@ -146,6 +146,7 @@ public class ReservationPanel extends JPanel {
         reservationPanel.setOpaque(false);
         npasseggeri.setText("0");
         npasseggeri.addKeyListener(new KeyAdapter() {
+            @Override
             public void keyTyped(KeyEvent e) {
                 char caracter = e.getKeyChar();
                 if (((caracter < '0') || (caracter > '9'))) {
@@ -247,14 +248,23 @@ public class ReservationPanel extends JPanel {
                        
                         if (a.length == 0) {
                             JOptionPane.showConfirmDialog(home, "Siamo spiacenti. In questa data non risulta" + " nessun volo per la tratta desiderata.", "Errore", JOptionPane.OK_CANCEL_OPTION);
-                        } else {
-                            home.setNpasseggeri(Integer.parseInt(npasseggeri.getText()));
+                        } else { 
+                             home.setNpasseggeri(Integer.parseInt(npasseggeri.getText()));
+                           
+                           
                             ArrayList<Flight> ar = new ArrayList();
                             for (int i = 0; i < a.length; i++) {
-                                ar.add(a[i]);
+                                if(a[i].getSeatFree()>home.getNpasseggeri())
+                                    ar.add(a[i]);
                             }
+                            if(!ar.isEmpty())
+                            {
                             home.refreshGUI(new FlightsPanel(controller, home, ar));
                             home.notifiche.setText("Ricerco informazioni sulla rotta.. ");
+                            }
+                            else
+                                 JOptionPane.showConfirmDialog(home, "Siamo spiacenti. I posti per il volo" + " desiderato sono finiti.", "Errore", JOptionPane.OK_CANCEL_OPTION);
+                    
                         }
 
                     } else {
