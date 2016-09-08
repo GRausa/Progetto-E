@@ -11,7 +11,7 @@ import java.util.ArrayList;
  * Represents a ticket associated to a one and only seat on a 
  * specific flight on an airplane. A passengers can customize the ticket with supplements.
  * 
- * @author cl418377
+ * @author Giovanni
  */
 public class Ticket {
 

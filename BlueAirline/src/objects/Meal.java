@@ -9,7 +9,7 @@ package objects;
  * Represents a meal on the airplane. Meals are supplements of the ticket. Meals can be added 
  * only in certain flights.
  *
- * @author cl418377
+ * @author Giovanni
  */
 public class Meal {
     private String code;
@@ -56,9 +56,4 @@ public class Meal {
         return code;
     }
 
-    /*
-    public String toString(){
-        return code+" "+name+" "+price+" €";
-    }
-    */
 }

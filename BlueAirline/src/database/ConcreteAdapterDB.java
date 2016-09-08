@@ -68,7 +68,6 @@ public class ConcreteAdapterDB implements AdapterDB {
     }
 
     private int numberSeatFirstClassFlight(String cod) throws SQLException {
-
         String query
                 = "SELECT POSTI1CLASSE \n"
                 + "FROM Aereo A,Volo V\n"
@@ -107,12 +106,10 @@ public class ConcreteAdapterDB implements AdapterDB {
                     + "WHERE R.AEROPORTOPARTENZA = A1.COD_AEROPORTO AND R.AEROPORTOARRIVO=A2.COD_AEROPORTO AND R.COD_ROTTA=V.ROTTA";
             ResultSet resultQuery = SQL.queryRead(query);
             flights = ParserSQL.parseFlights(resultQuery);
-
             for (Flight fli : flights) {
                 System.out.println(fli);
                 ConcreteAdapterDB.this.setAllSeatFlight(fli);
             }
-
             resultQuery.close();
             return flights;
         } catch (SQLException ex) {
@@ -215,16 +212,6 @@ public class ConcreteAdapterDB implements AdapterDB {
         }
     }
 
-    /*
-    public double returnPriceFlight(String codflight) throws SQLException {
-        String query
-                = "SELECT PREZZO AS PREZZOVOLO\n"
-                + "FROM Volo\n"
-                + "WHERE COD_VOLO='" + codflight + "'";
-        ResultSet resultQuery = SQL.queryRead(query);
-        return ParserSQL.parseFunctionSQL(resultQuery, "PREZZOVOLO");
-    }
-     */
     @Override
     public Reservation makeReservation(Reservation reservation) {
 
@@ -280,7 +267,6 @@ public class ConcreteAdapterDB implements AdapterDB {
                 } else {
                     t.setNSeat(-1); //posto -1 non assegnato
                 }
-
             } catch (SQLException ex) {
                 Logger.getLogger(ConcreteAdapterDB.class.getName()).log(Level.SEVERE, null, ex);
                 return null;
@@ -479,7 +465,6 @@ public class ConcreteAdapterDB implements AdapterDB {
         return tp;
     }
 
-    //verifico se è stato fatto il checkIn
     @Override
     public boolean isCheckIn(String codeTicket) {
         try {
@@ -502,7 +487,6 @@ public class ConcreteAdapterDB implements AdapterDB {
 
     @Override
     public void setCheckIn(String codeTicket) {
-        //verificare se è stato fatto altrimenti fallo
         if (!this.isCheckIn(codeTicket)) {
             String query
                     = "UPDATE `TicketPasseggero`\n"
@@ -657,7 +641,6 @@ public class ConcreteAdapterDB implements AdapterDB {
 
     @Override
     public String getCodeRoute(String airportDeparture, String airportDestination) {
-
         try {
             String codeRoute;
             String query
@@ -677,7 +660,6 @@ public class ConcreteAdapterDB implements AdapterDB {
             Logger.getLogger(ConcreteAdapterDB.class.getName()).log(Level.SEVERE, null, ex);
             return null;
         }
-
     }
 
     @Override
@@ -703,8 +685,6 @@ public class ConcreteAdapterDB implements AdapterDB {
     public Flight editFlight(Flight flight)  {
         try {
             Flight f;
-            //ParserSQL.stringDate((GregorianCalendar) flight.getDateDestination())+"',
-            //'"+ParserSQL.stringTime((GregorianCalendar) flight.getDateDeparture())+"
             String query
                     = "UPDATE `Volo` SET `DATAPARTENZA` = '" + ParserSQL.stringDate((GregorianCalendar) flight.getDateDeparture()) + "',\n"
                     + "`DATAARRIVO` = '" + ParserSQL.stringDate((GregorianCalendar) flight.getDateDestination()) + "',\n"

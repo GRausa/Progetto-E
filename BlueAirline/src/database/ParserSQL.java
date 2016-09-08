@@ -141,6 +141,7 @@ public class ParserSQL {
                 codeTicket = resultQuery.getString("COD_TICKET");
                 ticket.add(new Ticket(codeTicket));
             }
+            
             res.setTickets(ticket);
             return res;
         }
@@ -158,6 +159,7 @@ public class ParserSQL {
         resultQuery.next();
         return resultQuery.getString(value);
     }
+    
     /**
      * Inserts the cities located in the databdase in an ArrayList.
      * 
@@ -172,6 +174,7 @@ public class ParserSQL {
         }
         return citys;
     }
+    
     /**
      * Inserts the seats located in the databdase in an ArrayList.
      * 
@@ -201,6 +204,7 @@ public class ParserSQL {
         }
         return meals;   
     } 
+    
     /**
      * Inserts the hold luggages located in the databdase in an ArrayList.
      * 
@@ -219,6 +223,7 @@ public class ParserSQL {
         }
         return holdLuggages; 
     }
+    
     /**
      * Inserts the insurances located in the databdase in an ArrayList.
      * 
@@ -237,6 +242,7 @@ public class ParserSQL {
         }
         return insurances; 
     }
+    
     /**
      * Inserts the tickets located in the databdase in an ArrayList.
      * 

@@ -171,12 +171,10 @@ class RemoteUser extends Thread {
                     }
                     out.println(gson.toJson(app));
                 }
-
             }
-
         }
         );
-        //MODIFICA 7set19.13
+
         commands.put("SEARCHFLIGHTS", new Command() {
 
             @Override
@@ -189,31 +187,12 @@ class RemoteUser extends Thread {
                     flights = company.searchFlights(r.getRoute().getDepartureCity(), r.getRoute().getDestinationCity(), formatted);
                     out.println(gson.toJson(flights));
                 } else {
-                    //Flight flight = gson.fromJson(args, Flight.class);
-                    //flight = company.searchFlight(flight.getCode());
                     flights.add(company.searchFlight(r.getCode()));
-
                     out.println(gson.toJson(flights));
                 }
             }
         }
         );
-        //PICCOLA MODIFICA7set19
-        /*
-        commands.put("SEARCHFLIGHTCODE", new Command() {
-            @Override
-            public void execute(String args) {
-                try {
-                    Flight flight = gson.fromJson(args, Flight.class);
-                    flight = company.searchFlight(flight.getCode());
-                    out.println(gson.toJson(flight));
-                } catch (SQLException ex) {
-                    Logger.getLogger(RemoteUser.class.getName()).log(Level.SEVERE, null, ex);
-                    out.println(gson.toJson(null));
-                }
-            }
-        }
-        );*/
 
         commands.put("MEALS", new Command() {
             @Override
@@ -393,6 +372,5 @@ class RemoteUser extends Thread {
  * @author Andrea Cavagna
  */
 interface Command {
-
     void execute(String args);
 }

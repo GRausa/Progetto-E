@@ -42,7 +42,6 @@ public class Server {
     */
     public void startServer() throws IOException {
         serverSocket = new ServerSocket(port);
-
         Logger.getLogger(Server.class.getName()).log(Level.INFO,
                 "Server started");
         while (true) {
@@ -50,8 +49,7 @@ public class Server {
             RemoteUser u = new RemoteUser((FacadeControllerServer) company, socket);
             Logger.getLogger(Server.class.getName()).log(Level.INFO, "Accepting a new user. Ip guest : " + socket.getInetAddress() + "port guest:" + socket.getPort());
             u.start();
-        }
-        
+        }        
     }
 
     /**

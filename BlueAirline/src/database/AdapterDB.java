@@ -188,28 +188,4 @@ public interface AdapterDB {
      * @return Flight modified.
      */
     Flight editFlight(Flight flight);
-    
-    //void setSeat(String volo, int num, int classe) throws SQLException;
-    
-    //int numberSeatFirstClassFlight(String cod) throws SQLException;
-    
-    //void insertSupplement(String code, String codeTicket) throws SQLException;
-
-    //void insertSupplementHoldLuggage(String code, String codeTicket) throws SQLException;
-    
-    //void insertSupplementInsurance(String code, String codeTicket) throws SQLException;
-    
-    //void insertSupplementMeal(String code, String codeTicket) throws SQLException;
-    
-    //ArrayList<Seat> getSeatsFlight(String codeFlight) throws SQLException;
-    
-    //verifico se è stato fatto il checkIn
-    
-    //int numberSeatFlight(String codeFlight) throws SQLException;
-    
-    //void setSeatBoolean(String codeFlight, int nSeat, String ticketPassenger, boolean b) throws SQLException;
-    
-    //void setAllSeatFlight(Flight volo) throws SQLException;
-    
-    //Reservation addTickets(Reservation reservation) throws SQLException;
 }

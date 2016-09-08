@@ -94,10 +94,4 @@ public class Reservation {
         return s;
     }
     
-/*
-    @Override
-    public String toString() {
-        return "Reservation{" + "passengers=" + tickets.get(0) + ", code=" + code + ", email=" + email + ", number=" + number + ", codeFlight=" + codeFlight + '}';
-    }
- */  
 }

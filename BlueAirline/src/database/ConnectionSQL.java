@@ -24,6 +24,7 @@ public class ConnectionSQL {
     private final String nameDb;
     private final String username; 
     private final String password;
+    
     /**
      * Construct a ConnectionSQL with the credentials.
      */
@@ -33,6 +34,7 @@ public class ConnectionSQL {
         this.username = "sql7130256"; 
         this.password = "urHL9UR5SD";
     }
+    
     /**
      * Reads a query.
      * 
@@ -43,6 +45,7 @@ public class ConnectionSQL {
     public ResultSet queryRead(String query) throws SQLException {
         return statement.executeQuery(query);
     }
+    
    /**
     * Write a query.
     * 
@@ -52,6 +55,7 @@ public class ConnectionSQL {
     public void queryWrite(String query) throws SQLException {  
         statement.executeUpdate(query);
     }
+    
     /**
      * Start a connection with the database.
      * 
@@ -76,6 +80,7 @@ public class ConnectionSQL {
             return false;
         }
     }
+    
     /**
      * 
      * @return <code>true</code> if the connection is closen rightly;

@@ -8,7 +8,7 @@ package objects;
 /**
  * Represents an insurance. Insurances are supplements of the ticket.
  * 
- * @author cl418377
+ * @author Giovanni
  */
 public class Insurance { 
     private String code;
@@ -46,10 +46,6 @@ public class Insurance {
     public double getPrice() {
         return price;
     }
- 
-    public String toString(){
-        return code+" "+name+" "+price+" €";
-    }
    
     public String getCode(){
         return code;
@@ -57,7 +53,6 @@ public class Insurance {
 
     public String getDescription() {
         return description;
-    }
-    
+    }    
     
 }

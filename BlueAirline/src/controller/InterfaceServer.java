@@ -161,17 +161,4 @@ public interface InterfaceServer {
      * @return Flight modified.
      */
     Flight editFlight(Flight flight);
-
-    //numero posti liberi in un volo
-    //int numberSeatFreeFlight(String codeFlight) throws SQLException;
-    //dato volo e posto vedere se è libero
-    //boolean seatIsFree(String codeFlight, int nseat) throws SQLException;
-    //imposta array posti di un volo
-    //Flight setSeatsFlight(Flight flight) throws SQLException;    
-    //ritorna i bagagli di un ticket
-    //ArrayList<HoldLuggage> getHoldLuggagesTicket(String codeTicket) throws SQLException;
-    //ritorna le assicurazioni di un ticket
-    //ArrayList<Insurance> getInsurancesTicket(String codeTicket) throws SQLException;
-    //ritorna i pasti di un ticket
-    //ArrayList<Meal> getMealsTicket(String codeTicket) throws SQLException;
 }

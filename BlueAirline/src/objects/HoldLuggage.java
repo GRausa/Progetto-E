@@ -8,7 +8,7 @@ package objects;
 /**
  * Represents an hold luggage. Unlike the hand baggage, it is a supplement of the ticket.
  * 
- * @author cl418377
+ * @author Giovanni
  */
 public class HoldLuggage {
     private String code;
@@ -45,14 +45,8 @@ public class HoldLuggage {
 
     public Double getPrice() {
         return price;
-    }
-   
-    /*
-    public String toString(){
-        return code+" "+kg+"Kg "+price+"€";
-    }
-    */
-   
+    }   
+  
     public String getCode() {
         return code;
     }
