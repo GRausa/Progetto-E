@@ -358,7 +358,7 @@ public class MethodsControlClient {
      * @param flight Flight.
      */
     private static void checkReservation(InterfaceClient client, Reservation res, Flight flight) {
-        flight = client.searchFlights(flight)[0];
+        flight = client.searchFlights(new Flight(flight.getCode()))[0];
         for (Ticket tp : res.getPassengers()) { //controllo assegnamento posti
             if (tp.getNseat() == -1) {
                 System.out.println("Passeggero: " + tp.getName() + " " + tp.getSurname() + " (" + tp.getID() + ") non inserito, il posto è stato occupato.\nPosti disponibili:");
