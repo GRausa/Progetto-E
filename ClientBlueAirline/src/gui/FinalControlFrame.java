@@ -103,8 +103,6 @@ public class FinalControlFrame extends JPanel {
                     t = controller.editSeatTicket(t);
                     if (!(t.getNseat() == set)) {
                         JOptionPane.showMessageDialog(home, "Il posto è gia stato assegnato\n");
-                    } else {
-                        closeWindow();
                     }
                 }
             }
@@ -112,7 +110,4 @@ public class FinalControlFrame extends JPanel {
         });
     }
 
-    public void closeWindow() {
-        this.closeWindow();
-    }
 }

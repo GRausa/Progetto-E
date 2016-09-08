@@ -71,7 +71,6 @@ public class RiassuntoPanel extends JPanel {
 
         this.makeComponentsTrasparent();
         passeggeri.setForeground(Color.black);
-
     }
 
     private void addComponents(Container pane) throws IOException {

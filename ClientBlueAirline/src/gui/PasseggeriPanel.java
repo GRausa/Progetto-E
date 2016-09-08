@@ -202,6 +202,8 @@ public class PasseggeriPanel extends JPanel {
                         }
                     }
                 }
+                if(posto0.getItemCount()==0)
+                  posto0.addItem("Nessun Posto");
             }
         });
         pane.add(cbclasse, c);
@@ -518,7 +520,7 @@ public class PasseggeriPanel extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                if (cognome0.getText().isEmpty() || nome0.getText().isEmpty() || id0.getText().isEmpty() || cognome0.getText().equals("Inserisci Cognome") || nome0.getText().equals("Inserisci Nome") || id0.getText().equals("Inserisci id")) {
+                if (cognome0.getText().isEmpty() || nome0.getText().isEmpty() || id0.getText().isEmpty() || cognome0.getText().equals("Inserisci Cognome") || nome0.getText().equals("Inserisci Nome") || id0.getText().equals("Inserisci id")|| posto0.getSelectedItem().equals("Nessun Posto")) {
                     JOptionPane.showConfirmDialog(home, "Riempire tutti i campi" + " per poter proseguire.", "Errore", JOptionPane.OK_CANCEL_OPTION);
                 } else if ((Integer.parseInt(npasti.getText()) != home.getMeals().size()) || (Integer.parseInt(nbagagli.getText()) != home.getLuggages().size()) || (Integer.parseInt(nassicurazioni.getText()) != home.getInsurances().size())) {
                     JOptionPane.showConfirmDialog(home, "Specificare il tipo di aggiunta" + " per poter proseguire.", "Errore", JOptionPane.OK_CANCEL_OPTION);

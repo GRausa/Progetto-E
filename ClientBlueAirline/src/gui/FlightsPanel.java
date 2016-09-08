@@ -73,7 +73,7 @@ public class FlightsPanel extends JPanel {
         MyTableModel model = new MyTableModel();
         int nfl = 0;
         for (Flight f : flights) {
-            if (home.getNpasseggeri() <= f.getPrice()) {
+            if (home.getNpasseggeri() <= f.getSeatFree()) {
                 nfl++;
             }
         }
