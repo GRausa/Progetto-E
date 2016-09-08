@@ -250,7 +250,5 @@ public class Ticket {
             s+="\nCheck-In: Non effettuato";
         return s;
     }   
-
-    
     
 }
