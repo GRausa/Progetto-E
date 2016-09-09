@@ -98,7 +98,7 @@ public class RiassuntoPanel extends JPanel {
                     }
                 }
                 reservation = controller.getReservation(reservation);
-                String s = "Codice prenotazione:\n " + reservation.getCode();
+                String s = "Codice prenotazione: " + reservation.getCode() + "\nCodice biglietto:\n";
                 for (Ticket t : reservation.getPassengers()) {
                     s += t.getName() + " " + t.getSurname() + " " + t.getCode() + "\n";
                 }
