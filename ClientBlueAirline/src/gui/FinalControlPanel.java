@@ -22,7 +22,7 @@ import objects.Ticket;
  *
  * @author andreacavagna
  */
-public class FinalControlFrame extends JPanel {
+public class FinalControlPanel extends JPanel {
 
     HomeFrame home;
     FacadeControllerClient controller;
@@ -35,7 +35,7 @@ public class FinalControlFrame extends JPanel {
     JButton ok = new JButton("OK");
     boolean c = false;
 
-    public FinalControlFrame(HomeFrame home, FacadeControllerClient controller, Reservation res, Ticket t, Flight f) {
+    public FinalControlPanel(HomeFrame home, FacadeControllerClient controller, Reservation res, Ticket t, Flight f) {
         this.home = home;
         this.controller = controller;
         this.res = res;
@@ -92,6 +92,7 @@ public class FinalControlFrame extends JPanel {
         this.add(posto0);
 
         this.add(ok);
+        
         ok.addActionListener(new ActionListener() {
 
             @Override

@@ -42,7 +42,7 @@ public class ReservationPanel extends JPanel {
     JLabel logo = new JLabel();
     JPanel panelsud = new JPanel(new GridLayout(0, 2));
     JButton ricerca = new JButton("Ricerca");
-    JDateChooser data = new JDateChooser();
+    JDateChooser data = new JDateChooser(); 
 
     public ReservationPanel(FacadeControllerClient company, HomeFrame home) {
         this.home = home;
@@ -125,7 +125,10 @@ public class ReservationPanel extends JPanel {
         reservationPanel.add(titdata);
         titdata.setFont(new Font("Helvetica", Font.BOLD, 25));
         data.setDateFormatString("yyyy-MM-dd");
-        //data.setMinSelectableDate(new Date());
+       
+        
+        
+        
         data.setPreferredSize(new java.awt.Dimension(170, 30));
         data.addKeyListener(new KeyAdapter() {
             public void keyTyped(KeyEvent e) {
@@ -137,6 +140,7 @@ public class ReservationPanel extends JPanel {
             }
         });
         data.setDate(Date.from(Instant.now()));
+        
         data.setSize(new java.awt.Dimension(170, 30));
         data.setFont(new Font("Helvetica", Font.BOLD, 15));
         titandata.setFont(new Font("Helvetica", Font.BOLD, 25));
@@ -245,26 +249,25 @@ public class ReservationPanel extends JPanel {
                         Calendar c = new GregorianCalendar();
                         c.setTime(data.getDate());
                         Flight[] a = controller.searchFlights(new Flight(new Route(andata.getSelectedItem().toString(), ritorno.getSelectedItem().toString()), c));
-                       
+
                         if (a.length == 0) {
                             JOptionPane.showConfirmDialog(home, "Siamo spiacenti. In questa data non risulta" + " nessun volo per la tratta desiderata.", "Errore", JOptionPane.OK_CANCEL_OPTION);
-                        } else { 
-                             home.setNpasseggeri(Integer.parseInt(npasseggeri.getText()));
-                           
-                           
+                        } else {
+                            home.setNpasseggeri(Integer.parseInt(npasseggeri.getText()));
+
                             ArrayList<Flight> ar = new ArrayList();
                             for (int i = 0; i < a.length; i++) {
-                                if(a[i].getSeatFree()>home.getNpasseggeri())
+                                if (a[i].getSeatFree() > home.getNpasseggeri()) {
                                     ar.add(a[i]);
+                                }
                             }
-                            if(!ar.isEmpty())
-                            {
-                            home.refreshGUI(new FlightsPanel(controller, home, ar));
-                            home.notifiche.setText("Ricerco informazioni sulla rotta.. ");
+                            if (!ar.isEmpty()) {
+                                home.refreshGUI(new FlightsPanel(controller, home, ar));
+                                home.notifiche.setText("Ricerco informazioni sulla rotta.. ");
+                            } else {
+                                JOptionPane.showConfirmDialog(home, "Siamo spiacenti. I posti per il volo" + " desiderato sono finiti.", "Errore", JOptionPane.OK_CANCEL_OPTION);
                             }
-                            else
-                                 JOptionPane.showConfirmDialog(home, "Siamo spiacenti. I posti per il volo" + " desiderato sono finiti.", "Errore", JOptionPane.OK_CANCEL_OPTION);
-                    
+
                         }
 
                     } else {
@@ -272,7 +275,7 @@ public class ReservationPanel extends JPanel {
                         home.notifiche.setText("Attenzione: aggiungere almeno un passeggero.");
                     }
                 } else {
-                    int dialogResult = JOptionPane.showConfirmDialog(home, "Riempire tutti i campi\n" + " per poter proseguire.\n", "Errore", JOptionPane.OK_CANCEL_OPTION);
+                    JOptionPane.showConfirmDialog(home, "Riempire tutti i campi\n" + " per poter proseguire.\n", "Errore", JOptionPane.OK_CANCEL_OPTION);
                 }
             }
 
@@ -280,6 +283,8 @@ public class ReservationPanel extends JPanel {
         return evento;
     }
 
+ 
+    
     public void MakeComponentsTrasparent() {
         home.trasparentJDateChooser(data);
         home.trasparentButton(ricerca);
