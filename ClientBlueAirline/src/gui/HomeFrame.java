@@ -180,7 +180,9 @@ public class HomeFrame extends JFrame {
                             JOptionPane.showConfirmDialog(panel, "Il check-in è stato già effettuato.", null, JOptionPane.CLOSED_OPTION);
                         } else {
                             tp = controller.checkIn(tp);
-                            JOptionPane.showConfirmDialog(panel, "Check-in effettuato.\n" + tp.printTicketPassenger("\n"), null, JOptionPane.CLOSED_OPTION);
+                            JOptionPane.showConfirmDialog(panel, "Check-in effettuato. Riceverà una mail con la conferma del check-in.\n" + tp.printTicketPassenger("\n"), null, JOptionPane.CLOSED_OPTION);
+                            controller.sendMail(reservation.getEmail(), "CHECK-IN EFFETTUATO",  reservation.printTickets("&%"));
+              
                         }
                     } else {
                         JOptionPane.showConfirmDialog(panel, "Errore inserimento codice biglietto", null, JOptionPane.CLOSED_OPTION);
@@ -223,7 +225,7 @@ public class HomeFrame extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 int dialogResult = JOptionPane.showConfirmDialog(frame, "Proseguendo potresti perdere\n" + "i dati inseriti fino ad ora.\n" + "Vuoi proseguire?", "Avvertenza", JOptionPane.YES_NO_OPTION);
                 if (dialogResult == 0) {
-                    frame.returnHome();
+                    returnHome();
                     notifiche.setText(DEFAULT);
                 } else {
                     notifiche.setText("Operazione cancellata dall'utente");
@@ -294,10 +296,9 @@ public class HomeFrame extends JFrame {
         return evento;
     }
 
-    protected void returnHome() {
+    public void returnHome() {
         passengers.clear();
         refreshGUI(homePanel());
-
     }
 
     public void setNpasseggeri(int npasseggeri) {

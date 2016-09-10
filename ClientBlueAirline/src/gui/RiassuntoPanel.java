@@ -104,6 +104,7 @@ public class RiassuntoPanel extends JPanel {
                 }
                 controller.sendMail(reservation.getEmail(), "ACQUISTO BIGLIETTO", reservation.printReservation("&%") + "&%" + reservation.printTickets("&%"));
                 JOptionPane.showMessageDialog(home, "Congratulazioni!\n" + "Prenotazione Effettuata\n" + s + "\nLe è stata inviata un'email di recupero.");
+                System.out.println("OK FUNZIONA");
                 home.returnHome();
             }
         });
@@ -145,7 +146,7 @@ public class RiassuntoPanel extends JPanel {
         passeggeri.addActionListener(PassengerListener());
 
         riassunto.setText("");
-        riassunto.append(passengers.get(0).printTicketWithoutCode("\n\n\n"));
+        riassunto.append(passengers.get(0).printTicketWithoutCode("\n"));
         riassunto.append("\n\nATTENZIONE: il codice biglietto sarà valido solo al momento del check-in!");
         info.add(riassunto, BorderLayout.CENTER);
         riassunto.setEditable(false);
@@ -167,7 +168,7 @@ public class RiassuntoPanel extends JPanel {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                riassunto.setText(passengers.get(passeggeri.getSelectedIndex()).printTicketPassenger("\n"));
+                riassunto.setText(passengers.get(passeggeri.getSelectedIndex()).printTicketWithoutCode("\n"));
                 riassunto.append("\n\nATTENZIONE: codice biglietto verrà erogato solo al momento del check-in!");
             }
         };

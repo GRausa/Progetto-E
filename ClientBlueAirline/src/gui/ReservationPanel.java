@@ -5,10 +5,13 @@
  */
 package gui;
 
+import com.toedter.calendar.JCalendar;
 import controller.FacadeControllerClient;
 import com.toedter.calendar.JDateChooser;
 import java.awt.*;
 import java.awt.event.*;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -42,7 +45,7 @@ public class ReservationPanel extends JPanel {
     JLabel logo = new JLabel();
     JPanel panelsud = new JPanel(new GridLayout(0, 2));
     JButton ricerca = new JButton("Ricerca");
-    JDateChooser data = new JDateChooser(); 
+    JDateChooser data =new JDateChooser() ; 
 
     public ReservationPanel(FacadeControllerClient company, HomeFrame home) {
         this.home = home;
@@ -73,6 +76,7 @@ public class ReservationPanel extends JPanel {
                             st++;
                         }
                     }
+                  
                     andata.getEditor().setItem(new String(a));
                     andata.hidePopup();
                     if (st != 0) {
@@ -124,6 +128,8 @@ public class ReservationPanel extends JPanel {
 
         reservationPanel.add(titdata);
         titdata.setFont(new Font("Helvetica", Font.BOLD, 25));
+        
+       
         data.setDateFormatString("yyyy-MM-dd");
        
         
@@ -139,6 +145,7 @@ public class ReservationPanel extends JPanel {
                 }
             }
         });
+        
         data.setDate(Date.from(Instant.now()));
         
         data.setSize(new java.awt.Dimension(170, 30));

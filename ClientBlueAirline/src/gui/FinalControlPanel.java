@@ -90,7 +90,7 @@ public class FinalControlPanel extends JPanel {
         posto0.setForeground(Color.black);
         posto0.addItem("selezionare Classe");
         this.add(posto0);
-
+        
         this.add(ok);
         
         ok.addActionListener(new ActionListener() {
@@ -105,10 +105,15 @@ public class FinalControlPanel extends JPanel {
                     if (!(t.getNseat() == set)) {
                         JOptionPane.showMessageDialog(home, "Il posto è gia stato assegnato\n");
                     }
+                        
                 }
             }
 
         });
+    }
+
+    public JButton getOk() {
+        return ok;
     }
 
 }
