@@ -39,6 +39,7 @@ public class RiassuntoPanel extends JPanel {
 
     JPanel infoGenerali = new JPanel();
     JLabel email = new JLabel();
+    JLabel telefono= new JLabel();
     JLabel codice = new JLabel();
     JLabel andata = new JLabel();
     JLabel ritorno = new JLabel();
@@ -116,12 +117,11 @@ public class RiassuntoPanel extends JPanel {
         infoGenerali.setOpaque(false);
         codice.setText(reservation.getCodeFlight());
         infoGenerali.add(codice);
-        email.setText(reservation.getEmail());
-        infoGenerali.add(email);
         andata.setText(flight.getRoute().getDepartureCity() + " " + flight.getRoute().getDeparutreAirport());
         infoGenerali.add(andata);
         ritorno.setText(flight.getRoute().getDestinationCity() + " " + flight.getRoute().getDestinationAirport());
         infoGenerali.add(ritorno);
+        
         SimpleDateFormat format1 = new SimpleDateFormat("dd-MM-yyyy");
         String d = format1.format(flight.getDateDeparture().getTime());
         data.setText(d);
@@ -132,6 +132,11 @@ public class RiassuntoPanel extends JPanel {
         infoGenerali.add(orario);
         prezzototale.setText("Prezzo totale: " + reservation.getTotalPrice() + "€");
         infoGenerali.add(prezzototale);
+        email.setText(reservation.getEmail());
+        infoGenerali.add(email);
+        telefono.setText(reservation.getNumber());
+        infoGenerali.add(new JLabel(""));
+        infoGenerali.add(telefono);
 
     }
 
