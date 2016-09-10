@@ -31,7 +31,7 @@ public class ParserSQL {
      * 
      * @param resultQuery Result of the query.
      * @return List of all routes found in the database.
-     * @throws SQLException 
+     * @throws SQLException if occurs a database access error or other errors.
      */
     public static ArrayList<Route> parseRoutes(ResultSet resultQuery) throws SQLException{
         ArrayList<Route> routes = new ArrayList<>();
@@ -49,7 +49,7 @@ public class ParserSQL {
      * 
      * @param resultQuery Result of the query.
      * @return List of all flights found in the database.
-     * @throws SQLException 
+     * @throws SQLException if occurs a database access error or other errors.
      */
     public static ArrayList<Flight> parseFlights(ResultSet resultQuery) throws SQLException{
         ArrayList<Flight> flights = new ArrayList<>();
@@ -79,7 +79,7 @@ public class ParserSQL {
      * 
      * @param resultQuery Result of the query.
      * @return List of all flights found in the database.
-     * @throws SQLException 
+     * @throws SQLException if occurs a database access error or other errors.
      */
     public static Flight parseFlight(ResultSet resultQuery) throws SQLException{
         if(resultQuery.next()){
@@ -123,7 +123,7 @@ public class ParserSQL {
      * 
      * @param resultQuery Result of the query.
      * @return List of all reservation found in the database.
-     * @throws SQLException 
+     * @throws SQLException if occurs a database access error or other errors.
      */
     public static Reservation parseReservation(ResultSet resultQuery) throws SQLException{
         if(resultQuery.next()){
@@ -165,7 +165,7 @@ public class ParserSQL {
      * 
      * @param resultQuery Result of the query.
      * @return List of all cities found in the database.
-     * @throws SQLException 
+     * @throws SQLException if occurs a database access error or other errors.
      */
     public static ArrayList<String> parseCitis(ResultSet resultQuery) throws SQLException{
         ArrayList<String> citys = new ArrayList<>();
@@ -180,7 +180,7 @@ public class ParserSQL {
      * 
      * @param resultQuery Result of the query.
      * @return List of all seats found in the database.
-     * @throws SQLException 
+     * @throws SQLException if occurs a database access error or other errors.
      */
     public static ArrayList<Seat> parseSeats(ResultSet resultQuery) throws SQLException {
         ArrayList<Seat> seats = new ArrayList<>();
@@ -192,7 +192,13 @@ public class ParserSQL {
         }
         return seats;    
     }
-    
+    /**
+     * Inserts the meals located in the databdase in an ArrayList.
+     * 
+     * @param resultQuery Result of the query;
+     * @return List of all meals found in the database.
+     * @throws SQLException if occurs a database access error or other errors.
+     */
     public static ArrayList<Meal> parseMeals(ResultSet resultQuery) throws SQLException{
         ArrayList<Meal> meals = new ArrayList<>();
         while (resultQuery.next()) {
@@ -210,7 +216,7 @@ public class ParserSQL {
      * 
      * @param resultQuery Result of the query.
      * @return List of all hold luggages found in the database.
-     * @throws SQLException 
+     * @throws SQLException if occurs a database access error or other errors.
      */
     public static ArrayList<HoldLuggage> parseHoldLuggages(ResultSet resultQuery) throws SQLException{
         ArrayList<HoldLuggage> holdLuggages = new ArrayList<>();
@@ -229,7 +235,7 @@ public class ParserSQL {
      * 
      * @param resultQuery Result of the query.
      * @return List of all insurances found in the database.
-     * @throws SQLException 
+     * @throws SQLException if occurs a database access error or other errors.
      */
     public static ArrayList<Insurance> parseInsurances(ResultSet resultQuery) throws SQLException{
         ArrayList<Insurance> insurances = new ArrayList<>();
@@ -248,7 +254,7 @@ public class ParserSQL {
      * 
      * @param resultQuery Result of the query.
      * @return List of all tickets found in the database.
-     * @throws SQLException 
+     * @throws SQLException if occurs a database access error or other errors.
      */
     public static Ticket parseTicketPassenger(ResultSet resultQuery) throws SQLException{
         if(resultQuery.next()){

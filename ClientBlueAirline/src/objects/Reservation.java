@@ -95,7 +95,7 @@ public class Reservation {
     }
 
     /**
-     *
+     * @param tab Tab character to "format" the string.
      * @return Written description of the reservation.
      */
     public String printReservation(String tab) {
@@ -111,7 +111,7 @@ public class Reservation {
     }
 
     /**
-     *
+     * @param tab Tab character to "format" the string.
      * @return Written description of the reservation.
      */
     public String printTickets(String tab) {

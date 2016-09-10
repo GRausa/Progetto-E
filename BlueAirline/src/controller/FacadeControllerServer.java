@@ -31,7 +31,10 @@ public class FacadeControllerServer implements InterfaceServer {
     private FacadeControllerServer(){   
         adapter = new ConcreteAdapterDB();
     }
-    
+    /**
+     * 
+     * @return an instance of FacadeControllerServer.
+     */
     public static FacadeControllerServer getIstance(){
         if(istance==null)
             istance = new FacadeControllerServer();
