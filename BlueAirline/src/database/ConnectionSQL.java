@@ -40,7 +40,7 @@ public class ConnectionSQL {
      * 
      * @param query Query to be read.
      * @return Result.
-     * @throws SQLException 
+     * @throws SQLException if occurs a database access error or other errors.
      */
     public ResultSet queryRead(String query) throws SQLException {
         return statement.executeQuery(query);
@@ -50,7 +50,7 @@ public class ConnectionSQL {
     * Write a query.
     * 
     * @param query Query to be wrote.
-    * @throws SQLException 
+    * @throws SQLException if occurs a database access error or other errors.
     */
     public void queryWrite(String query) throws SQLException {  
         statement.executeUpdate(query);

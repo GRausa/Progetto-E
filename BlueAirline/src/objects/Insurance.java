@@ -22,6 +22,7 @@ public class Insurance {
      * @param code Code of the insurance.
      * @param name Name of the insurance.
      * @param price Price of the insurance.
+     * @param description Description of the insurance. 
      */
     public Insurance (String code, String name, double price, String description){
         this.code=code;

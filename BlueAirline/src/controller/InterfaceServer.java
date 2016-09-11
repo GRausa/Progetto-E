@@ -139,7 +139,7 @@ public interface InterfaceServer {
 
     /**
      *
-     * @param userpass Login information.
+     * @param username Login information.
      * @return <code>true</code> if informations are correct. *
      *          <code>false</code> otherwise.
      */
