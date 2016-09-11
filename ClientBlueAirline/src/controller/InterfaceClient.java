@@ -15,7 +15,7 @@ import objects.Route;
 import objects.Ticket;
 
 /**
- * Provides methodsin order to communicate with the server.
+ * Provides methods in order to communicate with the server.
  *
  * @author Giovanni
  */
