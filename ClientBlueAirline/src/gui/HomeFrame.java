@@ -152,7 +152,7 @@ public class HomeFrame extends JFrame {
 
                 notifiche.setText("Clicca per effettuare il check in del tuo volo.");
             }
-
+            
         });
 
         checkin.addActionListener(new ActionListener() {

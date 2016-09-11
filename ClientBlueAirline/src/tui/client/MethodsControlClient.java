@@ -544,6 +544,9 @@ public class MethodsControlClient {
                 System.out.println("Il check-in è stato già effettuato.");
             } else {
                 tp = client.checkIn(tp);
+                Ticket tpt=client.getTicket(tp);
+                Reservation t=client.getReservation(new Reservation(tpt.getCodeReservation()));
+                client.sendMail(t.getEmail(), "CHECK-IN EFFETTUATO",  tpt.printTicketPassenger("&%"));              
                 System.out.println("Check-in effettuato.\n" + tp.printTicketPassenger("\n"));
             }
         } else {
