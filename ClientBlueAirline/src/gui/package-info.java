@@ -1,4 +1,4 @@
 /**
- * Classes for Graphical User Interface.
+ * Graphical User Interface for customers.
  */
 package gui;
