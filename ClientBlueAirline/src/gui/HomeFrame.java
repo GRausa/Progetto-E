@@ -53,6 +53,7 @@ public class HomeFrame extends JFrame {
 
     JLabel c1 = new JLabel("\t\t");
     JButton modificavolo = new JButton("Modifica volo");
+    
 
     JButton order = new JButton("Prenota Volo");
     JLabel mb1 = new JLabel("\t\t");
@@ -79,7 +80,7 @@ public class HomeFrame extends JFrame {
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         Dimension frameSize = this.getSize();
         this.setLocation((screenSize.width - frameSize.width) / 2,
-                (screenSize.height - frameSize.height) / 2);
+                (screenSize.height - frameSize.height) / 2); 
         this.setVisible(true);
     }
 
@@ -123,12 +124,13 @@ public class HomeFrame extends JFrame {
         scritta.setForeground(Color.blue);
         homepanel.add(order, new GridBagConstraints(3, 2, 1, 1, 1.0, 1.0, GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 200, 40));
         homepanel.add(a1, new GridBagConstraints(2, 2, 1, 1, 1.0, 1.0, GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 200, 40));
-        homepanel.add(modificavolo, new GridBagConstraints(3, 4, 1, 1, 1.0, 1.0, GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 200, 40));
+        homepanel.add(modificavolo, new GridBagConstraints(3, 6, 1, 1, 1.0, 1.0, GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 200, 40));
         homepanel.add(mb1, new GridBagConstraints(2, 4, 1, 1, 1.0, 1.0, GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 200, 40));
-        homepanel.add(checkin, new GridBagConstraints(3, 6, 1, 1, 1.0, 1.0, GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 225, 40));
+        homepanel.add(checkin, new GridBagConstraints(3, 4, 1, 1, 1.0, 1.0, GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 225, 40));
         homepanel.add(c1, new GridBagConstraints(2, 6, 1, 1, 1.0, 1.0, GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 200, 40));
         this.trasparentButton(order);
         this.setallFont(order);
+        modificavolo.setVisible(false);
         this.trasparentButton(modificavolo);
         this.setallFont(modificavolo);
         this.trasparentButton(checkin);
@@ -166,7 +168,7 @@ public class HomeFrame extends JFrame {
                 JTextField txt = new JTextField(10);
                 panel.add(lbl);
                 panel.add(txt);
-                ImageIcon immagine = new ImageIcon("immagini/logo2.jpg");
+                ImageIcon immagine = new ImageIcon("immagini/logo2.png");
                 immagine = scalaImmagine(immagine, 60, 60);
                 int selectedOption = JOptionPane.showOptionDialog(null, panel, "EFFETTUA IL CHECK-IN", JOptionPane.NO_OPTION, JOptionPane.QUESTION_MESSAGE, immagine, options, options[0]);
 
@@ -258,7 +260,7 @@ public class HomeFrame extends JFrame {
                 JTextArea txt = new JTextArea(20, 30);
                 panel.add(lbl);
                 panel.add(txt);
-                ImageIcon immagine = new ImageIcon("immagini/logo2.jpg");
+                ImageIcon immagine = new ImageIcon("immagini/logo2.png");
                 immagine = scalaImmagine(immagine, 150, 150);
                 int selectedOption = JOptionPane.showOptionDialog(null, panel, "CONTATTACI", JOptionPane.NO_OPTION, JOptionPane.QUESTION_MESSAGE, immagine, options, options[0]);
 

@@ -6,7 +6,9 @@
 package gui;
 
 import controller.FacadeControllerClient;
+import java.awt.Image;
 import java.io.IOException;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -21,15 +23,18 @@ public class StartGui {
 
     public static void main(String[] args) throws IOException, InterruptedException {
         FacadeControllerClient clientBlueAirline = FacadeControllerClient.getIstance();
-        JFrame frame1 = new JFrame();
-
+        
+        
+        
         String[] options = {"OK"};
         JPanel panel = new JPanel();
         JLabel lbl = new JLabel("Enter IP server: ");
         JTextField txt = new JTextField(10);
         panel.add(lbl);
         panel.add(txt);
-        int selectedOption = JOptionPane.showOptionDialog(null, panel, "BENVENUTI IN THETABLUEAIRLINE", JOptionPane.NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+        ImageIcon im = new ImageIcon("immagini/logo2.png");
+        im = scalaImmagine(im, 60, 60);
+        int selectedOption = JOptionPane.showOptionDialog(null, panel, "BENVENUTI IN THETABLUEAIRLINE", JOptionPane.NO_OPTION, JOptionPane.QUESTION_MESSAGE, im, options, options[0]);
 
         if (selectedOption == 0) {
             String text = txt.getText();
@@ -49,23 +54,11 @@ public class StartGui {
             // ...
         }
 
-//If a string was returned, say so.
-
-        /*
-         int input = JOptionPane.showOptionDialog(null, "CONNESSIONE CON IL SERVER NON RIUSCITA", "ERRORE CONNESSIONE", JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null, null, null);
-
-         if (input == JOptionPane.OK_OPTION) {
-         System.exit(1);
-         }
-         */
+        
     }
-    /*
-     ControllerTxt r1 = new ControllerTxt(clientBlueAirline);
-     //scrittura r2 = new scrittura(ciao);
-		
-     Thread nuovoThread1 = new Thread(r1);
-     //Thread nuovoThread2 = new Thread(r2);
-
-     nuovoThread1.start();
-     //nuovoThread2.start();*/
+    
+      public static ImageIcon scalaImmagine(ImageIcon immagine, int lunghezza, int altezza) {
+        return new ImageIcon(immagine.getImage().getScaledInstance(lunghezza, altezza, java.awt.Image.SCALE_SMOOTH));
+    }
+  
 }
