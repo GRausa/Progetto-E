@@ -95,7 +95,7 @@ public class MethodsControlClient {
         Route tmproute = new Route(inputtxt.get(0), inputtxt.get(1));
         inputtxt = MethodsControlClient.scannerInput(new ArrayList<>(asList("Inserisci data di partenza AAAA-MM-GG")));
         String data = inputtxt.get(0);
-        int day, month, year;
+       
         String[] vetDate = data.split("-");
         if (vetDate.length == 3) {
             GregorianCalendar date = new GregorianCalendar(Integer.parseInt(vetDate[0]), Integer.parseInt(vetDate[1]) - 1, Integer.parseInt(vetDate[2]));
@@ -544,6 +544,9 @@ public class MethodsControlClient {
                 System.out.println("Il check-in è stato già effettuato.");
             } else {
                 tp = client.checkIn(tp);
+                Ticket tpt=client.getTicket(tp);
+                Reservation t=client.getReservation(new Reservation(tpt.getCodeReservation()));
+                client.sendMail(t.getEmail(), "CHECK-IN EFFETTUATO",  tpt.printTicketPassenger("&%"));              
                 System.out.println("Check-in effettuato.\n" + tp.printTicketPassenger("\n"));
             }
         } else {

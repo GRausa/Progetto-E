@@ -79,6 +79,8 @@ public class FinalControlPanel extends JPanel {
                         }
                     }
                 }
+                if(posto0.getItemCount()==0)
+                  posto0.addItem("Nessun Posto");
             }
         });
 

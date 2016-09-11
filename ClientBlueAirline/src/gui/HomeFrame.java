@@ -67,7 +67,7 @@ public class HomeFrame extends JFrame {
         setMinimumSize(new Dimension(WEIGHT, HEIGHT));
         this.setResizable(false);
         initComponents();
-        this.setVisible(true);
+        
         this.passengers = new ArrayList<>();
         this.allmeals = this.controller.getAllMeals();
         this.allholdluggages = this.controller.getAllHoldLuggages();
@@ -80,7 +80,7 @@ public class HomeFrame extends JFrame {
         Dimension frameSize = this.getSize();
         this.setLocation((screenSize.width - frameSize.width) / 2,
                 (screenSize.height - frameSize.height) / 2);
-
+        this.setVisible(true);
     }
 
     private void initComponents() {
@@ -152,7 +152,7 @@ public class HomeFrame extends JFrame {
 
                 notifiche.setText("Clicca per effettuare il check in del tuo volo.");
             }
-
+            
         });
 
         checkin.addActionListener(new ActionListener() {
@@ -181,7 +181,9 @@ public class HomeFrame extends JFrame {
                         } else {
                             tp = controller.checkIn(tp);
                             JOptionPane.showConfirmDialog(panel, "Check-in effettuato. Riceverà una mail con la conferma del check-in.\n" + tp.printTicketPassenger("\n"), null, JOptionPane.CLOSED_OPTION);
-                            controller.sendMail(reservation.getEmail(), "CHECK-IN EFFETTUATO",  reservation.printTickets("&%"));
+                            Ticket tpt=controller.getTicket(tp);
+                            Reservation t=controller.getReservation(new Reservation(tpt.getCodeReservation()));
+                            controller.sendMail(t.getEmail(), "CHECK-IN EFFETTUATO",  tpt.printTicketPassenger("&%"));
               
                         }
                     } else {
