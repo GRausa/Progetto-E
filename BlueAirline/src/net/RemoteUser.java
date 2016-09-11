@@ -66,20 +66,13 @@ class RemoteUser extends Thread {
         this.progressiven = generateProgressive();
     }
 
-    /**
-     * Send an errore message.
-     *
-     * @param message Message to be sended.
-     */
+    
     private void error(String message) {
         log(Level.WARNING, "Sent error: " + message);
         out.println("ERR " + message);
     }
 
-    /**
-     * Create a new table that maps the commands for performing various action.
-     *
-     */
+   
     private void registerCommands() {
         commands = new HashMap<>();
 
@@ -306,12 +299,7 @@ class RemoteUser extends Thread {
 
     }
 
-    /**
-     * Perform a specified command.
-     *
-     * @param command Command to be performed.
-     * @param args
-     */
+    
     private void executeCommand(String command, String args) {
         Command cmd = commands.get(command);
         if (cmd == null) {

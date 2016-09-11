@@ -30,8 +30,8 @@ public class MethodsControlClient {
 
     /**
      *
-     * @param n
-     * @return
+     * @param n List of generic request.
+     * @return strings of input.
      */
     public static ArrayList<String> scannerInput(ArrayList<String> n) {
         Scanner input = new Scanner(System.in);
@@ -47,7 +47,7 @@ public class MethodsControlClient {
     /**
      * Prints the menu.
      *
-     * @return
+     * @return strings of input.
      */
     public static String toStringMenu() {
         Scanner input = new Scanner(System.in);
@@ -192,11 +192,11 @@ public class MethodsControlClient {
     }
 
     /**
-     * Adds on or more meals to a ticket.
+     * Adds one or more meals to a ticket.
      *
      * @param p Ticket.
      * @param meals List of meals.
-     * @param v
+     * @param v Code of the meal to add.
      */
     private static void addMealTicket(Ticket p, Meal[] meals, String v) {
         for (Meal m : meals) {
@@ -208,11 +208,11 @@ public class MethodsControlClient {
     }
 
     /**
-     * Adds on or more hold luggages to a ticket.
+     * Adds one or more hold luggages to a ticket.
      *
      * @param p Ticket.
      * @param holdLuggages List of hold luggages.
-     * @param v
+     * @param v Code of the luggage to add.
      */
     private static void addHoldLuggageTicket(Ticket p, HoldLuggage[] holdLuggages, String v) {
         for (HoldLuggage hl : holdLuggages) {
@@ -224,11 +224,11 @@ public class MethodsControlClient {
     }
 
     /**
-     * Adds on or more insurances to a ticket.
+     * Adds one or more insurances to a ticket.
      *
      * @param p Ticket.
      * @param holdLuggages List of insurances.
-     * @param v
+     * @param v Code of the insurance to add.
      */
     private static void addInsuranceTicket(Ticket p, Insurance[] insurances, String v) {
         for (Insurance in : insurances) {

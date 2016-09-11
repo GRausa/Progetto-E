@@ -16,7 +16,7 @@ import java.util.logging.Logger;
 /**
  * Used for the comunication between client and server.
  * 
- * @author 
+ * @author riccardo
  */
 public class Server {
     InterfaceServer company;

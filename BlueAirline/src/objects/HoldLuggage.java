@@ -22,6 +22,7 @@ public class HoldLuggage {
      * @param code Code of the luggage.
      * @param kg Max wheight of the luggage in Kilograms.
      * @param price Price of the luggage.
+     * @param description Description of the luggage.
      */
     public HoldLuggage (String code,Double kg, Double price, String description){
         this.code=code;

@@ -24,8 +24,8 @@ public class MethodsControlAdministrator {
 
     /**
      *
-     * @param n
-     * @return
+     * @param n List of generic request.
+     * @return strings of input.
      */
     public static ArrayList<String> scannerInput(ArrayList<String> n) {
         Scanner input = new Scanner(System.in);
@@ -42,7 +42,7 @@ public class MethodsControlAdministrator {
     /**
      * Prints the menu.
      *
-     * @return
+     * @return string of input.
      */
     public static String toStringMenu() {
         Scanner input = new Scanner(System.in);
@@ -74,7 +74,7 @@ public class MethodsControlAdministrator {
      * Text for inserting a new flight.
      *
      * @param client Client
-     * @throws IOException if has occurred an I/O exception.
+     * 
      */
     public static void insertFlight(InterfaceClient client) {
         ArrayList<String> input = MethodsControlAdministrator.scannerInput(new ArrayList<>(asList("Codice volo:")));
@@ -133,7 +133,6 @@ public class MethodsControlAdministrator {
      * @param client Client.
      * @return <code>true</code> if the combination user/pass is correct.
      * <code>false</code> otherwise.
-     * @throws IOException
      */
     public static boolean checkLogin(InterfaceClient client) {
         boolean b = false;

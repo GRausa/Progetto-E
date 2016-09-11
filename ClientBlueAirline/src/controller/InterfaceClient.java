@@ -48,7 +48,6 @@ public interface InterfaceClient {
      * @param text Text of the email.
      * @return <code>true</code> if the email is sent; <code>false</code>
      * otherwise.
-     * @throws IOException if occurs an I/O exception
      */
     boolean sendMail(String destination, String object, String text);
 
@@ -56,7 +55,6 @@ public interface InterfaceClient {
      *
      * @param rotta Route.
      * @return List of flight that cover the route.
-     * @throws IOException if occurs an I/O exception.
      */
     Flight[] calendar(Route rotta);
 
@@ -65,7 +63,6 @@ public interface InterfaceClient {
      *
      * @param tp Ticket.
      * @return ticket with checkin.
-     * @throws IOException if occurs an I/O exception
      */
     Ticket checkIn(Ticket tp);
 
@@ -74,7 +71,6 @@ public interface InterfaceClient {
      *
      * @param tp Ticket.
      * @return Modified ticket.
-     * @throws IOException if occurs an I/O exception
      */
     Ticket editSeatTicket(Ticket tp);
 
@@ -83,7 +79,6 @@ public interface InterfaceClient {
      *
      * @param ticketPassenger Ticket.
      * @return Ticket modified.
-     * @throws IOException if occurs an I/O exception
      */
     Ticket editTicket(Ticket ticketPassenger);
 
@@ -91,33 +86,38 @@ public interface InterfaceClient {
      *
      * @return List of all cities in the database.
      *
-     * @throws IOException if occurs an I/O exception
      */
     String[] getAllCitys();
 
     /**
      *
      * @return List of all possible hold luggages in the database.
-     * @throws IOException if occurs an I/O exception
      */
     HoldLuggage[] getAllHoldLuggages();
 
     /**
      *
      * @return List of all possible hinsurances in the database.
-     * @throws IOException if occurs an I/O exception
      */
     Insurance[] getAllInsurances();
 
     /**
      *
      * @return List of all possible meals in the database.
-     * @throws IOException if occurs an I/O exception
      */
     Meal[] getAllMeals();
-
+    /**
+     * 
+     * 
+     * @param res Empty reservation.
+     * @return Reservation.
+     */
     Reservation getReservation(Reservation res);
-
+    /**
+     * 
+     * @param tp Empty ticket.
+     * @return Ticket.
+     */
     Ticket getTicket(Ticket tp);
 
     /**
@@ -125,7 +125,6 @@ public interface InterfaceClient {
      *
      * @param flight Flight.
      * @return flight inserted.
-     * @throws IOException if occurs an I/O exception.
      */
     Flight insertFlight(Flight flight);
 
@@ -135,15 +134,27 @@ public interface InterfaceClient {
      * @param tp Ticket.
      * @return <code>true</code> if the passenger already did the check in;
      * <code>false</code> otherwise.
-     * @throws IOException if occurs an I/O exception
      */
     boolean isCheckIn(Ticket tp);
-
+    /**
+     * Makes a reservation.
+     * 
+     * @param res Reservation.
+     * @return reservation.
+     */
     Reservation makeReservation(Reservation res);
 
-    //Flight searchFlight(Flight flight) throws IOException;
+    /**
+     * 
+     * @param flight Empty flight;
+     * @return List of flights.
+     */
     Flight[] searchFlights(Flight flight);
-
+    /**
+     * 
+     * @param rotta Empty route.
+     * @return List of routes.
+     */
     Route[] searchRoutes(Route rotta);
 
     /**
@@ -151,7 +162,6 @@ public interface InterfaceClient {
      * @param userpass username and password of the administrator.
      * @return<code>true</code> if the user/pass are correct; <code>false</code>
      * otherwise.
-     * @throws IOException if occurs an I/O exception
      */
     boolean checkLogin(String userpass);
 
@@ -160,7 +170,6 @@ public interface InterfaceClient {
      *
      * @param flight Flight to modify;
      * @return Flight modified.
-     * @throws IOException if occurs an I/O exception
      */
     Flight editFlight(Flight flight);
 

@@ -186,7 +186,7 @@ public class Ticket {
     }
      */
     /**
-     *
+     * @param tab Tab character to "format" the string.
      * @return Written description of the ticket.
      */
     public String printTicketPassenger(String tab) {
@@ -195,7 +195,7 @@ public class Ticket {
     }
 
     /**
-     *
+     * @param tab Tab character to "format" the string.
      * @return Written description of the ticket. The code ticket not added.
      */
     public String printTicketWithoutCode(String tab) {
