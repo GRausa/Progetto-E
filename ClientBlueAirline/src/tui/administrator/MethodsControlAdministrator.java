@@ -24,8 +24,8 @@ public class MethodsControlAdministrator {
 
     /**
      *
-     * @param n
-     * @return
+     * @param n List of generic request.
+     * @return strings of input.
      */
     public static ArrayList<String> scannerInput(ArrayList<String> n) {
         Scanner input = new Scanner(System.in);
@@ -42,7 +42,7 @@ public class MethodsControlAdministrator {
     /**
      * Prints the menu.
      *
-     * @return
+     * @return string of input.
      */
     public static String toStringMenu() {
         Scanner input = new Scanner(System.in);
