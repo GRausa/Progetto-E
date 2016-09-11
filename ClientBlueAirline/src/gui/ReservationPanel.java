@@ -5,13 +5,10 @@
  */
 package gui;
 
-import com.toedter.calendar.JCalendar;
 import controller.FacadeControllerClient;
 import com.toedter.calendar.JDateChooser;
 import java.awt.*;
 import java.awt.event.*;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -132,7 +129,6 @@ public class ReservationPanel extends JPanel {
        
         data.setDateFormatString("yyyy-MM-dd");
        
-        
         
         
         data.setPreferredSize(new java.awt.Dimension(170, 30));

@@ -95,7 +95,7 @@ public class MethodsControlClient {
         Route tmproute = new Route(inputtxt.get(0), inputtxt.get(1));
         inputtxt = MethodsControlClient.scannerInput(new ArrayList<>(asList("Inserisci data di partenza AAAA-MM-GG")));
         String data = inputtxt.get(0);
-        int day, month, year;
+       
         String[] vetDate = data.split("-");
         if (vetDate.length == 3) {
             GregorianCalendar date = new GregorianCalendar(Integer.parseInt(vetDate[0]), Integer.parseInt(vetDate[1]) - 1, Integer.parseInt(vetDate[2]));
